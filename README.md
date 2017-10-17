@@ -9,10 +9,34 @@ Beyond the Java and C# models, we intend to develop several other models based o
 We have also included an extended quality model for both Java and C# (extending their models) which includes enhanced security analysis to
 meet RMF compliance.
 
-## Building
-This project is completely implemented using Java and currently uses Maven for the build managment. Thus, the following command executed at the project root directory will collect the necessary dependencies and produce a JAR file in the target directory:
+## Installing Maven
 
-`mvn package`
+This project uses the Maven wrapper so that you do not need to install maven manually.
+The first time you go to build this project, simply execute the following command:
+
+```
+./mvnw clean install -Dmaven.test.skip=true
+```
+or for windows:
+```
+.\mvnw.cmd clean package -Dmaven.test.skip=true
+```
+
+## Building
+
+This project can be built using the following command:
+
+```
+./mvnw clean package -Dmaven.test.skip=true
+```
+
+This project can be compile, tested, or packaged with the following commands:
+
+```
+./mvnw clean compile
+./mvnw clean test
+./mvnw clean package
+```
 
 ## Project Goals
 * Calculate quality using a Quamoco Quality Model.
