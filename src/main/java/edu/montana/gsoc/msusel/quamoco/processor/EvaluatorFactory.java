@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +25,9 @@
 package edu.montana.gsoc.msusel.quamoco.processor;
 
 import edu.montana.gsoc.msusel.quamoco.graph.INode;
+import edu.montana.gsoc.msusel.quamoco.processor.evaluators.ManualEvaluator;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorMethod;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
-import edu.montana.gsoc.msusel.quamoco.processor.evaluators.ManualEvaluator;
 import edu.montana.gsoc.msusel.quamoco.processor.evaluators.SingleMeasureEvaluator;
 import edu.montana.gsoc.msusel.quamoco.processor.evaluators.WeightedSumEvaluator;
 

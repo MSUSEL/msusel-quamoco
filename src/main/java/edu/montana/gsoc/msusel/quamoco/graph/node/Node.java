@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,11 +28,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-
+import com.google.common.graph.EndpointPair;
+import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.INode;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.processor.Processor;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
 
 /**
  * Abstract base class for the nodes in the distilled quality model processing
@@ -47,7 +46,7 @@ public abstract class Node implements INode {
     /**
      * Graph to which this node belongs
      */
-    transient protected DirectedSparseGraph<Node, Edge> graph;
+    transient protected MutableNetwork<Node, Edge> graph;
     /**
      * Value associated with node after evaluation
      */
@@ -77,7 +76,7 @@ public abstract class Node implements INode {
     /**
      * The process associated with this node, which facilitates the evaluation
      */
-    protected Processor                                 processor;
+    protected Processor processor;
     /**
      * Boolean flag indicating that this node has already successfully been
      * calculated.
@@ -97,7 +96,7 @@ public abstract class Node implements INode {
      * @param owner
      *            Identifier of the quamoco model entity this node came from
      */
-    public Node(final DirectedSparseGraph<Node, Edge> graph, final String name, final String owner)
+    public Node(final MutableNetwork<Node, Edge> graph, final String name, final String owner)
     {
         if (name == null || name.isEmpty() || owner == null || owner.isEmpty())
         {
@@ -123,7 +122,7 @@ public abstract class Node implements INode {
     /**
      * @return The graph to which this node belongs
      */
-    public DirectedSparseGraph<Node, Edge> getGraph()
+    public MutableNetwork<Node, Edge> getGraph()
     {
         return graph;
     }
@@ -296,5 +295,12 @@ public abstract class Node implements INode {
         }
         return true;
     }
-
+    
+    public Node getOpposite(Edge e) {
+        EndpointPair<Node> pair = graph.incidentNodes(e);
+        if (pair.target().equals(this))
+            return pair.source();
+        else
+            return pair.target();
+    }
 }

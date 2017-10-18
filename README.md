@@ -33,49 +33,13 @@ This project can be built using the following command:
 This project can be compile, tested, or packaged with the following commands:
 
 ```
-./mvnw clean compile
-./mvnw clean test
-./mvnw clean package
+./mvnw clean compile -Dmaven.test.skip=true
+./mvnw clean test -Dmaven.test.skip=true
+./mvnw clean package -Dmaven.test.skip=true
 ```
 
 ## Project Goals
 * Calculate quality using a Quamoco Quality Model.
 * Evaluate the quality grade for any set of quality factors and attributes.
-* Create and evalute quality models for the following languages:
- - ABAP
- - C/C++
- - C#
- - Clojure
- - COBOL
- - CSS
- - D
- - Erlang
- - Flex/Action Script
- - Fortran
- - F#
- - Go
- - Groovy
- - Haskell
- - Io
- - Java
- - JavaScript
- - Lisp
- - lua
- - ML
- - Objective-C
- - PHP
- - PL/1
- - PL/SQL
- - Python
- - R
- - RPG
- - Ruby
- - Scala
- - Scheme
- - Swift
- - VB.NET
- - Web/HTML
- - XML
-* Extend the Quamoco Quality models to include Code Smells, Antipatterns, and other issues not yet already included to increase their functionality.
 * Replace the existing SQALE implementation in SonarQube.
 * Collect and analyze data for empirical software engineering research.

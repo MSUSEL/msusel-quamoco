@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,9 +28,8 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
-
+import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
 
 /**
  * A node which collects findings into a Set. Findings are simply reports of
@@ -73,7 +71,7 @@ public class FindingNode extends Node {
      * @param toolName
      *            Tool which provides the rules
      */
-    public FindingNode(final DirectedSparseGraph<Node, Edge> graph, final String key, final String owner,
+    public FindingNode(final MutableNetwork<Node, Edge> graph, final String key, final String owner,
             final String ruleName, final String toolName)
     {
         super(graph, key, owner);

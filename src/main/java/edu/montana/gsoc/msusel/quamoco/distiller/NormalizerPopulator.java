@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,25 +29,28 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.annotations.VisibleForTesting;
-
+import com.google.common.graph.EndpointPair;
+import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.RankedEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.model.AbstractEntity;
-import edu.montana.gsoc.msusel.quamoco.model.qm.AbstractQMEntity;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Evaluates;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Evaluation;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Factor;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Function;
-import edu.montana.gsoc.msusel.quamoco.model.qm.FunctionType;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Measure;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Ranking;
 import edu.montana.gsoc.msusel.quamoco.processor.NormalizerFactory;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.NegativeLinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.PositiveLinearDistribution;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
+import edu.montana.gsoc.msusel.quamoco.model.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.FactorRanking;
+import edu.montana.gsoc.msusel.quamoco.model.Function;
+import edu.montana.gsoc.msusel.quamoco.model.LinearFunction;
+import edu.montana.gsoc.msusel.quamoco.model.LinearIncreasingFunction;
+import edu.montana.gsoc.msusel.quamoco.model.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.MeasureRanking;
+import edu.montana.gsoc.msusel.quamoco.model.QMElement;
+import edu.montana.gsoc.msusel.quamoco.model.Ranking;
+import edu.montana.gsoc.msusel.quamoco.model.WeightedSumFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.WeightedSumMultiMeasureEvaluation;
 
 /**
  * Class to populate the model processing graph edges with normalizers
@@ -61,17 +63,17 @@ public class NormalizerPopulator implements GraphModifier {
     /**
      * Data storage for the distillation process
      */
-    DistillerData                   data;
+    DistillerData              data;
     /**
      * Distilled quality model processing graph
      */
-    DirectedSparseGraph<Node, Edge> graph;
+    MutableNetwork<Node, Edge> graph;
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void modifyGraph(DistillerData data, DirectedSparseGraph<Node, Edge> graph)
+    public void modifyGraph(DistillerData data, MutableNetwork<Node, Edge> graph)
     {
         this.data = data;
         this.graph = graph;
@@ -88,17 +90,13 @@ public class NormalizerPopulator implements GraphModifier {
     {
         List<Evaluation> evalList = QualityModelUtils.getAllEvaluations(data.getModels());
 
-        Map<String, Evaluation> evalMap = data.getEvalMap();
+        Map<Factor, Evaluation> evalMap = data.getEvalMap();
         for (Evaluation eval : evalList)
         {
-            Evaluates ev = eval.getEvaluates();
+            Factor ev = eval.getEvaluates();
             if (ev != null)
             {
-                if (evalMap.containsKey(ev.getHREF()))
-                {
-                    continue;
-                }
-                evalMap.put(ev.getHREF(), eval);
+                evalMap.put(ev, eval);
             }
         }
     }
@@ -110,13 +108,14 @@ public class NormalizerPopulator implements GraphModifier {
     @VisibleForTesting
     void updateEdges()
     {
-        for (final Edge edge : graph.getEdges())
+        for (final Edge edge : graph.edges())
         {
             // FIXME so that it returns non-null values
-            AbstractQMEntity srcEntity = null;
-            AbstractQMEntity destEntity = null;
-            Node dest = graph.getDest(edge);
-            Node src = graph.getSource(edge);
+            QMElement srcEntity = null;
+            QMElement destEntity = null;
+            EndpointPair<Node> pair = graph.incidentNodes(edge);
+            Node dest = pair.target();
+            Node src = pair.source();
             final Evaluation eval = data.getEvalMap().get(dest.getOwnedBy());
 
             RankedEdge re = null;
@@ -163,36 +162,50 @@ public class NormalizerPopulator implements GraphModifier {
      *            The Entity on the dest side of the Edge
      */
     @VisibleForTesting
-    void updateEdge(final RankedEdge redge, final Evaluation eval, final AbstractQMEntity srcEntity,
-            final AbstractQMEntity destEntity)
+    void updateEdge(final RankedEdge redge, final Evaluation eval, final QMElement srcEntity,
+            final QMElement destEntity)
     {
-        for (final Ranking rank : eval.getRankings())
+        if (eval instanceof WeightedSumFactorAggregation)
         {
-            if (rank.getFactor() == null && rank.getMeasure() == null)
+            for (final FactorRanking rank : ((WeightedSumFactorAggregation) eval).getRankings())
             {
-                continue;
-            }
-
-            if (srcEntity instanceof Measure && rank.getMeasure() != null)
-            {
-                Measure srcMeas = (Measure) srcEntity;
-                if (!srcMeas.equals(QualityModelUtils.getMeasure(rank.getMeasure().getHREF(), data.getModelMap())))
-                    continue;
-                else
+                if (rank.getFactor() == null)
                 {
-                    updateEdge(redge, rank, eval);
-                    break;
+                    continue;
+                }
+
+                if (srcEntity instanceof Factor)
+                {
+                    Factor srcFac = (Factor) srcEntity;
+                    if (!srcFac.equals(rank.getFactor()))
+                        continue;
+                    else
+                    {
+                        updateEdge(redge, rank, eval);
+                        break;
+                    }
                 }
             }
-            else if (srcEntity instanceof Factor && rank.getFactor() != null)
+        }
+        else if (eval instanceof WeightedSumMultiMeasureEvaluation)
+        {
+            for (final MeasureRanking rank : ((WeightedSumMultiMeasureEvaluation) eval).getRankings())
             {
-                Factor srcFac = (Factor) srcEntity;
-                if (!srcFac.equals(QualityModelUtils.getFactor(rank.getFactor().getHREF(), data.getModelMap())))
-                    continue;
-                else
+                if (rank.getMeasure() == null)
                 {
-                    updateEdge(redge, rank, eval);
-                    break;
+                    continue;
+                }
+
+                if (srcEntity instanceof Measure)
+                {
+                    Measure srcMeas = (Measure) srcEntity;
+                    if (!srcMeas.equals(rank.getMeasure()))
+                        continue;
+                    else
+                    {
+                        updateEdge(redge, rank, eval);
+                        break;
+                    }
                 }
             }
         }
@@ -212,49 +225,54 @@ public class NormalizerPopulator implements GraphModifier {
     @VisibleForTesting
     void updateEdge(final RankedEdge redge, final Ranking rank, final Evaluation eval)
     {
-        if (rank.getRank() != null)
+        if (rank.getRank() > 0)
         {
             redge.setRank(new BigDecimal(rank.getRank()));
         }
-        if (rank.getWeight() != null)
+        if (Double.compare(rank.getWeight(), 0) > 0)
         {
             redge.setWeight(new BigDecimal(rank.getWeight()));
         }
-        if (rank.getFunction() != null)
+
+        if (eval instanceof WeightedSumMultiMeasureEvaluation)
         {
-            final Function f = rank.getFunction();
-            redge.setMaxPoints(eval.getMaximumPoints());
-            redge.setLowerBound(f.getLowerBound());
-            redge.setUpperBound(f.getUpperBound());
-
-            redge.setUsesLinearDist(true);
-
-            switch (f.getType())
+            MeasureRanking mrank = (MeasureRanking) rank;
+            if (mrank.getFunction() != null)
             {
-            case FunctionType.INCREASING:
-                redge.setDist(new PositiveLinearDistribution());
-                break;
-            case FunctionType.DECREASING:
-                redge.setDist(new NegativeLinearDistribution());
-                break;
+                final Function f = mrank.getFunction();
+                if (f instanceof LinearFunction)
+                {
+                    redge.setMaxPoints(new BigDecimal(eval.getMaximumPoints()));
+                    redge.setLowerBound(new BigDecimal(((LinearFunction) f).getLowerBound()));
+                    redge.setUpperBound(new BigDecimal(((LinearFunction) f).getUpperBound()));
+
+                    if (f instanceof LinearIncreasingFunction)
+                    {
+                        redge.setDist(new PositiveLinearDistribution());
+                    }
+                    else
+                    {
+                        redge.setDist(new NegativeLinearDistribution());
+                    }
+                }
             }
-        }
 
-        if (rank.getNormalizationMeasure() != null)
-        {
-            AbstractEntity ent = QualityModelUtils
-                    .findEntity(data.getModelMap(), rank.getNormalizationMeasure().getHREF());
-            if (ent != null && ent instanceof Measure)
+            if (mrank.getNormalization() != null)
             {
-                final Node norm = data.getMeasure((Measure) ent);
+                Measure ent = mrank.getNormalization();
+                if (ent != null)
+                {
+                    final Node norm = data.getMeasure(ent);
+                    redge.setNormalizer(
+                            NormalizerFactory.getInstance()
+                                    .createNormalizer((Edge) redge, norm.getName(), mrank.getRange()));
+                }
+            }
+            else
+            {
                 redge.setNormalizer(
-                        NormalizerFactory.getInstance()
-                                .createNormalizer((Edge) redge, norm.getName(), rank.getRange()));
+                        NormalizerFactory.getInstance().createNormalizer((Edge) redge, "LOC", mrank.getRange()));
             }
-        }
-        else
-        {
-            redge.setNormalizer(NormalizerFactory.getInstance().createNormalizer((Edge) redge, "LOC", rank.getRange()));
         }
     }
 }

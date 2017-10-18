@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,10 +26,11 @@ package edu.montana.gsoc.msusel.quamoco.distiller;
 
 import java.util.List;
 
+import com.google.common.graph.MutableNetwork;
+import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.model.qm.QualityModel;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
+import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 
 /**
  * DistilledGraphCreator - builds the Quamoco processing graph.
@@ -49,9 +49,14 @@ public class DistilledGraphCreator {
      * @return Graph constructed from information contained within the provided
      *         QualityModels and DecoratorContext.
      */
-    public DirectedSparseGraph<Node, Edge> buildGraph(final List<QualityModel> models)
+    public MutableNetwork<Node, Edge> buildGraph(final List<QualityModel> models)
     {
-        final DirectedSparseGraph<Node, Edge> graph = new DirectedSparseGraph<>();
+        final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
+                .allowsParallelEdges(true)
+                .allowsSelfLoops(false)
+                .expectedNodeCount(10000)
+                .expectedEdgeCount(10000)
+                .build();
         final GraphModifier nodepop = new NodePopulator();
         final GraphModifier edgepop = new EdgePopulator();
         final GraphModifier procpop = new ProcessorPopulator();

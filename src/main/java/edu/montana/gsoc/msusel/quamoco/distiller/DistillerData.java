@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
 import java.util.List;
@@ -32,18 +32,17 @@ import java.util.Set;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
-
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FindingsUnionNode;
+import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
+import edu.montana.gsoc.msusel.quamoco.model.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.QMElement;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
-import edu.montana.gsoc.msusel.quamoco.model.qm.AbstractQMEntity;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Evaluation;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Factor;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Measure;
-import edu.montana.gsoc.msusel.quamoco.model.qm.MeasurementMethod;
-import edu.montana.gsoc.msusel.quamoco.model.qm.QualityModel;
+import edu.montana.gsoc.msusel.quamoco.model.MeasurementMethod;
+import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 
 /**
  * A Parameter Object containing maps of Identifiers and Nodes,
@@ -58,35 +57,35 @@ public class DistillerData {
     /**
      * Map of known quality models indexed by name.
      */
-    private Map<String, QualityModel>           modelMap   = Maps.newHashMap();
+    private Map<String, QualityModel>    modelMap   = Maps.newHashMap();
     /**
      * Map of factor nodes indexed by the item they represents, in a quality
      * model, identifier
      */
-    private final BiMap<AbstractQMEntity, Node> factorMap  = HashBiMap.create();
+    private final BiMap<QMElement, Node> factorMap  = HashBiMap.create();
     /**
      * Map of measure nodes indexed by the item they represents, in a quality
      * model, identifier
      */
-    final BiMap<AbstractQMEntity, Node>         measureMap = HashBiMap.create();
+    final BiMap<QMElement, Node>         measureMap = HashBiMap.create();
     /**
      * Map of value and finding nodes indexed by the item they represents, in a
      * quality model, identifier
      */
-    final BiMap<AbstractQMEntity, Node>         valuesMap  = HashBiMap.create();
+    final BiMap<QMElement, Node>         valuesMap  = HashBiMap.create();
     /**
      * Map of findings union nodes indexed by the item they represents, in a
      * quality model, identifier
      */
-    final BiMap<AbstractQMEntity, Node>         unionsMap  = HashBiMap.create();
+    final BiMap<QMElement, Node>         unionsMap  = HashBiMap.create();
     /**
      * List of known quality models.
      */
-    private final List<QualityModel>            models;
+    private final List<QualityModel>     models;
     /**
      * Map of known evaluator, indexed by the id of the item evaluated
      */
-    private Map<String, Evaluation>             evaluatesMap;
+    private Map<Factor, Evaluation>      evaluatesMap;
 
     /**
      * Constructs a new DistillerData object for the given list of QualityModel
@@ -113,7 +112,7 @@ public class DistillerData {
     /**
      * @return Map of evaluations
      */
-    public Map<String, Evaluation> getEvalMap()
+    public Map<Factor, Evaluation> getEvalMap()
     {
         return evaluatesMap;
     }
@@ -121,9 +120,9 @@ public class DistillerData {
     /**
      * @param source
      *            The measure whose owner is required
-     * @return The AbstractQMEntity from which the given node was derived
+     * @return The QMElement from which the given node was derived
      */
-    public AbstractQMEntity getMeasureOwner(Node source)
+    public QMElement getMeasureOwner(Node source)
     {
         return measureMap.inverse().get(source);
     }
@@ -148,7 +147,7 @@ public class DistillerData {
      *            FactorNode
      * @return Factor entity
      */
-    public AbstractQMEntity getFactorOwner(Node source)
+    public QMElement getFactorOwner(Node source)
     {
         return factorMap.inverse().get(source);
     }
@@ -173,7 +172,7 @@ public class DistillerData {
      *            ValueNode
      * @return MeasurementMethod entity
      */
-    public AbstractQMEntity getValueOwner(Node source)
+    public QMElement getValueOwner(Node source)
     {
         return valuesMap.inverse().get(source);
     }
@@ -203,7 +202,7 @@ public class DistillerData {
      * @return MeasurementMethod associated with the given node, or null if no
      *         such association exists.
      */
-    public AbstractQMEntity getUnionOwner(Node source)
+    public QMElement getUnionOwner(Node source)
     {
         if (source == null || !unionsMap.containsValue(source))
             return null;
@@ -224,10 +223,9 @@ public class DistillerData {
      * @param map
      *            Map to which the node will be added.
      */
-    public void addNode(final AbstractQMEntity entity, final Node node)
+    public void addNode(final QMElement entity, final Node node)
     {
-        node.setDescription(entity.getDescription());
-        node.setOwnedBy(entity.getId());
+        node.setOwnedBy(entity.getIdentifier());
 
         if (node instanceof FactorNode)
         {
@@ -251,7 +249,7 @@ public class DistillerData {
      * @return The set of Factor entities present across all loaded quality
      *         models.
      */
-    public Set<AbstractQMEntity> getFactors()
+    public Set<QMElement> getFactors()
     {
         return factorMap.keySet();
     }
@@ -268,7 +266,7 @@ public class DistillerData {
      * @return The set of Measure entities present across all loaded quality
      *         models
      */
-    public Set<AbstractQMEntity> getMeasures()
+    public Set<QMElement> getMeasures()
     {
         return measureMap.keySet();
     }
@@ -277,7 +275,7 @@ public class DistillerData {
      * @return The set of MeasurementMethod entities present across all loaded
      *         quality models
      */
-    public Set<AbstractQMEntity> getValues()
+    public Set<QMElement> getValues()
     {
         return valuesMap.keySet();
     }
@@ -327,7 +325,7 @@ public class DistillerData {
      * @return Set of all union measurement methods across all loaded Quality
      *         Models.
      */
-    public Set<AbstractQMEntity> getUnions()
+    public Set<QMElement> getUnions()
     {
         return unionsMap.keySet();
     }

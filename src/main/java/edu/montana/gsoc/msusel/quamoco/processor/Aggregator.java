@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -58,7 +57,7 @@ public abstract class Aggregator extends Processor {
     public BigDecimal process()
     {
         final List<BigDecimal> values = new ArrayList<>();
-        for (final Edge n : owner.getGraph().getInEdges(owner))
+        for (final Edge n : owner.getGraph().inEdges(owner))
         {
             values.addAll(n.getValues());
         }

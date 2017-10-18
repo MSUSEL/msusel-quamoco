@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,32 +24,36 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Queue;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 
+import edu.montana.gsoc.msusel.quamoco.io.QMXMLReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xml.sax.SAXException;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
-
+import com.google.common.graph.MutableNetwork;
+import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.io.QMReader;
-import edu.montana.gsoc.msusel.quamoco.model.qm.QualityModel;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Requires;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
+import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 
 /**
  * Distills a processing graph from a set of Quamoco Quality Models.
@@ -63,26 +66,31 @@ public class ModelDistiller {
     /**
      * Logger
      */
-    private static final Logger             LOG = LoggerFactory.getLogger(ModelDistiller.class);
+    private static final Logger        LOG = LoggerFactory.getLogger(ModelDistiller.class);
     /**
      * Processing graph to be created
      */
-    private DirectedSparseGraph<Node, Edge> graph;
+    private MutableNetwork<Node, Edge> graph;
     /**
      * Language
      */
-    private String                          language;
+    private String                     language;
     /**
      * List of known quality models
      */
-    List<QualityModel>                      models;
+    List<QualityModel>                 models;
 
     /**
      * Constructor
      */
     public ModelDistiller()
     {
-        graph = new DirectedSparseGraph<>();
+        graph = NetworkBuilder.directed()
+                .allowsParallelEdges(true)
+                .allowsSelfLoops(false)
+                .expectedNodeCount(10000)
+                .expectedEdgeCount(10000)
+                .build();
         models = Lists.newArrayList();
     }
 
@@ -122,7 +130,7 @@ public class ModelDistiller {
     /**
      * @return The processing graph.
      */
-    public DirectedSparseGraph<Node, Edge> getGraph()
+    public MutableNetwork<Node, Edge> getGraph()
     {
         return graph;
     }
@@ -144,7 +152,7 @@ public class ModelDistiller {
      */
     private List<QualityModel> readInQualityModels(final String... args)
     {
-        final QMReader qmread = new QMReader();
+        final QMXMLReader qmread = new QMXMLReader();
         final List<QualityModel> models = Lists.newArrayList();
         if (args != null)
         {
@@ -152,15 +160,21 @@ public class ModelDistiller {
             {
                 for (final String arg : args)
                 {
-                    qmread.read(arg);
+                    qmread.firstPass(arg);
                     models.add(qmread.getModel());
                 }
+
+                for (final String arg : args)
+                {
+                    qmread.secondPass(arg);
+                }
             }
-            catch (FileNotFoundException | XMLStreamException e)
+            catch (ParserConfigurationException | SAXException | IOException e)
             {
                 ModelDistiller.LOG.warn(e.getMessage(), e);
             }
         }
+
         return models;
     }
 
@@ -176,11 +190,11 @@ public class ModelDistiller {
      */
     private List<QualityModel> readInQualityModels(Path path)
     {
-        final QMReader qmRead = new QMReader();
+        final QMXMLReader qmRead = new QMXMLReader();
         final List<QualityModel> models = Lists.newArrayList();
         final Path baseDir = path.toAbsolutePath().getParent();
         Queue<Path> paths = Queues.newArrayDeque();
-
+        Queue<Path> pstack = Queues.newArrayDeque();
         paths.offer(path);
 
         Map<String, QualityModel> modelMap = new HashMap<>();
@@ -188,35 +202,66 @@ public class ModelDistiller {
         while (!paths.isEmpty())
         {
             Path p = paths.poll();
+            pstack.offer(p);
             if (Files.exists(p))
             {
                 try
                 {
-                    qmRead.read(p.toString());
-                    QualityModel model = qmRead.getModel();
-                    modelMap.put(p.getFileName().toString(), model);
-                    models.add(qmRead.getModel());
-                    for (Requires req : model.getRequires())
+                    final XMLInputFactory factory = XMLInputFactory.newInstance();
+                    final InputStream stream = Files.newInputStream(p, StandardOpenOption.READ);
+                    final XMLStreamReader reader = factory.createXMLStreamReader(stream);
+                    while (reader.hasNext())
                     {
-                        String other = req.getHREF().split("#")[0];
-                        if (!modelMap.containsKey(other))
+                        final int event = reader.next();
+
+                        switch (event)
                         {
-                            if (baseDir != null)
+                        case XMLStreamConstants.START_ELEMENT:
+                            if (reader.getLocalName().equals("requires"))
                             {
-                                Path next = baseDir.resolve(other);
-                                paths.offer(next);
-                            }
-                            else
-                            {
-                                paths.offer(Paths.get(other));
+                                String other = reader.getAttributeValue(null, "href");
+                                if (other.contains("#"))
+                                {
+                                    String x = other.split("#")[0];
+
+                                    if (!modelMap.containsKey(x))
+                                    {
+                                        if (baseDir != null)
+                                        {
+                                            Path next = baseDir.resolve(x);
+                                            paths.offer(next);
+                                        }
+                                        else
+                                        {
+                                            paths.offer(Paths.get(x));
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
+
+                    qmRead.firstPass(p.toString());
+                    QualityModel model = qmRead.getModel();
+                    modelMap.put(p.getFileName().toString(), model);
+                    models.add(qmRead.getModel());
                 }
-                catch (XMLStreamException | IOException e)
+                catch (XMLStreamException | ParserConfigurationException | SAXException | IOException e)
                 {
                     LOG.warn("Could not read file at: " + path.toString());
                 }
+            }
+        }
+
+        while (!pstack.isEmpty())
+        {
+            try
+            {
+                qmRead.secondPass(pstack.poll().toString());
+            }
+            catch (ParserConfigurationException | SAXException | IOException e)
+            {
+                e.printStackTrace();
             }
         }
 
@@ -265,5 +310,14 @@ public class ModelDistiller {
     public List<QualityModel> getModelList()
     {
         return models;
+    }
+
+    /**
+     * @param qmFileLocs
+     */
+    public void buildGraph(Map<Class, String> qmFileLocs)
+    {
+        // TODO Auto-generated method stub
+        
     }
 }

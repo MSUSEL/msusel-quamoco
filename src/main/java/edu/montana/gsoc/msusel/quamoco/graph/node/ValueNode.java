@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,9 +31,8 @@ import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
+import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
 
 /**
  * Input Node which simply forms a place into which metric measures are to be
@@ -84,8 +82,7 @@ public class ValueNode extends Node {
      * @param tool
      *            Tool which provides the values for this node
      */
-    public ValueNode(final DirectedSparseGraph<Node, Edge> graph, final String key, final String owner,
-            final String tool)
+    public ValueNode(final MutableNetwork<Node, Edge> graph, final String key, final String owner, final String tool)
     {
         super(graph, key, owner);
         this.tool = tool;

@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,12 +29,11 @@ import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
+import com.google.common.graph.MutableNetwork;
+import edu.montana.gsoc.msusel.quamoco.processor.FindingsAggregator;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.processor.FindingsAggregator;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
 
 /**
  * A findings based aggregator for measures with type FINDINGS. Simply this
@@ -64,13 +62,13 @@ public class FindingsIntersectAggregator extends FindingsAggregator {
     @Override
     protected Set<Finding> aggregate()
     {
-        final DirectedSparseGraph<Node, Edge> graph = owner.getGraph();
+        final MutableNetwork<Node, Edge> graph = owner.getGraph();
         Set<Finding> retVal = Sets.newHashSet();
         boolean first = true;
 
-        for (final Edge edge : graph.getInEdges(owner))
+        for (final Edge edge : graph.inEdges(owner))
         {
-            Node n = graph.getOpposite(owner, edge);
+            Node n = owner.getOpposite(edge);
             if (retVal.isEmpty() && first)
             {
                 retVal.addAll(n.getFindings());

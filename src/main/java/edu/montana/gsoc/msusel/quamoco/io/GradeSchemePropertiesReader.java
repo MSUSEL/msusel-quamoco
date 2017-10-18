@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,11 +28,10 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import edu.montana.gsoc.msusel.quamoco.distiller.Grade;
 import edu.montana.gsoc.msusel.quamoco.distiller.GradeThresholdException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Properties reader for the default grade scheme for quamoco.

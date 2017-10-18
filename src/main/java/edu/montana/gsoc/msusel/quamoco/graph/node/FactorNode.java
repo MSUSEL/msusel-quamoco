@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,13 +29,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
-import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
+import com.google.common.graph.MutableNetwork;
 
 /**
  * Node representing a factor in the Quamoco processing graph. A
@@ -68,7 +66,7 @@ public class FactorNode extends Node {
      * @param owner
      *            Id of the entity in a quality model this node represents.
      */
-    public FactorNode(final DirectedSparseGraph<Node, Edge> graph, final String name, final String owner)
+    public FactorNode(final MutableNetwork<Node, Edge> graph, final String name, final String owner)
     {
         super(graph, name, owner);
         method = FactorMethod.MEAN;
@@ -142,9 +140,9 @@ public class FactorNode extends Node {
     public BigDecimal getLowerResult()
     {
         final List<BigDecimal> values = Lists.newArrayList();
-        for (final Edge e : graph.getInEdges(this))
+        for (final Edge e : graph.inEdges(this))
         {
-            final Node n = graph.getOpposite(this, e);
+            final Node n = getOpposite(e);
             values.add(n.getValue());
         }
 
@@ -158,9 +156,9 @@ public class FactorNode extends Node {
     public BigDecimal getUpperResult()
     {
         final List<BigDecimal> values = Lists.newArrayList();
-        for (final Edge e : graph.getInEdges(this))
+        for (final Edge e : graph.inEdges(this))
         {
-            final Node n = graph.getOpposite(this, e);
+            final Node n = getOpposite(e);
             values.add(n.getValue());
         }
 
@@ -175,9 +173,9 @@ public class FactorNode extends Node {
     {
         if (findings == null || findings.isEmpty())
         {
-            for (Edge edge : graph.getInEdges(this))
+            for (Edge edge : graph.inEdges(this))
             {
-                Node n = graph.getOpposite(this, edge);
+                Node n = getOpposite(edge);
                 findings.addAll(n.getFindings());
             }
         }

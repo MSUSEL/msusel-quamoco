@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,17 +30,17 @@ import java.util.Map;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
+import com.google.common.graph.EndpointPair;
+import com.google.common.graph.MutableNetwork;
+import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.INode;
-import edu.montana.gsoc.msusel.quamoco.model.AbstractEntity;
-import edu.montana.gsoc.msusel.quamoco.model.qm.AbstractQMEntity;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Evaluation;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Factor;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Measure;
-import edu.montana.gsoc.msusel.quamoco.model.qm.MeasurementMethod;
-import edu.montana.gsoc.msusel.quamoco.model.qm.QualityModel;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Requires;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
+import edu.montana.gsoc.msusel.quamoco.model.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.QMElement;
+
+import edu.montana.gsoc.msusel.quamoco.model.MeasurementMethod;
+import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 
 /**
  * A utility class for dealing with quality model objects.
@@ -90,29 +89,29 @@ public final class QualityModelUtils {
      *            The unique identifying string associated with the entity.
      * @return The entity with the provided id or null if no such entity exists.
      */
-    public static AbstractEntity findEntity(final Map<String, QualityModel> modelMap, final String id)
+    public static QMElement findEntity(final Map<String, QualityModel> modelMap, final String id)
     {
         if (modelMap == null || modelMap.isEmpty() || id == null || id.isEmpty())
         {
             return null;
         }
 
-        AbstractEntity entity = null;
+        QMElement entity = null;
 
         if (id.contains(".qm#"))
         {
             final String[] keys = id.split(".qm#");
             final String model = keys[0];
-            entity = modelMap.get(model).find(id);
+            entity = modelMap.get(model).getEntity(id);
         }
         else
         {
             for (final QualityModel model : modelMap.values())
             {
                 final String temp = model.getName() + ".qm#" + id;
-                if (model.hasKey(temp))
+                if (model.hasEntity(temp))
                 {
-                    entity = model.find(temp);
+                    entity = model.getEntity(temp);
                     break;
                 }
             }
@@ -137,13 +136,7 @@ public final class QualityModelUtils {
         {
             for (final QualityModel model : models)
             {
-                for (final AbstractQMEntity entity : model.getContained())
-                {
-                    if (entity instanceof MeasurementMethod)
-                    {
-                        mmlist.add((MeasurementMethod) entity);
-                    }
-                }
+                mmlist.addAll(model.getMeasurementMethods());
             }
         }
 
@@ -166,7 +159,7 @@ public final class QualityModelUtils {
      */
     public static Evaluation getEvaluates(final INode dest, final Map<String, QualityModel> modelMap)
     {
-        final AbstractEntity ent = QualityModelUtils.findEntity(modelMap, dest.getOwnedBy());
+        final QMElement ent = QualityModelUtils.findEntity(modelMap, dest.getOwnedBy());
         if (ent != null && ent instanceof Evaluation)
         {
             return (Evaluation) ent;
@@ -187,7 +180,7 @@ public final class QualityModelUtils {
      */
     public static Factor getFactor(final INode source, final Map<String, QualityModel> modelMap)
     {
-        final AbstractEntity ent = QualityModelUtils.findEntity(modelMap, source.getOwnedBy());
+        final QMElement ent = QualityModelUtils.findEntity(modelMap, source.getOwnedBy());
         if (ent != null && ent instanceof Factor)
         {
             return (Factor) ent;
@@ -208,7 +201,7 @@ public final class QualityModelUtils {
      */
     public static Measure getMeasure(String id, final Map<String, QualityModel> modelMap)
     {
-        final AbstractEntity ent = QualityModelUtils.findEntity(modelMap, id);
+        final QMElement ent = QualityModelUtils.findEntity(modelMap, id);
         if (ent != null && ent instanceof Measure)
         {
             return (Measure) ent;
@@ -228,7 +221,7 @@ public final class QualityModelUtils {
      */
     public static Factor getFactor(String id, final Map<String, QualityModel> modelMap)
     {
-        final AbstractEntity ent = QualityModelUtils.findEntity(modelMap, id);
+        final QMElement ent = QualityModelUtils.findEntity(modelMap, id);
         if (ent != null && ent instanceof Factor)
         {
             return (Factor) ent;
@@ -253,13 +246,7 @@ public final class QualityModelUtils {
         {
             for (final QualityModel model : sorted)
             {
-                for (final AbstractQMEntity entity : model.getContained())
-                {
-                    if (entity instanceof Evaluation)
-                    {
-                        evalList.add((Evaluation) entity);
-                    }
-                }
+                evalList.addAll(model.getEvaluations());
             }
         }
 
@@ -278,29 +265,19 @@ public final class QualityModelUtils {
     @VisibleForTesting
     static List<QualityModel> getSortedModelList(List<QualityModel> models)
     {
-        DirectedSparseGraph<QualityModel, String> g = new DirectedSparseGraph<>();
+        MutableNetwork<QualityModel, String> g = NetworkBuilder.directed().allowsSelfLoops(false).build();
+
         if (models != null)
         {
             for (QualityModel model : models)
             {
-                g.addVertex(model);
+                g.addNode(model);
             }
             for (QualityModel model : models)
             {
-                for (Requires r : model.getRequires())
+                for (QualityModel qm : model.getRequires())
                 {
-                    String s = r.getHREF();
-                    if (s.contains("#"))
-                    {
-                        for (QualityModel m : models)
-                        {
-                            if (m.getId().equals(s.split(".qm#")[1]))
-                            {
-                                g.addEdge("requires: " + model.getName() + " - " + m.getName(), model, m);
-                                break;
-                            }
-                        }
-                    }
+                    g.addEdge(model, qm, "requires: " + model.getName() + " - " + qm.getName());
                 }
             }
         }
@@ -316,12 +293,12 @@ public final class QualityModelUtils {
      * @return Topologically sorted list of quality models
      */
     @VisibleForTesting
-    static List<QualityModel> topoSort(DirectedSparseGraph<QualityModel, String> graph)
+    static List<QualityModel> topoSort(MutableNetwork<QualityModel, String> graph)
     {
         List<QualityModel> list = Lists.newArrayList();
         List<QualityModel> set = Lists.newArrayList();
 
-        for (QualityModel q : graph.getVertices())
+        for (QualityModel q : graph.nodes())
         {
             if (graph.inDegree(q) <= 0)
             {
@@ -334,9 +311,9 @@ public final class QualityModelUtils {
             QualityModel q = set.remove(0);
             list.add(q);
             List<String> toRemove = Lists.newArrayList();
-            for (String edge : graph.getOutEdges(q))
+            for (String edge : graph.outEdges(q))
             {
-                QualityModel x = graph.getOpposite(q, edge);
+                QualityModel x = getOpposite(q, edge, graph);
                 toRemove.add(edge);
                 if (graph.inDegree(x) <= 1)
                 {
@@ -348,10 +325,24 @@ public final class QualityModelUtils {
                 graph.removeEdge(edge);
             }
         }
-        if (graph.getEdgeCount() > 0)
+        if (graph.edges().size() > 0)
         {
             System.out.println("Graph has Cycles");
         }
         return list;
+    }
+
+    private static <N, E> N getOpposite(N q, E edge, MutableNetwork<N, E> graph)
+    {
+        EndpointPair<N> pair = graph.incidentNodes(edge);
+
+        if (pair.nodeU().equals(q))
+        {
+            return pair.nodeV();
+        }
+        else
+        {
+            return pair.nodeU();
+        }
     }
 }

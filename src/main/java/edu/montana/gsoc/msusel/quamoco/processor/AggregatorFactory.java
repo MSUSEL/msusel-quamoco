@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,14 +27,14 @@ package edu.montana.gsoc.msusel.quamoco.processor;
 import edu.montana.gsoc.msusel.quamoco.graph.INode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureMethod;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureType;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsIntersectAggregator;
+import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMeanAggregator;
+import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMinAggregator;
+import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMedianAggregator;
+import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggregator;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMaxAggregator;
-import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMeanAggregator;
-import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMedianAggregator;
-import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMinAggregator;
 
 /**
  * Factory used to select the appropriate aggregator for a given MeasureNode

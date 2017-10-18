@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,10 +25,14 @@
 package edu.montana.gsoc.msusel.quamoco.io;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+
+import org.xml.sax.SAXException;
 
 import com.google.common.collect.Maps;
 
@@ -72,15 +75,29 @@ public abstract class AbstractQuamocoReader {
     }
 
     /**
-     * Reads in a quality model from the given file.
+     * Reads in a quality model from the given file, extracting only the basic
+     * components: Factors, Measures, Tools, Sources, Tags, and Entities
      * 
-     * @param qm
-     *            Name of the file to read.
+     * @param doc
+     *            String representing the location of the file
+     * @throws FileNotFoundException
+     *             If the file is cannot be found
      * @throws XMLStreamException
      *             If the file is not a well-formed XML document
+     */
+    public abstract void firstPass(String doc) throws ParserConfigurationException, SAXException, IOException;
+
+    /**
+     * Updates a quality model from the data in the given file, extracting
+     * relationship information such as Model requires, Evaluations, Entity isAs
+     * and partOfs, Impact information, refines information, etc.
+     * 
+     * @param doc
+     *            String representing the location of the file
      * @throws FileNotFoundException
      *             If the file cannot be found
+     * @throws XMLStreamException
+     *             If the file is not a well-formed XML document
      */
-    public abstract void read(String file) throws FileNotFoundException, XMLStreamException;
-
+    public abstract void secondPass(String doc) throws ParserConfigurationException, SAXException, IOException;
 }

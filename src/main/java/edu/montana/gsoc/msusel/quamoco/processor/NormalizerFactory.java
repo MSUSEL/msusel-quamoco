@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,12 +24,12 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor;
 
-import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingsEdge;
+import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Normalizable;
-import edu.montana.gsoc.msusel.quamoco.model.qm.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.RangedNormalizer;
+import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
+import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingsEdge;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.UnrangedNormalizer;
 
 /**

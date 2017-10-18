@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,9 +26,9 @@ package edu.montana.gsoc.msusel.quamoco.graph.node;
 
 import java.math.BigDecimal;
 
+import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import edu.montana.gsoc.msusel.quamoco.model.qm.NormalizationRange;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
+import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
 /**
  * Node originally meant to provide the means by which normalization was to
@@ -47,7 +46,7 @@ public class NormalizationNode extends MeasureNode {
      * @param graph
      * @param owner
      */
-    public NormalizationNode(final DirectedSparseGraph<Node, Edge> graph, final String name, final String owner)
+    public NormalizationNode(final MutableNetwork<Node, Edge> graph, final String name, final String owner)
     {
         super(graph, name, owner);
         range = NormalizationRange.NA;

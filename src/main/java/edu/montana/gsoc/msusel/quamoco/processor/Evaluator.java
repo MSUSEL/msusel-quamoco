@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -56,7 +55,7 @@ public abstract class Evaluator extends Processor {
     {
         final List<BigDecimal> values = new ArrayList<>();
 
-        for (final Edge edge : owner.getGraph().getInEdges(owner))
+        for (final Edge edge : owner.getGraph().inEdges(owner))
         {
             if (edge instanceof RankedEdge)
             {

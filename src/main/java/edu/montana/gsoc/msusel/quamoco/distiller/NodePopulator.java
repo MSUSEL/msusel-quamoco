@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,30 +25,29 @@
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
 import java.util.List;
-import java.util.Map;
 
 import com.google.common.annotations.VisibleForTesting;
-
+import com.google.common.graph.MutableNetwork;
+import edu.montana.gsoc.msusel.quamoco.model.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.QMElement;
+import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
+import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
+import edu.montana.gsoc.msusel.quamoco.model.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.ManualInstrument;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorMethod;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FindingsUnionNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureMethod;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.graph.node.NormalizationNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
-import edu.montana.gsoc.msusel.quamoco.model.AbstractEntity;
-import edu.montana.gsoc.msusel.quamoco.model.qm.AbstractQMEntity;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Entity;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Factor;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Measure;
-import edu.montana.gsoc.msusel.quamoco.model.qm.MeasurementMethod;
-import edu.montana.gsoc.msusel.quamoco.model.qm.QualityModel;
-import edu.montana.gsoc.msusel.quamoco.model.qm.Tool;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
+import edu.montana.gsoc.msusel.quamoco.model.Entity;
+import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
+import edu.montana.gsoc.msusel.quamoco.model.MeasurementMethod;
+import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
+import edu.montana.gsoc.msusel.quamoco.model.Tool;
+import edu.montana.gsoc.msusel.quamoco.model.ToolBasedInstrument;
 
 /**
  * Populates the Quamoco Processing Graph with nodes.
@@ -80,13 +78,12 @@ public class NodePopulator implements GraphModifier {
      *            Map to which the node will be added.
      */
     @VisibleForTesting
-    void addNode(DistillerData data, final DirectedSparseGraph<Node, Edge> graph, final AbstractQMEntity entity,
-            final Node node)
+    void addNode(DistillerData data, final MutableNetwork<Node, Edge> graph, final QMElement entity, final Node node)
     {
-        if (graph.containsVertex(node))
+        if (graph.nodes().contains(node))
             return;
 
-        graph.addVertex(node);
+        graph.addNode(node);
         data.addNode(entity, node);
     }
 
@@ -103,59 +100,53 @@ public class NodePopulator implements GraphModifier {
      */
     @VisibleForTesting
     void extractFactorsAndMeasures(final DistillerData data, final List<QualityModel> models,
-            final DirectedSparseGraph<Node, Edge> graph)
+            final MutableNetwork<Node, Edge> graph)
     {
         for (final QualityModel model : models)
         {
-            for (final AbstractQMEntity entity : model.getContained())
+            for (Measure meas : model.getMeasures())
             {
-                if (entity instanceof Measure)
+                MeasureNode node = null;
+                if (meas.getType() != null && meas.getType().equals("qm:NormalizationMeasure"))
                 {
-                    final Measure measure = (Measure) entity;
-                    MeasureNode node = null;
-                    if (measure.getType() != null && measure.getType().equals("qm:NormalizationMeasure"))
-                    {
-                        node = new NormalizationNode(graph, measure.getName(), measure.getId());
-                        setMeasureNodeProperties(measure, node);
-                    }
-                    else
-                    {
-                        node = new MeasureNode(graph, measure.getName(), measure.getId());
-                        setMeasureNodeProperties(measure, node);
-                    }
-                    addNode(data, graph, measure, node);
+                    node = new NormalizationNode(graph, meas.getName(), meas.getIdentifier());
+                    setMeasureNodeProperties(meas, node);
                 }
-                else if (entity instanceof Factor)
+                else
                 {
-                    final Factor factor = (Factor) entity;
+                    node = new MeasureNode(graph, meas.getName(), meas.getIdentifier());
+                    setMeasureNodeProperties(meas, node);
+                }
+                addNode(data, graph, meas, node);
+            }
 
-                    String name = factor.getName();
+            for (Factor fact : model.getFactors())
+            {
+                String name = fact.getName();
 
-                    if (factor.getCharacterizes() != null)
+                if (fact.getCharacterizes() != null)
+                {
+                    Entity ent = fact.getCharacterizes();
+
+                    if (ent != null)
                     {
-                        AbstractEntity ent = QualityModelUtils
-                                .findEntity(data.getModelMap(), factor.getCharacterizes().getHREF());
-
-                        if (ent != null)
+                        if (ent instanceof Entity)
                         {
-                            if (ent instanceof Entity)
-                            {
-                                name = name.concat(" @" + ((Entity) ent).getName());
-                            }
+                            name = name.concat(" @" + ((Entity) ent).getName());
                         }
                     }
-
-                    final FactorNode node = new FactorNode(graph, name, factor.getId());
-                    if (!factor.getAnnotations().isEmpty() && factor.hasAggregationAnnotation())
-                    {
-                        node.setMethod(factor.getAggregationAnnotationValue());
-                    }
-                    else
-                    {
-                        node.setMethod(FactorMethod.MEAN);
-                    }
-                    addNode(data, graph, factor, node);
                 }
+
+                final FactorNode node = new FactorNode(graph, name, fact.getIdentifier());
+                if (!fact.getAnnotations().isEmpty() && fact.hasAggregationAnnotation())
+                {
+                    node.setMethod(fact.getAggregationAnnotationValue());
+                }
+                else
+                {
+                    node.setMethod(FactorMethod.MEAN);
+                }
+                addNode(data, graph, fact, node);
             }
         }
     }
@@ -172,54 +163,47 @@ public class NodePopulator implements GraphModifier {
      */
     @VisibleForTesting
     void extractValues(final DistillerData data, final List<QualityModel> models,
-            final DirectedSparseGraph<Node, Edge> graph)
+            final MutableNetwork<Node, Edge> graph)
     {
         final List<MeasurementMethod> mmlist = QualityModelUtils.getAllMeasurementMethods(models);
-        final Map<String, QualityModel> map = QualityModelUtils.createModelMap(models);
         for (final MeasurementMethod method : mmlist)
         {
             Node node = null;
-            if (method.getType().equals("qm:ManualInstrument"))
+            if (method instanceof ManualInstrument)
             {
-                node = new ValueNode(graph, method.getName(), method.getId(), ValueNode.MANUAL);
+                node = new ValueNode(graph, method.getMetric(), method.getIdentifier(), ValueNode.MANUAL);
             }
-            else if (method.getType().equals("qm:ToolBasedInstrument"))
+            else if (method instanceof ToolBasedInstrument)
             {
-                String type = "";
+                MeasureType type = null;
                 if (method.getDetermines() != null)
                 {
-                    final AbstractEntity determines = QualityModelUtils
-                            .findEntity(map, method.getDetermines().getHREF());
+                    final Measure determines = method.getDetermines();
 
-                    if (determines instanceof Measure)
-                    {
-                        type = ((Measure) determines).getType();
-                    }
+                    type = determines.getType();
                 }
 
-                final AbstractEntity tool = QualityModelUtils.findEntity(map, method.getTool());
+                final Tool tool = ((ToolBasedInstrument) method).getTool();
                 String toolName = "";
 
-                if (tool instanceof Tool)
-                {
-                    toolName = ((Tool) tool).getName();
-                }
+                toolName = tool.getName();
 
-                if (type.equalsIgnoreCase(MeasureType.FINDINGS))
+                if (type == MeasureType.FINDINGS)
                 {
-                    node = new FindingNode(graph, method.getMetric(), method.getId(), method.getMetric(), toolName);
+                    node = new FindingNode(
+                            graph, method.getMetric(), method.getIdentifier(), method.getMetric(), toolName);
                 }
                 else
                 {
-                    node = new ValueNode(graph, method.getMetric(), method.getId(), toolName);
+                    node = new ValueNode(graph, method.getMetric(), method.getIdentifier(), toolName);
                 }
             }
             else
             {
-                node = new FindingsUnionNode(graph, method.getName(), method.getId());
+                node = new FindingsUnionNode(graph, method.getMetric(), method.getIdentifier());
             }
 
-            if (!graph.containsVertex(node))
+            if (!graph.nodes().contains(node))
             {
                 if (node instanceof FindingsUnionNode)
                 {
@@ -229,7 +213,7 @@ public class NodePopulator implements GraphModifier {
                 {
                     data.addValue(method, node);
                 }
-                graph.addVertex(node);
+                graph.addNode(node);
             }
         }
     }
@@ -238,7 +222,7 @@ public class NodePopulator implements GraphModifier {
      * {@inheritDoc}
      */
     @Override
-    public void modifyGraph(final DistillerData data, final DirectedSparseGraph<Node, Edge> graph)
+    public void modifyGraph(final DistillerData data, final MutableNetwork<Node, Edge> graph)
     {
         extractFactorsAndMeasures(data, data.getModels(), graph);
         extractValues(data, data.getModels(), graph);

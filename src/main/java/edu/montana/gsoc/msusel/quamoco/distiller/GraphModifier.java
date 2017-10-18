@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,9 +24,9 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
+import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
 
 /**
  * Strategy to modify a graph based on available distiller data.
@@ -46,5 +45,5 @@ public interface GraphModifier {
      * @param graph
      *            Graph to be modified.
      */
-    void modifyGraph(DistillerData data, DirectedSparseGraph<Node, Edge> graph);
+    void modifyGraph(DistillerData data, MutableNetwork<Node, Edge> graph);
 }

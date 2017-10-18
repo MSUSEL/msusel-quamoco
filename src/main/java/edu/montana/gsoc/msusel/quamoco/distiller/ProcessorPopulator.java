@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +25,11 @@
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
 import com.google.common.annotations.VisibleForTesting;
-
+import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.INode;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.processor.ProcessorFactory;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
 
 /**
  * Modifies the graph by adding Evaluators to existing Nodes.
@@ -56,7 +54,7 @@ public class ProcessorPopulator implements GraphModifier {
      * {@inheritDoc}
      */
     @Override
-    public void modifyGraph(final DistillerData data, final DirectedSparseGraph<Node, Edge> graph)
+    public void modifyGraph(final DistillerData data, final MutableNetwork<Node, Edge> graph)
     {
         assignProcessors(graph);
     }
@@ -68,9 +66,9 @@ public class ProcessorPopulator implements GraphModifier {
      *            Graph in which the nodes exist
      */
     @VisibleForTesting
-    void assignProcessors(final DirectedSparseGraph<Node, Edge> graph)
+    void assignProcessors(final MutableNetwork<Node, Edge> graph)
     {
-        for (final INode n : graph.getVertices())
+        for (final INode n : graph.nodes())
         {
             if (ProcessorFactory.getInstance(n) != null)
             {

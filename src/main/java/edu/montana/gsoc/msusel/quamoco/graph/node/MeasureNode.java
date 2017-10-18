@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,18 +29,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
+import edu.montana.gsoc.msusel.quamoco.processor.FindingsAggregator;
+import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
+import edu.montana.gsoc.msusel.quamoco.graph.edge.RankedEdge;
+import edu.montana.gsoc.msusel.quamoco.processor.Extent;
+import edu.montana.gsoc.msusel.quamoco.processor.MetricsContext;
+import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
-import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.RankedEdge;
-import edu.montana.gsoc.msusel.quamoco.processor.Extent;
-import edu.montana.gsoc.msusel.quamoco.processor.FindingsAggregator;
-import edu.montana.gsoc.msusel.quamoco.processor.MetricsContext;
-import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
+import com.google.common.graph.MutableNetwork;
 
 /**
  * MeasureNode -
@@ -53,7 +52,7 @@ public class MeasureNode extends Node {
     /**
      * The type associated with this measure
      */
-    private String       type;
+    private MeasureType type;
     /**
      * The method associated with this measure
      */
@@ -76,7 +75,7 @@ public class MeasureNode extends Node {
      * @param owner
      *            Identifier of the quamoco model entity this node came from
      */
-    public MeasureNode(final DirectedSparseGraph<Node, Edge> graph, final String name, final String owner)
+    public MeasureNode(final MutableNetwork<Node, Edge> graph, final String name, final String owner)
     {
         super(graph, name, owner);
         type = MeasureType.FINDINGS;
@@ -94,7 +93,7 @@ public class MeasureNode extends Node {
     /**
      * @return the type of this measure
      */
-    public String getType()
+    public MeasureType getType()
     {
         return type;
     }
@@ -147,7 +146,7 @@ public class MeasureNode extends Node {
      * @param type
      *            the new type of this measure
      */
-    public void setType(final String type)
+    public void setType(final MeasureType type)
     {
         this.type = type;
     }
@@ -201,9 +200,9 @@ public class MeasureNode extends Node {
 
         if (type.equals(MeasureType.FINDINGS))
         {
-            for (final Edge e : graph.getInEdges(this))
+            for (final Edge e : graph.inEdges(this))
             {
-                final Node n = graph.getOpposite(this, e);
+                final Node n = getOpposite(e);
                 if (e instanceof RankedEdge)
                 {
                     final RankedEdge we = (RankedEdge) e;
@@ -227,9 +226,9 @@ public class MeasureNode extends Node {
         }
         else
         {
-            for (final Edge e : graph.getInEdges(this))
+            for (final Edge e : graph.inEdges(this))
             {
-                final Node n = graph.getOpposite(this, e);
+                final Node n = getOpposite(e);
                 values.add(n.getValue());
             }
         }

@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +29,7 @@ import java.util.Set;
 
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
-import edu.montana.gsoc.msusel.quamoco.model.qm.NormalizationRange;
+import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
 /**
  * Normalizer -
@@ -42,7 +41,7 @@ public abstract class Normalizer {
     /**
      * Edge containing this normalizer
      */
-    protected Edge               owner;
+    protected Edge owner;
     /**
      * Range of normalization
      */

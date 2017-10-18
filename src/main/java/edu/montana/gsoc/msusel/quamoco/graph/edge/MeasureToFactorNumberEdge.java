@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +27,7 @@ package edu.montana.gsoc.msusel.quamoco.graph.edge;
 import java.math.BigDecimal;
 
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.model.qm.InfluenceEffect;
+import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
 
 /**
  * Edge connection a Measure node to a Factor node and for which the Measure has

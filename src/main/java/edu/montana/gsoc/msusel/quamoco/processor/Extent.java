@@ -1,9 +1,8 @@
 /**
  * The MIT License (MIT)
  *
- * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
- * Software Engineering Laboratory
+ * SparQLine Quamoco Implementation
+ * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,23 +33,22 @@ import java.util.Set;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
-
-import edu.montana.gsoc.msusel.CodeTree;
-import edu.montana.gsoc.msusel.INode;
-import edu.montana.gsoc.msusel.node.FieldNode;
-import edu.montana.gsoc.msusel.node.FileNode;
-import edu.montana.gsoc.msusel.node.MethodNode;
-import edu.montana.gsoc.msusel.node.ModuleNode;
-import edu.montana.gsoc.msusel.node.NamespaceNode;
-import edu.montana.gsoc.msusel.node.ProjectNode;
-import edu.montana.gsoc.msusel.node.StatementNode;
-import edu.montana.gsoc.msusel.node.TypeNode;
+import com.sparqline.codetree.CodeTree;
+import com.sparqline.codetree.INode;
+import com.sparqline.codetree.node.FieldNode;
+import com.sparqline.codetree.node.FileNode;
+import com.sparqline.codetree.node.MethodNode;
+import com.sparqline.codetree.node.ModuleNode;
+import com.sparqline.codetree.node.NamespaceNode;
+import com.sparqline.codetree.node.ProjectNode;
+import com.sparqline.codetree.node.StatementNode;
+import com.sparqline.codetree.node.TypeNode;
+import com.sparqline.codetree.util.CodeTreeUtils;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureType;
-import edu.montana.gsoc.msusel.quamoco.model.qm.NormalizationRange;
-import edu.montana.gsoc.msusel.util.CodeTreeUtils;
+import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
+import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
 /**
  * Class used to evaluate the extent that a set of findings has across a
