@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,16 @@ package edu.montana.gsoc.msusel.quamoco.model;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * A source is a reference document that is the basis for the model element it
@@ -49,11 +59,14 @@ public class Source extends QMElement {
     /**
      * An optional title providing a more detailed name of this Source
      */
+    @Getter @Setter
     private String title;
     /**
      * 
      */
+    @Getter @Setter
     private String description;
+    @Getter @Setter
     private String name;
 
     /**
@@ -82,85 +95,13 @@ public class Source extends QMElement {
         this.name = name;
     }
 
-    /**
-     * @return The title
-     */
-    public String getTitle()
+    @Builder(buildMethodName = "create")
+    protected Source(String name, String description, String title, String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations)
     {
-        return title;
-    }
-
-    /**
-     * @param title
-     *            The new title of this Source
-     */
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
-
-    /**
-     * @return the description
-     */
-    public String getDescription()
-    {
-        return description;
-    }
-
-    /**
-     * @param description
-     *            the description to set
-     */
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Source getOriginatesFrom()
-    {
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setOriginatesFrom(Source source)
-    {
-        return;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * @param name
-     *            the name to set
-     */
-    public void setName(String name)
-    {
+        super(identifier, originatesFrom, tags, annotations);
         this.name = name;
-    }
-
-    /**
-     * Creates a new Builder for a Source with the given simple name
-     * 
-     * @param name
-     *            Simple Name
-     * @return the Source.Builder instance
-     */
-    public static Builder builder(String name)
-    {
-        return new Builder(name);
+        this.description = description;
+        this.title = title;
     }
     
     /**
@@ -169,134 +110,13 @@ public class Source extends QMElement {
     @Override
     public String xmlTag()
     {
-        StringBuilder builder = new StringBuilder();
-        builder.append(String.format(
-                "<sources xmi:id=\"%s\" name=\"%s\" description=\"%s\"", getIdentifier(), StringEscapeUtils.escapeXml10(getName()),
-                StringEscapeUtils.escapeXml10(getDescription())));
-        if (hasAnnotations())
-        {
-            builder.append(">\n");
-            annotations.forEach((ann) -> {
-                builder.append(ann.xmlTag());
-            });
-            builder.append("</sources>\n");
-        }
-        else
-        {
-            builder.append(" />\n");
-        }
-        
-        return builder.toString();
-    }
+        Map<String, String> attrs = Maps.newHashMap();
 
-    /**
-     * Creates a new Builder for a Source with the given simple name and unique
-     * identifier
-     * 
-     * @param name
-     *            Simple Name
-     * @param identifier
-     *            Unique identifier
-     * @return the Source.Builder instance
-     */
-    public static Builder builder(String name, String identifier)
-    {
-        return new Builder(name, identifier);
-    }
+        attrs.put("name", StringEscapeUtils.escapeXml10(getName()));
+        attrs.put("description", StringEscapeUtils.escapeXml10(getDescription()));
+        attrs.put("title", StringEscapeUtils.escapeXml10(getTitle()));
 
-    /**
-     * Builder for Sources implemented using the fluent interface and method
-     * chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder extends AbstractQMElementBuilder {
-
-        /**
-         * Constructs a new Builder for a Source with the given name
-         * 
-         * @param name
-         *            The name of the tag to construct
-         */
-        private Builder(String name)
-        {
-            element = new Source(name);
-        }
-
-        /**
-         * Constructs a new Builder for a Source with the given name and unique
-         * identifier
-         * 
-         * @param name
-         *            The name of the tag to construct
-         * @param identifier
-         *            The unique identifier
-         */
-        private Builder(String name, String identifier)
-        {
-            element = new Source(name, identifier);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        @Nonnull
-        public Source create()
-        {
-            return (Source) element;
-        }
-
-        /**
-         * Sets the element under construction's description
-         * 
-         * @param description
-         *            the description to set
-         * @return this
-         */
-        @Nonnull
-        public Builder description(String description)
-        {
-            ((Source) element).setDescription(description);
-
-            return this;
-        }
-
-        /**
-         * Sets the optional title of the Source under construction
-         * 
-         * @param title
-         *            Title of the Source
-         * @return this
-         */
-        @Nonnull
-        public Builder title(String title)
-        {
-            ((Source) element).setTitle(title);
-
-            return this;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toYaml()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toJson()
-    {
-        // TODO Auto-generated method stub
-        return null;
+        return generateXMLTag("sources", null, attrs, Lists.newArrayList());
     }
 
     /**

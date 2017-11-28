@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +25,11 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
-import com.sparqline.codetree.INode;
+import edu.montana.gsoc.msusel.codetree.INode;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * A Finding is simply a report that a static analysis rule was triggered at
@@ -35,36 +40,39 @@ import com.sparqline.codetree.INode;
  * @author Isaac Griffith
  * @version 1.1.1
  */
+@EqualsAndHashCode
+@ToString
 public class Finding {
 
     /**
      * Location in the CodeTree where the Finding was found
      */
-    private INode  location;
+    @Getter
+    @Setter
+    private INode location;
     /**
      * Associated Issue Key (Rule Key) to which this finding belongs
      */
+    @Getter
+    @Setter
     private String issueKey;
     /**
      * Simple name of the issue to which this finding belongs.
      */
+    @Getter
+    @Setter
     private String issueName;
 
     /**
      * Constructs a new Finding for the given issue key and name at the given
      * location in the CodeTree
-     * 
-     * @param location
-     *            Location
-     * @param issueKey
-     *            Issue Key
-     * @param issueName
-     *            Issue Name
+     *
+     * @param location  Location
+     * @param issueKey  Issue Key
+     * @param issueName Issue Name
      */
-    public Finding(final INode location, final String issueKey, final String issueName)
-    {
-        if (location == null || issueKey == null || issueKey.isEmpty() || issueName == null || issueName.isEmpty())
-        {
+    public Finding(final INode location, final String issueKey, final String issueName) {
+        if (location == null || issueKey == null || issueKey.isEmpty() || issueName == null || issueName.isEmpty()) {
             throw new IllegalArgumentException();
         }
 
@@ -74,21 +82,10 @@ public class Finding {
     }
 
     /**
-     * @return the CodeTree location of the activated issue
+     * @param location the new location of the activated issue
      */
-    public INode getLocation()
-    {
-        return location;
-    }
-
-    /**
-     * @param location
-     *            the new location of the activated issue
-     */
-    public void setLocation(final INode location)
-    {
-        if (location == null)
-        {
+    public void setLocation(final INode location) {
+        if (location == null) {
             return;
         }
 
@@ -96,21 +93,10 @@ public class Finding {
     }
 
     /**
-     * @return the key of the activate issue
+     * @param issueKey the new key of the activated issue
      */
-    public String getIssueKey()
-    {
-        return issueKey;
-    }
-
-    /**
-     * @param issueKey
-     *            the new key of the activated issue
-     */
-    public void setIssueKey(final String issueKey)
-    {
-        if (issueKey == null || issueKey.isEmpty())
-        {
+    public void setIssueKey(final String issueKey) {
+        if (issueKey == null || issueKey.isEmpty()) {
             return;
         }
 
@@ -118,102 +104,13 @@ public class Finding {
     }
 
     /**
-     * @return the name of the activated issue
+     * @param issueName the new name of the activated issue
      */
-    public String getIssueName()
-    {
-        return issueName;
-    }
-
-    /**
-     * @param issueName
-     *            the new name of the activated issue
-     */
-    public void setIssueName(final String issueName)
-    {
-        if (issueName == null || issueName.isEmpty())
-        {
+    public void setIssueName(final String issueName) {
+        if (issueName == null || issueName.isEmpty()) {
             return;
         }
 
         this.issueName = issueName;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (issueKey == null ? 0 : issueKey.hashCode());
-        result = prime * result + (issueName == null ? 0 : issueName.hashCode());
-        result = prime * result + (location == null ? 0 : location.hashCode());
-        return result;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(final Object obj)
-    {
-        if (this == obj)
-        {
-            return true;
-        }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (!(obj instanceof Finding))
-        {
-            return false;
-        }
-        final Finding other = (Finding) obj;
-        if (issueKey == null)
-        {
-            if (other.issueKey != null)
-            {
-                return false;
-            }
-        }
-        else if (!issueKey.equals(other.issueKey))
-        {
-            return false;
-        }
-        if (issueName == null)
-        {
-            if (other.issueName != null)
-            {
-                return false;
-            }
-        }
-        else if (!issueName.equals(other.issueName))
-        {
-            return false;
-        }
-        if (location == null)
-        {
-            if (other.location != null)
-            {
-                return false;
-            }
-        }
-        else if (!location.equals(other.location))
-        {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString()
-    {
-        return "Finding [location=" + location.toString() + ", issueKey=" + issueKey + ", issueName=" + issueName + "]";
     }
 }

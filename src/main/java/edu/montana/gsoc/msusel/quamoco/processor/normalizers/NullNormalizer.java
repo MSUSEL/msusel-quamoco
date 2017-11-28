@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -42,12 +43,12 @@ public class NullNormalizer extends Normalizer {
 
     /**
      * Constructs a new NullNormalizer for the given edge using the provided
-     * normalization metric.
+     * normalization name.
      * 
      * @param owner
      *            The Edge in which this normalizer was installed
      * @param normMetric
-     *            the name of the metric used for normalization
+     *            the name of the name used for normalization
      * @param range
      *            The range of this normalizer
      */

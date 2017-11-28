@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +25,15 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
-import javax.annotation.Nonnull;
-
+import com.google.common.collect.Maps;
+import edu.montana.gsoc.msusel.quamoco.io.MeasurementMethodType;
+import lombok.Builder;
+import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import edu.montana.gsoc.msusel.quamoco.io.MeasurementMethodType;
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Isaac Griffith
@@ -40,114 +45,42 @@ public class QIESLAggregation extends TextAggregation {
      * /**
      * Constructs a new QIESLAggregation.
      */
-    public QIESLAggregation()
-    {
+    public QIESLAggregation() {
         super();
     }
 
     /**
      * Constructs a new QIESLAggregation with the given unique
      * identifier.
-     * 
-     * @param identifier
-     *            The unique identifier
+     *
+     * @param identifier The unique identifier
      */
-    public QIESLAggregation(String identifier)
-    {
+    public QIESLAggregation(String identifier) {
         super(identifier);
     }
 
-    /**
-     * Creates a new Builder for a TextAggregation
-     * 
-     * @return the TextAggregation.Builder instance
-     */
-    public static QIESLAggregationBuilder builder()
-    {
-        return new QIESLAggregationBuilder();
-    }
-
-    /**
-     * Creates a new Builder for a TextAggregation with the
-     * given unique identifier
-     * 
-     * @param identifier
-     *            The unique identifier
-     * @return the TextAggregation.Builder instance
-     */
-    public static QIESLAggregationBuilder builder(String identifier)
-    {
-        return new QIESLAggregationBuilder(identifier);
+    @Builder(buildMethodName = "create", builderMethodName = "qieslBuilder")
+    protected QIESLAggregation(String specification, @Singular List<Measure> aggregates, Measure determines, String metric, String description, String title,
+                              String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
+        super(specification, aggregates, determines, metric, description, title, identifier, originatesFrom, tags, annotations);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String xmlTag()
-    {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append(
-                String.format(
-                        "<measurementMethods xmi:id=\"%s\" xsi:type=\"%s\" description=\"%s\" originatesFrom=\"%s\" tool=\"%s\" specification=\"%s\" determines=\"%s\"",
-                        getIdentifier(), MeasurementMethodType.QIESL_AGGREGATION.type(),
-                        StringEscapeUtils.escapeXml10(getDescription()), getOriginatesFrom().getQualifiedIdentifier(),
-                        StringEscapeUtils.escapeXml10(getSpecification()), getDetermines().getQualifiedIdentifier()));
-        if (hasAnnotations())
-        {
-            builder.append(">\n");
-            annotations.forEach((ann) -> builder.append(ann.xmlTag()));
-            builder.append("</measurementMethods>\n");
-        }
-        else
-        {
-            builder.append(" />\n");
-        }
-
-        return builder.toString();
+    public String xmlTag() {
+        Map<String, String> attrMap = Maps.newHashMap();
+        attrMap.put("specification", StringEscapeUtils.escapeXml10(getSpecification()));
+        return generateXMLTag(MeasurementMethodType.QIESL_AGGREGATION.type(), attrMap);
     }
 
     /**
-     * Builder for TextAggregations implemented using the fluent
-     * interface and method
-     * chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
+     * {@inheritDoc}
      */
-    public static class QIESLAggregationBuilder extends TextAggregationBuilder {
-
-        /**
-         * Constructs a new Builder for a TextAggregation
-         */
-        private QIESLAggregationBuilder()
-        {
-            super();
-            element = new QIESLAggregation();
-        }
-
-        /**
-         * Constructs a new Builder for a TextAggregation with
-         * the given unique identifier
-         * 
-         * @param name
-         *            The unique identifier
-         */
-        private QIESLAggregationBuilder(String identifier)
-        {
-            super(identifier);
-            element = new QIESLAggregation(identifier);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        @Nonnull
-        public QIESLAggregation create()
-        {
-            return (QIESLAggregation) element;
-        }
+    @Override
+    public String toScript() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

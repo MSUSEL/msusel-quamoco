@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal

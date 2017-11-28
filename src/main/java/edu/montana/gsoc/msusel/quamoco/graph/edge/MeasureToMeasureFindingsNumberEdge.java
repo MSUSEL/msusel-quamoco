@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,10 +25,10 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
-import java.math.BigDecimal;
-
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Edge connection two measure nodes which handles both Findings and Values.
@@ -64,11 +65,13 @@ public class MeasureToMeasureFindingsNumberEdge extends WeightedRankedEdge {
         if (this.getRank().compareTo(value) == 0)
             return value;
 
-        value = norm.normalize(((MeasureNode) src).getFindings());
+        value = norm.normalize(source.getFindings());
+
         if (usesLinearDist)
         {
             value = getDist().calculate(getMaxPoints(), value);
         }
+
         value = weight.multiply(value);
         value = thresholdValue(value);
 

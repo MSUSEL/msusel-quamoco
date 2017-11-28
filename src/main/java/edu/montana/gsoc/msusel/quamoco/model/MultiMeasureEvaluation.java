@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +27,8 @@ package edu.montana.gsoc.msusel.quamoco.model;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
+import java.util.List;
+
 /**
  * @author Isaac Griffith
  * @version 1.1.1
@@ -47,29 +50,9 @@ public abstract class MultiMeasureEvaluation extends FormBasedEvaluation {
     {
         super(identifier);
     }
-    
-    protected String generateXMLTag(String type)
-    {
-        StringBuilder builder = new StringBuilder();
 
-        builder.append(
-                String.format(
-                        "<evaluations xmi:id=\"%s\" xsi:type=\"%s\" description=\"%s\" maximumPoints=\"%f\" evaluates=\"%s\" completeness=\"%f\" />%n",
-                        getIdentifier(), type,
-                        StringEscapeUtils.escapeXml10(getDescription()), getMaximumPoints(),
-                        getEvaluates().getQualifiedIdentifier(),
-                        getCompleteness()));
-
-        return builder.toString();
-    }
-
-    /**
-     * Base Builder for MultiMeasureEvauations
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public abstract static class AbstractMultiMeasureEvaluationBuilder extends AbstractFormBasedEvaluationBuilder {
-
+    protected MultiMeasureEvaluation(Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
+                               String identifier, Source originatesFrom, List<Tag> taggedBy, List<Annotation> annotations) {
+        super(completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, taggedBy, annotations);
     }
 }

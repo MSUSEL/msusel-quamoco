@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +24,11 @@
  * SOFTWARE.
  */
 package edu.montana.gsoc.msusel.quamoco.model;
+
+import lombok.Builder;
+import lombok.Singular;
+
+import java.util.List;
 
 /**
  * Classification items are used to group related factors.
@@ -49,13 +55,10 @@ public abstract class ClassificationItem extends Factor {
         super(name, identifier);
     }
 
-    /**
-     * Base Builder class for ClassificationItems using a Fluent Interface
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public abstract static class AbstractClassificationItemBuilder extends AbstractFactorBuilder {
-
+    protected ClassificationItem(String name, String description, Entity characterizes, String title, @Singular List<Impact> influences, Factor refines,
+                String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations)
+    {
+        super(name, description, characterizes, title,influences, refines,
+                identifier, originatesFrom, tags, annotations);
     }
 }

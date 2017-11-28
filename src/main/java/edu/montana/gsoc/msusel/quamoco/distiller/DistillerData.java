@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +23,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
 import java.util.List;
@@ -46,7 +46,7 @@ import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 
 /**
  * A Parameter Object containing maps of Identifiers and Nodes,
- * a Map of QUality Models indexed by Name, and a List of known Quality Models.
+ * a Map of Quality Models indexed by Name, and a List of known Quality Models.
  * This object is used in the construction of the Quamoco Processing Graph.
  *
  * @author Isaac Griffith
@@ -141,7 +141,7 @@ public class DistillerData {
     }
 
     /**
-     * Retrieves the Factor entity from whcih the given FactorNode was derived
+     * Retrieves the Factor entity from which the given FactorNode was derived
      * 
      * @param source
      *            FactorNode
@@ -194,7 +194,7 @@ public class DistillerData {
     }
 
     /**
-     * Retreives the associated MeasurementMethod entity associated with the
+     * Retrieves the associated MeasurementMethod entity associated with the
      * given FindingsUnion node.
      * 
      * @param source
@@ -214,14 +214,10 @@ public class DistillerData {
      * Adds a the provided Node representing the given entity to both the
      * provided graph and Map.
      *
-     * @param graph
-     *            Graph to which the node is to be added.
      * @param entity
      *            Entity the node represents.
      * @param node
      *            Node to be added.
-     * @param map
-     *            Map to which the node will be added.
      */
     public void addNode(final QMElement entity, final Node node)
     {

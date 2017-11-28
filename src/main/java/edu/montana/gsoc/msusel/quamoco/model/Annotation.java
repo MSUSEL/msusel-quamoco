@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +29,7 @@ import java.util.UUID;
 
 import javax.annotation.Nonnull;
 
+import lombok.*;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import edu.montana.gsoc.msusel.quamoco.io.XMLSerializable;
@@ -45,20 +47,27 @@ import edu.montana.gsoc.msusel.quamoco.io.XMLSerializable;
  * @author Isaac Griffith
  * @version 1.1.1
  */
+@EqualsAndHashCode
+@ToString
+@Builder(buildMethodName = "create")
 public class Annotation implements XMLSerializable {
 
     /**
      * The key has to be unique for the current model element.
      */
+    @Getter @Setter
     private String key;
     /**
      * The value can be any text describing the facts for the particular key.
      */
+    @Getter @Setter
     private String value;
     /**
      * A unique identifier for this annotation
      */
-    private String identifier;
+    @Getter
+    @Builder.Default
+    private String identifier = UUID.randomUUID().toString();
 
     public Annotation()
     {
@@ -85,231 +94,12 @@ public class Annotation implements XMLSerializable {
     }
 
     /**
-     * @return the key
-     */
-    public String getKey()
-    {
-        return key;
-    }
-
-    /**
-     * @param key
-     *            the key to set
-     */
-    public void setKey(String key)
-    {
-        this.key = key;
-    }
-
-    /**
-     * @return the value
-     */
-    public String getValue()
-    {
-        return value;
-    }
-
-    /**
-     * @param value
-     *            the value to set
-     */
-    public void setValue(String value)
-    {
-        this.value = value;
-    }
-
-    /**
-     * @return the identifier
-     */
-    public String getIdentifier()
-    {
-        return identifier;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((identifier == null) ? 0 : identifier.hashCode());
-        result = prime * result + ((key == null) ? 0 : key.hashCode());
-        result = prime * result + ((value == null) ? 0 : value.hashCode());
-        return result;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (this == obj)
-        {
-            return true;
-        }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
-        {
-            return false;
-        }
-        Annotation other = (Annotation) obj;
-        if (identifier == null)
-        {
-            if (other.identifier != null)
-            {
-                return false;
-            }
-        }
-        else if (!identifier.equals(other.identifier))
-        {
-            return false;
-        }
-        if (key == null)
-        {
-            if (other.key != null)
-            {
-                return false;
-            }
-        }
-        else if (!key.equals(other.key))
-        {
-            return false;
-        }
-        if (value == null)
-        {
-            if (other.value != null)
-            {
-                return false;
-            }
-        }
-        else if (!value.equals(other.value))
-        {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString()
-    {
-        return String.format("Annotation [key=%s, value=%s, identifier=%s]", key, value, identifier);
-    }
-    
-    /**
      * {@inheritDoc}
      */
     @Override
     public String xmlTag() {
-        StringBuilder builder = new StringBuilder();
-        
-        builder.append(String.format(
-                "<annotations xmi:id=\"%s\" key=\"%s\" value=\"%s\" />\n", getIdentifier(), 
-                StringEscapeUtils.escapeXml10(getKey()), StringEscapeUtils.escapeXml10(getValue())));
-        
-        return builder.toString();
-    }
-
-    /**
-     * Creates a new Builder for an Annotation
-     * 
-     * @return the Annotation.Builder instance
-     */
-    public static Builder builder()
-    {
-        return new Builder();
-    }
-
-    /**
-     * Creates a new Builder for an Annotation
-     * 
-     * @param identifier
-     *            The unique identifier of this annotation
-     * @return the Annotation.Builder instance
-     */
-    public static Builder builder(String identifier)
-    {
-        return new Builder(identifier);
-    }
-
-    /**
-     * Builder for Annotations implemented using the fluent interface and method
-     * chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder {
-
-        /**
-         * Annotation element under construction
-         */
-        private Annotation element;
-
-        /**
-         * Constructs a new Builder for an Annotation
-         */
-        private Builder()
-        {
-            element = new Annotation();
-        }
-
-        /**
-         * Constructs a new Builder for an Annotation with the given unique
-         * identifier
-         * 
-         * @param identifier
-         *            Unique identifier
-         */
-        private Builder(String identifier)
-        {
-            element = new Annotation();
-        }
-
-        /**
-         * @return The newly constructed Annotation element
-         */
-        @Nonnull
-        public Annotation create()
-        {
-            return (Annotation) element;
-        }
-
-        /**
-         * Sets the Annotation under construction's value
-         * 
-         * @param value
-         *            the value
-         * @return this
-         */
-        @Nonnull
-        public Builder value(String value)
-        {
-            element.setValue(value);
-
-            return this;
-        }
-
-        /**
-         * Sets the Annotation under construction's key
-         * 
-         * @param key
-         *            the key
-         * @return this
-         */
-        public Builder key(String key)
-        {
-            element.setKey(key);
-
-            return this;
-        }
+        return String.format(
+                "<annotations xmi:id=\"%s\" key=\"%s\" value=\"%s\" />\n", getIdentifier(),
+                StringEscapeUtils.escapeXml10(getKey()), StringEscapeUtils.escapeXml10(getValue()));
     }
 }

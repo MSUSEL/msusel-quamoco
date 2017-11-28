@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,8 +27,17 @@ package edu.montana.gsoc.msusel.quamoco.model;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import edu.montana.gsoc.msusel.quamoco.io.EvaluationType;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * An evaluation where the specification is a semi-formal text.
@@ -37,7 +47,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
  * <li>Within one model, the textual specification should be used consistently
  * and marked out by a telling name.</li>
  * </ul>
- * 
+ *
  * @author Isaac Griffith
  * @version 1.1.1
  */
@@ -47,44 +57,24 @@ public class TextEvaluation extends Evaluation {
      * The textual specification can be used for writing any syntax; thus the
      * text will not be evaluated.
      */
+    @Getter @Setter
     private String specification;
 
     /**
-     * 
+     *
      */
-    public TextEvaluation()
-    {
+    public TextEvaluation() {
         super();
     }
 
-    public TextEvaluation(String identifier)
-    {
+    public TextEvaluation(String identifier) {
         super(identifier);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double evaluate()
-    {
-        throw new RuntimeException("Not yet implemented");
-    }
-
-    /**
-     * @return the specification
-     */
-    public String getSpecification()
-    {
-        return specification;
-    }
-
-    /**
-     * @param specification
-     *            the specification to set
-     */
-    public void setSpecification(String specification)
-    {
+    @Builder(buildMethodName = "create")
+    protected TextEvaluation(String specification, Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
+                               String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
+        super(completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, tags, annotations);
         this.specification = specification;
     }
 
@@ -92,126 +82,33 @@ public class TextEvaluation extends Evaluation {
      * {@inheritDoc}
      */
     @Override
-    public String xmlTag()
-    {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append(
-                String.format(
-                        "<evaluations xmi:id=\"%s\" xsi:type=\"%s\" description=\"%s\" specification=\"%s\" maximumPoints=\"%f\" evaluates=\"%s\" completeness=\"%f\"",
-                        getIdentifier(), EvaluationType.TEXT_EVALUATION.type(),
-                        StringEscapeUtils.escapeXml10(getDescription()),
-                        StringEscapeUtils.escapeXml10(getSpecification()), getMaximumPoints(), getEvaluates(),
-                        getCompleteness()));
-
-        return builder.toString();
+    public double evaluate() {
+        throw new RuntimeException("Not yet implemented");
     }
 
-    /**
-     * Creates a new Builder for a TextEvaluation
-     * 
-     * @return the TextEvaluation.Builder instance
-     */
-    public static Builder builder()
-    {
-        return new Builder();
-    }
+    protected String xmlTag(String type) {
+        String tag = "evaluations";
+        Map<String, String> attrs = Maps.newHashMap();
 
-    /**
-     * Creates a new Builder for a TextEvaluation with the given
-     * unique identifier
-     * 
-     * @param identifier
-     *            Unique identifier
-     * @return the TextEvaluation.Builder instance
-     */
-    public static Builder builder(String identifier)
-    {
-        return new Builder(identifier);
-    }
+        if (getSpecification() != null)
+            attrs.put("specification", StringEscapeUtils.escapeXml10(getSpecification()));
 
-    /**
-     * Builder for TextEvaluations implemented using the fluent
-     * interface and method
-     * chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder extends AbstractEvaluationBuilder {
-
-        /**
-         * Constructs a new Builder for a TextEvaluation
-         */
-        protected Builder()
-        {
-            element = new TextEvaluation();
-        }
-
-        /**
-         * Constructs a new Builder for a TextEvaluation with the
-         * given
-         * identifier
-         * 
-         * @param identifier
-         *            The identifier of the tool to construct
-         */
-        protected Builder(String identifier)
-        {
-            element = new TextEvaluation(identifier);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Nonnull
-        public TextEvaluation create()
-        {
-            return (TextEvaluation) element;
-        }
-
-        /**
-         * Sets the text specification for this evaluation
-         * 
-         * @param spec
-         *            The Text Specification of the evaluation
-         * @return this
-         */
-        @Nonnull
-        public Builder specification(String spec)
-        {
-            ((TextEvaluation) element).setSpecification(spec);
-
-            return this;
-        }
+        return generateXMLTag(type, attrs);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String toYaml()
-    {
-        // TODO Auto-generated method stub
-        return null;
+    public String xmlTag() {
+        return xmlTag(EvaluationType.TEXT_EVALUATION.type());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String toJson()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toScript()
-    {
+    public String toScript() {
         // TODO Auto-generated method stub
         return null;
     }

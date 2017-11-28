@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -115,7 +116,7 @@ public class FactorFactory extends AbstractQMElementFactory {
      */
     private Factor createProductFactor(Element e)
     {
-        return (Factor) ProductFactor.builder(e.getAttribute("name"), e.getAttribute("xmi:id"))
+        return (Factor) ProductFactor.builder().name(e.getAttribute("name")).identifier(e.getAttribute("xmi:id"))
                 .description(e.hasAttribute("description") ? e.getAttribute("description") : "")
                 .create();
     }
@@ -126,7 +127,7 @@ public class FactorFactory extends AbstractQMElementFactory {
      */
     private Factor createProductQualityAttribute(Element e)
     {
-        return (Factor) ProductQualityAttribute.builder(e.getAttribute("name"), e.getAttribute("xmi:id"))
+        return (Factor) ProductQualityAttribute.builder().name(e.getAttribute("name")).identifier(e.getAttribute("xmi:id"))
                 .description(e.hasAttribute("description") ? e.getAttribute("description") : "")
                 .create();
     }
@@ -137,7 +138,7 @@ public class FactorFactory extends AbstractQMElementFactory {
      */
     private Factor createQualityInUseAttribute(Element e)
     {
-        return (Factor) QualityInUseAttribute.builder(e.getAttribute("name"), e.getAttribute("xmi:id"))
+        return (Factor) QualityInUseAttribute.builder().name(e.getAttribute("name")).identifier(e.getAttribute("xmi:id"))
                 .description(e.hasAttribute("description") ? e.getAttribute("description") : "")
                 .create();
     }
@@ -148,7 +149,9 @@ public class FactorFactory extends AbstractQMElementFactory {
      */
     private Factor createGoal(Element e)
     {
-        return (Factor) Goal.builder(e.getAttribute("name"), e.getAttribute("xmi:id"))
+        return (Factor) Goal.builder()
+                .name(e.getAttribute("name"))
+                .identifier(e.getAttribute("xmi:id"))
                 .description(e.hasAttribute("description") ? e.getAttribute("description") : "")
                 .create();
     }
@@ -159,7 +162,7 @@ public class FactorFactory extends AbstractQMElementFactory {
      */
     private Factor createTechnicalIssue(Element e)
     {
-        return (Factor) TechnicalIssue.builder(e.getAttribute("name"), e.getAttribute("xmi:id"))
+        return (Factor) TechnicalIssue.builder().name(e.getAttribute("name")).identifier(e.getAttribute("xmi:id"))
                 .description(e.hasAttribute("description") ? e.getAttribute("description") : "")
                 .create();
     }
@@ -170,7 +173,7 @@ public class FactorFactory extends AbstractQMElementFactory {
      */
     private Factor createRequirement(Element e)
     {
-        return (Factor) Requirement.builder(e.getAttribute("name"), e.getAttribute("xmi:id"))
+        return (Factor) Requirement.builder().name(e.getAttribute("name")).identifier(e.getAttribute("xmi:id"))
                 .description(e.hasAttribute("description") ? e.getAttribute("description") : "")
                 .create();
     }
@@ -181,7 +184,7 @@ public class FactorFactory extends AbstractQMElementFactory {
      */
     private Factor createStakeholderSatisfaction(Element e)
     {
-        return (Factor) StakeholderSatisfaction.builder(e.getAttribute("name"), e.getAttribute("xmi:id"))
+        return (Factor) StakeholderSatisfaction.builder().name(e.getAttribute("name")).identifier(e.getAttribute("xmi:id"))
                 .description(e.hasAttribute("description") ? e.getAttribute("description") : "")
                 .create();
     }

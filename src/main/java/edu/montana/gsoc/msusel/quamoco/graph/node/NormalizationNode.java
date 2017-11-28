@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +30,8 @@ import java.math.BigDecimal;
 import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Node originally meant to provide the means by which normalization was to
@@ -40,6 +43,8 @@ import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
  */
 public class NormalizationNode extends MeasureNode {
 
+    @Getter
+    @Setter
     private NormalizationRange range;
 
     /**
@@ -59,22 +64,6 @@ public class NormalizationNode extends MeasureNode {
     public BigDecimal getValue()
     {
         return BigDecimal.ZERO;
-    }
-
-    /**
-     * @return
-     */
-    public NormalizationRange getRange()
-    {
-        return range;
-    }
-
-    /**
-     * @param range
-     */
-    public void setRange(final NormalizationRange range)
-    {
-        this.range = range;
     }
 
     /**

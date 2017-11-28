@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +28,9 @@ package edu.montana.gsoc.msusel.quamoco.model.result;
 import javax.annotation.Nonnull;
 
 import edu.montana.gsoc.msusel.quamoco.model.MeasurementMethod;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Isaac Griffith
@@ -34,105 +38,16 @@ import edu.montana.gsoc.msusel.quamoco.model.MeasurementMethod;
  */
 public class NumberMeasurementResult extends MeasurementResult {
 
+    @Getter @Setter
     private DoubleInterval value;
     
     /**
-     * 
-     */
-    public NumberMeasurementResult(DoubleInterval value)
-    {
-        super();
-        this.value = value;
-    }
-
-    /**
      * @param identifier
      */
-    public NumberMeasurementResult(DoubleInterval value, String identifier)
+    @Builder(buildMethodName = "create")
+    public NumberMeasurementResult(String identifier, MeasurementMethod resultFrom, DoubleInterval value)
     {
-        super(identifier);
+        super(identifier, resultFrom);
         this.value = value;
-    }
-
-    /**
-     * @return the value
-     */
-    public DoubleInterval getValue()
-    {
-        return value;
-    }
-
-    /**
-     * @param value the value to set
-     */
-    public void setValue(DoubleInterval value)
-    {
-        this.value = value;
-    }
-
-    /**
-     * @param value
-     * @return
-     */
-    public static Builder builder(DoubleInterval value)
-    {
-        return new Builder(value);
-    }
-
-    /**
-     * @param value
-     * @param identifier
-     * @return
-     */
-    public static Builder builder(DoubleInterval value, String identifier)
-    {
-        return new Builder(value, identifier);
-    }
-
-    /**
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    private static class Builder {
-
-        private NumberMeasurementResult instance;
-
-        /**
-         * @param value
-         */
-        public Builder(DoubleInterval value)
-        {
-            instance = new NumberMeasurementResult(value);
-        }
-
-        /**
-         * @param value
-         * @param identifier
-         */
-        public Builder(DoubleInterval value, String identifier)
-        {
-            instance = new NumberMeasurementResult(value, identifier);
-        }
-
-        /**
-         * @return
-         */
-        @Nonnull
-        public NumberMeasurementResult create()
-        {
-            return instance;
-        }
-
-        /**
-         * @param from
-         * @return
-         */
-        @Nonnull
-        public Builder from(MeasurementMethod from)
-        {
-            instance.setResultFrom(from);
-
-            return this;
-        }
     }
 }

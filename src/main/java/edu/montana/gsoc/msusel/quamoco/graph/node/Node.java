@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -33,6 +34,10 @@ import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.INode;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.processor.Processor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Abstract base class for the nodes in the distilled quality model processing
@@ -41,11 +46,14 @@ import edu.montana.gsoc.msusel.quamoco.processor.Processor;
  * @author Isaac Griffith
  * @version 1.1.1
  */
+@EqualsAndHashCode(of = {"name", "ownedBy"})
+@ToString(of = "name")
 public abstract class Node implements INode {
 
     /**
      * Graph to which this node belongs
      */
+    @Getter @Setter
     transient protected MutableNetwork<Node, Edge> graph;
     /**
      * Value associated with node after evaluation
@@ -63,24 +71,29 @@ public abstract class Node implements INode {
      * fully qualified identifier of the quamoco model entity from which this
      * node was derived
      */
+    @Getter @Setter
     protected String                                    ownedBy;
     /**
      * name of this node
      */
+    @Getter @Setter
     protected String                                    name;
     /**
      * description of this node
      * TODO remove this
      */
+    @Getter @Setter
     protected String                                    description;
     /**
      * The process associated with this node, which facilitates the evaluation
      */
+    @Getter @Setter
     protected Processor processor;
     /**
      * Boolean flag indicating that this node has already successfully been
      * calculated.
      */
+    @Getter
     protected boolean                                   calculated;
 
     /**
@@ -108,41 +121,6 @@ public abstract class Node implements INode {
         description = "";
         ownedBy = owner;
         calculated = false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getDescription()
-    {
-        return description;
-    }
-
-    /**
-     * @return The graph to which this node belongs
-     */
-    public MutableNetwork<Node, Edge> getGraph()
-    {
-        return graph;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getOwnedBy()
-    {
-        return ownedBy;
     }
 
     /**
@@ -204,96 +182,12 @@ public abstract class Node implements INode {
      * {@inheritDoc}
      */
     @Override
-    public String toString()
-    {
-        return name;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Processor getProcessor()
-    {
-        return processor;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setProcessor(final Processor processor)
-    {
-        this.processor = processor;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public List<BigDecimal> getValues()
     {
         final List<BigDecimal> list = Lists.newArrayList();
         list.add(getValue());
 
         return list;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((ownedBy == null) ? 0 : ownedBy.hashCode());
-        return result;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (this == obj)
-        {
-            return true;
-        }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
-        {
-            return false;
-        }
-        Node other = (Node) obj;
-        if (name == null)
-        {
-            if (other.name != null)
-            {
-                return false;
-            }
-        }
-        else if (!name.equals(other.name))
-        {
-            return false;
-        }
-        if (ownedBy == null)
-        {
-            if (other.ownedBy != null)
-            {
-                return false;
-            }
-        }
-        else if (!ownedBy.equals(other.ownedBy))
-        {
-            return false;
-        }
-        return true;
     }
     
     public Node getOpposite(Edge e) {

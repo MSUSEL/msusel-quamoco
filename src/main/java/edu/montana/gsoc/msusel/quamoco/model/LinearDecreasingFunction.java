@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +28,10 @@ package edu.montana.gsoc.msusel.quamoco.model;
 import javax.annotation.Nonnull;
 
 import edu.montana.gsoc.msusel.quamoco.io.FunctionType;
+import lombok.Builder;
+import lombok.Singular;
+
+import java.util.List;
 
 /**
  * @author Isaac Griffith
@@ -47,6 +52,11 @@ public class LinearDecreasingFunction extends LinearFunction {
         super(identifier);
     }
 
+    @Builder(buildMethodName = "create")
+    protected LinearDecreasingFunction(double lowerBound, double upperBound, String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
+        super(lowerBound, upperBound, identifier, originatesFrom, tags, annotations);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -54,89 +64,6 @@ public class LinearDecreasingFunction extends LinearFunction {
     public String xmlTag()
     {
         return generateXMLTag(FunctionType.LINEAR_DECREASING.type());
-    }
-
-    /**
-     * Creates a new Builder for a LinearDecreasingFunction
-     * 
-     * @return the LinearDecreasingFunction.Builder instance
-     */
-    public static Builder builder()
-    {
-        return new Builder();
-    }
-
-    /**
-     * Creates a new Builder for a LinearDecreasingFunction with the given
-     * identifier
-     * 
-     * @param identifier
-     *            Unique identifier
-     * @return the LinearDecreasingFunction.Builder instance
-     */
-    public static Builder builder(String identifier)
-    {
-        return new Builder(identifier);
-    }
-
-    /**
-     * Builder for LinearDecreasingFunctions implemented using the fluent
-     * interface and method chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder extends AbstractLinearFunctionBuilder {
-
-        /**
-         * Constructs a new Builder for a LinearDecreasingFunction
-         */
-        private Builder()
-        {
-            element = new LinearDecreasingFunction();
-        }
-
-        /**
-         * Constructs a new Builder for a LinearDecreasingFunction with the
-         * given identifier
-         * 
-         * @param identifier
-         *            The identifier of the tool to construct
-         */
-        private Builder(String identifier)
-        {
-            element = new LinearDecreasingFunction(identifier);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        @Nonnull
-        public LinearDecreasingFunction create()
-        {
-            return (LinearDecreasingFunction) element;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toYaml()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toJson()
-    {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     /**

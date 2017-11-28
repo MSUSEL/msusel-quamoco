@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -52,9 +53,9 @@ public final class MetricPropertiesReader {
     }
 
     /**
-     * Static method to read the metric properties stored in the JAR
+     * Static method to read the name properties stored in the JAR
      * 
-     * @return array of metric properites.
+     * @return array of name properties.
      */
     public static String[] read()
     {
@@ -68,7 +69,7 @@ public final class MetricPropertiesReader {
         }
         catch (final IOException e)
         {
-            MetricPropertiesReader.LOG.warn("A problem occurred while loading the metric properties file.", e);
+            MetricPropertiesReader.LOG.warn("A problem occurred while loading the name properties file.", e);
         }
 
         return temp.split(",");

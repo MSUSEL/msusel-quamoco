@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +30,8 @@ import java.math.RoundingMode;
 
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Edge connecting one FactorNode to another FactorNode.
@@ -40,6 +43,7 @@ public class FactorToFactorEdge extends WeightedRankedEdge implements InfluenceE
     /**
      * Influence type
      */
+    @Getter @Setter
     private String inf;
 
     /**
@@ -72,7 +76,7 @@ public class FactorToFactorEdge extends WeightedRankedEdge implements InfluenceE
         if (weight.compareTo(BigDecimal.ZERO) <= 0)
             return weight;
 
-        value = src.getValue();
+        value = source.getValue();
 
         if (inf != null)
 
@@ -99,15 +103,6 @@ public class FactorToFactorEdge extends WeightedRankedEdge implements InfluenceE
         return
 
         thresholdValue(value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getInf()
-    {
-        return inf;
     }
 
     /**

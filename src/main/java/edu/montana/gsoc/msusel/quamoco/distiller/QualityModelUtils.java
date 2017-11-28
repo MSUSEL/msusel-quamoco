@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -130,17 +131,17 @@ public final class QualityModelUtils {
      */
     public static List<MeasurementMethod> getAllMeasurementMethods(final List<QualityModel> models)
     {
-        final List<MeasurementMethod> mmlist = Lists.newArrayList();
+        final List<MeasurementMethod> list = Lists.newArrayList();
 
         if (models != null)
         {
             for (final QualityModel model : models)
             {
-                mmlist.addAll(model.getMeasurementMethods());
+                list.addAll(model.getMeasurementMethods());
             }
         }
 
-        return mmlist;
+        return list;
     }
 
     /**
@@ -192,7 +193,7 @@ public final class QualityModelUtils {
      * Retrieves a measure object from a quality model provided in the model
      * map, that is represented by the provided node.
      *
-     * @param source
+     * @param id
      *            Node which represents the measure.
      * @param modelMap
      *            Map of quality models indexed by name.
@@ -281,7 +282,7 @@ public final class QualityModelUtils {
                 }
             }
         }
-        return topoSort(g);
+        return topologicalSort(g);
     }
 
     /**
@@ -293,7 +294,7 @@ public final class QualityModelUtils {
      * @return Topologically sorted list of quality models
      */
     @VisibleForTesting
-    static List<QualityModel> topoSort(MutableNetwork<QualityModel, String> graph)
+    static List<QualityModel> topologicalSort(MutableNetwork<QualityModel, String> graph)
     {
         List<QualityModel> list = Lists.newArrayList();
         List<QualityModel> set = Lists.newArrayList();

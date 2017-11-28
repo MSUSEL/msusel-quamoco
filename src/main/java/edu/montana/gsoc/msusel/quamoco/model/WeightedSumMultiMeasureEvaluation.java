@@ -1,19 +1,20 @@
 /**
  * The MIT License (MIT)
- *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
- *
+ * <p>
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,7 +29,11 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.collect.Maps;
 import edu.montana.gsoc.msusel.quamoco.io.EvaluationType;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.google.common.collect.Lists;
@@ -36,19 +41,19 @@ import com.google.common.collect.Lists;
 /**
  * Indicates that the factor should aggregate incoming measures using
  * the weighted summation operator
- * 
+ *
  * @author Isaac Griffith
  * @version 1.1.1
  */
 public class WeightedSumMultiMeasureEvaluation extends MultiMeasureEvaluation {
 
-    private List<MeasureRanking> rankings;
+    @Getter
+    private List<MeasureRanking> rankings = Lists.newArrayList();
 
     /**
-     * 
+     *
      */
-    public WeightedSumMultiMeasureEvaluation()
-    {
+    public WeightedSumMultiMeasureEvaluation() {
         super();
         rankings = Lists.newArrayList();
     }
@@ -56,187 +61,57 @@ public class WeightedSumMultiMeasureEvaluation extends MultiMeasureEvaluation {
     /**
      * @param identifier
      */
-    public WeightedSumMultiMeasureEvaluation(String identifier)
-    {
+    public WeightedSumMultiMeasureEvaluation(String identifier) {
         super(identifier);
         rankings = Lists.newArrayList();
     }
 
-    public void addRanking(MeasureRanking rank)
-    {
+    @Builder(buildMethodName = "create")
+    protected WeightedSumMultiMeasureEvaluation(@Singular List<MeasureRanking> rankings, Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
+                                                String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
+        super(completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, tags, annotations);
+        if (rankings != null && !rankings.isEmpty())
+            rankings = Lists.newArrayList(rankings);
+    }
+
+    public void addRanking(MeasureRanking rank) {
         if (rank == null || rankings.contains(rank))
             return;
 
         rankings.remove(rank);
     }
 
-    public void removeRanking(MeasureRanking rank)
-    {
+    public void removeRanking(MeasureRanking rank) {
         if (rank == null || rankings.contains(rank))
             return;
 
         rankings.remove(rank);
-    }
-
-    public List<MeasureRanking> getRankings()
-    {
-        return rankings;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public double evaluate()
-    {
+    public double evaluate() {
         throw new RuntimeException("Not yet implemented");
     }
 
     /**
-     * Creates a new Builder for a WeightedSumMultiMeasureEvaluation
-     * 
-     * @return the WeightedSumMultiMeasureEvaluation.Builder instance
+     * {@inheritDoc}
      */
-    public static Builder builder()
-    {
-        return new Builder();
-    }
+    @Override
+    public String xmlTag() {
+        List<String> content = Lists.newArrayList();
+        rankings.forEach((rank) -> content.add(rank.xmlTag()));
 
-    /**
-     * Creates a new Builder for a WeightedSumMultiMeasureEvaluation with the
-     * given unique identifier
-     * 
-     * @param identifier
-     *            Unique identifier
-     * @return the WeightedSumMultiMeasureEvaluation.Builder instance
-     */
-    public static Builder builder(String identifier)
-    {
-        return new Builder(identifier);
-    }
-
-    /**
-     * Builder for WeightedSumMultiMeasureEvaluations implemented using the
-     * fluent interface and method chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder extends AbstractMultiMeasureEvaluationBuilder {
-
-        /**
-         * Constructs a new Builder for a WeightedSumMultiMeasureEvaluation
-         */
-        private Builder()
-        {
-            element = new WeightedSumMultiMeasureEvaluation();
-        }
-
-        /**
-         * Constructs a new Builder for a WeightedSumMultiMeasureEvaluation with
-         * the
-         * given
-         * identifier
-         * 
-         * @param identifier
-         *            The identifier of the tool to construct
-         */
-        private Builder(String identifier)
-        {
-            element = new WeightedSumMultiMeasureEvaluation(identifier);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        @Nonnull
-        public WeightedSumMultiMeasureEvaluation create()
-        {
-            return (WeightedSumMultiMeasureEvaluation) element;
-        }
-
-        /**
-         * Adds the given MeasureRanking to this evaluation
-         * 
-         * @param ranking
-         *            MeasureRanking to add
-         * @return this
-         */
-        @Nonnull
-        public Builder ranking(MeasureRanking rank)
-        {
-            ((WeightedSumMultiMeasureEvaluation) element).addRanking(rank);
-
-            return this;
-        }
+        return generateXMLTag(EvaluationType.WEIGHTED_SUM_MULTI_MEASURE_EVALUATION.type(), Maps.newHashMap(), content);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String xmlTag()
-    {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append(
-                String.format(
-                        "<evaluations xmi:id=\"%s\" xsi:type=\"%s\" description=\"%s\" maximumPoints=\"%f\" evaluates=\"%s\" completeness=\"%f\"",
-                        getIdentifier(), EvaluationType.WEIGHTED_SUM_MULTI_MEASURE_EVALUATION.type(),
-                        StringEscapeUtils.escapeXml10(getDescription()), getMaximumPoints(),
-                        getEvaluates().getQualifiedIdentifier(), getCompleteness()));
-
-        if (hasAnnotations() || rankings.size() > 0)
-        {
-            builder.append(">\n");
-
-            if (hasAnnotations())
-            {
-                annotations.forEach((ann) -> builder.append(ann.xmlTag()));
-            }
-
-            if (rankings.size() > 0)
-            {
-                rankings.forEach((rank) -> builder.append(rank.xmlTag()));
-            }
-
-            builder.append("</evaluations>\n");
-        }
-        else
-        {
-            builder.append(" />\n");
-        }
-
-        return builder.toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toYaml()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toJson()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toScript()
-    {
+    public String toScript() {
         // TODO Auto-generated method stub
         return null;
     }

@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +28,11 @@ package edu.montana.gsoc.msusel.quamoco.model;
 import javax.annotation.Nonnull;
 
 import edu.montana.gsoc.msusel.quamoco.io.EvaluationType;
+import lombok.Builder;
+import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.util.List;
 
 /**
  * Indicates that the factor should aggregate incoming factors using
@@ -54,6 +59,12 @@ public class ModeFactorAggregation extends FactorAggregation {
         super(identifier);
     }
 
+    @Builder(buildMethodName = "create")
+    protected ModeFactorAggregation(Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
+                                   String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
+        super(completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, tags, annotations);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -70,94 +81,7 @@ public class ModeFactorAggregation extends FactorAggregation {
     @Override
     public String xmlTag()
     {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append(
-                String.format(
-                        "<evaluations xmi:id=\"%s\" xsi:type=\"%s\" description=\"%s\" maximumPoints=\"%f\" evaluates=\"%s\" completeness=\"%f\" />%n",
-                        getIdentifier(), EvaluationType.MODE_FACTOR_AGGREGATION.type(),
-                        StringEscapeUtils.escapeXml10(getDescription()), getMaximumPoints(), getEvaluates(),
-                        getCompleteness()));
-
-        return builder.toString();
-    }
-
-    public static Builder builder()
-    {
-        return new Builder();
-    }
-
-    /**
-     * Creates a new Builder for a ModeFactorAggregation with the given
-     * unique identifier
-     * 
-     * @param identifier
-     *            Unique identifier
-     * @return the ModeFactorAggregation.Builder instance
-     */
-    public static Builder builder(String identifier)
-    {
-        return new Builder(identifier);
-    }
-
-    /**
-     * Builder for ModeFactorAggregations implemented using the fluent
-     * interface and method chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder extends AbstractFactorAggregationBuilder {
-
-        /**
-         * Constructs a new Builder for a ModeFactorAggregation
-         */
-        private Builder()
-        {
-            element = new ModeFactorAggregation();
-        }
-
-        /**
-         * Constructs a new Builder for a ModeFactorAggregation with the
-         * given identifier
-         * 
-         * @param identifier
-         *            The identifier of the tool to construct
-         */
-        private Builder(String identifier)
-        {
-            element = new ModeFactorAggregation(identifier);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        @Nonnull
-        public ModeFactorAggregation create()
-        {
-            return (ModeFactorAggregation) element;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toYaml()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toJson()
-    {
-        // TODO Auto-generated method stub
-        return null;
+        return generateXMLTag(EvaluationType.MODE_FACTOR_AGGREGATION.type());
     }
 
     /**

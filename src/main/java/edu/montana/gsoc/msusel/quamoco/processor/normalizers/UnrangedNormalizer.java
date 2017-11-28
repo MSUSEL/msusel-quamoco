@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -45,12 +46,12 @@ public class UnrangedNormalizer extends Normalizer {
 
     /**
      * Constructs a new UnrangedNormalizer for the given edge using the provided
-     * normalization metric.
+     * normalization name.
      * 
      * @param owner
      *            The Edge in which this normalizer was installed
      * @param normMetric
-     *            the name of the metric used for normalization
+     *            the name of the name used for normalization
      */
     public UnrangedNormalizer(final Edge owner, final String normMetric)
     {
@@ -68,20 +69,20 @@ public class UnrangedNormalizer extends Normalizer {
 
         BigDecimal totalAffected = BigDecimal.ZERO;
         NormalizationRange newRange = Extent.getInstance()
-                .findRange(MetricsContext.getInstance().getTree(), normMetric, range, findings);
+                .findRange(MetricsContext.getInstance().getTree(), metric, range, findings);
 
         Extent ext = Extent.getInstance();
         for (final Finding f : findings)
         {
-            totalAffected = totalAffected.add(ext.findExtent(f, normMetric, newRange));
+            totalAffected = totalAffected.add(ext.findExtent(f, metric, newRange));
         }
 
-        BigDecimal extent = ext.findExtent(normMetric, newRange);
+        BigDecimal extent = ext.findExtent(metric, newRange);
 
         if (BigDecimal.ZERO.compareTo(extent) == 0 && extent.compareTo(totalAffected) == 0)
             return BigDecimal.ZERO;
         else
-            return totalAffected.divide(ext.findExtent(normMetric, range), 15, RoundingMode.HALF_UP);
+            return totalAffected.divide(ext.findExtent(metric, range), 15, RoundingMode.HALF_UP);
     }
 
 }

@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +27,12 @@ package edu.montana.gsoc.msusel.quamoco.model;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.collect.Lists;
+import lombok.Getter;
+import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.util.List;
 
 /**
  * @author Isaac Griffith
@@ -34,8 +40,8 @@ import org.apache.commons.lang3.StringEscapeUtils;
  */
 public abstract class MeasureAggregation extends MeasurementMethod {
 
-    protected String description;
-    protected String title;
+    @Getter
+    List<Measure> aggregates;
 
     /**
      * 
@@ -43,6 +49,7 @@ public abstract class MeasureAggregation extends MeasurementMethod {
     public MeasureAggregation()
     {
         super(null);
+        aggregates = Lists.newArrayList();
     }
 
     /**
@@ -51,89 +58,33 @@ public abstract class MeasureAggregation extends MeasurementMethod {
     public MeasureAggregation(String identifier)
     {
         super(null, identifier);
+        aggregates = Lists.newArrayList();
     }
 
-    /**
-     * @return the description
-     */
-    public String getDescription()
+    protected MeasureAggregation(@Singular List<Measure> aggregates, Measure determines, String metric, String description, String title,
+                                  String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations)
     {
-        return description;
-    }
-
-    /**
-     * @param description
-     *            the description to set
-     */
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    /**
-     * @return the title
-     */
-    public String getTitle()
-    {
-        return title;
-    }
-
-    /**
-     * @param title
-     *            the title to set
-     */
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
-
-    public String generateXMLTag(String type)
-    {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append(
-                String.format(
-                        "<measurementMethods xmi:id=\"%s\" xsi:type=\"%s\" description=\"%s\" originatesFrom=\"%s\" tool=\"%s\" determines=\"%s\"",
-                        getIdentifier(), type, StringEscapeUtils.escapeXml10(getDescription()),
-                        getOriginatesFrom().getQualifiedIdentifier(),
-                        getDetermines().getQualifiedIdentifier()));
-        if (hasAnnotations())
-        {
-            builder.append(">\n");
-            annotations.forEach((ann) -> builder.append(ann.xmlTag()));
-            builder.append("</measurementMethods>\n");
+        super(determines, metric, description, title, identifier, originatesFrom, tags, annotations);
+        if (aggregates != null && !aggregates.isEmpty()) {
+            this.aggregates = Lists.newArrayList(aggregates);
         }
-        else
+    }
+
+    public void addAggregate(Measure measure)
+    {
+        if (measure == null || aggregates.contains(measure))
+            return;
+
+        aggregates.add(measure);
+    }
+
+    public void removeAggregate(Measure measure)
+    {
+        if (measure == null || !aggregates.contains(measure))
         {
-            builder.append(" />\n");
+            return;
         }
 
-        return builder.toString();
-    }
-
-    /**
-     * Base Builder for MeasureAggregations which uses the Fluent Interface and
-     * Method Chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public abstract static class AbstractMeasureAggregationBuilder extends AbstractMeasurementMethodBuilder {
-
-        @Nonnull
-        public AbstractMeasureAggregationBuilder title(String title)
-        {
-            ((MeasureAggregation) element).setTitle(title);
-
-            return this;
-        }
-
-        @Nonnull
-        public AbstractMeasureAggregationBuilder description(String desc)
-        {
-            ((MeasureAggregation) element).setDescription(desc);
-
-            return this;
-        }
+        aggregates.remove(measure);
     }
 }

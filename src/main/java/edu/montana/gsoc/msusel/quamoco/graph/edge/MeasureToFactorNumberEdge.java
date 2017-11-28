@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,9 +26,12 @@
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Edge connection a Measure node to a Factor node and for which the Measure has
@@ -38,6 +42,7 @@ import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
  */
 public class MeasureToFactorNumberEdge extends WeightedRankedEdge implements InfluenceEdge {
 
+    @Getter @Setter
     private String inf;
 
     /**
@@ -68,39 +73,24 @@ public class MeasureToFactorNumberEdge extends WeightedRankedEdge implements Inf
         if (this.getRank().compareTo(value) == 0)
             return value;
 
+        value = source.getValue();
+
+        if (inf != null && inf.equals(InfluenceType.NEG))
+        {
+            value = (getMaxPoints().subtract(getMaxPoints().multiply(value)))
+                    .divide(getMaxPoints(), 15, RoundingMode.HALF_UP);
+        }
+
         if (usesLinearDist)
         {
-            BigDecimal proportion = src.getValue();
-            // if (src.getValue() <= 1.0) {
-            // proportion = proportion * getMaxPoints();
-            // }
-            value = dist.calculate(getMaxPoints(), proportion);
+            value = dist.calculate(value.multiply(getMaxPoints()).divide(getMaxPoints(), 15, RoundingMode.HALF_UP), getMaxPoints());
         }
         else
         {
-            if (inf != null)
-            {
-                if (inf.equals(InfluenceType.POS))
-                {
-                    value = src.getValue().multiply(weight);
-                }
-                else
-                {
-                    value = (getMaxPoints().subtract(src.getValue())).multiply(weight);
-                }
-            }
+            value = value.multiply(weight);
         }
 
         return value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getInf()
-    {
-        return inf;
     }
 
     /**
@@ -120,7 +110,7 @@ public class MeasureToFactorNumberEdge extends WeightedRankedEdge implements Inf
             throw new IllegalArgumentException("Influence cannot be the empty string.");
         }
 
-        if (inf != InfluenceType.NEG && inf != InfluenceType.POS)
+        if (!inf.equals(InfluenceType.NEG) && !inf.equals(InfluenceType.POS))
         {
             throw new IllegalArgumentException(
                     "Influence must be either: " + InfluenceType.POS + " or " + InfluenceType.NEG);

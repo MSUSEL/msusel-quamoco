@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -49,7 +50,7 @@ public class NormalizerFactory {
     }
 
     /**
-     * Private static inner class which holds the singlton instance
+     * Private static inner class which holds the singleton instance
      * 
      * @author Isaac Griffith
      * @version 1.1.1
@@ -71,37 +72,60 @@ public class NormalizerFactory {
     }
 
     /**
-     * Given the edge, metric, and range this method constructs a new normalizer
+     * Given the edge, name, and range this method constructs a new normalizer
      * for use in the given edge.
      * 
      * @param edge
      *            The edge
      * @param metric
-     *            The normalization metric
+     *            The normalization name
      * @param range
      *            The normalization range
-     * @return A Normalizer for the given edge, or null if the metric is null,
-     *         the range is null, the metric is empty, or the edge is not
+     * @return A Normalizer for the given edge, or null if the name is null,
+     *         the range is null, the name is empty, or the edge is not
      *         subject to normalization.
      */
     public Normalizer createNormalizer(final Edge edge, final String metric, final NormalizationRange range)
     {
         Normalizer retVal = null;
 
-        if (metric == null || range == null || metric.isEmpty()
-                || !((edge instanceof FindingsEdge) || (edge instanceof Normalizable)))
+        if (isBadMetric(metric) || isBadRange(range) || isFIndingsOrNormalizable(edge))
         {
-            retVal = new NullNormalizer(edge, metric, range);
+            retVal = createNullNormalizer(edge, metric, range);
         }
         else if (range.equals(NormalizationRange.NA))
         {
-            retVal = new UnrangedNormalizer(edge, metric);
+            retVal = createUnrangedNormalizer(edge, metric);
         }
         else
         {
-            retVal = new RangedNormalizer(edge, metric, range);
+            retVal = createRangedNormalizer(edge, metric, range);
         }
 
         return retVal;
+    }
+
+    private RangedNormalizer createRangedNormalizer(Edge edge, String metric, NormalizationRange range) {
+        return new RangedNormalizer(edge, metric, range);
+    }
+
+    private UnrangedNormalizer createUnrangedNormalizer(Edge edge, String metric) {
+        return new UnrangedNormalizer(edge, metric);
+    }
+
+    private NullNormalizer createNullNormalizer(Edge edge, String metric, NormalizationRange range) {
+        return new NullNormalizer(edge, metric, range);
+    }
+
+    boolean isFIndingsOrNormalizable(Edge edge) {
+        return !((edge instanceof FindingsEdge) || (edge instanceof Normalizable));
+    }
+
+    boolean isBadRange(NormalizationRange range) {
+        return range == null;
+    }
+
+    boolean isBadMetric(String metric) {
+        return metric == null || metric.isEmpty();
     }
 }

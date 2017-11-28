@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +28,9 @@ package edu.montana.gsoc.msusel.quamoco.model.result;
 import javax.annotation.Nonnull;
 
 import edu.montana.gsoc.msusel.quamoco.model.Evaluation;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Isaac Griffith
@@ -37,101 +41,17 @@ public class SingleMeasureEvaluationResult extends EvaluationResult {
     /**
      * 
      */
+    @Getter @Setter
     private double ratioAffected;
-    
-    /**
-     * @param ratio
-     */
-    public SingleMeasureEvaluationResult(double ratio)
-    {
-        super();
-        this.ratioAffected = ratio;
-    }
-    
+
     /**
      * @param ratio
      * @param identifier
      */
-    public SingleMeasureEvaluationResult(double ratio, String identifier)
+    @Builder(buildMethodName = "create")
+    public SingleMeasureEvaluationResult(String identifier, Evaluation resultFrom, DoubleInterval value, double ratio)
     {
-        super(identifier);
+        super(identifier, resultFrom, value);
         this.ratioAffected = ratio;
     }
-
-    /**
-     * @return the ratioAffected
-     */
-    public double getRatioAffected()
-    {
-        return ratioAffected;
-    }
-
-    /**
-     * @param ratioAffected the ratioAffected to set
-     */
-    public void setRatioAffected(double ratioAffected)
-    {
-        this.ratioAffected = ratioAffected;
-    }
-    
-    /**
-     * @param ratio
-     * @return
-     */
-    public static Builder builder(double ratio) {
-        return new Builder(ratio);
-    }
-    
-    /**
-     * @param ratio
-     * @param identifier
-     * @return
-     */
-    public static Builder builder(double ratio, String identifier) {
-        return new Builder(ratio, identifier);
-    }
-    
-    /**
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    private static class Builder {
-        
-        private SingleMeasureEvaluationResult instance;
-        
-        /**
-         * @param ratio
-         */
-        public Builder(double ratio) {
-            instance = new SingleMeasureEvaluationResult(ratio);
-        }
-        
-        /**
-         * @param ratio
-         * @param identifier
-         */
-        public Builder(double ratio, String identifier) {
-            instance = new SingleMeasureEvaluationResult(ratio, identifier);
-        }
-        
-        /**
-         * @return
-         */
-        @Nonnull
-        public SingleMeasureEvaluationResult create() {
-            return instance;
-        }
-        
-        /**
-         * @param from
-         * @return
-         */
-        @Nonnull
-        public Builder from(Evaluation from) {
-            instance.setResultFrom(from);
-            
-            return this;
-        }
-    }
-
 }

@@ -1,19 +1,20 @@
 /**
  * The MIT License (MIT)
- *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
- *
+ * <p>
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,9 +26,15 @@
 package edu.montana.gsoc.msusel.quamoco.model;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.collect.Maps;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.google.common.collect.Lists;
@@ -65,38 +72,49 @@ import com.google.common.collect.Lists;
  * </ul>
  * </li>
  * </ul>
- * 
+ *
  * @author Isaac Griffith
  * @version 1.1.1
  */
 public abstract class Factor extends QMElement {
 
-    protected String       name;
-    protected String       description;
+    @Getter
+    @Setter
+    protected String name;
+    @Getter
+    @Setter
+    protected String description;
     /**
      * Specifies the entity that is characterized by the factor
      */
-    protected Entity       characterizes;
+    @Getter
+    @Setter
+    protected Entity characterizes;
     /**
      * Optional title. The title can be used to provided a more verbose
      * description of the factor, beyond its name
      */
-    protected String       title;
+    @Getter
+    @Setter
+    protected String title;
     /**
      * List of impacts which indicate the factors which this factor influences
      */
-    protected List<Impact> influences;
+    @Getter
+    @Builder.Default
+    protected List<Impact> influences = Lists.newArrayList();
     /**
      * List of factors which this factor refines (note: must be of same type as
      * this factor)
      */
-    protected Factor       refines;
+    @Getter
+    @Setter
+    protected Factor refines;
 
     /**
      * @param name
      */
-    public Factor(String name)
-    {
+    public Factor(String name) {
         super();
         this.name = name;
         influences = Lists.newArrayList();
@@ -106,165 +124,60 @@ public abstract class Factor extends QMElement {
      * @param name
      * @param identifier
      */
-    public Factor(String name, String identifier)
-    {
+    public Factor(String name, String identifier) {
         super(identifier);
         this.name = name;
         influences = Lists.newArrayList();
     }
 
-    /**
-     * @return the characterizes
-     */
-    public Entity getCharacterizes()
-    {
-        return characterizes;
-    }
-
-    /**
-     * @param characterizes
-     *            the characterizes to set
-     */
-    public void setCharacterizes(Entity characterizes)
-    {
-        this.characterizes = characterizes;
-    }
-
-    public void addInfluence(Impact impact)
-    {
-        if (impact == null || influences.contains(impact))
-            return;
-
-        influences.add(impact);
-    }
-
-    /**
-     * Adds a factor which this factor refines.
-     * 
-     * @param factor
-     *            Factor which this factor refines
-     */
-    public void setRefines(Factor factor)
-    {
-        refines = factor;
-    }
-
-    /**
-     * @return List of all factors refined by this factor
-     */
-    public Factor getRefines()
-    {
-        return refines;
-    }
-
-    /**
-     * @return List of all factors influenced by this factor
-     */
-    public List<Impact> getInfluences()
-    {
-        return influences;
-    }
-
-    /**
-     * @return the element's description
-     */
-    public String getDescription()
-    {
-        return description;
-    }
-
-    /**
-     * @param description
-     *            the new description to set
-     */
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    /**
-     * @return the element's name
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * @param name
-     *            the new name to set
-     */
-    public void setName(String name)
-    {
+    public Factor(String name, String description, Entity characterizes, String title, @Singular List<Impact> influences, Factor refines,
+                  String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
+        super(identifier, originatesFrom, tags, annotations);
         this.name = name;
+        this.description = description;
+        this.characterizes = characterizes;
+        this.title = title;
+        this.refines = refines;
+        if (influences != null && !influences.isEmpty())
+            this.influences = Lists.newArrayList(influences);
     }
 
-    /**
-     * @return the title
-     */
-    public String getTitle()
-    {
-        return title;
+    public void addInfluence(Impact impact) {
+        if (impact != null && !influences.contains(impact))
+            influences.add(impact);
     }
 
-    protected String generateXMLTag(String type)
-    {
-        StringBuilder builder = new StringBuilder();
+    public void removeInfluence(Impact impact) {
+        if (impact != null && influences.contains(impact))
+            influences.remove(impact);
+    }
 
-        builder.append(
-                String.format(
-                        "<factors xmi:id=\"%s\" xsi:type=\"%s\" originatesFrom=\"%s\" title=\"%s\" name=\"%s\" description=\"%s\" chracterizes=\"%s\">%n",
-                        getIdentifier(), type, getOriginatesFrom().getQualifiedIdentifier(),
-                        StringEscapeUtils.escapeXml10(getTitle()), StringEscapeUtils.escapeXml10(getName()),
-                        StringEscapeUtils.escapeXml10(getDescription()), getCharacterizes().getQualifiedIdentifier()));
+    protected String generateXMLTag(String type) {
+        String tag = "factors";
+        Map<String, String> attrs = Maps.newHashMap();
+        List<String> content = Lists.newArrayList();
 
+        if (getTitle() != null)
+            attrs.put("title", StringEscapeUtils.escapeXml10(getTitle()));
+        if (getName() != null)
+            attrs.put("name", StringEscapeUtils.escapeXml10(getName()));
+        if (getDescription() != null)
+            attrs.put("description", StringEscapeUtils.escapeXml10(getDescription()));
+        if (getCharacterizes() != null)
+            attrs.put("characterizes", getCharacterizes().getQualifiedIdentifier());
         if (getRefines() != null)
-            builder.append(String.format("<refines parent=\"%s\" />%n", getRefines().getQualifiedIdentifier()));
+            content.add(String.format("<refines parent=\"%s\" />", getRefines().getQualifiedIdentifier()));
 
-        influences.forEach((inf) -> builder.append(inf.xmlTag()));
-        annotations.forEach((ann) -> builder.append(ann.xmlTag()));
-        builder.append("</factors>\n");
+        influences.forEach((inf) -> content.add(inf.xmlTag()));
 
-        return builder.toString();
+        return generateXMLTag(tag, type, attrs, content);
     }
 
-    /**
-     * Base Builder for Factors implemented using the fluent interface
-     * and method chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public abstract static class AbstractFactorBuilder extends AbstractQMElementBuilder {
+    public boolean hasAggregationAnnotation() {
+        return false;
+    }
 
-        /**
-         * Sets the element under construction's description
-         * 
-         * @param description
-         *            the description to set
-         * @return this
-         */
-        @Nonnull
-        public AbstractFactorBuilder description(String description)
-        {
-            ((Factor) element).setDescription(description);
-
-            return this;
-        }
-
-        /**
-         * Adds a factor which the factor under construction refines
-         * 
-         * @param factor
-         *            Factor
-         * @return this
-         */
-        @Nonnull
-        public AbstractFactorBuilder refines(Factor factor)
-        {
-            ((Factor) element).setRefines(factor);
-
-            return this;
-        }
+    public String getAggregationAnnotationValue() {
+        return "";
     }
 }

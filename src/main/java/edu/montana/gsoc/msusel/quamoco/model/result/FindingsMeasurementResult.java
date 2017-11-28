@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,103 +28,28 @@ package edu.montana.gsoc.msusel.quamoco.model.result;
 import javax.annotation.Nonnull;
 
 import edu.montana.gsoc.msusel.quamoco.model.MeasurementMethod;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author Isaac Griffith
  */
+@ToString
 public class FindingsMeasurementResult extends MeasurementResult {
 
-    private int count;
-
-    /**
-     * 
-     */
-    public FindingsMeasurementResult(int count)
-    {
-        super();
-        this.count = count;
-    }
+    @Getter
+    @Builder.Default
+    private int count = 0;
 
     /**
      * @param identifier
      */
-    public FindingsMeasurementResult(int count, String identifier)
+    @Builder(buildMethodName = "create")
+    public FindingsMeasurementResult(String identifier, MeasurementMethod method, int count)
     {
-        super(identifier);
+        super(identifier, method);
         this.count = count;
-    }
-
-    /**
-     * @return
-     */
-    public int getCount()
-    {
-        return count;
-    }
-
-    /**
-     * @param count
-     * @return
-     */
-    public static Builder builder(int count)
-    {
-        return new Builder(count);
-    }
-
-    /**
-     * @param count
-     * @param identifier
-     * @return
-     */
-    public static Builder builder(int count, String identifier)
-    {
-        return new Builder(count, identifier);
-    }
-
-    /**
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    private static class Builder {
-
-        private FindingsMeasurementResult instance;
-
-        /**
-         * @param count
-         */
-        public Builder(int count)
-        {
-            instance = new FindingsMeasurementResult(count);
-        }
-
-        /**
-         * @param count
-         * @param identifier
-         */
-        public Builder(int count, String identifier)
-        {
-            instance = new FindingsMeasurementResult(count, identifier);
-        }
-
-        /**
-         * @return
-         */
-        @Nonnull
-        public FindingsMeasurementResult create()
-        {
-            return instance;
-        }
-
-        /**
-         * @param from
-         * @return
-         */
-        @Nonnull
-        public Builder from(MeasurementMethod from)
-        {
-            instance.setResultFrom(from);
-
-            return this;
-        }
     }
 }

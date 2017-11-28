@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,10 +28,14 @@ package edu.montana.gsoc.msusel.quamoco.model;
 import javax.annotation.Nonnull;
 
 import edu.montana.gsoc.msusel.quamoco.io.MeasurementMethodType;
+import lombok.Builder;
+import lombok.Singular;
+
+import java.util.List;
 
 /**
- * A metric based instrument is a concrete description how to collect the data
- * for a measure using a tool that calculates a numerical metric. Examples are
+ * A name based instrument is a concrete description how to collect the data
+ * for a measure using a tool that calculates a numerical name. Examples are
  * lines of code or clone coverage.
  * 
  * @author Isaac Griffith
@@ -44,7 +49,7 @@ public class MetricBasedInstrument extends ToolBasedInstrument {
      * 
      * @param name
      *            The name of this instrument, representing the exact
-     *            capitalization of the metric provided by the tool to which
+     *            capitalization of the name provided by the tool to which
      *            this instrument is associated.
      * @param tool
      *            The tool associated with this instrument
@@ -60,7 +65,7 @@ public class MetricBasedInstrument extends ToolBasedInstrument {
      * 
      * @param name
      *            The name of this instrument, representing the exact
-     *            capitalization of the metric provided by the tool to which
+     *            capitalization of the name provided by the tool to which
      *            this instrument is associated.
      * @param tool
      *            The tool associated with this instrument
@@ -69,7 +74,14 @@ public class MetricBasedInstrument extends ToolBasedInstrument {
      */
     public MetricBasedInstrument(String name, Tool tool, String identifier)
     {
-        super(name, tool);
+        super(name, tool, identifier);
+    }
+
+    @Builder(buildMethodName = "create")
+    protected MetricBasedInstrument(Tool tool, Measure determines, String metric, String description, String title,
+                         String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations)
+    {
+        super(tool, determines, metric, description, title, identifier, originatesFrom, tags, annotations);
     }
     
     /**
@@ -79,110 +91,6 @@ public class MetricBasedInstrument extends ToolBasedInstrument {
     public String xmlTag()
     {
         return generateXMLTag(MeasurementMethodType.METRIC_BASED_INSTRUMENT.type());
-    }
-
-    /**
-     * Creates a new Builder for a Instrument with the given simple name and
-     * associated with the given tool.
-     * 
-     * @param name
-     *            Simple Name
-     * @param tool
-     *            The tool associated with instrument under construction.
-     * @return the Instrument.Builder instance
-     */
-    public static Builder builder(String name, Tool tool)
-    {
-        return new Builder(name, tool);
-    }
-
-    /**
-     * Creates a new Builder for a Instrument with the given simple name and
-     * associated with the given tool and given the unique identifier.
-     * 
-     * @param name
-     *            Simple Name
-     * @param tool
-     *            The tool associated with instrument under construction.
-     * @param identifier
-     *            The unique identifier
-     * @return the Instrument.Builder instance
-     */
-    public static Builder builder(String name, Tool tool, String identifier)
-    {
-        return new Builder(name, tool, identifier);
-    }
-
-    /**
-     * Builder for Instruments implemented using the fluent interface and method
-     * chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder extends AbstractToolBasedInstrumentBuilder {
-
-        /**
-         * Creates a new Builder for a Instrument with the given simple name and
-         * associated with the given tool.
-         * 
-         * @param name
-         *            Simple Name
-         * @param tool
-         *            The tool associated with instrument under construction.
-         * @return the Instrument.Builder instance
-         */
-        private Builder(String name, Tool tool)
-        {
-            element = new MetricBasedInstrument(name, tool);
-        }
-
-        /**
-         * Creates a new Builder for a Instrument with the given simple name and
-         * associated with the given tool and has the given unique identifier.
-         * 
-         * @param name
-         *            Simple Name
-         * @param tool
-         *            The tool associated with instrument under construction.
-         * @param identifier
-         *            The unique identifier
-         * @return the Instrument.Builder instance
-         */
-        private Builder(String name, Tool tool, String identifier)
-        {
-            element = new MetricBasedInstrument(name, tool);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        @Nonnull
-        public MetricBasedInstrument create()
-        {
-            return (MetricBasedInstrument) element;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toYaml()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toJson()
-    {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     /**

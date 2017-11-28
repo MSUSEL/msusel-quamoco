@@ -1,6 +1,31 @@
 /**
  * The MIT License (MIT)
  *
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+/* The MIT License (MIT)
+ *
  * SparQLine Quamoco Implementation
  * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
  *
@@ -29,6 +54,8 @@ import java.math.BigDecimal;
 import edu.montana.gsoc.msusel.quamoco.processor.LinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Abstract base edge type for edges which have both a weight and a rank.
@@ -41,56 +68,62 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
     /**
      * Weight applied to the input value
      */
-    protected BigDecimal         weight;
+    @Getter
+    protected BigDecimal weight;
     /**
      * Lower bound on proportion (0.0 to 1.0)
      */
-    protected BigDecimal         lowerBound;
+    @Getter
+    protected BigDecimal lowerBound;
     /**
      * Upper bound on proportion (0.0 to 1.0)
      */
-    protected BigDecimal         upperBound;
+    @Getter
+    protected BigDecimal upperBound;
     /**
      * Flag indicating that a linear distribution should be applied to the
      * value.
      */
-    protected boolean            usesLinearDist;
+    @Getter
+    @Setter
+    protected boolean usesLinearDist;
     /**
      * Linear distribution to use if usesLinearDist is true
      */
+    @Getter
     protected LinearDistribution dist;
     /**
      * Maximum points
      */
-    protected BigDecimal         maxPoints;
+    @Getter
+    protected BigDecimal maxPoints;
     /**
      * Rank of the source in the evaluation of the dest
      */
-    protected BigDecimal         rank;
+    @Getter
+    private BigDecimal rank;
     /**
      * Flag indicating that the rank has been set
      */
-    private boolean              rankSet   = false;
+    @Getter
+    private boolean rankSet = false;
     /**
      * Flag indicating that the weight has been set
      */
-    private boolean              weightSet = false;
+    @Getter
+    private boolean weightSet = false;
 
     /**
      * Constructs a new WeightedRankedEdge with the given name connecting the
      * source and dest nodes. Initially the weight is 1.0 and rank is 0.
-     * MaxPoints is set to the default of 100 and upperbound is set to 1.0 while
-     * lowerbound is set to 0.0
-     * 
-     * @param name
-     *            Name of this edge
-     * @param src
-     *            Source node
-     * @param dest
-     *            Dest node
+     * MaxPoints is set to the default of 100 and upper bound is set to 1.0 while
+     * lower bound is set to 0.0
+     *
+     * @param name Name of this edge
+     * @param src  Source node
+     * @param dest Dest node
      */
-    public WeightedRankedEdge(final String name, final Node src, final Node dest)
-    {
+    WeightedRankedEdge(final String name, final Node src, final Node dest) {
         super(name, src, dest);
         weight = BigDecimal.ONE;
         lowerBound = BigDecimal.ZERO;
@@ -103,30 +136,10 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getLowerBound()
-    {
-        return lowerBound;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public BigDecimal getUpperBound()
-    {
-        return upperBound;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setLowerBound(final BigDecimal lowerBound)
-    {
-        if (upperBound.compareTo(lowerBound) < 0)
-        {
+    public void setLowerBound(final BigDecimal lowerBound) {
+        if (upperBound.compareTo(lowerBound) < 0) {
             throw new IllegalArgumentException(
-                    "Value of upperbound: " + upperBound + " cannot be less than value of lowerbound: " + lowerBound);
+                    "Value of upper bound: " + upperBound + " cannot be less than value of lower bound: " + lowerBound);
         }
 
         this.lowerBound = lowerBound;
@@ -136,12 +149,10 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      * {@inheritDoc}
      */
     @Override
-    public void setUpperBound(final BigDecimal upperBound)
-    {
-        if (upperBound.compareTo(lowerBound) < 0)
-        {
+    public void setUpperBound(final BigDecimal upperBound) {
+        if (upperBound.compareTo(lowerBound) < 0) {
             throw new IllegalArgumentException(
-                    "Value of upperbound: " + upperBound + " cannot be less than value of lowerbound: " + lowerBound);
+                    "Value of upper bound: " + upperBound + " cannot be less than value of lower bound: " + lowerBound);
         }
 
         this.upperBound = upperBound;
@@ -151,19 +162,16 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      * {@inheritDoc}
      */
     @Override
-    public void setWeight(final BigDecimal weight)
-    {
-        if (weight.compareTo(BigDecimal.ZERO) < 0)
-        {
+    public void setWeight(final BigDecimal weight) {
+        if (weight.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Value of weight cannot be less than 0.0.");
         }
-        if (weight.compareTo(BigDecimal.ONE) > 0)
-        {
+        if (weight.compareTo(BigDecimal.ONE) > 0) {
             throw new IllegalArgumentException("Value of weight cannot be greater than 1.0.");
         }
 
-        if (weightSet)
-            return;
+//        if (weightSet)
+//            return;
 
         this.weight = weight;
         weightSet = true;
@@ -173,8 +181,7 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      * {@inheritDoc}
      */
     @Override
-    public void setNormalizer(final Normalizer normalizer)
-    {
+    public void setNormalizer(final Normalizer normalizer) {
         norm = normalizer;
     }
 
@@ -182,44 +189,7 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getWeight()
-    {
-        return weight;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isUsesLinearDist()
-    {
-        return usesLinearDist;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setUsesLinearDist(final boolean usesLinearDist)
-    {
-        this.usesLinearDist = usesLinearDist;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public LinearDistribution getDist()
-    {
-        return dist;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDist(final LinearDistribution dist)
-    {
+    public void setDist(final LinearDistribution dist) {
         this.dist = dist;
 
         if (dist == null)
@@ -232,19 +202,8 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getMaxPoints()
-    {
-        return maxPoints;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMaxPoints(final BigDecimal maxPoints)
-    {
-        if (maxPoints.compareTo(BigDecimal.ZERO) < 0)
-        {
+    public void setMaxPoints(final BigDecimal maxPoints) {
+        if (maxPoints.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Value of maximum points cannot be less than 0");
         }
 
@@ -255,8 +214,7 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      * {@inheritDoc}
      */
     @Override
-    public Normalizer getNormalizer()
-    {
+    public Normalizer getNormalizer() {
         return norm;
     }
 
@@ -264,27 +222,16 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      * {@inheritDoc}
      */
     @Override
-    public void setRank(BigDecimal rank)
-    {
+    public void setRank(BigDecimal rank) {
         if (rank == null)
             return;
 
-        if (rankSet)
-        {
+        if (rankSet) {
             System.out.println("Trying to set the rank twice");
             return;
         }
 
         this.rank = rank;
         rankSet = true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public BigDecimal getRank()
-    {
-        return rank;
     }
 }

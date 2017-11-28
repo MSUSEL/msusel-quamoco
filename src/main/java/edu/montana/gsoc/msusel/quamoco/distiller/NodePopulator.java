@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -74,8 +75,6 @@ public class NodePopulator implements GraphModifier {
      *            Entity the node represents.
      * @param node
      *            Node to be added.
-     * @param map
-     *            Map to which the node will be added.
      */
     @VisibleForTesting
     void addNode(DistillerData data, final MutableNetwork<Node, Edge> graph, final QMElement entity, final Node node)
@@ -107,7 +106,7 @@ public class NodePopulator implements GraphModifier {
             for (Measure meas : model.getMeasures())
             {
                 MeasureNode node = null;
-                if (meas.getType() != null && meas.getType().equals("qm:NormalizationMeasure"))
+                if (meas.isNormalizer())
                 {
                     node = new NormalizationNode(graph, meas.getName(), meas.getIdentifier());
                     setMeasureNodeProperties(meas, node);
@@ -132,7 +131,7 @@ public class NodePopulator implements GraphModifier {
                     {
                         if (ent instanceof Entity)
                         {
-                            name = name.concat(" @" + ((Entity) ent).getName());
+                            name = name.concat(" @" + ent.getName());
                         }
                     }
                 }
@@ -165,13 +164,13 @@ public class NodePopulator implements GraphModifier {
     void extractValues(final DistillerData data, final List<QualityModel> models,
             final MutableNetwork<Node, Edge> graph)
     {
-        final List<MeasurementMethod> mmlist = QualityModelUtils.getAllMeasurementMethods(models);
-        for (final MeasurementMethod method : mmlist)
+        final List<MeasurementMethod> list = QualityModelUtils.getAllMeasurementMethods(models);
+        for (final MeasurementMethod method : list)
         {
             Node node = null;
             if (method instanceof ManualInstrument)
             {
-                node = new ValueNode(graph, method.getMetric(), method.getIdentifier(), ValueNode.MANUAL);
+                node = new ValueNode(graph, method.getName(), method.getIdentifier(), ValueNode.MANUAL);
             }
             else if (method instanceof ToolBasedInstrument)
             {
@@ -191,16 +190,16 @@ public class NodePopulator implements GraphModifier {
                 if (type == MeasureType.FINDINGS)
                 {
                     node = new FindingNode(
-                            graph, method.getMetric(), method.getIdentifier(), method.getMetric(), toolName);
+                            graph, method.getName(), method.getIdentifier(), method.getName(), toolName);
                 }
                 else
                 {
-                    node = new ValueNode(graph, method.getMetric(), method.getIdentifier(), toolName);
+                    node = new ValueNode(graph, method.getName(), method.getIdentifier(), toolName);
                 }
             }
             else
             {
-                node = new FindingsUnionNode(graph, method.getMetric(), method.getIdentifier());
+                node = new FindingsUnionNode(graph, method.getName(), method.getIdentifier());
             }
 
             if (!graph.nodes().contains(node))

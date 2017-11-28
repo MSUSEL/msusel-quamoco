@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +25,11 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * @author Isaac Griffith
@@ -32,7 +37,9 @@ import javax.annotation.Nonnull;
  */
 public abstract class LinearFunction extends Function {
 
+    @Getter @Setter
     private double lowerBound;
+    @Getter @Setter
     private double upperBound;
 
     public LinearFunction()
@@ -45,37 +52,9 @@ public abstract class LinearFunction extends Function {
         super(identifier);
     }
 
-    /**
-     * @return the lowerBound
-     */
-    public double getLowerBound()
-    {
-        return lowerBound;
-    }
-
-    /**
-     * @param lowerBound
-     *            the lowerBound to set
-     */
-    public void setLowerBound(double lowerBound)
-    {
+    protected LinearFunction(double lowerBound, double upperBound, String identifier, Source originatesFrom, List<Tag> taggedBy, List<Annotation> annotations) {
+        super(identifier, originatesFrom, taggedBy, annotations);
         this.lowerBound = lowerBound;
-    }
-
-    /**
-     * @return the upperBound
-     */
-    public double getUpperBound()
-    {
-        return upperBound;
-    }
-
-    /**
-     * @param upperBound
-     *            the upperBound to set
-     */
-    public void setUpperBound(double upperBound)
-    {
         this.upperBound = upperBound;
     }
     
@@ -84,51 +63,8 @@ public abstract class LinearFunction extends Function {
      * @return
      */
     protected String generateXMLTag(String type) {
-        StringBuilder builder = new StringBuilder();
-        
-        builder.append(String.format(
+        return String.format(
                 "<function xmi:id=\"%s\" xsi:type=\"%s\" lowerBound=\"%f\" upperBound=\"%f\" />%n",
-                getIdentifier(), type, getLowerBound(), getUpperBound()));
-        
-        return builder.toString();
-    }
-
-    /**
-     * Base Builder for LinearFunctions using a Fluent Interface.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public abstract static class AbstractLinearFunctionBuilder extends AbstractFunctionBuilder {
-
-        /**
-         * Sets theDouble elements lower bound
-         * 
-         * @param lb
-         *            The lower bound
-         * @return this
-         */
-        @Nonnull
-        public AbstractLinearFunctionBuilder lowerBound(double lb)
-        {
-            ((LinearFunction) element).setLowerBound(lb);
-
-            return this;
-        }
-
-        /**
-         * Sets the elements upper bound
-         * 
-         * @param lb
-         *            The upper bound
-         * @return this
-         */
-        @Nonnull
-        public AbstractLinearFunctionBuilder upperBound(double ub)
-        {
-            ((LinearFunction) element).setUpperBound(ub);
-
-            return this;
-        }
+                getIdentifier(), type, getLowerBound(), getUpperBound());
     }
 }

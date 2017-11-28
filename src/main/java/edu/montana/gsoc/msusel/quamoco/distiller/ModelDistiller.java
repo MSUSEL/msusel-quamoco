@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -152,7 +153,7 @@ public class ModelDistiller {
      */
     private List<QualityModel> readInQualityModels(final String... args)
     {
-        final QMXMLReader qmread = new QMXMLReader();
+        final QMXMLReader qmRead = new QMXMLReader();
         final List<QualityModel> models = Lists.newArrayList();
         if (args != null)
         {
@@ -160,13 +161,13 @@ public class ModelDistiller {
             {
                 for (final String arg : args)
                 {
-                    qmread.firstPass(arg);
-                    models.add(qmread.getModel());
+                    qmRead.firstPass(arg);
+                    models.add(qmRead.getModel());
                 }
 
                 for (final String arg : args)
                 {
-                    qmread.secondPass(arg);
+                    qmRead.secondPass(arg);
                 }
             }
             catch (ParserConfigurationException | SAXException | IOException e)
@@ -194,7 +195,7 @@ public class ModelDistiller {
         final List<QualityModel> models = Lists.newArrayList();
         final Path baseDir = path.toAbsolutePath().getParent();
         Queue<Path> paths = Queues.newArrayDeque();
-        Queue<Path> pstack = Queues.newArrayDeque();
+        Queue<Path> pStack = Queues.newArrayDeque();
         paths.offer(path);
 
         Map<String, QualityModel> modelMap = new HashMap<>();
@@ -202,7 +203,7 @@ public class ModelDistiller {
         while (!paths.isEmpty())
         {
             Path p = paths.poll();
-            pstack.offer(p);
+            pStack.offer(p);
             if (Files.exists(p))
             {
                 try
@@ -253,11 +254,11 @@ public class ModelDistiller {
             }
         }
 
-        while (!pstack.isEmpty())
+        while (!pStack.isEmpty())
         {
             try
             {
-                qmRead.secondPass(pstack.poll().toString());
+                qmRead.secondPass(pStack.poll().toString());
             }
             catch (ParserConfigurationException | SAXException | IOException e)
             {
@@ -313,9 +314,9 @@ public class ModelDistiller {
     }
 
     /**
-     * @param qmFileLocs
+     * @param qmFileLocations
      */
-    public void buildGraph(Map<Class, String> qmFileLocs)
+    public void buildGraph(Map<Class, String> qmFileLocations)
     {
         // TODO Auto-generated method stub
         

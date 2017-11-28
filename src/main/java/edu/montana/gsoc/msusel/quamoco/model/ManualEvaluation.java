@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +26,11 @@
 package edu.montana.gsoc.msusel.quamoco.model;
 
 import edu.montana.gsoc.msusel.quamoco.io.EvaluationType;
+import lombok.Builder;
+import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.util.List;
 
 /**
  * The evaluation is done manually without using pre-defined calculation
@@ -49,6 +54,12 @@ public class ManualEvaluation extends Evaluation {
         super(identifier);
     }
 
+    @Builder(buildMethodName = "create")
+    protected ManualEvaluation(Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
+                          String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
+        super(completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, tags, annotations);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -65,35 +76,18 @@ public class ManualEvaluation extends Evaluation {
     public String xmlTag()
     {
         StringBuilder builder = new StringBuilder();
-
-        builder.append(
-                String.format(
-                        "<evaluations xmi:id=\"%s\" xsi:type=\"%s\" description=\"%s\" maximumPoints=\"%f\" evaluates=\"%s\" completeness=\"%f\" />%n",
-                        getIdentifier(), EvaluationType.MANUAL_EVALUATION.type(),
-                        StringEscapeUtils.escapeXml10(getDescription()), getMaximumPoints(), getEvaluates(),
-                        getCompleteness()));
+        builder.append(String.format("<evaluations xmi:id=\"%s\" xsi:type=\"%s\"", getIdentifier(), EvaluationType.MANUAL_EVALUATION.type()));
+        if (getDescription() != null)
+            builder.append(String.format(" description=\"%s\"", StringEscapeUtils.escapeXml10(getDescription())));
+        if (getMaximumPoints() != null)
+            builder.append(String.format(" maximumPoints=\"%f\"", getMaximumPoints()));
+        if (getEvaluates() != null)
+            builder.append(String.format(" evaluates=\"%s\"", getEvaluates()));
+        if (getCompleteness() != null)
+            builder.append(String.format(" completeness=\"%f\"", getCompleteness()));
+        builder.append(" />");
 
         return builder.toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toYaml()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toJson()
-    {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     /**
@@ -104,55 +98,5 @@ public class ManualEvaluation extends Evaluation {
     {
         // TODO Auto-generated method stub
         return null;
-    }
-
-    /**
-     * @return
-     */
-    public static Builder builder()
-    {
-        return new Builder();
-    }
-
-    /**
-     * @param identifier
-     * @return
-     */
-    public static Builder builder(String identifier)
-    {
-        return new Builder(identifier);
-    }
-
-    /**
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder extends AbstractEvaluationBuilder {
-
-        /**
-         * 
-         */
-        public Builder()
-        {
-            element = new ManualEvaluation();
-        }
-
-        /**
-         * @param identifier
-         */
-        public Builder(String identifier)
-        {
-            element = new ManualEvaluation(identifier);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public ManualEvaluation create()
-        {
-            return (ManualEvaluation) element;
-        }
-
     }
 }

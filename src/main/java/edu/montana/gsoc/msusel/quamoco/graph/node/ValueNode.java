@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -33,9 +34,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * Input Node which simply forms a place into which metric measures are to be
+ * Input Node which simply forms a place into which name measures are to be
  * stored in the graph.
  *
  * @author Isaac Griffith
@@ -54,18 +57,22 @@ public class ValueNode extends Node {
      */
     public static final String     UNION  = "FindingsUnionMeasureAggregation";
     /**
-     * Name of the tool providing the values for this metric
+     * Name of the tool providing the values for this name
      */
+    @Getter
     private final String           tool;
     /**
      * List of actual measurement values.
      * TODO Provide a means by which these values can be related to where they
      * came from (INode)
      */
+    @Getter
     private final List<BigDecimal> values;
     /**
-     * Name of the metric for which the provided measures exist.
+     * Name of the name for which the provided measures exist.
      */
+    @Getter
+    @Setter
     private String                 metric;
 
     /**
@@ -91,19 +98,11 @@ public class ValueNode extends Node {
     }
 
     /**
-     * @return the key identifying this ndoe
+     * @return the key identifying this node
      */
     public String getKey()
     {
         return getName();
-    }
-
-    /**
-     * @return tool providing measuments for this node
-     */
-    public String getTool()
-    {
-        return tool;
     }
 
     /**
@@ -174,15 +173,6 @@ public class ValueNode extends Node {
     public BigDecimal getUpperResult()
     {
         return Collections.max(values);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<BigDecimal> getValues()
-    {
-        return values;
     }
 
     /**

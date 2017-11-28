@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -198,14 +199,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createVarianceMultiMeasureEvaluation(Element e)
     {
         return (Evaluation) VarianceMultiMeasureEvaluation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .annotation(null)
-                .originatesFrom(null)
-                .taggedBy(null)
                 .create();
     }
 
@@ -216,14 +209,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createSummationMultiMeasureEvaluation(Element e)
     {
         return (Evaluation) SummationMultiMeasureEvaluation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)
-                .annotation(null)
                 .create();
     }
 
@@ -234,14 +219,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createStdDevMultiMeasureEvaluation(Element e)
     {
         return (Evaluation) StdDevMultiMeasureEvaluation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -252,14 +229,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createRangeMultiMeasureEvaluation(Element e)
     {
         return (Evaluation) RangeMultiMeasureEvaluation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -270,14 +239,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createModeMultiMeasureEvaluation(Element e)
     {
         return (Evaluation) ModeMultiMeasureEvaluation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -288,14 +249,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createMinMultiMeasureEvaluation(Element e)
     {
         return (Evaluation) MinMultiMeasureEvaluation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -306,14 +259,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createMedianMultiMeasureEvaluation(Element e)
     {
         return (Evaluation) MedianMultiMeasureEvaluation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -324,14 +269,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createMeanMultiMeasureEvaluation(Element e)
     {
         return (Evaluation) MeanMultiMeasureEvaluation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -342,14 +279,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createMaxMultiMeasureEvaluation(Element e)
     {
         return (Evaluation) MaxMultiMeasureEvaluation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -360,14 +289,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createHistCompMultiMeasureEvaluation(Element e)
     {
         return (Evaluation) HistCompMultiMeasureEvaluation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -378,14 +299,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createVarianceFactorAggregation(Element e)
     {
         return (Evaluation) VarianceFactorAggregation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -396,14 +309,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createStdDevFactorAggregation(Element e)
     {
         return (Evaluation) StdDevFactorAggregation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -414,14 +319,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createRangeFactorAggregation(Element e)
     {
         return (Evaluation) RangeFactorAggregation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -432,14 +329,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createModeFactorAggregation(Element e)
     {
         return (Evaluation) ModeFactorAggregation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -450,14 +339,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createMinFactorAggregation(Element e)
     {
         return (Evaluation) MinFactorAggregation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -468,14 +349,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createMedianFactorAggregation(Element e)
     {
         return (Evaluation) MedianFactorAggregation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -486,14 +359,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createMeanFactorAggregation(Element e)
     {
         return (Evaluation) MeanFactorAggregation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -504,14 +369,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createMaxFactorAggregation(Element e)
     {
         return (Evaluation) MaxFactorAggregation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -522,14 +379,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createHistogramCompFactorAggregation(Element e)
     {
         return (Evaluation) HistogramCompFactorAggregation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -540,14 +389,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createWeightedSumMultiMeasureEvaluation(Element e)
     {
         return (Evaluation) WeightedSumMultiMeasureEvaluation.builder()
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)                
-                .annotation(null)
                 .create();
     }
 
@@ -558,12 +399,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createManualEvaluation(Element e)
     {
         return (Evaluation) ManualEvaluation.builder()
-                .description("")
-                .title("")
-                .evaluates(null)
-                .originatesFrom(null)
-                .taggedBy(null)
-                .annotation(null)
                 .create();
     }
 
@@ -574,13 +409,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createWeightedSumFactorAggregation(Element e)
     {
         return (Evaluation) WeightedSumFactorAggregation.builder()
-                .ranking(null)
-                .title("")
-                .description("")
-                .evaluates(null)
-                .originatesFrom(null)
-                .taggedBy(null)
-                .annotation(null)
                 .create();
     }
 
@@ -591,16 +419,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createSingleMeasureEvaluation(Element e)
     {
         return (Evaluation) SingleMeasureEvaluation.builder()
-                .basedOn(null)
-                .range(null)
-                .normalization(null)
-                .function(null)
-                .title("")
-                .description("")
-                .evaluates(null)
-                .originatesFrom(null)
-                .taggedBy(null)
-                .annotation(null)
                 .create();
     }
 
@@ -611,15 +429,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createQIESLEvaluation(Element e)
     {
         return (Evaluation) QIESLEvaluation.builder()
-                .specification("")
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)
-                .annotation(null)
                 .create();
     }
 
@@ -629,15 +438,6 @@ public class EvaluationFactory extends AbstractQMElementFactory {
     private Evaluation createTextEvaluation(Element e)
     {
         return (Evaluation) TextEvaluation.builder()
-                .specification("")
-                .title("")
-                .description("")
-                .completeness(0.0)
-                .evaluates(null)
-                .maxPts(0.0)
-                .originatesFrom(null)
-                .taggedBy(null)
-                .annotation(null)
                 .create();
     }
 }

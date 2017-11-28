@@ -1,19 +1,20 @@
 /**
  * The MIT License (MIT)
- *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
- *
+ * <p>
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,270 +26,194 @@
 package edu.montana.gsoc.msusel.quamoco.model;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Nonnull;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.google.common.collect.Lists;
 import edu.montana.gsoc.msusel.quamoco.io.JsonSerializable;
 import edu.montana.gsoc.msusel.quamoco.io.ScriptSerializable;
 import edu.montana.gsoc.msusel.quamoco.io.XMLSerializable;
 import edu.montana.gsoc.msusel.quamoco.io.YamlSerializable;
+import lombok.*;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  * Abstract base class of all QMElements. This class contains the basic pieces
  * of all QMElements.
- * 
+ *
  * @author Isaac Griffith
  * @version 1.1.1
  */
+@EqualsAndHashCode(of = {"identifier"})
+@ToString(of = {"identifier"})
 public abstract class QMElement implements XMLSerializable, YamlSerializable, JsonSerializable, ScriptSerializable {
 
+    @Getter
+    @Builder.Default
     protected String identifier;
-
     /**
      * Link to where the original information for this element can be found
      */
-    protected Source           originatesFrom;
+    @Getter
+    @Setter
+    protected Source originatesFrom;
     /**
      * Tags for the element indicating additional information
      */
-    protected List<Tag>        taggedBy;
+    @Getter
+    @Builder.Default
+    protected List<Tag> taggedBy = Lists.newArrayList();
     /**
      * List of annotations
      */
-    protected List<Annotation> annotations;
-
+    @Getter
+    @Builder.Default
+    protected List<Annotation> annotations = Lists.newArrayList();
+    @Getter
     private String qualifiedIdentifier;
 
     /**
      * Constructs a new QMElement with a randomly generated UUID as its
      * identifier.
      */
-    public QMElement()
-    {
+    public QMElement() {
         identifier = UUID.randomUUID().toString();
+        taggedBy = Lists.newArrayList();
+        annotations = Lists.newArrayList();
+    }
+
+    public QMElement(String identifier) {
+        this();
+        identifier = identifier;
     }
 
     /**
      * Constructs a new QMElement with the specified Unique Identifier already
      * assigned.
-     * 
-     * @param identifier
-     *            The Unique Identifier of this element.
+     *
+     * @param identifier The Unique Identifier of this element.
      */
-    public QMElement(String identifier)
-    {
-        this.identifier = identifier;
+    public QMElement(String identifier, Source originatesFrom, List<Tag> taggedBy, List<Annotation> annotations) {
+        if (identifier != null)
+            this.identifier = identifier;
+        this.originatesFrom = originatesFrom;
+        if (taggedBy != null && !taggedBy.isEmpty())
+            this.taggedBy = Lists.newArrayList(taggedBy);
+        if (annotations != null && !annotations.isEmpty())
+        this.annotations = Lists.newArrayList(annotations);
     }
 
     /**
-     * @return the element's originatesFrom
+     * @param tag the tag this element is tagged by
      */
-    public Source getOriginatesFrom()
-    {
-        return originatesFrom;
-    }
-
-    /**
-     * @param source
-     *            the new source to add
-     */
-    public void setOriginatesFrom(Source source)
-    {
-        originatesFrom = source;
-    }
-
-    /**
-     * @return the element's taggedBy
-     */
-    public List<Tag> getTaggedBy()
-    {
-        return taggedBy;
-    }
-
-    /**
-     * @param taggedBy
-     *            the new taggedBy to add
-     */
-    public void addTaggedBy(Tag tag)
-    {
+    public void addTaggedBy(Tag tag) {
         if (tag == null || taggedBy.contains(tag))
             return;
 
         taggedBy.add(tag);
     }
 
-    public void removeTaggedBy(Tag tag)
-    {
+    public void removeTaggedBy(Tag tag) {
         if (tag == null || !taggedBy.contains(tag))
             return;
 
         taggedBy.remove(tag);
     }
 
+    public boolean hasTags() {
+        return !taggedBy.isEmpty();
+    }
+
     /**
      * Adds the given annotation to this element, unless the given annotation is
      * null.
-     * 
-     * @param ann
-     *            Annotation to add
+     *
+     * @param ann Annotation to add
      */
-    public void addAnnotation(Annotation ann)
-    {
+    public void addAnnotation(Annotation ann) {
         if (ann == null)
             return;
 
         annotations.add(ann);
     }
 
-    public boolean hasAnnotations()
-    {
+    public boolean hasAnnotations() {
         return !annotations.isEmpty();
     }
 
-    public List<Annotation> getAnnotations()
-    {
-        return annotations;
-    }
-
-    /**
-     * @return the identifier
-     */
-    public String getIdentifier()
-    {
-        return identifier;
-    }
-
-    /**
-     * @return the qualifiedIdentifier
-     */
-    public String getQualifiedIdentifier()
-    {
-        return qualifiedIdentifier;
-    }
-
-    public void updateQualifiedIdentifier(QualityModel owner)
-    {
-        if (owner != null)
-            qualifiedIdentifier = owner.getFileName() + identifier;
+    public void updateQualifiedIdentifier(QualityModel owner) {
+        if (owner == null || owner.getFileName() == null)
+            qualifiedIdentifier = identifier;
+        else
+            qualifiedIdentifier = owner.getFileName() + "#" + identifier;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((identifier == null) ? 0 : identifier.hashCode());
-        return result;
+    public String toJson() {
+        ObjectMapper mapper = new ObjectMapper();
+        String value = "";
+
+        try {
+            value = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+
+        }
+
+        return value;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(Object obj)
-    {
-        if (this == obj)
-        {
-            return true;
+    public String toYaml() {
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        String value = "";
+
+        try {
+            value = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+
         }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
-        {
-            return false;
-        }
-        QMElement other = (QMElement) obj;
-        if (identifier == null)
-        {
-            if (other.identifier != null)
-            {
-                return false;
-            }
-        }
-        else if (!identifier.equals(other.identifier))
-        {
-            return false;
-        }
-        return true;
+
+        return value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString()
-    {
-        return String.format("%s [identifier=%s]", this.getClass().getSimpleName(), identifier);
+    protected String generateXMLTag(String tag, String type, Map<String, String> attrMap, List<String> contents) {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(String.format("<%s xmi:id=\"%s\"", tag, getIdentifier()));
+        if (type != null)
+            builder.append(String.format(" xsi:type=\"%s\"", type));
+        if (getOriginatesFrom() != null)
+            attrMap.put("originatesFrom", getOriginatesFrom().getQualifiedIdentifier());
+        attrMap.forEach((key, value) -> {
+            if (value != null) builder.append(String.format(" %s=\"%s\"", key, value));
+        });
+
+        if (hasAnnotations() || hasTags() || !contents.isEmpty()) {
+            builder.append(">\n");
+
+            taggedBy.forEach(
+                    (tagg) -> builder.append(String.format("<taggedBy href=\"%s\" />%n", tagg.getQualifiedIdentifier())));
+            annotations.forEach((ann) -> builder.append(ann.xmlTag()));
+            contents.forEach(content -> builder.append(content + "\n"));
+
+            builder.append(String.format("</%s>\n", tag));
+        } else {
+            builder.append(" />\n");
+        }
+
+        return builder.toString();
     }
 
     public abstract String xmlTag();
-
-    /**
-     * Base Builder for QMElements implemented using the fluent interface
-     * and method chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static abstract class AbstractQMElementBuilder {
-
-        protected QMElement element;
-
-        /**
-         * @return The newly constructed ProductPart element
-         */
-        @Nonnull
-        public abstract QMElement create();
-
-        /**
-         * Sets the element under construction's originatesFrom
-         * 
-         * @param originatesFrom
-         *            the originatesFrom to set
-         * @return this
-         */
-        public AbstractQMElementBuilder originatesFrom(Source originatesFrom)
-        {
-            element.setOriginatesFrom(originatesFrom);
-
-            return this;
-        }
-
-        /**
-         * Sets the element under contruction's tagged by
-         * 
-         * @param taggedBy
-         *            the taggedBy to set
-         * @return this
-         */
-        @Nonnull
-        public AbstractQMElementBuilder taggedBy(Tag taggedBy)
-        {
-            element.addTaggedBy(taggedBy);
-
-            return this;
-        }
-
-        /**
-         * Adds the given annotation to the element under construction.
-         * 
-         * @param ann
-         *            Annotation to add
-         * @return this
-         */
-        @Nonnull
-        public AbstractQMElementBuilder annotation(Annotation ann)
-        {
-            element.addAnnotation(ann);
-
-            return this;
-        }
-
-    }
 }

@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -57,16 +58,16 @@ public class DistilledGraphCreator {
                 .expectedNodeCount(10000)
                 .expectedEdgeCount(10000)
                 .build();
-        final GraphModifier nodepop = new NodePopulator();
-        final GraphModifier edgepop = new EdgePopulator();
-        final GraphModifier procpop = new ProcessorPopulator();
-        final GraphModifier normpop = new NormalizerPopulator();
+        final GraphModifier nodePop = new NodePopulator();
+        final GraphModifier edgePop = new EdgePopulator();
+        final GraphModifier processPop = new ProcessorPopulator();
+        final GraphModifier normPop = new NormalizerPopulator();
 
         final DistillerData data = new DistillerData(models);
-        nodepop.modifyGraph(data, graph);
-        edgepop.modifyGraph(data, graph);
-        procpop.modifyGraph(data, graph);
-        normpop.modifyGraph(data, graph);
+        nodePop.modifyGraph(data, graph);
+        edgePop.modifyGraph(data, graph);
+        processPop.modifyGraph(data, graph);
+        normPop.modifyGraph(data, graph);
 
         return graph;
     }

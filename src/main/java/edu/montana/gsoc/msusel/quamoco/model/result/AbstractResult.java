@@ -1,19 +1,20 @@
 /**
  * The MIT License (MIT)
- *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
- *
+ * <p>
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,73 +25,28 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.result;
 
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
 import java.util.UUID;
 
 /**
  * @author Isaac Griffith
  * @version 1.1.1
  */
-public class AbstractResult {
+@EqualsAndHashCode
+public abstract class AbstractResult {
 
-    protected String identifier;
-    
-    /**
-     * 
-     */
-    public AbstractResult()
-    {
-        this(UUID.randomUUID().toString());
-    }
-    
+    @Getter
+    @Builder.Default
+    protected String identifier = UUID.randomUUID().toString();
+
     /**
      * @param identifier
      */
     public AbstractResult(String identifier) {
-        this.identifier = identifier;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((identifier == null) ? 0 : identifier.hashCode());
-        return result;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (this == obj)
-        {
-            return true;
-        }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
-        {
-            return false;
-        }
-        AbstractResult other = (AbstractResult) obj;
-        if (identifier == null)
-        {
-            if (other.identifier != null)
-            {
-                return false;
-            }
-        }
-        else if (!identifier.equals(other.identifier))
-        {
-            return false;
-        }
-        return true;
+        if (identifier != null)
+            this.identifier = identifier;
     }
 }

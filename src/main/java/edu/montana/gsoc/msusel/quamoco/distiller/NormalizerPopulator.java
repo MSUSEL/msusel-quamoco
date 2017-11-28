@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -152,7 +153,7 @@ public class NormalizerPopulator implements GraphModifier {
     /**
      * Updates edges with rank information and sets the normalizer for the edge.
      *
-     * @param redge
+     * @param rankedEdge
      *            The edge to be update
      * @param eval
      *            The evaluation object containing ranking information.
@@ -162,7 +163,7 @@ public class NormalizerPopulator implements GraphModifier {
      *            The Entity on the dest side of the Edge
      */
     @VisibleForTesting
-    void updateEdge(final RankedEdge redge, final Evaluation eval, final QMElement srcEntity,
+    void updateEdge(final RankedEdge rankedEdge, final Evaluation eval, final QMElement srcEntity,
             final QMElement destEntity)
     {
         if (eval instanceof WeightedSumFactorAggregation)
@@ -177,11 +178,9 @@ public class NormalizerPopulator implements GraphModifier {
                 if (srcEntity instanceof Factor)
                 {
                     Factor srcFac = (Factor) srcEntity;
-                    if (!srcFac.equals(rank.getFactor()))
-                        continue;
-                    else
+                    if (srcFac.equals(rank.getFactor()))
                     {
-                        updateEdge(redge, rank, eval);
+                        updateEdge(rankedEdge, rank, eval);
                         break;
                     }
                 }
@@ -199,11 +198,9 @@ public class NormalizerPopulator implements GraphModifier {
                 if (srcEntity instanceof Measure)
                 {
                     Measure srcMeas = (Measure) srcEntity;
-                    if (!srcMeas.equals(rank.getMeasure()))
-                        continue;
-                    else
+                    if (srcMeas.equals(rank.getMeasure()))
                     {
-                        updateEdge(redge, rank, eval);
+                        updateEdge(rankedEdge, rank, eval);
                         break;
                     }
                 }
@@ -215,7 +212,7 @@ public class NormalizerPopulator implements GraphModifier {
      * Updates the given ranked edge with the provided ranking based on the
      * given evaluation.
      * 
-     * @param redge
+     * @param rankedEdge
      *            Ranked Edge to update
      * @param rank
      *            Ranking providing information for the update
@@ -223,55 +220,55 @@ public class NormalizerPopulator implements GraphModifier {
      *            Evaluation providing information for the update
      */
     @VisibleForTesting
-    void updateEdge(final RankedEdge redge, final Ranking rank, final Evaluation eval)
+    void updateEdge(final RankedEdge rankedEdge, final Ranking rank, final Evaluation eval)
     {
         if (rank.getRank() > 0)
         {
-            redge.setRank(new BigDecimal(rank.getRank()));
+            rankedEdge.setRank(new BigDecimal(rank.getRank()));
         }
         if (Double.compare(rank.getWeight(), 0) > 0)
         {
-            redge.setWeight(new BigDecimal(rank.getWeight()));
+            rankedEdge.setWeight(new BigDecimal(rank.getWeight()));
         }
 
         if (eval instanceof WeightedSumMultiMeasureEvaluation)
         {
-            MeasureRanking mrank = (MeasureRanking) rank;
-            if (mrank.getFunction() != null)
+            MeasureRanking measureRank = (MeasureRanking) rank;
+            if (measureRank.getFunction() != null)
             {
-                final Function f = mrank.getFunction();
+                final Function f = measureRank.getFunction();
                 if (f instanceof LinearFunction)
                 {
-                    redge.setMaxPoints(new BigDecimal(eval.getMaximumPoints()));
-                    redge.setLowerBound(new BigDecimal(((LinearFunction) f).getLowerBound()));
-                    redge.setUpperBound(new BigDecimal(((LinearFunction) f).getUpperBound()));
+                    rankedEdge.setMaxPoints(new BigDecimal(eval.getMaximumPoints()));
+                    rankedEdge.setLowerBound(new BigDecimal(((LinearFunction) f).getLowerBound()));
+                    rankedEdge.setUpperBound(new BigDecimal(((LinearFunction) f).getUpperBound()));
 
                     if (f instanceof LinearIncreasingFunction)
                     {
-                        redge.setDist(new PositiveLinearDistribution());
+                        rankedEdge.setDist(new PositiveLinearDistribution());
                     }
                     else
                     {
-                        redge.setDist(new NegativeLinearDistribution());
+                        rankedEdge.setDist(new NegativeLinearDistribution());
                     }
                 }
             }
 
-            if (mrank.getNormalization() != null)
+            if (measureRank.getNormalization() != null)
             {
-                Measure ent = mrank.getNormalization();
+                Measure ent = measureRank.getNormalization();
                 if (ent != null)
                 {
                     final Node norm = data.getMeasure(ent);
-                    redge.setNormalizer(
+                    rankedEdge.setNormalizer(
                             NormalizerFactory.getInstance()
-                                    .createNormalizer((Edge) redge, norm.getName(), mrank.getRange()));
+                                    .createNormalizer((Edge) rankedEdge, norm.getName(), measureRank.getRange()));
                 }
             }
             else
             {
-                redge.setNormalizer(
-                        NormalizerFactory.getInstance().createNormalizer((Edge) redge, "LOC", mrank.getRange()));
+                rankedEdge.setNormalizer(
+                        NormalizerFactory.getInstance().createNormalizer((Edge) rankedEdge, "LOC", measureRank.getRange()));
             }
         }
     }

@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -98,7 +99,9 @@ public class EntityFactory extends AbstractQMElementFactory {
      */
     private Entity createStakeholder(Element e)
     {
-        return (Stakeholder) Stakeholder.builder(e.getAttribute("name"), e.getAttribute("xmi:id"))
+        return (Stakeholder) Stakeholder.builder()
+                .name(e.getAttribute("name"))
+                .identifier(e.getAttribute("xmi:id"))
                 .description(e.hasAttribute("description") ? e.getAttribute("description") : "")
                 .create();
     }
@@ -109,7 +112,9 @@ public class EntityFactory extends AbstractQMElementFactory {
      */
     private Entity createUseCase(Element e)
     {
-        return (UseCase) UseCase.builder(e.getAttribute("name"), e.getAttribute("xmi:id"))
+        return (UseCase) UseCase.builder()
+                .name(e.getAttribute("name"))
+                .identifier(e.getAttribute("xmi:id"))
                 .description(e.hasAttribute("description") ? e.getAttribute("description") : "")
                 .create();
     }
@@ -120,7 +125,9 @@ public class EntityFactory extends AbstractQMElementFactory {
      */
     private Entity createProductPart(Element e)
     {
-        return (ProductPart) ProductPart.builder(e.getAttribute("name"), e.getAttribute("xmi:id"))
+        return (ProductPart) ProductPart.builder()
+                .name(e.getAttribute("name"))
+                .identifier(e.getAttribute("xmi:id"))
                 .description(e.hasAttribute("description") ? e.getAttribute("description") : "")
                 .create();
     }

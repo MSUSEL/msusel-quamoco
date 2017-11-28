@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +25,14 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
-import javax.annotation.Nonnull;
+import com.google.common.collect.Maps;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Singular;
+import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Isaac Griffith
@@ -32,69 +40,68 @@ import javax.annotation.Nonnull;
  */
 public abstract class MeasurementMethod extends QMElement {
 
+    @Getter
+    @Setter
     protected Measure determines;
-    protected String metric;
+    @Getter
+    @Setter
+    protected String name;
+    @Getter
+    @Setter
+    protected String description;
+    @Getter
+    @Setter
+    protected String title;
 
-    public MeasurementMethod(String metric)
-    {
+    public MeasurementMethod(String name) {
         super();
-        this.metric = metric;
+        this.name = name;
     }
 
-    public MeasurementMethod(String metric, String identifier)
-    {
+    public MeasurementMethod(String name, String identifier) {
         super(identifier);
-        this.metric = metric;
+        this.name = name;
     }
 
-    /**
-     * @return the determines
-     */
-    public Measure getDetermines()
+    protected MeasurementMethod(Measure determines, String name, String description, String title,
+                                String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations)
     {
-        return determines;
-    }
-
-    /**
-     * @param determines
-     *            the determines to set
-     */
-    public void setDetermines(Measure determines)
-    {
+        super(identifier, originatesFrom, tags, annotations);
         this.determines = determines;
+        this.name = name;
+        this.description = description;
+        this.title = title;
     }
 
-    /**
-     * @return the metric
-     */
-    public String getMetric()
-    {
-        return metric;
+    protected String generateXMLTag(String type) {
+        return generateXMLTag(type, Maps.newHashMap());
     }
 
-    /**
-     * @param metric
-     *            the metric to set
-     */
-    public void setMetric(String metric)
-    {
-        this.metric = metric;
-    }
+    protected String generateXMLTag(String type, Map<String, String> attrMap) {
+        StringBuilder builder = new StringBuilder();
 
-    /**
-     * Base Builder for MeasurementMethods using the Fluent Interface and Method
-     * Chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @verison 1.1.1
-     */
-    public abstract static class AbstractMeasurementMethodBuilder extends AbstractQMElementBuilder {
-        
-        @Nonnull
-        public AbstractMeasurementMethodBuilder determines(Measure measure) {
-            ((MeasurementMethod) element).setDetermines(measure);
-            
-            return this;
+        builder.append(String.format("<measurementMethods xmi:id=\"%s\"", getIdentifier()));
+        builder.append(String.format(" xsi:type=\"%s\"", type));
+        if (getDescription() != null)
+            builder.append(String.format(" description=\"%s\"", StringEscapeUtils.escapeXml10(getDescription())));
+        if (getOriginatesFrom() != null)
+            builder.append(String.format(" originatesFrom=\"%s\"", getOriginatesFrom().getQualifiedIdentifier()));
+        if (getName() != null)
+            builder.append(String.format(" name=\"%s\"", StringEscapeUtils.escapeXml10(getName())));
+        if (getQualifiedIdentifier() != null)
+            builder.append(String.format(" determines=\"%s\"", getDetermines().getQualifiedIdentifier()));
+        attrMap.forEach((key, value) -> {
+            if (value != null) builder.append(String.format(" %s=\"%s\"", key, value));
+        });
+
+        if (hasAnnotations()) {
+            builder.append(">\n");
+            annotations.forEach((ann) -> builder.append(ann.xmlTag()));
+            builder.append("</measurementMethods>\n");
+        } else {
+            builder.append(" />\n");
         }
+
+        return builder.toString();
     }
 }

@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +25,15 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import lombok.Getter;
+import lombok.Setter;
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Map;
 
 /**
  * An evaluation describes how to calculate the degree to which the factor is
@@ -49,6 +58,7 @@ public abstract class Evaluation extends QMElement {
     /**
      * 
      */
+    @Getter @Setter
     protected Double completeness;
     /**
      * <ul>
@@ -68,12 +78,16 @@ public abstract class Evaluation extends QMElement {
      * satisfied.</li>
      * </ul>
      */
+    @Getter @Setter
     protected Double maximumPoints;
     /**
      * A title is an optional additional name for the evaluation.
      */
+    @Getter @Setter
     protected String title;
+    @Getter @Setter
     protected String description;
+    @Getter @Setter
     protected Factor evaluates;
 
     public Evaluation()
@@ -86,172 +100,39 @@ public abstract class Evaluation extends QMElement {
         super(identifier);
     }
 
-    /**
-     * @return the completeness
-     */
-    public Double getCompleteness()
-    {
-        return completeness;
-    }
-
-    /**
-     * @param completeness
-     *            the completeness to set
-     */
-    public void setCompleteness(Double completeness)
-    {
+    protected Evaluation(Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
+                      String identifier, Source originatesFrom, List<Tag> taggedBy, List<Annotation> annotations) {
+        super(identifier, originatesFrom, taggedBy, annotations);
         this.completeness = completeness;
-    }
-
-    /**
-     * @return the maximumPoints
-     */
-    public Double getMaximumPoints()
-    {
-        return maximumPoints;
-    }
-
-    /**
-     * @param maximumPoints
-     *            the maximumPoints to set
-     */
-    public void setMaximumPoints(Double maximumPoints)
-    {
         this.maximumPoints = maximumPoints;
-    }
-
-    public Factor getEvaluates()
-    {
-        return evaluates;
-    }
-
-    public void setEvaluates(Factor factor)
-    {
-        if (factor == null)
-            return;
-
-        this.evaluates = factor;
+        this.title = title;
+        this.description = description;
+        this.evaluates = evaluates;
     }
 
     public abstract double evaluate();
 
-    /**
-     * @return the title
-     */
-    public String getTitle()
-    {
-        return title;
+    protected String generateXMLTag(String type) {
+        return generateXMLTag(type, Maps.newHashMap());
     }
 
-    /**
-     * @param title
-     *            the title to set
-     */
-    public void setTitle(String title)
-    {
-        this.title = title;
+    protected String generateXMLTag(String type, Map<String, String> attrs, List<String> content) {
+        String tag = "evaluations";
+
+        if (getDescription() != null)
+            attrs.put("description", StringEscapeUtils.escapeXml10(getDescription()));
+        if (getMaximumPoints() != null)
+            attrs.put("maximumPoints", getMaximumPoints().toString());
+        if (getEvaluates() != null)
+            attrs.put("evaluates", StringEscapeUtils.escapeXml10(getEvaluates().getQualifiedIdentifier()));
+        if (getCompleteness() != null)
+            attrs.put("completeness", getCompleteness().toString());
+
+        return generateXMLTag(tag, type, attrs, content);
     }
 
-    /**
-     * @return the description
-     */
-    public String getDescription()
+    protected String generateXMLTag(String type, Map<String, String> attrs)
     {
-        return description;
-    }
-
-    /**
-     * @param description
-     *            the description to set
-     */
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    /**
-     * Base Builder for Evaluation classes
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public abstract static class AbstractEvaluationBuilder extends AbstractQMElementBuilder {
-
-        /**
-         * Sets the element under construction's description
-         * 
-         * @param description
-         *            the description to set
-         * @return this
-         */
-        @Nonnull
-        public AbstractEvaluationBuilder description(String description)
-        {
-            ((Evaluation) element).setDescription(description);
-
-            return this;
-        }
-
-        /**
-         * Sets the optional title of the TextEvaluation under
-         * construction
-         * 
-         * @param title
-         *            Title of the TextEvaluation
-         * @return this
-         */
-        @Nonnull
-        public AbstractEvaluationBuilder title(String title)
-        {
-            ((Evaluation) element).setTitle(title);
-
-            return this;
-        }
-
-        /**
-         * Sets the maximum points for this Evaluation
-         * 
-         * @param maximumPoints
-         *            Max Points
-         * @return this
-         */
-        @Nonnull
-        public AbstractEvaluationBuilder maxPts(double maximumPoints)
-        {
-            ((Evaluation) element).setMaximumPoints(maximumPoints);
-
-            return this;
-        }
-
-        /**
-         * Sets the percentage (0.0 - 1.0) of completeness for this evaluation
-         * of the given factor.
-         * 
-         * @param complete
-         *            Percentage complete
-         * @return this
-         */
-        @Nonnull
-        public AbstractEvaluationBuilder completeness(double complete)
-        {
-            ((Evaluation) element).setCompleteness(complete);
-
-            return this;
-        }
-
-        /**
-         * Sets the factor evaluated by this evaluation
-         * 
-         * @param factor
-         *            Factor to be evaluated
-         * @return this
-         */
-        @Nonnull
-        public AbstractEvaluationBuilder evaluates(Factor factor)
-        {
-            ((Evaluation) element).setEvaluates(factor);
-
-            return this;
-        }
+        return generateXMLTag(type, attrs, Lists.newArrayList());
     }
 }

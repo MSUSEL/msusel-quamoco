@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +25,13 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
+import com.google.common.collect.Lists;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Singular;
+
 import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * A tool is a software program, which is used to collect measurement data. This
@@ -34,8 +41,6 @@ import javax.annotation.Nonnull;
  * @version 1.1.1
  */
 public abstract class Instrument extends MeasurementMethod {
-
-    protected String description;
 
     /**
      * Constructs a new instance of Instrument
@@ -53,45 +58,9 @@ public abstract class Instrument extends MeasurementMethod {
         super(metric, identifier);
     }
 
-    /**
-     * @return the description
-     */
-    public String getDescription()
+    protected Instrument(Measure determines, String metric, String description, String title,
+                                String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations)
     {
-        return description;
-    }
-
-    /**
-     * @param description
-     *            the description to set
-     */
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-    
-    /**
-     * Base Builder for Instruments which uses the Fluent Interface and Method
-     * Chaining patterns
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public abstract static class AbstractInstrumentBuilder extends AbstractMeasurementMethodBuilder {
-
-        /**
-         * Sets the element under construction's description
-         * 
-         * @param description
-         *            the description to set
-         * @return this
-         */
-        @Nonnull
-        public AbstractInstrumentBuilder description(String description)
-        {
-            ((Instrument) element).setDescription(description);
-
-            return this;
-        }
+        super(determines, metric, description, title, identifier, originatesFrom, tags, annotations);
     }
 }

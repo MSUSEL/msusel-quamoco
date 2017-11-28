@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +28,10 @@ package edu.montana.gsoc.msusel.quamoco.model;
 import javax.annotation.Nonnull;
 
 import edu.montana.gsoc.msusel.quamoco.io.MeasuresType;
+import lombok.Builder;
+import lombok.Singular;
+
+import java.util.List;
 
 /**
  * A special measure that is thought for normalizing when evaluating based on
@@ -63,104 +68,29 @@ public class NormalizationMeasure extends Measure {
      */
     public NormalizationMeasure(String name, String identifier)
     {
-        super(name);
+        super(name, identifier);
+    }
+
+    @Builder(buildMethodName = "create", builderMethodName = "normBuilder")
+    protected NormalizationMeasure(String name, String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations,
+                                    String title, String description, Entity characterizes, Measure refines, @Singular List<Factor> measures, MeasureType type) {
+        super(name, identifier, originatesFrom, tags, annotations, title, description, characterizes, refines, measures, type);
     }
 
     /**
-     * {@inheritDoc}
+     * @return the normalizer
      */
-    @Override
     public boolean isNormalizer()
     {
         return true;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String xmlTag()
     {
-        return generateXMLTag(MeasuresType.NORMALIZATION_MEASURE.type());
-    }
-
-    /**
-     * Creates a new Builder for a Measure with the given simple name
-     * 
-     * @param name
-     *            Simple Name
-     * @return the Measure.Builder instance.
-     */
-    public static Builder builder(String name)
-    {
-        return new Builder(name);
-    }
-
-    /**
-     * Creates a new Builder for a Measure with the given simple name and
-     * unique identifier.
-     * 
-     * @param name
-     *            Simple Name
-     * @param identifier
-     *            The unique identifier
-     * @return the Measure.Builder instance.
-     */
-    public static Builder builder(String name, String identifier)
-    {
-        return new Builder(name, identifier);
-    }
-
-    /**
-     * Builder for Measures implemented using the fluent interface and method
-     * chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class NormalizationBuilder extends Builder {
-
-        /**
-         * Measure element under construction
-         */
-        private Measure element;
-
-        /**
-         * Creates a new Builder for a Measure with the given simple name.
-         * 
-         * @param name
-         *            Simple Name
-         * @return the Measure.Builder instance
-         */
-        private NormalizationBuilder(String name)
-        {
-            super(name);
-            element = new Measure(name);
-        }
-
-        /**
-         * Constructs a new Builder for a Measure with the given
-         * name and unique identifier
-         * 
-         * @param name
-         *            The name of the Measure to construct
-         * @param identifier
-         *            The unique identifier
-         */
-        private NormalizationBuilder(String name, String identifier)
-        {
-            super(name, identifier);
-            element = new Measure(name, identifier);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        @Nonnull
-        public NormalizationMeasure create()
-        {
-            return (NormalizationMeasure) element;
-        }
+        return xmlTag(MeasuresType.NORMALIZATION_MEASURE.type());
     }
 }

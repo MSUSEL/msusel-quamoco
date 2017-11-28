@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +24,8 @@
  * SOFTWARE.
  */
 package edu.montana.gsoc.msusel.quamoco.model;
+
+import java.util.List;
 
 /**
  * @author Isaac Griffith
@@ -46,13 +49,7 @@ public abstract class Function extends QMElement {
         super(identifier);
     }
 
-    /**
-     * Base Builder for Functions using a Fluent Interface.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public abstract static class AbstractFunctionBuilder extends AbstractQMElementBuilder {
-
+    protected Function(String identifier, Source originatesFrom, List<Tag> taggedBy, List<Annotation> annotations) {
+        super(identifier, originatesFrom, taggedBy, annotations);
     }
 }

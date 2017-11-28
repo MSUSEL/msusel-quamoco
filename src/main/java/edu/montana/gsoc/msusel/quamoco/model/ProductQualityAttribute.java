@@ -1,19 +1,20 @@
 /**
  * The MIT License (MIT)
- *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
- *
+ * <p>
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,6 +28,10 @@ package edu.montana.gsoc.msusel.quamoco.model;
 import javax.annotation.Nonnull;
 
 import edu.montana.gsoc.msusel.quamoco.io.FactorType;
+import lombok.Builder;
+import lombok.Singular;
+
+import java.util.List;
 
 /**
  * Product quality attributes define one way to decompose the abstract concept
@@ -39,7 +44,7 @@ import edu.montana.gsoc.msusel.quamoco.io.FactorType;
  * <li>Product quality attributes model the -ilities of the ISO 25010.</li>
  * <li>These factors do characterize the entity Product.</li>
  * </ul>
- * 
+ *
  * @author Isaac Griffith
  * @version 1.1.1
  */
@@ -47,12 +52,11 @@ public class ProductQualityAttribute extends QualityAspect {
 
     /**
      * Constructs a new ProductQualityAttribute with the given name
-     * 
+     *
      * @param name
      *            The name
      */
-    public ProductQualityAttribute(String name)
-    {
+    public ProductQualityAttribute(String name) {
         super(name);
     }
 
@@ -60,123 +64,30 @@ public class ProductQualityAttribute extends QualityAspect {
      * @param name
      * @param identifier
      */
-    public ProductQualityAttribute(String name, String identifier)
-    {
+    public ProductQualityAttribute(String name, String identifier) {
         super(name, identifier);
+    }
+
+    @Builder(buildMethodName = "create")
+    protected ProductQualityAttribute(String name, String description, Entity characterizes, String title, @Singular List<Impact> influences, Factor refines,
+                                      String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
+        super(name, description, characterizes, title, influences, refines,
+                identifier, originatesFrom, tags, annotations);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String xmlTag()
-    {
+    public String xmlTag() {
         return generateXMLTag(FactorType.PRODUCT_QUALITY_ATTRIBUTE.type());
     }
 
     /**
-     * Creates a new Builder for a ProductQualityAttribute with the given simple
-     * name
-     * 
-     * @param name
-     *            Simple Name
-     * @return the ProductQualityAttribute.Builder instance.
-     */
-    public static Builder builder(String name)
-    {
-        return new Builder(name);
-    }
-
-    /**
-     * Creates a new Builder for a ProductQualityAttribute with the given simple
-     * name and
-     * unique
-     * identifier.
-     * 
-     * @param name
-     *            Simple Name
-     * @param identifier
-     *            The unique identifier
-     * @return the ProductQualityAttribute.Builder instance.
-     */
-    public static Builder builder(String name, String identifier)
-    {
-        return new Builder(name, identifier);
-    }
-
-    /**
-     * Builder for ProductQualityAttributes implemented using the fluent
-     * interface
-     * and method chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder extends AbstractAspectBuilder {
-
-        /**
-         * Constructs a new Builder for a ProductQualityAttribute with the given
-         * name
-         * 
-         * @param name
-         *            The name of the ProductQualityAttribute to construct
-         */
-        private Builder(String name)
-        {
-            element = new ProductQualityAttribute(name);
-        }
-
-        /**
-         * Constructs a new Builder for a ProductQualityAttribute with the given
-         * name and unique identifier
-         * 
-         * @param name
-         *            The name of the ProductQualityAttribute to construct
-         * @param identifier
-         *            The unique identifier
-         */
-        private Builder(String name, String identifier)
-        {
-            element = new ProductQualityAttribute(name, identifier);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        @Nonnull
-        public ProductQualityAttribute create()
-        {
-            return (ProductQualityAttribute) element;
-        }
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
-    public String toYaml()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toJson()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toScript()
-    {
+    public String toScript() {
         // TODO Auto-generated method stub
         return null;
     }

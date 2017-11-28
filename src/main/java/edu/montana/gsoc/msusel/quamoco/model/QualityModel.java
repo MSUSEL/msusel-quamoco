@@ -1,19 +1,20 @@
 /**
  * The MIT License (MIT)
- *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
- *
+ * <p>
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,6 +30,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Nonnull;
+import javax.swing.*;
 
 import static org.apache.commons.lang3.StringEscapeUtils.escapeXml10;
 
@@ -38,6 +40,7 @@ import edu.montana.gsoc.msusel.quamoco.io.JsonSerializable;
 import edu.montana.gsoc.msusel.quamoco.io.ScriptSerializable;
 import edu.montana.gsoc.msusel.quamoco.io.XMLSerializable;
 import edu.montana.gsoc.msusel.quamoco.io.YamlSerializable;
+import lombok.*;
 
 /**
  * A quality model is the basic module of Quamoco quality models. A quality
@@ -53,106 +56,116 @@ import edu.montana.gsoc.msusel.quamoco.io.YamlSerializable;
  * example, a quality model for Java should also depend on the object-oriented
  * quality model.</li>
  * </ul>
- * 
+ *
  * @author Isaac Griffith
  * @version 1.1.1
  */
+@Builder(buildMethodName = "create")
+@ToString(of = {"name", "identifier", "fileName", "version"})
+@EqualsAndHashCode(of = {"name", "identifier", "fileName", "version"})
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class QualityModel implements XMLSerializable, YamlSerializable, JsonSerializable, ScriptSerializable {
 
     /**
      * A textual explanation what the model contains.
      */
-    private String                         description;
+    @Getter
+    @Setter
+    private String description;
     /**
      * The name of a model should represent the content of the model. For
      * example, if it describes factors for the programming language Java, it
      * should be called Java.
-     * If there is no specific reason to do otherwise, only captialise the first
+     * If there is no specific reason to do otherwise, only capitalise the first
      * word in the name.
      */
-    private String                         name;
+    @Getter
+    @Setter
+    private String name;
     /**
      * The title is a more elaborated/detailed name for the model.
      * This is optional.
-     * If there is no specific reason to do otherwise, only captialise the first
+     * If there is no specific reason to do otherwise, only capitalise the first
      * word in the title.
      */
-    private String                         title;
+    @Getter
+    @Setter
+    private String title;
     /**
-     * 
+     *
      */
-    private Source                         originatesFrom;
+    @Getter
+    @Setter
+    private Source originatesFrom;
     /**
-     * 
+     *
      */
-    private List<Tag>                      taggedBy;
+    @Singular
+    private List<Tag> taggedBys = Lists.newArrayList();
     /**
-     * 
+     *
      */
-    private Map<String, Entity>            entities;
+    @Singular
+    private Map<String, Entity> entities = Maps.newHashMap();
     /**
-     * 
+     *
      */
-    private Map<String, Factor>            factors;
+    @Singular
+    private Map<String, Factor> factors = Maps.newHashMap();
     /**
-     * 
+     *
      */
-    private List<Evaluation>               evaluations;
+    @Getter
+    @Singular
+    private List<Evaluation> evaluations = Lists.newArrayList();
     /**
-     * 
+     *
      */
-    private Map<String, Measure>           measures;
+    @Singular
+    private Map<String, Measure> measures = Maps.newHashMap();
     /**
-     * 
+     *
      */
-    private Map<String, MeasurementMethod> measurementMethods;
+    @Singular
+    private Map<String, MeasurementMethod> measurementMethods = Maps.newHashMap();
     /**
-     * 
+     *
      */
-    private Map<String, Tool>              tools;
+    @Singular
+    private Map<String, Tool> tools = Maps.newHashMap();
     /**
-     * 
+     *
      */
-    private List<Tag>                      tags;
+    @Singular
+    private List<Tag> tags = Lists.newArrayList();
     /**
-     * 
+     *
      */
-    private List<Source>                   sources;
+    @Getter
+    @Singular
+    private List<Source> sources = Lists.newArrayList();
     /**
      * The quality models the current quality model depends on. These models
      * will be loaded together with the current model
      * You can only link in any way from the current model to models that are in
      * this requires list.
      */
-    private List<QualityModel>             requires;
-    private String                         identifier;
-    private String                         fileName;
-    private String                         version;
+    @Singular
+    private List<QualityModel> requires = Lists.newArrayList();
+    @Getter
+    private String identifier;
+    @Getter
+    @Setter
+    private String fileName;
+    @Getter
+    @Setter
+    private String version;
 
-    /**
-     * @return the fileName
-     */
-    public String getFileName()
-    {
-        return fileName;
-    }
-
-    /**
-     * @param fileName
-     *            the fileName to set
-     */
-    public void setFileName(String fileName)
-    {
-        this.fileName = fileName;
-    }
-
-    public QualityModel(String name)
-    {
+    public QualityModel(String name) {
         this(name, UUID.randomUUID().toString());
     }
 
-    public QualityModel(String name, String identifier)
-    {
+    public QualityModel(String name, String identifier) {
         this.name = name;
         this.identifier = identifier;
         entities = Maps.newHashMap();
@@ -163,107 +176,44 @@ public class QualityModel implements XMLSerializable, YamlSerializable, JsonSeri
         requires = Lists.newArrayList();
         sources = Lists.newArrayList();
         tags = Lists.newArrayList();
-        taggedBy = Lists.newArrayList();
+        taggedBys = Lists.newArrayList();
         evaluations = Lists.newArrayList();
     }
 
-    /**
-     * @return the description
-     */
-    public String getDescription()
-    {
-        return description;
-    }
-
-    /**
-     * @param description
-     *            the description to set
-     */
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * @param name
-     *            the name to set
-     */
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    /**
-     * @return the originatesFrom
-     */
-    public Source getOriginatesFrom()
-    {
-        return originatesFrom;
-    }
-
-    /**
-     * @param originatesFrom
-     *            the originatesFrom to set
-     */
-    public void setOriginatesFrom(Source originatesFrom)
-    {
-        this.originatesFrom = originatesFrom;
-    }
-
-    public void addSource(Source src)
-    {
+    public void addSource(Source src) {
         if (src == null || sources.contains(src))
             return;
 
         sources.add(src);
+        src.updateQualifiedIdentifier(this);
     }
 
-    public void removeSource(Source src)
-    {
+    public void removeSource(Source src) {
         if (src == null || !sources.contains(src))
             return;
 
         sources.remove(src);
+        src.updateQualifiedIdentifier(null);
     }
 
-    /**
-     * @return the sources
-     */
-    public List<Source> getSources()
-    {
-        return sources;
-    }
-
-    public void addTool(Tool tool)
-    {
-        if (tool == null)
-        {
+    public void addTool(Tool tool) {
+        if (tool == null) {
             return;
         }
 
         tools.put(tool.getName(), tool);
+        tool.updateQualifiedIdentifier(this);
     }
 
-    public boolean hasTool(String name)
-    {
+    public boolean hasTool(String name) {
         return tools.containsKey(name);
     }
 
-    public Tool getTool(String name)
-    {
+    public Tool getTool(String name) {
         return tools.get(name);
     }
 
-    public List<Tool> getTools()
-    {
+    public List<Tool> getTools() {
         List<Tool> list = Lists.newArrayList();
 
         list.addAll(tools.values());
@@ -271,26 +221,23 @@ public class QualityModel implements XMLSerializable, YamlSerializable, JsonSeri
         return list;
     }
 
-    public void addEntity(Entity ent)
-    {
+    public void addEntity(Entity ent) {
         if (ent == null)
             return;
 
         entities.put(ent.getName(), ent);
+        ent.updateQualifiedIdentifier(this);
     }
 
-    public boolean hasEntity(String name)
-    {
+    public boolean hasEntity(String name) {
         return entities.containsKey(name);
     }
 
-    public Entity getEntity(String name)
-    {
+    public Entity getEntity(String name) {
         return entities.get(name);
     }
 
-    public List<Entity> getEntities()
-    {
+    public List<Entity> getEntities() {
         List<Entity> list = Lists.newArrayList();
 
         list.addAll(entities.values());
@@ -298,26 +245,23 @@ public class QualityModel implements XMLSerializable, YamlSerializable, JsonSeri
         return list;
     }
 
-    public void addMeasure(Measure meas)
-    {
+    public void addMeasure(Measure meas) {
         if (meas == null)
             return;
 
         measures.put(meas.getName(), meas);
+        meas.updateQualifiedIdentifier(this);
     }
 
-    public boolean hasMeasure(String name)
-    {
+    public boolean hasMeasure(String name) {
         return measures.containsKey(name);
     }
 
-    public Measure getMeasure(String name)
-    {
+    public Measure getMeasure(String name) {
         return measures.get(name);
     }
 
-    public List<Measure> getMeasures()
-    {
+    public List<Measure> getMeasures() {
         List<Measure> list = Lists.newArrayList();
 
         list.addAll(measures.values());
@@ -325,182 +269,145 @@ public class QualityModel implements XMLSerializable, YamlSerializable, JsonSeri
         return list;
     }
 
-    public boolean hasNormalizationMeasure(String name)
-    {
+    public boolean hasNormalizationMeasure(String name) {
         return measures.containsKey(name) && measures.get(name) instanceof NormalizationMeasure;
     }
 
-    public Measure getNormalizationMeasure(String name)
-    {
+    public Measure getNormalizationMeasure(String name) {
         if (measures.get(name) instanceof NormalizationMeasure)
             return measures.get(name);
         else
             return null;
     }
 
-    public void addFactor(Factor fac)
-    {
+    public void addFactor(Factor fac) {
         if (fac == null)
             return;
 
         factors.put(fac.getName(), fac);
+        fac.updateQualifiedIdentifier(this);
     }
 
-    public boolean hasFactor(String name)
-    {
+    public boolean hasFactor(String name) {
         return factors.containsKey(name);
     }
 
-    public Factor getFactor(String name)
-    {
+    public Factor getFactor(String name) {
         return factors.get(name);
     }
 
-    public List<Factor> getFactors()
-    {
+    public List<Factor> getFactors() {
         return Lists.newArrayList(factors.values());
     }
 
-    public void addRequires(QualityModel model)
-    {
+    public void addRequires(QualityModel model) {
         if (model == null || requires.contains(model))
             return;
 
         requires.add(model);
     }
 
-    public void removeRequires(QualityModel model)
-    {
+    public void removeRequires(QualityModel model) {
         if (model == null || !requires.contains(model))
             return;
 
         requires.remove(model);
     }
 
-    public List<QualityModel> getRequires()
-    {
+    public List<QualityModel> getRequires() {
         return requires;
     }
 
-    public void addTag(Tag tag)
-    {
+    public void addTag(Tag tag) {
         if (tag == null || tags.contains(tag))
             return;
 
         tags.add(tag);
+        tag.updateQualifiedIdentifier(this);
     }
 
-    public void removeTag(Tag tag)
-    {
+    public void removeTag(Tag tag) {
         if (tag == null || !tags.contains(tag))
             return;
 
         tags.remove(tag);
+        tag.updateQualifiedIdentifier(null);
     }
 
-    public List<Tag> getTags()
-    {
+    public List<Tag> getTags() {
         return tags;
     }
 
-    public void addTaggedBy(Tag tag)
-    {
-        if (tag == null || taggedBy.contains(tag))
+    public void addTaggedBy(Tag tag) {
+        if (tag == null || taggedBys.contains(tag))
             return;
 
-        taggedBy.add(tag);
+        taggedBys.add(tag);
     }
 
-    public void removeTaggedBy(Tag tag)
-    {
-        if (tag == null || !taggedBy.contains(tag))
+    public void removeTaggedBy(Tag tag) {
+        if (tag == null || !taggedBys.contains(tag))
             return;
 
-        taggedBy.remove(tag);
+        taggedBys.remove(tag);
     }
 
-    public List<Tag> getTaggedBy()
-    {
-        return taggedBy;
+    public List<Tag> getTaggedBy() {
+        return taggedBys;
     }
 
-    public void addEvaluation(Evaluation eval)
-    {
-        if (eval == null || evaluations.contains(eval))
+    public void addEvaluation(Evaluation eval) {
+        if (eval == null || evaluations.contains(eval)) {
             return;
+        }
 
         evaluations.add(eval);
+        eval.updateQualifiedIdentifier(this);
     }
 
-    public void removeEvaluatyion(Evaluation eval)
-    {
+    public void removeEvaluation(Evaluation eval) {
         if (eval == null || !evaluations.contains(eval))
             return;
 
         evaluations.remove(eval);
-    }
-
-    public List<Evaluation> getEvaluations()
-    {
-        return evaluations;
-    }
-
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
-
-    public String getTitle()
-    {
-        return title;
-    }
-
-    /**
-     * @return the identifier
-     */
-    public String getIdentifier()
-    {
-        return identifier;
+        eval.updateQualifiedIdentifier(null);
     }
 
     /**
      * @param method
      */
-    public void addMeasurementMethod(MeasurementMethod method)
-    {
+    public void addMeasurementMethod(MeasurementMethod method) {
         if (method == null || measurementMethods.containsKey(method.getIdentifier()))
             return;
 
         measurementMethods.put(method.getIdentifier(), method);
+        method.updateQualifiedIdentifier(this);
     }
 
     /**
      * @param method
      */
-    public void removeMeasurementMethod(MeasurementMethod method)
-    {
+    public void removeMeasurementMethod(MeasurementMethod method) {
         if (method == null || !measurementMethods.containsKey(method.getIdentifier()))
             return;
 
         measurementMethods.remove(method.getIdentifier());
+        method.updateQualifiedIdentifier(null);
     }
 
     /**
      * @param identifier
      * @return
      */
-    public MeasurementMethod getMeasurementMethod(String identifier)
-    {
+    public MeasurementMethod getMeasurementMethod(String identifier) {
         return measurementMethods.get(identifier);
     }
 
-    public boolean hasMeasurementMethod(String identifier)
-    {
+    public boolean hasMeasurementMethod(String identifier) {
         return measurementMethods.containsKey(identifier);
     }
 
-    public List<MeasurementMethod> getMeasurementMethods()
-    {
+    public List<MeasurementMethod> getMeasurementMethods() {
         List<MeasurementMethod> list = Lists.newArrayList();
 
         list.addAll(measurementMethods.values());
@@ -509,28 +416,10 @@ public class QualityModel implements XMLSerializable, YamlSerializable, JsonSeri
     }
 
     /**
-     * @return the version
-     */
-    public String getVersion()
-    {
-        return version;
-    }
-
-    /**
-     * @param version
-     *            the version to set
-     */
-    public void setVersion(String version)
-    {
-        this.version = version;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
-    public String xmlTag()
-    {
+    public String xmlTag() {
         StringBuilder builder = new StringBuilder();
 
         builder.append(
@@ -539,67 +428,54 @@ public class QualityModel implements XMLSerializable, YamlSerializable, JsonSeri
                         escapeXml10(getDescription()), escapeXml10(getName()), escapeXml10(getTitle()), getIdentifier(),
                         getVersion()));
 
-        if (hasChildren())
-        {
+        if (hasChildren()) {
             builder.append(">\n");
-            if (hasRequires())
-            {
+            if (hasRequires()) {
                 requires.forEach(
                         (req) -> builder
                                 .append(String.format("<requires href=\"%s\" />%n", req.getQualifiedIdentifier())));
             }
 
-            if (hasTaggedBy())
-            {
-                taggedBy.forEach(
+            if (hasTaggedBy()) {
+                taggedBys.forEach(
                         (tag) -> builder
                                 .append(String.format("<taggedBy href=\"%s\" />%n", tag.getQualifiedIdentifier())));
             }
 
-            if (hasFactors())
-            {
+            if (hasFactors()) {
                 factors.forEach((key, fact) -> builder.append(fact.xmlTag()));
             }
 
-            if (hasMeasures())
-            {
+            if (hasMeasures()) {
                 measures.forEach((key, meas) -> builder.append(meas.xmlTag()));
             }
 
-            if (hasEntities())
-            {
+            if (hasEntities()) {
                 entities.forEach((key, ent) -> builder.append(ent.xmlTag()));
             }
 
-            if (hasTags())
-            {
+            if (hasTags()) {
                 tags.forEach((tag) -> builder.append(tag.xmlTag()));
             }
 
-            if (hasSources())
-            {
+            if (hasSources()) {
                 sources.forEach((src) -> builder.append(src.xmlTag()));
             }
 
-            if (hasTools())
-            {
+            if (hasTools()) {
                 tools.forEach((key, tool) -> builder.append(tool.xmlTag()));
             }
 
-            if (hasMeasurementMethods())
-            {
+            if (hasMeasurementMethods()) {
                 measurementMethods.forEach((key, mm) -> builder.append(mm.xmlTag()));
             }
 
-            if (hasEvaluations())
-            {
+            if (hasEvaluations()) {
                 evaluations.forEach((eval) -> builder.append(eval.xmlTag()));
             }
 
             builder.append("</qm:QualityModel>\n");
-        }
-        else
-        {
+        } else {
             builder.append(" />\n");
         }
 
@@ -610,78 +486,67 @@ public class QualityModel implements XMLSerializable, YamlSerializable, JsonSeri
      * {@inheritDoc}
      */
     @Override
-    public String toScript()
-    {
+    public String toScript() {
         StringBuilder builder = new StringBuilder();
 
-        if (hasRequires())
-        {
+        if (hasRequires()) {
             requires.forEach((req) -> builder.append(String.format("require '%s'%n", req.getFileName())));
         }
 
         builder.append(String.format("model '%s' {%n", getName()));
 
-        if (hasSources())
-        {
+        if (hasSources()) {
             builder.append("    sources {\n");
             sources.forEach((src) -> builder.append(src.toScript()));
             builder.append("    }\n");
         }
-        
-        if (hasTags())
-        {
+
+        if (hasTags()) {
             builder.append("    tags {\n");
             tags.forEach((tag) -> builder.append(tag.toScript()));
             builder.append("    }\n");
         }
-        
-        if (hasTaggedBy())
-        {
-            taggedBy.forEach(
+
+        if (hasTaggedBy()) {
+            taggedBys.forEach(
                     (tag) -> builder.append(String.format("<taggedBy href=\"%s\" />%n", tag.getQualifiedIdentifier())));
         }
 
-        if (hasEntities())
-        {
+        if (hasEntities()) {
             builder.append("    entities {\n");
-            // TODO needs to be sorted using toposort of dependencies
+            // TODO needs to be sorted using topological sort of dependencies
             entities.forEach((key, ent) -> builder.append(ent.toScript()));
             builder.append("    }\n");
         }
-        
-        if (hasFactors())
-        {
+
+        if (hasFactors()) {
             builder.append("    factors {\n");
-            // TODO needs to be sorted using toposort of dependencies
+            // TODO needs to be sorted using topological sort of dependencies
             factors.forEach((key, fact) -> builder.append(fact.toScript()));
             builder.append("    }\n");
         }
 
-        if (hasMeasures())
-        {
+        if (hasMeasures()) {
             builder.append("    measures {\n");
-            // TODO needs to be sorted using toposort of dependencies
+            // TODO needs to be sorted using topological sort of dependencies
             measures.forEach((key, meas) -> builder.append(meas.toScript()));
             builder.append("    }\n");
         }
 
-        if (hasTools())
-        {
+        if (hasTools()) {
             builder.append("    tools {\n");
             tools.forEach((key, tool) -> builder.append(tool.toScript()));
             builder.append("    }\n");
         }
 
-        if (hasMeasurementMethods())
-        {
+        if (hasMeasurementMethods()) {
             builder.append("    methods {\n");
             measurementMethods.forEach((key, mm) -> builder.append(mm.toScript()));
             builder.append("    }\n");
         }
 
-        if (hasEvaluations())
-        {
-            builder.append("    evaluatiosn {\n");
+        if (hasEvaluations()) {
+            builder.append("    evaluations {\n");
             evaluations.forEach((eval) -> builder.append(eval.toScript()));
             builder.append("    }\n");
         }
@@ -695,8 +560,7 @@ public class QualityModel implements XMLSerializable, YamlSerializable, JsonSeri
      * {@inheritDoc}
      */
     @Override
-    public String toJson()
-    {
+    public String toJson() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -705,8 +569,7 @@ public class QualityModel implements XMLSerializable, YamlSerializable, JsonSeri
      * {@inheritDoc}
      */
     @Override
-    public String toYaml()
-    {
+    public String toYaml() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -714,8 +577,7 @@ public class QualityModel implements XMLSerializable, YamlSerializable, JsonSeri
     /**
      * @return
      */
-    private boolean hasChildren()
-    {
+    private boolean hasChildren() {
         return hasRequires() || hasTaggedBy() || hasFactors() || hasMeasures() || hasEntities() || hasTags()
                 || hasSources() || hasTools() || hasMeasurementMethods() || hasEvaluations();
     }
@@ -723,223 +585,77 @@ public class QualityModel implements XMLSerializable, YamlSerializable, JsonSeri
     /**
      * @return
      */
-    private boolean hasRequires()
-    {
+    private boolean hasRequires() {
         return !requires.isEmpty();
     }
 
     /**
      * @return
      */
-    private boolean hasTaggedBy()
-    {
-        return !taggedBy.isEmpty();
+    private boolean hasTaggedBy() {
+        return !taggedBys.isEmpty();
     }
 
     /**
      * @return
      */
-    private boolean hasFactors()
-    {
+    private boolean hasFactors() {
         return !factors.isEmpty();
     }
 
     /**
      * @return
      */
-    private boolean hasMeasures()
-    {
+    private boolean hasMeasures() {
         return !measures.isEmpty();
     }
 
     /**
      * @return
      */
-    private boolean hasEntities()
-    {
+    private boolean hasEntities() {
         return !entities.isEmpty();
     }
 
     /**
      * @return
      */
-    private boolean hasTags()
-    {
+    private boolean hasTags() {
         return !tags.isEmpty();
     }
 
     /**
      * @return
      */
-    private boolean hasSources()
-    {
+    private boolean hasSources() {
         return !sources.isEmpty();
     }
 
     /**
      * @return
      */
-    private boolean hasTools()
-    {
+    private boolean hasTools() {
         return !tools.isEmpty();
     }
 
     /**
      * @return
      */
-    private boolean hasMeasurementMethods()
-    {
+    private boolean hasMeasurementMethods() {
         return !measurementMethods.isEmpty();
     }
 
     /**
      * @return
      */
-    private boolean hasEvaluations()
-    {
+    private boolean hasEvaluations() {
         return !evaluations.isEmpty();
     }
 
     /**
-     * @param name
      * @return
      */
-    public static Builder builder(String name)
-    {
-        return new Builder(name);
-    }
-
-    public static Builder builder(String name, String identifier)
-    {
-        return new Builder(name, identifier);
-    }
-
-    /**
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder {
-
-        private QualityModel instance;
-
-        public Builder(String name)
-        {
-            instance = new QualityModel(name);
-        }
-
-        public Builder(String name, String identifier)
-        {
-            instance = new QualityModel(name, identifier);
-        }
-
-        @Nonnull
-        public QualityModel create()
-        {
-            return instance;
-        }
-
-        @Nonnull
-        public Builder description(String desc)
-        {
-            instance.setDescription(desc);
-
-            return this;
-        }
-
-        @Nonnull
-        public Builder entity(Entity ent)
-        {
-            instance.addEntity(ent);
-
-            return this;
-        }
-
-        @Nonnull
-        public Builder evaluation(Evaluation eval)
-        {
-            instance.addEvaluation(eval);
-
-            return this;
-        }
-
-        @Nonnull
-        public Builder factor(Factor factor)
-        {
-            instance.addFactor(factor);
-
-            return this;
-        }
-
-        @Nonnull
-        public Builder measurementMethod(MeasurementMethod inst)
-        {
-            instance.addMeasurementMethod(inst);
-
-            return this;
-        }
-
-        @Nonnull
-        public Builder measure(Measure meas)
-        {
-            instance.addMeasure(meas);
-
-            return this;
-        }
-
-        @Nonnull
-        public Builder originatesFrom(Source of)
-        {
-            instance.setOriginatesFrom(of);
-
-            return this;
-        }
-
-        @Nonnull
-        public Builder source(Source src)
-        {
-            instance.addSource(src);
-
-            return this;
-        }
-
-        @Nonnull
-        public Builder taggedBy(Tag tag)
-        {
-            instance.addTaggedBy(tag);
-
-            return this;
-        }
-
-        @Nonnull
-        public Builder tag(Tag tag)
-        {
-            instance.addTag(tag);
-
-            return this;
-        }
-
-        @Nonnull
-        public Builder title(String title)
-        {
-            instance.setTitle(title);
-
-            return this;
-        }
-
-        @Nonnull
-        public Builder tool(Tool tool)
-        {
-            instance.addTool(tool);
-
-            return this;
-        }
-    }
-
-    /**
-     * @return
-     */
-    public String getQualifiedIdentifier()
-    {
+    public String getQualifiedIdentifier() {
         return fileName + "#" + identifier;
     }
 }

@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +31,7 @@ import edu.montana.gsoc.msusel.quamoco.processor.LinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
 
 /**
- * Typing inteface for edges which have a ranking capability.
+ * Typing interface for edges which have a ranking capability.
  * FIXME Currently this also includes stuff with linear distributions, should
  * move this to another type
  *
@@ -89,7 +90,7 @@ public interface RankedEdge {
      * FIXME move to another type
      * 
      * @param maximumPoints
-     *            New value of Maximum ponts
+     *            New value of Maximum points
      */
     void setMaxPoints(BigDecimal maximumPoints);
 

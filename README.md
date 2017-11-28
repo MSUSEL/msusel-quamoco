@@ -38,6 +38,14 @@ This project can be compile, tested, or packaged with the following commands:
 ./mvnw clean package -Dmaven.test.skip=true
 ```
 
+## Generating the Site
+
+This project's site can be generated using the following command:
+
+```
+./mvnw clean site -Dmaven.test.skip=true
+```
+
 ## Project Goals
 * Calculate quality using a Quamoco Quality Model.
 * Evaluate the quality grade for any set of quality factors and attributes.

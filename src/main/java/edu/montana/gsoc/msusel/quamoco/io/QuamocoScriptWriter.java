@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,27 +25,18 @@
  */
 package edu.montana.gsoc.msusel.quamoco.io;
 
-import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.stream.XMLStreamException;
-
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.Lists;
 import edu.montana.gsoc.msusel.quamoco.distiller.ModelDistiller;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+import edu.montana.gsoc.msusel.quamoco.distiller.QualityModelUtils;
+import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
+import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.Lists;
-import edu.montana.gsoc.msusel.quamoco.distiller.QualityModelUtils;
-import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Tool to generate Quamoco Quality Model Scripts from the old style XML files
@@ -116,7 +108,7 @@ public class QuamocoScriptWriter extends AbstractWriter {
      *            CommandLine used for processing command line options
      */
     @VisibleForTesting
-    static void execute(CommandLine line)
+    private static void execute(CommandLine line)
     {
         QuamocoScriptWriter gen = new QuamocoScriptWriter();
 
@@ -145,6 +137,9 @@ public class QuamocoScriptWriter extends AbstractWriter {
 
     }
 
+    private void saveOutput(String name, String folder, String generate) {
+    }
+
     /**
      * Reads quality models from the Jar
      *
@@ -153,23 +148,16 @@ public class QuamocoScriptWriter extends AbstractWriter {
      * @return List of Quality Model objects created from the read files.
      */
     @VisibleForTesting
-    List<QualityModel> readInQualityModels(final String... args)
+    private List<QualityModel> readInQualityModels(final String... args)
     {
-        final QMXMLReader qmread = new QMXMLReader();
+        final QMXMLReader qmRead = new QMXMLReader();
         final List<QualityModel> models = Lists.newArrayList();
         if (args != null)
         {
-            try
+            for (final String arg : args)
             {
-                for (final String arg : args)
-                {
-                    qmread.read(arg);
-                    models.add(qmread.getModel());
-                }
-            }
-            catch (FileNotFoundException | XMLStreamException e)
-            {
-                LOG.warn(e.getMessage(), e);
+                qmRead.read(arg);
+                models.add(qmRead.getModel());
             }
         }
         return models;
@@ -178,9 +166,14 @@ public class QuamocoScriptWriter extends AbstractWriter {
     /**
      * Constructs a new QuamocoScriptGen
      */
-    public QuamocoScriptWriter()
+    private QuamocoScriptWriter()
     {
         // TODO Auto-generated constructor stub
+    }
+
+    @Override
+    protected void writeData(QualityModel qm, PrintWriter pw) {
+        
     }
 
     /**
@@ -193,8 +186,8 @@ public class QuamocoScriptWriter extends AbstractWriter {
      *            Map of existing quality models indexed by their identifiers
      * @return String representing the script for the given quality model
      */
-    public String generate(QualityModel model, Map<String, QualityModel> modelMap)
+    private String generate(QualityModel model, Map<String, QualityModel> modelMap)
     {
-        
+        return "";
     }
 }

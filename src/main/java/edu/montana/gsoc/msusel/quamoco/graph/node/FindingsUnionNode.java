@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +32,8 @@ import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingsEdge;
+import lombok.Getter;
+import lombok.Setter;
 
 
 /**
@@ -42,8 +45,9 @@ import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingsEdge;
 public class FindingsUnionNode extends Node {
 
     /**
-     * The unioned set of findings.
+     * The union-ed set of findings.
      */
+    @Getter
     private final Set<Finding> findings;
 
     /**

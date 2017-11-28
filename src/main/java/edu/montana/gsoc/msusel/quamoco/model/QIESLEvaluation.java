@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +27,13 @@ package edu.montana.gsoc.msusel.quamoco.model;
 
 import javax.annotation.Nonnull;
 
+import lombok.Builder;
+import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import edu.montana.gsoc.msusel.quamoco.io.EvaluationType;
+
+import java.util.List;
 
 /**
  * @author Isaac Griffith
@@ -37,24 +42,27 @@ import edu.montana.gsoc.msusel.quamoco.io.EvaluationType;
 public class QIESLEvaluation extends TextEvaluation {
 
     /**
-     * 
+     *
      */
-    public QIESLEvaluation()
-    {
+    public QIESLEvaluation() {
         super();
     }
 
-    public QIESLEvaluation(String identifier)
-    {
+    public QIESLEvaluation(String identifier) {
         super(identifier);
+    }
+
+    @Builder(buildMethodName = "create", builderMethodName = "qieslBuilder")
+    protected QIESLEvaluation(String specification, Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
+                          String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
+        super(specification, completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, tags, annotations);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public double evaluate()
-    {
+    public double evaluate() {
         throw new RuntimeException("Not yet implemented");
     }
 
@@ -62,85 +70,7 @@ public class QIESLEvaluation extends TextEvaluation {
      * {@inheritDoc}
      */
     @Override
-    public String xmlTag()
-    {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append(
-                String.format(
-                        "<evaluations xmi:id=\"%s\" xsi:type=\"%s\" description=\"%s\" specification=\"%s\" maximumPoints=\"%f\" evaluates=\"%s\" completeness=\"%f\"",
-                        getIdentifier(), EvaluationType.QIESL_EVALUATION.type(),
-                        StringEscapeUtils.escapeXml10(getDescription()),
-                        StringEscapeUtils.escapeXml10(getSpecification()), getMaximumPoints(), getEvaluates(),
-                        getCompleteness()));
-
-        return builder.toString();
-    }
-
-    /**
-     * Creates a new Builder for a TextEvaluation
-     * 
-     * @return the TextEvaluation.Builder instance
-     */
-    public static Builder builder()
-    {
-        return new QIESLEvaluationBuilder();
-    }
-
-    /**
-     * Creates a new Builder for a TextEvaluation with the given
-     * unique identifier
-     * 
-     * @param identifier
-     *            Unique identifier
-     * @return the TextEvaluation.Builder instance
-     */
-    public static Builder builder(String identifier)
-    {
-        return new QIESLEvaluationBuilder(identifier);
-    }
-
-    /**
-     * Builder for TextEvaluations implemented using the fluent
-     * interface and method
-     * chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class QIESLEvaluationBuilder extends Builder {
-
-        /**
-         * Constructs a new Builder for a TextEvaluation
-         */
-        private QIESLEvaluationBuilder()
-        {
-            super();
-            element = new QIESLEvaluation();
-        }
-
-        /**
-         * Constructs a new Builder for a TextEvaluation with the
-         * given
-         * identifier
-         * 
-         * @param identifier
-         *            The identifier of the tool to construct
-         */
-        private QIESLEvaluationBuilder(String identifier)
-        {
-            super(identifier);
-            element = new QIESLEvaluation(identifier);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        @Nonnull
-        public QIESLEvaluation create()
-        {
-            return (QIESLEvaluation) element;
-        }
+    public String xmlTag() {
+        return xmlTag(EvaluationType.QIESL_EVALUATION.type());
     }
 }

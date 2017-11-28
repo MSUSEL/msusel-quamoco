@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +25,8 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
+import java.util.List;
+
 /**
  * @author Isaac Griffith
  * @version 1.1.1
@@ -43,13 +46,8 @@ public abstract class FactorAggregation extends FormBasedEvaluation {
         super(identifier);
     }
 
-    /**
-     * Base Builder class for FactorAggregation implemented using the fluent
-     * interface and method chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public abstract static class AbstractFactorAggregationBuilder extends AbstractFormBasedEvaluationBuilder {
+    protected FactorAggregation(Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
+                               String identifier, Source originatesFrom, List<Tag> taggedBy, List<Annotation> annotations) {
+        super(completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, taggedBy, annotations);
     }
 }

@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +25,10 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.result;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -35,9 +40,14 @@ import javax.annotation.Nonnull;
  */
 public class ResultSet {
 
+    @Getter
     private SystemDescriptor system;
-    private String identifier;
+    @Getter
+    @Builder.Default
+    private String identifier = UUID.randomUUID().toString();
+    @Getter
     private List<EvaluationResult> evaluations;
+    @Getter
     private List<MeasurementResult> measurements;
     
     /**
@@ -55,6 +65,15 @@ public class ResultSet {
     public ResultSet(SystemDescriptor system, String identifier) {
         this.system = system;
         this.identifier = identifier;
+    }
+
+    @Builder(buildMethodName = "create")
+    ResultSet(String identifier, SystemDescriptor system, List<EvaluationResult> evaluations, List<MeasurementResult> measurements) {
+        if (identifier != null)
+            this.identifier = identifier;
+        this.system = system;
+        this.evaluations = evaluations;
+        this.measurements = measurements;
     }
 
     /**
@@ -78,13 +97,6 @@ public class ResultSet {
     }
     
     /**
-     * @return
-     */
-    public List<EvaluationResult> getEvaluations() {
-        return evaluations;
-    }
-    
-    /**
      * @param mr
      */
     public void addMeasurement(MeasurementResult mr) {
@@ -102,81 +114,5 @@ public class ResultSet {
             return;
         
         measurements.remove(mr);
-    }
-    
-    /**
-     * @return
-     */
-    public List<MeasurementResult> getMeasurements() {
-        return measurements;
-    }
-    
-    /**
-     * @return the system
-     */
-    public SystemDescriptor getSystem()
-    {
-        return system;
-    }
-
-    /**
-     * @return the identifier
-     */
-    public String getIdentifier()
-    {
-        return identifier;
-    }
-
-    /**
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder {
-        private ResultSet instance;
-        
-        /**
-         * @param system
-         */
-        public Builder(SystemDescriptor system) {
-            instance = new ResultSet(system);
-        }
-        
-        /**
-         * @param system
-         * @param identifier
-         */
-        public Builder(SystemDescriptor system, String identifier) {
-            instance = new ResultSet(system, identifier);
-        }
-        
-        /**
-         * @return
-         */
-        @Nonnull
-        public ResultSet create() {
-            return instance;
-        }
-        
-        /**
-         * @param er
-         * @return
-         */
-        @Nonnull
-        public Builder evaluation(EvaluationResult er) {
-            instance.addEvaluation(er);            
-            
-            return this;
-        }
-        
-        /**
-         * @param mr
-         * @return
-         */
-        @Nonnull
-        public Builder measurement(MeasurementResult mr) {
-            instance.addMeasurement(mr);
-            
-            return this;
-        }
     }
 }

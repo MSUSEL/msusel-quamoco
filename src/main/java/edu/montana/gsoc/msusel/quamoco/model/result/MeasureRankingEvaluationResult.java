@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,168 +30,27 @@ import java.util.UUID;
 import javax.annotation.Nonnull;
 
 import edu.montana.gsoc.msusel.quamoco.model.MeasureRanking;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Isaac Griffith
  * @version 1.1.1
  */
-public class MeasureRankingEvaluationResult {
+public class MeasureRankingEvaluationResult extends EvaluationResult {
 
-    private double ratioAffected;
-    private MeasureRanking resultFrom;
-    private DoubleInterval value;
-    private String identifier;
-    
-    /**
-     * 
-     */
-    public MeasureRankingEvaluationResult()
-    {
-        this(UUID.randomUUID().toString());
-    }
+    @Getter @Setter
+    @Builder.Default
+    private double ratioAffected = 0.0;
+
     
     /**
      * @param identifier
      */
-    public MeasureRankingEvaluationResult(String identifier) {
-        this.identifier = identifier;
-    }
-
-    /**
-     * @return the ratioAffected
-     */
-    public double getRatioAffected()
-    {
-        return ratioAffected;
-    }
-
-    /**
-     * @param ratioAffected the ratioAffected to set
-     */
-    public void setRatioAffected(double ratioAffected)
-    {
+    @Builder(buildMethodName = "create")
+    public MeasureRankingEvaluationResult(String identifier, double ratioAffected, MeasureRanking resultFrom, DoubleInterval value) {
+        super(identifier, resultFrom, value);
         this.ratioAffected = ratioAffected;
-    }
-
-    /**
-     * @return the resultFrom
-     */
-    public MeasureRanking getResultFrom()
-    {
-        return resultFrom;
-    }
-
-    /**
-     * @param resultFrom the resultFrom to set
-     */
-    public void setResultFrom(MeasureRanking resultFrom)
-    {
-        this.resultFrom = resultFrom;
-    }
-
-    /**
-     * @return the value
-     */
-    public DoubleInterval getValue()
-    {
-        return value;
-    }
-
-    /**
-     * @param value the value to set
-     */
-    public void setValue(DoubleInterval value)
-    {
-        this.value = value;
-    }
-
-    /**
-     * @return the identifier
-     */
-    public String getIdentifier()
-    {
-        return identifier;
-    }
-
-    /**
-     * @param ratio
-     * @return
-     */
-    public static Builder build() {
-        return new Builder();
-    }
-    
-    /**
-     * @param ratio
-     * @param identifier
-     * @return
-     */
-    public static Builder build(String identifier) {
-        return new Builder(identifier);
-    }
-    
-    /**
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    private static class Builder {
-        
-        private MeasureRankingEvaluationResult instance;
-        
-        /**
-         * @param ratio
-         */
-        public Builder() {
-            instance = new MeasureRankingEvaluationResult();
-        }
-        
-        /**
-         * @param ratio
-         * @param identifier
-         */
-        public Builder(String identifier) {
-            instance = new MeasureRankingEvaluationResult(identifier);
-        }
-        
-        /**
-         * @return
-         */
-        @Nonnull
-        public MeasureRankingEvaluationResult create() {
-            return instance;
-        }
-        
-        /**
-         * @param value
-         * @return
-         */
-        @Nonnull
-        public Builder value(DoubleInterval value) {
-            instance.setValue(value);
-            
-            return this;
-        }
-        
-        /**
-         * @param ratio
-         * @return
-         */
-        @Nonnull
-        public Builder ratio(double ratio) {
-            instance.setRatioAffected(ratio);
-            
-            return this;
-        }
-        
-        /**
-         * @param from
-         * @return
-         */
-        @Nonnull
-        public Builder from(MeasureRanking from) {
-            instance.setResultFrom(from);
-            
-            return this;
-        }
     }
 }

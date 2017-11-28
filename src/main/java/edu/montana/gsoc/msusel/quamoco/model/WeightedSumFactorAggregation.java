@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +29,11 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.collect.Maps;
 import edu.montana.gsoc.msusel.quamoco.io.EvaluationType;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.google.common.collect.Lists;
@@ -52,7 +57,8 @@ public class WeightedSumFactorAggregation extends FactorAggregation {
      * Define Ranking or CP (Contribution Points) for all refining factors.
      * If rank or points are set to zero the factor is ignored.
      */
-    private List<FactorRanking> rankings;
+    @Getter
+    private List<FactorRanking> rankings = Lists.newArrayList();
 
     /**
      * 
@@ -70,6 +76,14 @@ public class WeightedSumFactorAggregation extends FactorAggregation {
     {
         super(identifier);
         rankings = Lists.newArrayList();
+    }
+
+    @Builder(buildMethodName = "create")
+    protected WeightedSumFactorAggregation(@Singular List<FactorRanking> rankings, Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
+                                   String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
+        super(completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, tags, annotations);
+        if (rankings != null && !rankings.isEmpty())
+            this.rankings = Lists.newArrayList(rankings);
     }
 
     /**
@@ -95,40 +109,15 @@ public class WeightedSumFactorAggregation extends FactorAggregation {
     }
 
     /**
-     * @return
-     */
-    public List<FactorRanking> getRankings()
-    {
-        return rankings;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public String xmlTag()
     {
-        StringBuilder builder = new StringBuilder();
+        List<String> content = Lists.newArrayList();
+        rankings.forEach((rank) -> content.add(rank.xmlTag()));
 
-        builder.append(
-                String.format(
-                        "<evaluations xmi:id=\"%s\" xsi:type=\"%s\" description=\"%s\" maximumPoints=\"%f\" evaluates=\"%s\" completeness=\"%f\"",
-                        getIdentifier(), EvaluationType.HISTOGRAM_COMP_FACTOR_AGGREGATION.type(),
-                        StringEscapeUtils.escapeXml10(getDescription()), getMaximumPoints(), getEvaluates(),
-                        getCompleteness()));
-
-        if (rankings.size() > 0)
-        {
-            builder.append(">\n");
-            rankings.forEach((rank) -> builder.append(rank.xmlTag()));
-            builder.append("</evaluations>");
-        }
-        else
-        {
-            builder.append(" />\n");
-        }
-
-        return builder.toString();
+        return generateXMLTag(EvaluationType.WEIGHTED_SUM_FACTOR_AGGREGATION.type(), Maps.newHashMap(), content);
     }
 
     /**
@@ -138,105 +127,6 @@ public class WeightedSumFactorAggregation extends FactorAggregation {
     public double evaluate()
     {
         throw new RuntimeException("Not Yet Implemented");
-    }
-
-    /**
-     * Creates a new Builder for a WeightedSumFactorAggregation
-     * 
-     * @return the WeightedSumFactorAggregation.Builder instance
-     */
-    public static Builder builder()
-    {
-        return new Builder();
-    }
-
-    /**
-     * Creates a new Builder for a WeightedSumFactorAggregation with the given
-     * unique identifier
-     * 
-     * @param identifier
-     *            Unique identifier
-     * @return the WeightedSumFactorAggregation.Builder instance
-     */
-    public static Builder builder(String identifier)
-    {
-        return new Builder(identifier);
-    }
-
-    /**
-     * Builder for WeightedSumFactorAggregations implemented using the fluent
-     * interface and method chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder extends AbstractFactorAggregationBuilder {
-
-        /**
-         * Constructs a new Builder for a WeightedSumFactorAggregation
-         */
-        private Builder()
-        {
-            element = new WeightedSumFactorAggregation();
-        }
-
-        /**
-         * Constructs a new Builder for a WeightedSumFactorAggregation with the
-         * given
-         * identifier
-         * 
-         * @param identifier
-         *            The identifier of the tool to construct
-         */
-        private Builder(String identifier)
-        {
-            element = new WeightedSumFactorAggregation(identifier);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        @Nonnull
-        public WeightedSumFactorAggregation create()
-        {
-            return (WeightedSumFactorAggregation) element;
-        }
-
-        /**
-         * Adds the given FactorRanking to this evaluation
-         * 
-         * @param ranking
-         *            FactorRanking to add
-         * @return this
-         */
-        @Nonnull
-        public Builder ranking(FactorRanking rank)
-        {
-            ((WeightedSumFactorAggregation) element).addRanking(rank);
-
-            return this;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toYaml()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toJson()
-    {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     /**

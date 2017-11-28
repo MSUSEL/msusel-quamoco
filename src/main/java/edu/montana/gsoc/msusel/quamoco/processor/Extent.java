@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -33,17 +34,10 @@ import java.util.Set;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
-import com.sparqline.codetree.CodeTree;
-import com.sparqline.codetree.INode;
-import com.sparqline.codetree.node.FieldNode;
-import com.sparqline.codetree.node.FileNode;
-import com.sparqline.codetree.node.MethodNode;
-import com.sparqline.codetree.node.ModuleNode;
-import com.sparqline.codetree.node.NamespaceNode;
-import com.sparqline.codetree.node.ProjectNode;
-import com.sparqline.codetree.node.StatementNode;
-import com.sparqline.codetree.node.TypeNode;
-import com.sparqline.codetree.util.CodeTreeUtils;
+import edu.montana.gsoc.msusel.codetree.CodeTree;
+import edu.montana.gsoc.msusel.codetree.INode;
+import edu.montana.gsoc.msusel.codetree.node.*;
+import edu.montana.gsoc.msusel.codetree.util.CodeTreeUtils;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
@@ -53,7 +47,7 @@ import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 /**
  * Class used to evaluate the extent that a set of findings has across a
  * software system. This is accomplished by evaluating the set based on some
- * normalizing metric across some given range.
+ * normalizing name across some given range.
  * <br>
  * We assume that if a finding is locates on a line within a method then that
  * entire method is affected by that finding. If the finding is located within a
@@ -66,29 +60,29 @@ import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
  * be able to evaluate the effect of this finding set on the entire software
  * system. This is where ranges and metrics come into play. There are four
  * ranges: Method, Class, File, and NA. Basically we need to calculate the total
- * value of the metric across all the effected entities and then divide this by
- * the total value of the metric across the system. This is done as follows for
+ * value of the name across all the effected entities and then divide this by
+ * the total value of the name across the system. This is done as follows for
  * each of the ranges:
  * <ul>
- * <li>Method: if each finding only affects a method, then summing the metric
- * value for each affected method and dividing by the sum of the metric for all
+ * <li>Method: if each finding only affects a method, then summing the name
+ * value for each affected method and dividing by the sum of the name for all
  * the methods in the system is the correct proportion. If any finding affects a
- * type or file, then we sum (for that finding) the metric for all contained
+ * type or file, then we sum (for that finding) the name for all contained
  * methods.
- * <li>Type: if each finding only affects a type, then summing the metric value
- * for each affected type and dividing by the sum of the metric for all types in
+ * <li>Type: if each finding only affects a type, then summing the name value
+ * for each affected type and dividing by the sum of the name for all types in
  * the system will provided the correct proportion. On the other hand if any
- * finding affects only a method, then we need to use the metric value for the
+ * finding affects only a method, then we need to use the name value for the
  * type containing the method. If the finding affects a file, then we must sum
- * the metric values for all contained types.
- * <li>File: if each finding only affects a file, then summing the metric value
- * for each affect file and dividing by the sum of the metric for all files will
+ * the name values for all contained types.
+ * <li>File: if each finding only affects a file, then summing the name value
+ * for each affect file and dividing by the sum of the name for all files will
  * provide the correct proportion. On the other hand if any finding affects a
- * method or type, then we must use the metric value for the containing file.
+ * method or type, then we must use the name value for the containing file.
  * <li>NA: This one is much simpler. Regardless of what the finding affects, we
  * always select the smallest possible unit (File, Type, or Method). We then sum
- * the metric value for each finding and divide by the system value for that
- * metric.
+ * the name value for each finding and divide by the system value for that
+ * name.
  * </ul>
  *
  * @author Isaac Griffith
@@ -97,12 +91,12 @@ import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 public class Extent {
 
     /**
-     * Map of project-wide metric extents: key = range, value = (key = metric
-     * name, value = metric) extent value
+     * Map of project-wide name extents: key = range, value = (key = name
+     * name, value = name) extent value
      */
     private final Map<NormalizationRange, Map<String, BigDecimal>> totalMetricExtents;
     /**
-     * The metric context for the system.
+     * The name context for the system.
      */
     private final MetricsContext                                   context;
 
@@ -130,7 +124,7 @@ public class Extent {
         totalMetricExtents = new HashMap<>();
         for (final NormalizationRange range : NormalizationRange.values())
         {
-            totalMetricExtents.put(range, new HashMap<String, BigDecimal>());
+            totalMetricExtents.put(range, new HashMap<>());
         }
     }
 
@@ -143,18 +137,18 @@ public class Extent {
     }
 
     /**
-     * Determines the extent for a MeasureNode given the normalization metric
+     * Determines the extent for a MeasureNode given the normalization name
      * and normalization range.
      * 
      * @param metric
-     *            Normalization metric
+     *            Normalization name
      * @param range
      *            Normalization range
-     * @param measures
+     * @param measure
      *            MeasureNode to normalize
      * @return Normalized value of the findings in the given measure node.
      * @throws IllegalArgumentException
-     *             if the measure is null or its type is NUMBER, the metric is
+     *             if the measure is null or its type is NUMBER, the name is
      *             null or empty, or the range is null.
      */
     public BigDecimal findMeasureExtent(final String metric, final NormalizationRange range, final MeasureNode measure)
@@ -188,16 +182,16 @@ public class Extent {
     }
 
     /**
-     * Finds the extent of a given Finding for the provided normalization metric
+     * Finds the extent of a given Finding for the provided normalization name
      * and range
      * 
      * @param finding
      *            Finding whose extent is required
      * @param metric
-     *            Normalization metric
+     *            Normalization name
      * @param range
      *            Normalization range
-     * @return Extent of the normalization metric for the given finding
+     * @return Extent of the normalization name for the given finding
      */
     public BigDecimal findExtent(final Finding finding, final String metric, final NormalizationRange range)
     {
@@ -222,14 +216,14 @@ public class Extent {
 
     /**
      * Finds the method range extent for a given node in the provide code tree
-     * for the given normalization metric.
+     * for the given normalization name.
      * 
      * @param tree
-     *            CodeTree used to evaluate metric
+     *            CodeTree used to evaluate name
      * @param node
      *            Node whose extent is to be evaluated
      * @param metric
-     *            Normalization metric
+     *            Normalization name
      * @return method range extent of node
      */
     @VisibleForTesting
@@ -272,7 +266,7 @@ public class Extent {
         // else if (c instanceof NamespaceNode)
         // {
         // NamespaceNode p = (NamespaceNode) c;
-        // value = sumMetrics(metric, p.getMethods());
+        // value = sumMetrics(name, p.getMethods());
         // }
         else if (node instanceof ProjectNode)
         {
@@ -285,14 +279,14 @@ public class Extent {
 
     /**
      * Finds the file range extent for a given node in the provide code tree
-     * for the given normalization metric.
+     * for the given normalization name.
      * 
      * @param tree
-     *            CodeTree used to evaluate metric
+     *            CodeTree used to evaluate name
      * @param node
      *            Node whose extent is to be evaluated
      * @param metric
-     *            Normalization metric
+     *            Normalization name
      * @return file range extent of node
      */
     @VisibleForTesting
@@ -358,14 +352,14 @@ public class Extent {
 
     /**
      * Finds the class range extent for a given node in the provide code tree
-     * for the given normalization metric.
+     * for the given normalization name.
      * 
      * @param tree
-     *            CodeTree used to evaluate metric
-     * @param node
+     *            CodeTree used to evaluate name
+     * @param c
      *            Node whose extent is to be evaluated
      * @param metric
-     *            Normalization metric
+     *            Normalization name
      * @return class range extent of node
      */
     @VisibleForTesting
@@ -428,15 +422,15 @@ public class Extent {
     }
 
     /**
-     * Sums the values of the given metric across the given collection of nodes.
+     * Sums the values of the given name across the given collection of nodes.
      * 
      * @param metric
-     *            Name of the metric to be summed.
+     *            Name of the name to be summed.
      * @param nodes
      *            Collection of nodes
-     * @return Sum of the named metric
+     * @return Sum of the named name
      * @throws IllegalArgumentException
-     *             if the metric name is null, empty, or no such metric has been
+     *             if the name name is null, empty, or no such name has been
      *             stored in any of the nodes
      */
     @VisibleForTesting
@@ -456,16 +450,16 @@ public class Extent {
     }
 
     /**
-     * Finds the system-wide extent of the given metric for the given range.
+     * Finds the system-wide extent of the given name for the given range.
      * 
      * @param metric
      *            Metric name
      * @param range
      *            Normalization range
-     * @return total value of the given metric in the system for the given
+     * @return total value of the given name in the system for the given
      *         range.
      * @throws IllegalArgumentException
-     *             if the metric name is null or empty or the range is null.
+     *             if the name name is null or empty or the range is null.
      */
     public BigDecimal findExtent(final String metric, final NormalizationRange range)
     {
@@ -522,7 +516,7 @@ public class Extent {
         totalMetricExtents.clear();
         for (final NormalizationRange range : NormalizationRange.values())
         {
-            totalMetricExtents.put(range, new HashMap<String, BigDecimal>());
+            totalMetricExtents.put(range, new HashMap<>());
         }
     }
 
@@ -620,7 +614,7 @@ public class Extent {
     /**
      * Calculates the ratio of the affect a FindingNode has on the entire
      * system. Essentially, this is the ratio of the sum of the normalizing
-     * metric across each affected item divided by the total of that metric
+     * name across each affected item divided by the total of that name
      * (within the range of those types of items) across the system.
      * 
      * @param metric
@@ -628,7 +622,7 @@ public class Extent {
      * @param normalizationRange
      *            Range for normalizing
      * @param n
-     *            The Finging Node whose findings are to be evaluated.
+     *            The Finding Node whose findings are to be evaluated.
      * @return The ratio representing the presence that this FindingNode has
      *         within the system as a whole.
      */
@@ -647,14 +641,14 @@ public class Extent {
             value = findFindingsExtent(metric, n.getFindings(), range);
         }
 
-        value = value.divide(findExtent(metric, range));
+        value = value.divide(findExtent(metric, range), BigDecimal.ROUND_HALF_UP);
 
         return value;
     }
 
     /**
-     * Find the total extent (for the provided metric) that the set of findings
-     * has within the system. Basically just a simple total of the metric for
+     * Find the total extent (for the provided name) that the set of findings
+     * has within the system. Basically just a simple total of the name for
      * the items affected by the provided set of findings.
      * 
      * @param metric
@@ -665,7 +659,7 @@ public class Extent {
      * @param range
      *            Range of the extent
      * @return The extent of affect this set of findings has within the entire
-     *         system (unnormalized)
+     *         system (un-normalized)
      */
     private BigDecimal findFindingsExtent(String metric, Set<Finding> findings, NormalizationRange range)
     {

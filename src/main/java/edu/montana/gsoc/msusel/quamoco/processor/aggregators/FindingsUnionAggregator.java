@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +44,7 @@ import edu.montana.gsoc.msusel.quamoco.processor.FindingsAggregator;
 public class FindingsUnionAggregator extends FindingsAggregator {
 
     /**
-     * Constructs a new FindignsUnionAggregator for the given node.
+     * Constructs a new FindingsUnionAggregator for the given node.
      * 
      * @param owner
      *            The node which contains and uses this aggregator

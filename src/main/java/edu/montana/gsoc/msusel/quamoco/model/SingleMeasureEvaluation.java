@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +28,10 @@ package edu.montana.gsoc.msusel.quamoco.model;
 import javax.annotation.Nonnull;
 
 import edu.montana.gsoc.msusel.quamoco.io.EvaluationType;
+import lombok.Builder;
+import lombok.Singular;
+
+import java.util.List;
 
 /**
  * An evaluation by applying pre-defined operations on a single measure.
@@ -52,6 +57,13 @@ public class SingleMeasureEvaluation extends MeasureEvaluation {
         super(identifier);
     }
 
+    @Builder(buildMethodName = "create")
+    protected SingleMeasureEvaluation(Measure basedOn, NormalizationMeasure normalization, NormalizationRange range, Function function,
+                             Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
+                             String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
+        super(basedOn, normalization, range, function, completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, tags, annotations);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -68,89 +80,6 @@ public class SingleMeasureEvaluation extends MeasureEvaluation {
     public String xmlTag()
     {
         return generateXMLTag(EvaluationType.SINGLE_MEASURE_EVALUATION.type());
-    }
-
-    /**
-     * Creates a new Builder for a SingleMeasureEvaluation
-     * 
-     * @return the SingleMeasureEvaluation.Builder instance
-     */
-    public static Builder builder()
-    {
-        return new Builder();
-    }
-
-    /**
-     * Creates a new Builder for a SingleMeasureEvaluation with the given
-     * unique identifier
-     * 
-     * @param identifier
-     *            Unique identifier
-     * @return the SingleMeasureEvaluation.Builder instance
-     */
-    public static Builder builder(String identifier)
-    {
-        return new Builder(identifier);
-    }
-
-    /**
-     * Builder for SingleMeasureEvaluations implemented using the fluent
-     * interface and method chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder extends AbstractMeasureEvaluationBuilder {
-
-        /**
-         * Constructs a new Builder for a SingleMeasureEvaluation
-         */
-        private Builder()
-        {
-            element = new SingleMeasureEvaluation();
-        }
-
-        /**
-         * Constructs a new Builder for a SingleMeasureEvaluation with the given
-         * identifier
-         * 
-         * @param identifier
-         *            The identifier of the tool to construct
-         */
-        private Builder(String identifier)
-        {
-            element = new SingleMeasureEvaluation(identifier);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        @Nonnull
-        public SingleMeasureEvaluation create()
-        {
-            return (SingleMeasureEvaluation) element;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toYaml()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toJson()
-    {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     /**

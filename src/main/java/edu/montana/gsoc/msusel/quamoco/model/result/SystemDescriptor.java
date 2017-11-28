@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,69 +25,46 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.result;
 
+import lombok.*;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
  * @author Isaac Griffith
- *
  */
+@EqualsAndHashCode
+@ToString
+@Builder(buildMethodName = "create")
 public class SystemDescriptor {
 
+    @Getter
     private String name;
-    private String identifier;
+    @Getter
+    @Builder.Default
+    private String identifier = UUID.randomUUID().toString();
+    @Getter
     private String version;
-    private String analysisDate;
-    
+    @Getter
+    @Builder.Default
+    private String analysisDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(LocalDateTime.now());
+
     /**
-     * 
+     *
      */
-    public SystemDescriptor(String name, String version)
-    {
+    public SystemDescriptor(String name, String version) {
         this(name, version, new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(LocalDateTime.now()));
     }
-    
+
     public SystemDescriptor(String name, String version, String date) {
         this(name, version, date, UUID.randomUUID().toString());
     }
-    
+
     public SystemDescriptor(String name, String version, String date, String identifier) {
         this.name = name;
         this.version = version;
         this.analysisDate = date;
         this.identifier = identifier;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * @return the identifier
-     */
-    public String getIdentifier()
-    {
-        return identifier;
-    }
-
-    /**
-     * @return the version
-     */
-    public String getVersion()
-    {
-        return version;
-    }
-
-    /**
-     * @return the analysisDate
-     */
-    public String getAnalysisDate()
-    {
-        return analysisDate;
     }
 }

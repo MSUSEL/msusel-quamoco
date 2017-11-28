@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,12 +29,12 @@ import java.util.List;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
-import com.sparqline.codetree.CodeTree;
-import com.sparqline.codetree.INode;
-import com.sparqline.codetree.node.FileNode;
-import com.sparqline.codetree.node.MethodNode;
-import com.sparqline.codetree.node.ProjectNode;
-import com.sparqline.codetree.node.TypeNode;
+import edu.montana.gsoc.msusel.codetree.CodeTree;
+import edu.montana.gsoc.msusel.codetree.INode;
+import edu.montana.gsoc.msusel.codetree.node.FileNode;
+import edu.montana.gsoc.msusel.codetree.node.MethodNode;
+import edu.montana.gsoc.msusel.codetree.node.ProjectNode;
+import edu.montana.gsoc.msusel.codetree.node.TypeNode;
 
 /**
  * Singleton class providing global access to the main code tree of the system
@@ -90,17 +91,17 @@ public class MetricsContext {
     }
 
     /**
-     * Retrieves the value of the metric for the FileNode with the given
+     * Retrieves the value of the name for the FileNode with the given
      * identifier.
      * 
      * @param identifier
      *            FileNode's identifier
      * @param metric
      *            Metric name
-     * @return double value of the metric, or NaN if there is no such file node
+     * @return double value of the name, or NaN if there is no such file node
      *         with the given identifier
      * @throws IllegalArgumentException
-     *             if the metric name is null or empty or if the identifier is
+     *             if the name name is null or empty or if the identifier is
      *             null or empty
      */
     public double getFileMetric(final String identifier, final String metric)
@@ -122,17 +123,17 @@ public class MetricsContext {
     }
 
     /**
-     * Retrieves the value of the metric for the MethodNode with the given
+     * Retrieves the value of the name for the MethodNode with the given
      * identifier.
      * 
      * @param identifier
      *            MethodNode's identifier
      * @param metric
      *            Metric name
-     * @return double value of the metric, or NaN if there is no such method
+     * @return double value of the name, or NaN if there is no such method
      *         node with the given identifier
      * @throws IllegalArgumentException
-     *             if the metric name is null or empty or if the identifier is
+     *             if the name name is null or empty or if the identifier is
      *             null or empty
      */
     public double getMethodMetric(final String identifier, final String metric)
@@ -178,14 +179,14 @@ public class MetricsContext {
     }
 
     /**
-     * Retrieves the system project value of the metric with the given name
+     * Retrieves the system project value of the name with the given name
      * 
      * @param metric
      *            Metric name
-     * @return double value of the project-level metric, or NaN if there is no
+     * @return double value of the project-level name, or NaN if there is no
      *         project in the code tree.
      * @throws IllegalArgumentException
-     *             if the metric name is null or empty
+     *             if the name name is null or empty
      */
     public double getProjectMetric(final String metric)
     {
@@ -201,14 +202,14 @@ public class MetricsContext {
     }
 
     /**
-     * Retrieves a listing of the values for the given metric across all types
+     * Retrieves a listing of the values for the given name across all types
      * in the system.
      * 
      * @param metric
      *            Metric name
-     * @return List of all types' values for the given metric
+     * @return List of all types' values for the given name
      * @throws IllegalArgumentException
-     *             if the metric name is null or empty
+     *             if the name name is null or empty
      */
     public List<Double> getAllClassValues(final String metric)
     {
@@ -229,14 +230,14 @@ public class MetricsContext {
     }
 
     /**
-     * Retrieves a listing of the values for the given metric across all files
+     * Retrieves a listing of the values for the given name across all files
      * in the system.
      * 
      * @param metric
      *            Metric name
-     * @return List of all files' values for the given metric
+     * @return List of all files' values for the given name
      * @throws IllegalArgumentException
-     *             if the metric name is null or empty
+     *             if the name name is null or empty
      */
     public List<Double> getAllFileValues(final String metric)
     {
@@ -257,14 +258,14 @@ public class MetricsContext {
     }
 
     /**
-     * Retrieves a listing of the values for the given metric across all methods
+     * Retrieves a listing of the values for the given name across all methods
      * in the system.
      * 
      * @param metric
      *            Metric name
-     * @return List of all methods' values for the given metric
+     * @return List of all methods' values for the given name
      * @throws IllegalArgumentException
-     *             if the metric name is null or empty
+     *             if the name name is null or empty
      */
     public List<Double> getAllMethodValues(final String metric)
     {
@@ -287,31 +288,31 @@ public class MetricsContext {
     /**
      * Retrieves the parent node of the provided node.
      * 
-     * @param cnode
+     * @param node
      *            Node whose parent is being requested.
      * @return Parent of the provided node, null if no such parent exists or the
      *         parent identifier is null.
      * @throws IllegalArgumentException
      *             if the provided node is null
      */
-    public INode getParent(INode cnode)
+    public INode getParent(INode node)
     {
-        if (cnode == null)
+        if (node == null)
             throw new IllegalArgumentException("INode cannot be null");
 
-        if (cnode instanceof MethodNode)
+        if (node instanceof MethodNode)
         {
             for (TypeNode type : tree.getUtils().getTypes())
             {
-                if (type.hasMethod((MethodNode) cnode))
+                if (type.hasMethod((MethodNode) node))
                     return type;
             }
         }
-        else if (cnode instanceof TypeNode)
+        else if (node instanceof TypeNode)
         {
             for (FileNode file : tree.getUtils().getFiles())
             {
-                if (file.hasType((TypeNode) cnode))
+                if (file.hasType((TypeNode) node))
                     return file;
             }
         }

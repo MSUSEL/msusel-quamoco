@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +29,7 @@ import java.util.UUID;
 import javax.annotation.Nonnull;
 
 import edu.montana.gsoc.msusel.quamoco.io.XMLSerializable;
+import lombok.*;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
@@ -57,17 +59,23 @@ import org.apache.commons.lang3.StringEscapeUtils;
  * <li>The justification must have clear why the impact is either positive or
  * negative.</li>
  * </ul>
- * 
+ *
  * @author Isaac Griffith
  * @version 1.1.1
  */
+@EqualsAndHashCode(exclude = {"justification"})
+@ToString(of = {"identifier", "effect"})
+@Builder(buildMethodName = "create")
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Impact implements XMLSerializable {
 
     /**
      * Provides a textual description of the rational why this impact exists,
-     * and why it ieither positive or negative
+     * and why it is either positive or negative
      */
-    private String          justification;
+    @Getter
+    @Setter
+    private String justification;
     /**
      * Describes whether the effect of the impact is positive or negative. If
      * the impact has a positive effect, the degree of which the product
@@ -76,216 +84,39 @@ public class Impact implements XMLSerializable {
      * degree of which the target factor is possessed by the product is hindered
      * if the product possesses the source factor.
      */
+    @Getter
+    @Setter
     private InfluenceEffect effect;
     /**
      * The target of this impact
      */
-    private Factor          target;
-    private String          identifier;
+    @Getter
+    @Setter
+    private Factor target;
+    @Getter
+    @Setter
+    @Builder.Default
+    private String identifier = UUID.randomUUID().toString();
 
-    public Impact()
-    {
-        identifier = UUID.randomUUID().toString();
-    }
-
-    public Impact(String identifier)
-    {
+    public Impact(String identifier) {
         this.identifier = identifier;
-    }
-
-    /**
-     * @return the identifier
-     */
-    public String getIdentifier()
-    {
-        return identifier;
-    }
-
-    /**
-     * @param identifier
-     *            the identifier to set
-     */
-    public void setIdentifier(String identifier)
-    {
-        this.identifier = identifier;
-    }
-
-    /**
-     * @return the effect
-     */
-    public InfluenceEffect getEffect()
-    {
-        return effect;
-    }
-
-    /**
-     * @param effect
-     *            the effect to set
-     */
-    public void setEffect(InfluenceEffect effect)
-    {
-        this.effect = effect;
-    }
-
-    /**
-     * @return the justification
-     */
-    public String getJustification()
-    {
-        return justification;
-    }
-
-    /**
-     * @param justification
-     *            the justification to set
-     */
-    public void setJustification(String justification)
-    {
-        this.justification = justification;
-    }
-
-    /**
-     * @return the target
-     */
-    public Factor getTarget()
-    {
-        return target;
-    }
-
-    /**
-     * @param target
-     *            the target to set
-     */
-    public void setTarget(Factor target)
-    {
-        this.target = target;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String xmlTag()
-    {
+    public String xmlTag() {
         StringBuilder builder = new StringBuilder();
-        
-        builder.append(
-                String.format(
-                        "<influences xmi:id=\"%s\" target=\"%s\" justification=\"%s\" effect=\"%s\" />%n",
-                        getIdentifier(), getTarget().getQualifiedIdentifier(),
-                        StringEscapeUtils.escapeXml10(getJustification()), getEffect().toString()));
+        builder.append(String.format("<influences xmi:id=\"%s\"", getIdentifier()));
+        if (getTarget() != null)
+            builder.append(String.format(" target=\"%s\"", getTarget().getQualifiedIdentifier()));
+        if (getJustification() != null)
+            builder.append(String.format(" justification=\"%s\"", StringEscapeUtils.escapeXml10(getJustification())));
+        if (getEffect() != null)
+            builder.append(String.format(" effect=\"%s\"", getEffect().toString()));
+        builder.append(" />\n");
 
         return builder.toString();
-    }
-
-    /**
-     * Returns a builder used to construct an Impact via method chaining and a
-     * fluent interface
-     * 
-     * @return the builder
-     */
-    public static Builder builder()
-    {
-        return new Builder();
-    }
-
-    /**
-     * Returns a builder used to construct an Impact with the given identifier
-     * via method chaining and a fluent interface
-     * 
-     * @param identifier
-     *            Unique identifier of the Impact to be created
-     * @return The builder
-     */
-    public static Builder builder(String identifier)
-    {
-        return new Builder(identifier);
-    }
-
-    /**
-     * Builder for Impact Objects
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder {
-
-        /**
-         * Impact object to be created.
-         */
-        private Impact impact;
-
-        /**
-         * Constructs a new Impact Builder
-         */
-        public Builder()
-        {
-            impact = new Impact();
-        }
-
-        /**
-         * Constructs a new Impact Builder for an Impact object with the given
-         * identifier
-         * 
-         * @param identifier
-         *            Unique Identifier
-         */
-        public Builder(String identifier)
-        {
-            impact = new Impact(identifier);
-        }
-
-        /**
-         * @return The impact newly built by this builder
-         */
-        public Impact create()
-        {
-            return impact;
-        }
-
-        /**
-         * Sets the target of the Impact being built.
-         * 
-         * @param factor
-         *            The target Factor
-         * @return this
-         */
-        @Nonnull
-        public Builder target(Factor factor)
-        {
-            impact.setTarget(factor);
-
-            return this;
-        }
-
-        /**
-         * Sets the effect (positive or negative) of the Impact being built
-         * 
-         * @param effect
-         *            Effect of the Impact
-         * @return this
-         */
-        @Nonnull
-        public Builder effect(InfluenceEffect effect)
-        {
-            impact.setEffect(effect);
-
-            return this;
-        }
-
-        /**
-         * Sets the text justification of the Impact being built.
-         * 
-         * @param just
-         *            The text justification.
-         * @return this
-         */
-        @Nonnull
-        public Builder justification(String just)
-        {
-            impact.setJustification(just);
-
-            return this;
-        }
     }
 }

@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,6 +31,10 @@ import java.util.List;
 import com.google.common.collect.Lists;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * An abstract representation of an Edge for the Quamoco
@@ -39,20 +44,25 @@ import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
  * @author Isaac Griffith
  * @version 1.1.1
  */
+@EqualsAndHashCode(of = {"id", "name"})
+@ToString(of = {"id"})
 public abstract class AbstractEdge implements Edge {
 
     /**
      * Incoming side of the edge
      */
-    protected Node src;
+    @Getter @Setter
+    protected Node source;
     /**
      * Outgoing side of the edge
      */
+    @Getter @Setter
     protected Node       dest;
     /**
      * Normalizer attached to this edge
      * FIXME: should only be available on Normalizable Edges
      */
+    @Getter @Setter
     protected Normalizer norm;
     /**
      * The next unique identification number for an edge
@@ -61,10 +71,12 @@ public abstract class AbstractEdge implements Edge {
     /**
      * Name of this edge
      */
+    @Getter
     private final String name;
     /**
      * The unique identifying number for this edge
      */
+    @Getter @Setter
     private long         id;
 
     /**
@@ -73,103 +85,17 @@ public abstract class AbstractEdge implements Edge {
      * 
      * @param name
      *            Name of this edge
-     * @param src
+     * @param source
      *            Source node
      * @param dest
      *            Dest node
      */
-    public AbstractEdge(final String name, final Node src, final Node dest)
+    AbstractEdge(final String name, final Node source, final Node dest)
     {
         this.name = name;
         id = AbstractEdge.NEXT_ID++;
-        this.src = src;
+        this.source = source;
         this.dest = dest;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(final Object obj)
-    {
-        if (this == obj)
-        {
-            return true;
-        }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
-        {
-            return false;
-        }
-        final AbstractEdge other = (AbstractEdge) obj;
-        if (id != other.id)
-        {
-            return false;
-        }
-        if (name == null)
-        {
-            if (other.name != null)
-            {
-                return false;
-            }
-        }
-        else if (!name.equals(other.name))
-        {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public long getId()
-    {
-        return id;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (id ^ id >>> 32);
-        result = prime * result + (name == null ? 0 : name.hashCode());
-        return result;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString()
-    {
-        return "Edge: " + id;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setId(final long id)
-    {
-        this.id = id;
     }
 
     /**
@@ -196,7 +122,7 @@ public abstract class AbstractEdge implements Edge {
      * @return 0.0 if the input value is less than 0.0, 1.0 if the input value
      *         is greater than 1.0, and the original value otherwise.
      */
-    protected BigDecimal thresholdValue(BigDecimal value)
+    BigDecimal thresholdValue(BigDecimal value)
     {
         if (value.compareTo(BigDecimal.ZERO) < 0)
             return BigDecimal.ZERO;

@@ -1,19 +1,20 @@
 /**
  * The MIT License (MIT)
- *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
- *
+ * <p>
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,38 +25,33 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.result;
 
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+
 /**
  * @author Isaac Griffith
  *
  */
+@EqualsAndHashCode
+@ToString
+@Builder(buildMethodName = "create")
 public class DoubleInterval implements Comparable<DoubleInterval> {
 
-    private double lower;
-    private double upper;
-    
-    /**
-     * 
-     */
-    public DoubleInterval(double lower, double upper)
-    {
-        this.lower = lower;
-        this.upper = upper;
-    }
-    
-    /**
-     * @return the lower
-     */
-    public double getLower()
-    {
-        return lower;
-    }
+    @Getter
+    @Builder.Default
+    private double lower = 0.0;
+    @Getter
+    @Builder.Default
+    private double upper = 1.0;
 
     /**
-     * @return the upper
+     *
      */
-    public double getUpper()
-    {
-        return upper;
+    public DoubleInterval(double lower, double upper) {
+        this.lower = lower;
+        this.upper = upper;
     }
 
     public boolean contains(double value) {
@@ -66,57 +62,19 @@ public class DoubleInterval implements Comparable<DoubleInterval> {
      * {@inheritDoc}
      */
     @Override
-    public int compareTo(DoubleInterval o)
-    {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+    public int compareTo(DoubleInterval o) {
+        if (o == null)
+            throw new IllegalArgumentException();
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        long temp;
-        temp = Double.doubleToLongBits(lower);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(upper);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        return result;
-    }
+        double x1 = lower;
+        double y1 = o.lower;
+        double x2 = upper;
+        double y2 = o.upper;
+        double range1 = Math.abs(upper - lower);
+        double range2 = Math.abs(o.upper - o.lower);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (this == obj)
-        {
-            return true;
-        }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
-        {
-            return false;
-        }
-        DoubleInterval other = (DoubleInterval) obj;
-        if (Double.doubleToLongBits(lower) != Double.doubleToLongBits(other.lower))
-        {
-            return false;
-        }
-        if (Double.doubleToLongBits(upper) != Double.doubleToLongBits(other.upper))
-        {
-            return false;
-        }
-        return true;
+        if (Double.compare(x1, y1) == 0 && Double.compare(x2, y2) == 0)
+            return 0;
+        else return Double.compare(range1, range2);
     }
-
-    
 }

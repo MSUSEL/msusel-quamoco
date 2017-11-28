@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -110,7 +111,7 @@ public class WeightUpdater {
      *            Factor whose edges are required
      * @param graph
      *            Distilled quality model processing graph
-     * @return List of incoming weighted ranked eges of the given factor node
+     * @return List of incoming weighted ranked edges of the given factor node
      */
     @VisibleForTesting
     List<WeightedRankedEdge> getWeightedEdges(FactorNode factor, DirectedSparseGraph<Node, Edge> graph)

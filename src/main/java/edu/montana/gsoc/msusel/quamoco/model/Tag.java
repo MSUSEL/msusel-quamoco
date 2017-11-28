@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +29,10 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.google.common.collect.Lists;
@@ -49,8 +54,11 @@ public class Tag extends QMElement {
     /**
      * Optional title providing a more detailed name for this Tag
      */
+    @Getter @Setter
     private String title;
+    @Getter @Setter
     private String description;
+    @Getter @Setter
     private String name;
 
     /**
@@ -79,55 +87,13 @@ public class Tag extends QMElement {
         this.name = name;
     }
 
-    /**
-     * @return The title
-     */
-    public String getTitle()
+    @Builder(buildMethodName = "create")
+    protected Tag(String name, String description, String title, String identifier, Source originatesFrom, @Singular List<Annotation> annotations)
     {
-        return title;
-    }
-
-    /**
-     * @param title
-     *            The new title of this Tag
-     */
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
-
-    /**
-     * @return the description
-     */
-    public String getDescription()
-    {
-        return description;
-    }
-
-    /**
-     * @param description
-     *            the description to set
-     */
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * @param name
-     *            the name to set
-     */
-    public void setName(String name)
-    {
+        super(identifier, originatesFrom, Lists.newArrayList(), annotations);
         this.name = name;
+        this.description = description;
+        this.title = title;
     }
 
     /**
@@ -145,7 +111,6 @@ public class Tag extends QMElement {
     @Override
     public void addTaggedBy(Tag tag)
     {
-        return;
     }
 
     /**
@@ -154,107 +119,6 @@ public class Tag extends QMElement {
     @Override
     public void removeTaggedBy(Tag tag)
     {
-        return;
-    }
-
-    /**
-     * Creates a new Builder for a Tag with the given simple name
-     * 
-     * @param name
-     *            Simple Name
-     * @return the Tag.Builder instance
-     */
-    public static Builder builder(String name)
-    {
-        return new Builder(name);
-    }
-
-    /**
-     * Creates a new Builder for a Tag with the given simple name
-     * 
-     * @param name
-     *            Simple Name
-     * @param identifier
-     *            The unique identifier
-     * @return the Tag.Builder instance
-     */
-    public static Builder builder(String name, String identifier)
-    {
-        return new Builder(name, identifier);
-    }
-
-    /**
-     * Builder for Tags implemented using the fluent interface and method
-     * chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder extends AbstractQMElementBuilder {
-
-        /**
-         * Constructs a new Builder for a Tag with the given name
-         * 
-         * @param name
-         *            The name of the tag to construct
-         */
-        private Builder(String name)
-        {
-            element = new Tag(name);
-        }
-
-        /**
-         * Constructs a new Builder for a Tag with the given name
-         * 
-         * @param name
-         *            The name of the tag to construct
-         * @param identifier
-         *            the unique identifier
-         */
-        private Builder(String name, String identifier)
-        {
-            element = new Tag(name, identifier);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        @Nonnull
-        public Tag create()
-        {
-            return (Tag) element;
-        }
-
-        /**
-         * Sets the element under construction's description
-         * 
-         * @param description
-         *            the description to set
-         * @return this
-         */
-        @Nonnull
-        public Builder description(String description)
-        {
-            ((Tag) element).setDescription(description);
-
-            return this;
-        }
-
-        /**
-         * Sets the optional title of the Tag under construction
-         * 
-         * @param title
-         *            Title of the Tag
-         * @return this
-         */
-        @Nonnull
-        public Builder title(String title)
-        {
-            ((Tag) element).setTitle(title);
-
-            return this;
-        }
     }
 
     /**
@@ -263,33 +127,9 @@ public class Tag extends QMElement {
     @Override
     public String xmlTag()
     {
-        StringBuilder builder = new StringBuilder();
-        
-        builder.append(String.format(
-                    "<tags xmi:id=\"%s\" name=\"%s\" description=\"%s\" />%n", getIdentifier(), StringEscapeUtils.escapeXml10(getName()),
-                    StringEscapeUtils.escapeXml10(getDescription())));
-        
-        return builder.toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toYaml()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toJson()
-    {
-        // TODO Auto-generated method stub
-        return null;
+        return String.format(
+                "<tags xmi:id=\"%s\" name=\"%s\" description=\"%s\" />%n", getIdentifier(), StringEscapeUtils.escapeXml10(getName()),
+                StringEscapeUtils.escapeXml10(getDescription()));
     }
 
     /**

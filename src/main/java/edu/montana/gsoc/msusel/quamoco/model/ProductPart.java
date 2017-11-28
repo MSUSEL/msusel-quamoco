@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +28,10 @@ package edu.montana.gsoc.msusel.quamoco.model;
 import javax.annotation.Nonnull;
 
 import edu.montana.gsoc.msusel.quamoco.io.EntityType;
+import lombok.Builder;
+import lombok.Singular;
+
+import java.util.List;
 
 /**
  * They describe a part of a software product. If they are characterized by a
@@ -62,6 +67,12 @@ public class ProductPart extends Entity {
         super(name, identifier);
     }
 
+    @Builder(buildMethodName = "create")
+    protected ProductPart(@Singular List<Entity> isAs, Entity partOf, String name, String description, String title, String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations)
+    {
+        super(isAs, partOf, name, description, title, identifier, originatesFrom, tags, annotations);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -69,99 +80,6 @@ public class ProductPart extends Entity {
     public String xmlTag()
     {
         return generateXMLTag(EntityType.PRODUCT_PART.type());
-    }
-
-    /**
-     * Creates a new Builder for a Tag with the given simple name
-     * 
-     * @param name
-     *            Simple Name
-     * @return the ProductPart.Builder instance.
-     */
-    public static Builder builder(String name)
-    {
-        return new Builder(name);
-    }
-
-    /**
-     * Creates a new Builder for a Tag with the given simple name
-     * 
-     * @param name
-     *            Simple Name
-     * @Param identifer The unique identifier of the Product part to be created
-     *        if it is already known.
-     * @return the ProductPart.Builder instance.
-     */
-    public static Builder builder(String name, String identifier)
-    {
-        return new Builder(name, identifier);
-    }
-
-    /**
-     * Builder for ProductParts implemented using the fluent interface
-     * and
-     * method
-     * chaining patterns.
-     * 
-     * @author Isaac Griffith
-     * @version 1.1.1
-     */
-    public static class Builder extends AbstractEntityBuilder {
-
-        /**
-         * Constructs a new Builder for a ProductPart with the given
-         * name
-         * 
-         * @param name
-         *            The name of the tag to construct
-         */
-        private Builder(String name)
-        {
-            element = new ProductPart(name);
-        }
-
-        /**
-         * Constructs a new Builder for a ProductPart with the given
-         * name
-         * 
-         * @param name
-         *            The name of the tag to construct
-         * @param identifier
-         *            The unique identifier of this entity (if already known)
-         */
-        private Builder(String name, String identifier)
-        {
-            element = new ProductPart(name, identifier);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Nonnull
-        public ProductPart create()
-        {
-            return (ProductPart) element;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toYaml()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toJson()
-    {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     /**

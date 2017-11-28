@@ -1,8 +1,9 @@
 /**
  * The MIT License (MIT)
  *
- * SparQLine Quamoco Implementation
- * Copyright (c) 2015-2017 Isaac Griffith, SparQLine Analytics, LLC
+ * MSUSEL Quamoco Implementation
+ * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -96,7 +97,9 @@ public class MeasureFactory extends AbstractQMElementFactory {
      */
     private Measure createNormMeasure(Element e)
     {
-        return NormalizationMeasure.builder(e.getAttribute("name"), e.getAttribute("xmi:id"))
+        return NormalizationMeasure.builder()
+                .name(e.getAttribute("name"))
+                .identifier(e.getAttribute("xmi:id"))
                 .description(e.hasAttribute("description") ? e.getAttribute("description") : "")
                 .title(e.hasAttribute("title") ? e.getAttribute("title") : "")
                 .type(MeasureType.NUMBER)
@@ -109,7 +112,9 @@ public class MeasureFactory extends AbstractQMElementFactory {
      */
     private Measure createNumberMeasure(Element e)
     {
-        return Measure.builder(e.getAttribute("name"), e.getAttribute("xmi:id"))
+        return Measure.builder()
+                .name(e.getAttribute("name"))
+                .identifier(e.getAttribute("xmi:id"))
                 .description(e.hasAttribute("description") ? e.getAttribute("description") : "")
                 .title(e.hasAttribute("title") ? e.getAttribute("title") : "")
                 .type(MeasureType.NUMBER)
@@ -122,7 +127,9 @@ public class MeasureFactory extends AbstractQMElementFactory {
      */
     private Measure createFindingsMeasure(Element e)
     {
-        return Measure.builder(e.getAttribute("name"), e.getAttribute("xmi:id"))
+        return Measure.builder()
+                .name(e.getAttribute("name"))
+                .identifier(e.getAttribute("xmi:id"))
                 .description(e.hasAttribute("description") ? e.getAttribute("description") : "")
                 .title(e.hasAttribute("title") ? e.getAttribute("title") : "")
                 .type(MeasureType.FINDINGS)
