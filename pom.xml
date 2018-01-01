@@ -1,16 +1,32 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<groupId>edu.montana.gsoc.msusel</groupId>
-		<artifactId>msusel-parent</artifactId>
-		<version>1.1.1</version>
-	</parent>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>edu.montana.gsoc.msusel</groupId>
+    <artifactId>msusel-parent</artifactId>
+    <version>1.1.1</version>
+  </parent>
 
-	<modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 	<groupId>edu.montana.gsoc.msusel.quamoco</groupId>
 	<artifactId>msusel-quamoco</artifactId>
-	<version>${msusel.version}</version>
-	<name>MSUSEL Quamoco Quality Model</name>
+	<name>MSUSEL Quamoco Implementation</name>
+  <description>An implementation of the Quamoco Metamodel</description>
+
+	<developers>
+		<developer>
+			<id>isaac.griffith</id>
+			<name>Isaac Griffith</name>
+			<email>isaacgriffith@gmail.com</email>
+			<organization>MSUSEL</organization>
+			<organizationUrl>https://msusel.github.io/</organizationUrl>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
+	</developers>
 
 	<dependencies>
 		<dependency>
@@ -39,11 +55,6 @@
 			<version>2.0.1</version>
 		</dependency>
 		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>19.0</version>
-		</dependency>
-		<dependency>
 			<groupId>edu.montana.gsoc.msusel</groupId>
 			<artifactId>msusel-codetree</artifactId>
 			<version>${msusel.version}</version>
@@ -55,4 +66,31 @@
 		</dependency>
 	</dependencies>
 
+	<repositories>
+			<repository>
+					<id>msusel-maven-repo</id>
+					<name>msusel-maven-repo</name>
+					<releases>
+							<enabled>true</enabled>
+					</releases>
+					<snapshots>
+							<enabled>false</enabled>
+					</snapshots>
+
+					<url>https://raw.github.com/MSUSEL/msusel-maven-repo/releases</url>
+			</repository>
+	</repositories>
+	<pluginRepositories>
+			<pluginRepository>
+					<id>synergian-repo</id>
+					<url>https://raw.github.com/synergian/wagon-git/releases</url>
+			</pluginRepository>
+	</pluginRepositories>
+	<distributionManagement>
+			<repository>
+					<id>msusel-maven-repo</id>
+					<name>msusel-maven-repo</name>
+					<url>git:releases://git@github.com:MSUSEL/msusel-maven-repo.git</url>
+			</repository>
+	</distributionManagement>
 </project>
