@@ -25,11 +25,11 @@
  */
 package edu.montana.gsoc.msusel.quamoco.io;
 
-import java.io.IOException;
-import java.util.Properties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.Properties;
 
 /**
  * Properties reader for files describing the language specific metrics produced
