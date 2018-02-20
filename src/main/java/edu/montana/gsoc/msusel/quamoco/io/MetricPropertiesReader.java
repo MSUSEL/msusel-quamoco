@@ -64,7 +64,7 @@ public final class MetricPropertiesReader {
         try
         {
             prop.load(MetricPropertiesReader.class.getResourceAsStream("metrics.properties"));
-            temp = prop.getProperty("metrics");
+            temp = prop.getProperty("edu/montana/gsoc/msusel/metrics");
             prop = new Properties();
         }
         catch (final IOException e)
