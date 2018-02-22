@@ -25,16 +25,16 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor;
 
-import java.math.BigDecimal;
-
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+
+import java.math.BigDecimal;
 
 /**
  * Processor which represents a null calculation. In this case it simply return
  * Zero.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class NullProcessor extends Processor {
 

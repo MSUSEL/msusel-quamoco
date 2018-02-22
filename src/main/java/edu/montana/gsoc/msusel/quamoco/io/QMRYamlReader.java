@@ -27,7 +27,7 @@ package edu.montana.gsoc.msusel.quamoco.io;
 
 /**
  * @author Isaac Griffith
- *
+ * @version 1.2.0
  */
 public class QMRYamlReader {
 

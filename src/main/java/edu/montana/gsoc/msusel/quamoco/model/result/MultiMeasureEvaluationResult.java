@@ -25,19 +25,16 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.result;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import com.google.common.collect.Lists;
-import edu.montana.gsoc.msusel.quamoco.model.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
 
+import java.util.List;
+
 /**
  * @author Isaac Griffith
- *
+ * @version 1.2.0
  */
 public class MultiMeasureEvaluationResult extends EvaluationResult {
 

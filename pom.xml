@@ -1,80 +1,53 @@
-<!--
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>edu.montana.gsoc.msusel</groupId>
+        <artifactId>msusel-parent</artifactId>
+        <version>1.2.0-idg</version>
+    </parent>
 
-    The MIT License (MIT)
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>edu.montana.gsoc.msusel.quamoco</groupId>
+    <artifactId>msusel-quamoco</artifactId>
+    <name>MSUSEL Quamoco Implementation</name>
+    <description>An implementation of the Quamoco Metamodel</description>
 
-    MSUSEL Quamoco Implementation
-    Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
-    Software Engineering Laboratory
+    <properties>
+        <evosuiteVersion>1.0.5</evosuiteVersion>
+    </properties>
 
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
+    <developers>
+        <developer>
+            <id>isaac.griffith</id>
+            <name>Isaac Griffith</name>
+            <email>isaacgriffith@gmail.com</email>
+            <organization>MSUSEL</organization>
+            <organizationUrl>https://msusel.github.io/</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
 
-    The above copyright notice and this permission notice shall be included in all
-    copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-    SOFTWARE.
-
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<groupId>edu.montana.gsoc.msusel</groupId>
-		<artifactId>msusel-parent</artifactId>
-		<version>1.2.0-idg</version>
-	</parent>
-
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>edu.montana.gsoc.msusel.quamoco</groupId>
-	<artifactId>msusel-quamoco</artifactId>
-	<version>${msusel.version}</version>
-	<name>MSUSEL Quamoco Quality Model</name>
-    <url>https://MSUSEL.github.io/msusel-quamoco/</url>
-
-	<properties>
-		<evosuiteVersion>1.0.5</evosuiteVersion>
-	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.antlr</groupId>
-			<artifactId>antlr4-runtime</artifactId>
-			<version>4.5.2</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.jung</groupId>
-			<artifactId>jung-graph-impl</artifactId>
-			<version>2.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.jung</groupId>
-			<artifactId>jung-visualization</artifactId>
-			<version>2.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.jung</groupId>
-			<artifactId>jung-algorithms</artifactId>
-			<version>2.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.jung</groupId>
-			<artifactId>jung-api</artifactId>
-			<version>2.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>edu.montana.gsoc.msusel</groupId>
-			<artifactId>msusel-metrics</artifactId>
-			<version>${msusel.version}</version>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr4-runtime</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.montana.gsoc.msusel</groupId>
+            <artifactId>msusel-codetree</artifactId>
+            <version>1.2.0-idg</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.montana.gsoc.msusel</groupId>
+            <artifactId>msusel-metrics</artifactId>
+            <version>1.2.0-idg</version>
+        </dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
@@ -100,13 +73,13 @@
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>2.9.2</version>
         </dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
             <version>2.11.0</version>
             <scope>test</scope>
         </dependency>
-	</dependencies>
+    </dependencies>
 
     <build>
         <plugins>
@@ -139,4 +112,32 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>msusel-maven-repo</id>
+            <name>msusel-maven-repo</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+
+            <url>https://raw.github.com/MSUSEL/msusel-maven-repo/releases</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>synergian-repo</id>
+            <url>https://raw.github.com/synergian/wagon-git/releases</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <distributionManagement>
+        <repository>
+            <id>msusel-maven-repo</id>
+            <name>msusel-maven-repo</name>
+            <url>git:releases://git@github.com:MSUSEL/msusel-maven-repo.git</url>
+        </repository>
+    </distributionManagement>
 </project>

@@ -40,15 +40,15 @@ import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.model.Evaluation;
-import edu.montana.gsoc.msusel.quamoco.model.Factor;
-import edu.montana.gsoc.msusel.quamoco.model.FactorRanking;
-import edu.montana.gsoc.msusel.quamoco.model.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.FactorRanking;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
-import edu.montana.gsoc.msusel.quamoco.model.ProductFactor;
+import edu.montana.gsoc.msusel.quamoco.model.factor.ProductFactor;
 import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
-import edu.montana.gsoc.msusel.quamoco.model.SingleMeasureEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.WeightedSumFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.SingleMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.WeightedSumFactorAggregation;
 
 /**
  * The class <code>NodePopulatorTest</code> contains tests for the class

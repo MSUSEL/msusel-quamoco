@@ -25,16 +25,9 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.aggregators;
 
-import java.util.Set;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.montana.gsoc.msusel.codetree.node.FileNode;
+import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureFindingsEdge;
@@ -42,6 +35,12 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Set;
 
 /**
  * The class <code>FindingsIntersectAggregatorTest</code> contains tests for the
@@ -89,11 +88,11 @@ public class FindingsIntersectAggregatorTest {
     @Test
     public void testAggregate_1() throws Exception
     {
-        fn1.addFinding(new Finding(FileNode.builder("file").create(), "issue1", "issue"));
-        fn1.addFinding(new Finding(FileNode.builder("file2").create(), "issue2", "issue"));
+        fn1.addFinding(new Finding(FileNode.builder().key("file").create(), "issue1", "issue"));
+        fn1.addFinding(new Finding(FileNode.builder().key("file2").create(), "issue2", "issue"));
 
-        fn2.addFinding(new Finding(FileNode.builder("file").create(), "issue1", "issue2"));
-        fn2.addFinding(new Finding(FileNode.builder("file2").create(), "issue2", "issue2"));
+        fn2.addFinding(new Finding(FileNode.builder().key("file").create(), "issue1", "issue2"));
+        fn2.addFinding(new Finding(FileNode.builder().key("file2").create(), "issue2", "issue2"));
 
         final Set<Finding> result = fixture.aggregate();
 
@@ -111,11 +110,11 @@ public class FindingsIntersectAggregatorTest {
     @Test
     public void testAggregate_2() throws Exception
     {
-        fn1.addFinding(new Finding(FileNode.builder("file").create(), "issue1", "issue"));
-        fn1.addFinding(new Finding(FileNode.builder("file2").create(), "issue2", "issue"));
+        fn1.addFinding(new Finding(FileNode.builder().key("file").create(), "issue1", "issue"));
+        fn1.addFinding(new Finding(FileNode.builder().key("file2").create(), "issue2", "issue"));
 
-        fn2.addFinding(new Finding(FileNode.builder("file").create(), "issue1", "issue"));
-        fn2.addFinding(new Finding(FileNode.builder("file2").create(), "issue2", "issue2"));
+        fn2.addFinding(new Finding(FileNode.builder().key("file").create(), "issue1", "issue"));
+        fn2.addFinding(new Finding(FileNode.builder().key("file2").create(), "issue2", "issue2"));
 
         final Set<Finding> result = fixture.aggregate();
 
@@ -133,8 +132,8 @@ public class FindingsIntersectAggregatorTest {
     @Test
     public void testAggregate_3() throws Exception
     {
-        fn1.addFinding(new Finding(FileNode.builder("file").create(), "issue1", "issue"));
-        fn1.addFinding(new Finding(FileNode.builder("file2").create(), "issue2", "issue"));
+        fn1.addFinding(new Finding(FileNode.builder().key("file").create(), "issue1", "issue"));
+        fn1.addFinding(new Finding(FileNode.builder().key("file2").create(), "issue2", "issue"));
 
         final Set<Finding> result = fixture.aggregate();
 
@@ -152,9 +151,9 @@ public class FindingsIntersectAggregatorTest {
     @Test
     public void testAggregate_4() throws Exception
     {
-        fn1.addFinding(new Finding(FileNode.builder("file").create(), "issue1", "issue"));
+        fn1.addFinding(new Finding(FileNode.builder().key("file").create(), "issue1", "issue"));
 
-        fn2.addFinding(new Finding(FileNode.builder("file").create(), "issue1", "issue"));
+        fn2.addFinding(new Finding(FileNode.builder().key("file").create(), "issue1", "issue"));
 
         final Set<Finding> result = fixture.aggregate();
 

@@ -25,24 +25,19 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FindingsUnionNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
-import edu.montana.gsoc.msusel.quamoco.model.Evaluation;
-import edu.montana.gsoc.msusel.quamoco.model.Factor;
-import edu.montana.gsoc.msusel.quamoco.model.Measure;
-import edu.montana.gsoc.msusel.quamoco.model.QMElement;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.model.MeasurementMethod;
-import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
+import edu.montana.gsoc.msusel.quamoco.graph.node.*;
+import edu.montana.gsoc.msusel.quamoco.model.*;
+import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * A Parameter Object containing maps of Identifiers and Nodes,
@@ -50,7 +45,7 @@ import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
  * This object is used in the construction of the Quamoco Processing Graph.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class DistillerData {
 

@@ -25,18 +25,14 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.result;
 
-import java.util.UUID;
-
-import javax.annotation.Nonnull;
-
-import edu.montana.gsoc.msusel.quamoco.model.MeasureRanking;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.MeasureRanking;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class MeasureRankingEvaluationResult extends EvaluationResult {
 

@@ -25,18 +25,19 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.RankedEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Evaluator -
  *
  * @author Isaac Griffith
+ * @version 1.2.0
  */
 public abstract class Evaluator extends Processor {
 

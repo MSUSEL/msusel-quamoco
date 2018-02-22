@@ -26,6 +26,8 @@
 package edu.montana.gsoc.msusel.quamoco.model;
 
 import edu.montana.gsoc.msusel.quamoco.io.EntityType;
+import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
+import edu.montana.gsoc.msusel.quamoco.model.entity.ProductPart;
 import org.junit.Before;
 import org.junit.Test;
 

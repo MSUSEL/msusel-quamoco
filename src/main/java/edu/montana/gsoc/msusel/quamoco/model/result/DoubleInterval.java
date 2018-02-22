@@ -32,7 +32,7 @@ import lombok.ToString;
 
 /**
  * @author Isaac Griffith
- *
+ * @version 1.2.0
  */
 @EqualsAndHashCode
 @ToString

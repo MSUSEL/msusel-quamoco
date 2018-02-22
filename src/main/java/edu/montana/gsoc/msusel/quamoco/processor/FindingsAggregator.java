@@ -25,19 +25,19 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor;
 
+import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
+import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
-
-import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
 /**
  * Base class for the aggregation of Findings sets, as produced from
  * FindingNodes or MeasureNodes.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public abstract class FindingsAggregator extends Aggregator {
 

@@ -25,19 +25,17 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.google.common.graph.MutableNetwork;
+import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
+import lombok.Getter;
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-
-import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import lombok.Getter;
-import lombok.Setter;
-import org.apache.commons.lang3.StringEscapeUtils;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.common.graph.MutableNetwork;
 
 /**
  * Node representing a factor in the Quamoco processing graph. A
@@ -45,7 +43,7 @@ import com.google.common.graph.MutableNetwork;
  * but it is not a direct measure related to the product.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class FactorNode extends Node {
 
@@ -53,12 +51,10 @@ public class FactorNode extends Node {
      * The method associated with aggregation.
      */
     @Getter
-    @Setter
     private String method;
     /**
      * The set of all findings connected to this factor (via the graph)
      */
-    @Getter
     private Set<Finding> findings;
 
     /**

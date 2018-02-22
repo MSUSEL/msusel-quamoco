@@ -42,18 +42,18 @@ import edu.montana.gsoc.msusel.quamoco.graph.edge.ValueToMeasureEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.model.QMElement;
-import edu.montana.gsoc.msusel.quamoco.model.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
 import edu.montana.gsoc.msusel.quamoco.model.Impact;
 import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
-import edu.montana.gsoc.msusel.quamoco.model.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
-import edu.montana.gsoc.msusel.quamoco.model.MeasurementMethod;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
 
 /**
  * Connects the nodes in the Quamoco Processing graph.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class EdgePopulator implements GraphModifier {
 

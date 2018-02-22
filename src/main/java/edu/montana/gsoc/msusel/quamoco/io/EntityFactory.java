@@ -25,15 +25,16 @@
  */
 package edu.montana.gsoc.msusel.quamoco.io;
 
-import edu.montana.gsoc.msusel.quamoco.model.Entity;
-import edu.montana.gsoc.msusel.quamoco.model.ProductPart;
-import edu.montana.gsoc.msusel.quamoco.model.UseCase;
+import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
+import edu.montana.gsoc.msusel.quamoco.model.entity.ProductPart;
+import edu.montana.gsoc.msusel.quamoco.model.entity.UseCase;
 import org.w3c.dom.Element;
 
-import edu.montana.gsoc.msusel.quamoco.model.Stakeholder;
+import edu.montana.gsoc.msusel.quamoco.model.entity.Stakeholder;
 
 /**
  * @author Isaac Griffith
+ * @version 1.2.0
  */
 public class EntityFactory extends AbstractQMElementFactory {
 

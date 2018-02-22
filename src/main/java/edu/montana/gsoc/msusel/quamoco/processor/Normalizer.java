@@ -25,19 +25,20 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor;
 
-import java.math.BigDecimal;
-import java.util.Set;
-
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.util.Set;
+
 /**
  * Normalizer -
  *
  * @author Isaac Griffith
+ * @version 1.2.0
  */
 public abstract class Normalizer {
 
@@ -82,20 +83,6 @@ public abstract class Normalizer {
         this.owner = owner;
         this.range = range;
         this.metric = normMetric;
-    }
-
-    /**
-     * @return Range of normalization
-     */
-    public NormalizationRange getNormalizationRange() {
-        return range;
-    }
-
-    /**
-     * @return Name of the normalization name
-     */
-    public String getMetric() {
-        return metric;
     }
 
     /**

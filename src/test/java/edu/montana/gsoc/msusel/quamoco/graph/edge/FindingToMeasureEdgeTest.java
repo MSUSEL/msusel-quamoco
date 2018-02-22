@@ -25,23 +25,22 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
-import java.math.BigDecimal;
-import java.util.Set;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.montana.gsoc.msusel.codetree.node.FileNode;
+import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.math.BigDecimal;
+import java.util.Set;
 
 /**
  * The class <code>FindingToMeasureEdgeTest</code> contains tests for the class
@@ -142,7 +141,7 @@ public class FindingToMeasureEdgeTest {
         fixture = new FindingToMeasureEdge("edge", src, dest);
         fixture.norm = new NullNormalizer(fixture, "LOC", NormalizationRange.CLASS);
 
-        src.addFinding(new Finding(FileNode.builder("path1").create(), "rule", "rule"));
+        src.addFinding(new Finding(FileNode.builder().key("path1").create(), "rule", "rule"));
     }
 
     /**

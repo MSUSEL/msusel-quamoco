@@ -25,17 +25,17 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.evaluators;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.processor.Evaluator;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * An evaluator for factors using a weighted sum of incoming factors
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class WeightedSumEvaluator extends Evaluator {
 

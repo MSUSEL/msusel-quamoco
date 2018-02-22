@@ -33,7 +33,7 @@ import java.util.List;
  * An enumeration representing a grade.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public enum Grade {
 

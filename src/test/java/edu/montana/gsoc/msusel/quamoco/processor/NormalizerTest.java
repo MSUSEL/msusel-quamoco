@@ -25,17 +25,15 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor;
 
+import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
+import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
+import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
+import edu.montana.gsoc.msusel.quamoco.processor.normalizers.RangedNormalizer;
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
-import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
-import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
-import edu.montana.gsoc.msusel.quamoco.processor.normalizers.RangedNormalizer;
 
 /**
  * The class <code>NormalizerTest</code> contains tests for the class
@@ -110,7 +108,7 @@ public class NormalizerTest {
 	 */
 	@Test
 	public void testGetNormalizationRange_1() throws Exception {
-		final NormalizationRange result = fixture.getNormalizationRange();
+		final NormalizationRange result = fixture.getRange();
 
 		// add additional test code here
 		Assert.assertNotNull(result);

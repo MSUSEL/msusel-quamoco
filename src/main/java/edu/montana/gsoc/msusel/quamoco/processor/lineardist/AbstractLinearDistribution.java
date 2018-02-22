@@ -25,16 +25,16 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.lineardist;
 
+import edu.montana.gsoc.msusel.quamoco.processor.LinearDistribution;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-
-import edu.montana.gsoc.msusel.quamoco.processor.LinearDistribution;
 
 /**
  * Base implementation of a LinearDistribution
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public abstract class AbstractLinearDistribution implements LinearDistribution {
 

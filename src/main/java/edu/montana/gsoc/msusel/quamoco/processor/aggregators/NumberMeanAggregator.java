@@ -25,19 +25,19 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.aggregators;
 
+import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.montana.gsoc.msusel.quamoco.processor.Aggregator;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
-
-import edu.montana.gsoc.msusel.quamoco.processor.Aggregator;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
 /**
  * A value based aggregator for measures with type NUMBER. Simply this collects
  * the incoming values and returns the arithmetic mean of the set.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class NumberMeanAggregator extends Aggregator {
 

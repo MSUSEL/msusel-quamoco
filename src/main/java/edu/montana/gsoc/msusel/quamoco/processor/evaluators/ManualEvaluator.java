@@ -25,18 +25,18 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.evaluators;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.processor.Evaluator;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * An evaluator which simply provides access to data stored in a file and which
  * was manually collected.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class ManualEvaluator extends Evaluator {
 

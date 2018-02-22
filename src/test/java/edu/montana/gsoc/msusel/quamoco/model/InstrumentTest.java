@@ -25,6 +25,8 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
+import edu.montana.gsoc.msusel.quamoco.model.measurement.Instrument;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.RuleBasedInstrument;
 import org.junit.Before;
 import org.junit.Test;
 

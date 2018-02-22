@@ -49,19 +49,19 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
-import java.math.BigDecimal;
-
+import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.processor.LinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.math.BigDecimal;
 
 /**
  * Abstract base edge type for edges which have both a weight and a rank.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public abstract class WeightedRankedEdge extends AbstractEdge implements WeightedEdge, RankedEdge {
 

@@ -25,20 +25,20 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Edge connecting a MeasureNode to a FactorNode for the purpose of passing
  * and normalizing findings sets.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class MeasureToFactorFindingsEdge extends WeightedRankedEdge implements InfluenceEdge, Normalizable {
 

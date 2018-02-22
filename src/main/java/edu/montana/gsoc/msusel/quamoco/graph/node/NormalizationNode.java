@@ -25,13 +25,13 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
-import java.math.BigDecimal;
-
 import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.math.BigDecimal;
 
 /**
  * Node originally meant to provide the means by which normalization was to
@@ -39,7 +39,7 @@ import lombok.Setter;
  * FIXME: Remove this class
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class NormalizationNode extends MeasureNode {
 

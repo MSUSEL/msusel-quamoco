@@ -25,13 +25,6 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
-import java.math.BigDecimal;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
@@ -42,6 +35,12 @@ import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.NegativeLinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.PositiveLinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.math.BigDecimal;
 
 /**
  * The class <code>WeightedRankedEdgeTest</code> contains tests for the class
@@ -292,7 +291,7 @@ public class WeightedRankedEdgeTest {
         // add additional test code here
         Assert.assertNotNull(fixture.getNormalizer());
         Assert.assertEquals("NOC", fixture.getNormalizer().getMetric());
-        Assert.assertEquals(NormalizationRange.CLASS, fixture.getNormalizer().getNormalizationRange());
+        Assert.assertEquals(NormalizationRange.CLASS, fixture.getNormalizer().getRange());
     }
 
     /**

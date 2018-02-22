@@ -25,15 +25,15 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor;
 
-import java.math.BigDecimal;
-
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+
+import java.math.BigDecimal;
 
 /**
  * Base abstract class for Node processors.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public abstract class Processor {
 

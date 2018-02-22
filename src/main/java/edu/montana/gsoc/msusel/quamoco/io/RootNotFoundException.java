@@ -30,7 +30,7 @@ package edu.montana.gsoc.msusel.quamoco.io;
  * be found.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class RootNotFoundException extends Exception {
 

@@ -25,21 +25,21 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.normalizers;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Set;
-
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
-import edu.montana.gsoc.msusel.quamoco.processor.Extent;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
+import edu.montana.gsoc.msusel.quamoco.processor.extents.Extent;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Set;
 
 /**
  * Class used to normalize un-ranged sets of findings.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class RangedNormalizer extends Normalizer {
 

@@ -25,6 +25,9 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.aggregation.FindingsIntersectionMeasureAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.aggregation.FormBasedMeasureAggregation;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

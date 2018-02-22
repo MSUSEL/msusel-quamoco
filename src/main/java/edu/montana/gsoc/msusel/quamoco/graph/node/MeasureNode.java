@@ -25,30 +25,30 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
-import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-
-import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
-import edu.montana.gsoc.msusel.quamoco.processor.FindingsAggregator;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.google.common.graph.MutableNetwork;
+import edu.montana.gsoc.msusel.metrics.MeasuresTable;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.RankedEdge;
-import edu.montana.gsoc.msusel.quamoco.processor.Extent;
-import edu.montana.gsoc.msusel.quamoco.processor.MetricsContext;
+import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
+import edu.montana.gsoc.msusel.quamoco.processor.extents.Extent;
+import edu.montana.gsoc.msusel.quamoco.processor.FindingsAggregator;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.common.graph.MutableNetwork;
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 /**
  * MeasureNode -
  *
  * @author Isaac Griffith
+ * @version 1.2.0
  */
 public class MeasureNode extends Node {
 
@@ -67,7 +67,6 @@ public class MeasureNode extends Node {
     /**
      * The set of findings collected in this node
      */
-    @Getter
     private Set<Finding> findings;
 
     /**
@@ -165,12 +164,12 @@ public class MeasureNode extends Node {
                     if (n instanceof MeasureNode) {
                         values.add(
                                 Extent.getInstance().findMeasureExtent(
-                                        norm.getMetric(), norm.getNormalizationRange(), (MeasureNode) n));
+                                        norm.getMetric(), norm.getRange(), (MeasureNode) n));
                     } else if (n instanceof FindingNode) {
                         values.add(
                                 Extent.getInstance().findFindingExtent(
-                                        MetricsContext.getInstance().getTree(), norm.getMetric(),
-                                        norm.getNormalizationRange(), (FindingNode) n));
+                                        MeasuresTable.getInstance().getTree(), norm.getMetric(),
+                                        norm.getRange(), (FindingNode) n));
                     }
                 }
             }

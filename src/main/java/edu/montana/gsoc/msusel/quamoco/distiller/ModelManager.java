@@ -25,18 +25,18 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import edu.montana.gsoc.msusel.quamoco.model.Measure;
-import edu.montana.gsoc.msusel.quamoco.model.Entity;
-import edu.montana.gsoc.msusel.quamoco.model.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
 import edu.montana.gsoc.msusel.quamoco.model.Tag;
-import edu.montana.gsoc.msusel.quamoco.model.NormalizationMeasure;
+import edu.montana.gsoc.msusel.quamoco.model.measure.NormalizationMeasure;
 import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 import edu.montana.gsoc.msusel.quamoco.model.Source;
 import edu.montana.gsoc.msusel.quamoco.model.Tool;
 
 /**
  * @author Isaac Griffith
- *
+ * @version 1.2.0
  */
 public class ModelManager {
 

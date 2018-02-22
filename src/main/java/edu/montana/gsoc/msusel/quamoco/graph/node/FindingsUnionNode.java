@@ -25,29 +25,26 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
-import java.math.BigDecimal;
-import java.util.Set;
-
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingsEdge;
-import lombok.Getter;
-import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.util.Set;
 
 
 /**
  * Node which simply constructs a union of all input findings nodes.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class FindingsUnionNode extends Node {
 
     /**
      * The union-ed set of findings.
      */
-    @Getter
     private final Set<Finding> findings;
 
     /**

@@ -25,16 +25,16 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.aggregators;
 
-import java.util.List;
-import java.util.Set;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
-import edu.montana.gsoc.msusel.quamoco.processor.FindingsAggregator;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.montana.gsoc.msusel.quamoco.processor.FindingsAggregator;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * A findings based aggregator for measures with type FINDINGS. Simply this
@@ -42,7 +42,7 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
  * sets.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class FindingsIntersectAggregator extends FindingsAggregator {
 

@@ -25,14 +25,14 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.result;
 
-import edu.montana.gsoc.msusel.quamoco.model.Evaluation;
-import lombok.Builder;
+import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 /**
  * @author Isaac Griffith
+ * @version 1.2.0
  */
 @ToString
 public abstract class EvaluationResult extends AbstractResult {

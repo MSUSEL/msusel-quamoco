@@ -26,6 +26,8 @@
 package edu.montana.gsoc.msusel.quamoco.model;
 
 import edu.montana.gsoc.msusel.quamoco.io.FunctionType;
+import edu.montana.gsoc.msusel.quamoco.model.func.LinearFunction;
+import edu.montana.gsoc.msusel.quamoco.model.func.LinearIncreasingFunction;
 import org.junit.Before;
 import org.junit.Test;
 

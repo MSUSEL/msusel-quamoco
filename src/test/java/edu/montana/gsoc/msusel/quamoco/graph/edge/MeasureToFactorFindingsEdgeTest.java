@@ -25,29 +25,23 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.montana.gsoc.msusel.codetree.node.FileNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
-import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
+import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
+import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggregator;
 import edu.montana.gsoc.msusel.quamoco.processor.evaluators.MeanEvaluator;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.PositiveLinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.math.BigDecimal;
 
 /**
  * The class <code>MeasureToFactorFindingsEdgeTest</code> contains tests for the
@@ -305,7 +299,7 @@ public class MeasureToFactorFindingsEdgeTest {
         src.setProcessor(new FindingsUnionAggregator(src));
         final FactorNode dest = new FactorNode(graph, "factor", "owner");
         final FindingNode srcsrc = new FindingNode(graph, "key", "owner", "finding", "tool");
-        srcsrc.addFinding(new Finding(FileNode.builder("path").create(), "finding", "finding"));
+        srcsrc.addFinding(new Finding(FileNode.builder().key("path").create(), "finding", "finding"));
 
         fixture = new MeasureToFactorFindingsEdge("", src, dest, InfluenceEffect.NEGATIVE);
         graph.addEdge(srcsrc, src, new FindingToMeasureEdge("f2m", srcsrc, src));

@@ -25,18 +25,18 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor;
 
+import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
+import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
-import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
 /**
  * Processor type applicable only to MeasureNodes.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public abstract class Aggregator extends Processor {
 

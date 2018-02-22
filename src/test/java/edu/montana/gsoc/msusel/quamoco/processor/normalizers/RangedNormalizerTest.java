@@ -1,20 +1,20 @@
 /**
  * The MIT License (MIT)
- *
+ * <p>
  * MSUSEL Quamoco Implementation
  * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,24 +25,15 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.normalizers;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Set;
-
-import org.easymock.EasyMock;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.codetree.CodeTree;
-import edu.montana.gsoc.msusel.codetree.node.FileNode;
-import edu.montana.gsoc.msusel.codetree.node.MethodNode;
-import edu.montana.gsoc.msusel.codetree.node.ProjectNode;
-import edu.montana.gsoc.msusel.codetree.node.TypeNode;
+import edu.montana.gsoc.msusel.codetree.node.member.MethodNode;
+import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
+import edu.montana.gsoc.msusel.codetree.node.structural.ProjectNode;
+import edu.montana.gsoc.msusel.codetree.node.type.ClassNode;
+import edu.montana.gsoc.msusel.metrics.MeasuresTable;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureNumberEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.ValueToMeasureEdge;
@@ -51,9 +42,16 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
-import edu.montana.gsoc.msusel.quamoco.processor.Extent;
-import edu.montana.gsoc.msusel.quamoco.processor.MetricsContext;
+import edu.montana.gsoc.msusel.quamoco.processor.extents.Extent;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMeanAggregator;
+import org.easymock.EasyMock;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.math.BigDecimal;
+import java.util.Set;
 
 /**
  * The class <code>RangedNormalizerTest</code> contains tests for the class
@@ -66,10 +64,10 @@ import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMeanAggregato
 public class RangedNormalizerTest {
 
     private RangedNormalizer fixture;
-    private Set<Finding>     findings;
-    private FileNode         file;
-    private FileNode         file2;
-    private FileNode         file3;
+    private Set<Finding> findings;
+    private FileNode file;
+    private FileNode file2;
+    private FileNode file3;
 
     /**
      * Run the RangedNormalizer(Edge,String,NormalizationRange) constructor
@@ -79,8 +77,7 @@ public class RangedNormalizerTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testRangedNormalizer_1() throws Exception
-    {
+    public void testRangedNormalizer_1() throws Exception {
         final Edge owner = EasyMock.createMock(Edge.class);
         final String normMetric = "LOC";
         final NormalizationRange range = NormalizationRange.CLASS;
@@ -97,8 +94,7 @@ public class RangedNormalizerTest {
     }
 
     @Test
-    public void testNormalize_Set_Finding_1() throws Exception
-    {
+    public void testNormalize_Set_Finding_1() throws Exception {
         findings = Sets.newHashSet();
         Finding f1 = new Finding(file, "issue", "issue");
         Finding f2 = new Finding(file2, "issue", "issue");
@@ -112,23 +108,20 @@ public class RangedNormalizerTest {
     }
 
     @Test
-    public void testNormalize_Set_Finding_2() throws Exception
-    {
+    public void testNormalize_Set_Finding_2() throws Exception {
         BigDecimal result = fixture.normalize((Set<Finding>) null);
 
         Assert.assertEquals(BigDecimal.ONE, result);
     }
 
     @Test
-    public void testNormalize_Set_Finding_3() throws Exception
-    {
+    public void testNormalize_Set_Finding_3() throws Exception {
         BigDecimal result = fixture.normalize(Sets.newHashSet());
 
         Assert.assertEquals(BigDecimal.ONE, result);
     }
 
-    public void testNormalize_Set_Finding_4() throws Exception
-    {
+    public void testNormalize_Set_Finding_4() throws Exception {
         findings = Sets.newHashSet();
         Finding f1 = new Finding(file, "issue", "issue");
         Finding f2 = new Finding(file2, "issue", "issue");
@@ -147,8 +140,7 @@ public class RangedNormalizerTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -172,34 +164,30 @@ public class RangedNormalizerTest {
         graph.addEdge(vn, src, new ValueToMeasureEdge("v2m", vn, src));
 
         // setup metrics
-        final MetricsContext context = MetricsContext.getCleanInstance();
-
         CodeTree tree = new CodeTree();
         file = null;
         file2 = null;
-        ProjectNode proj = ProjectNode.builder("Test")
+        ProjectNode proj = ProjectNode.builder().key("Test")
                 .file(
-                        file = FileNode.builder("path")
+                        file = FileNode.builder().key("path")
                                 .metric("LOC", 200.0)
                                 .type(
-                                        TypeNode.builder()
-                                                .name("Type")
-                                                .identifier("namespace.Type")
+                                        ClassNode.builder()
+                                                .key("namespace.Type")
                                                 .start(1)
                                                 .end(100)
                                                 .metric("LOC", 100.0)
                                                 .method("method",
                                                         MethodNode.builder()
-                                                                .name("method")
-                                                                .identifier("namespace.Type#method")
+                                                                .key("namespace.Type#method")
                                                                 .start(20)
                                                                 .end(100)
                                                                 .metric("LOC", 80.0)
                                                                 .create())
                                                 .create())
                                 .create())
-                .file(file2 = FileNode.builder("path2").metric("LOC", 200.0).create())
-                .file(FileNode.builder("path3").metric("LOC", 200.0).create())
+                .file(file2 = FileNode.builder().key("path2").metric("LOC", 200.0).create())
+                .file(FileNode.builder().key("path3").metric("LOC", 200.0).create())
                 .metric("LOC", 1000.0)
                 .metric("NOM", 2.0)
                 .metric("NIV", 10.0)
@@ -213,7 +201,7 @@ public class RangedNormalizerTest {
         findings.add(f1);
         findings.add(f2);
 
-        context.merge(tree);
+        MeasuresTable.getInstance().merge(tree);
         Extent.getInstance().clearExtents();
     }
 
@@ -225,8 +213,7 @@ public class RangedNormalizerTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         // Add additional tear down code here
     }
 
@@ -237,8 +224,7 @@ public class RangedNormalizerTest {
      *            the command line arguments
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         new org.junit.runner.JUnitCore().run(RangedNormalizerTest.class);
     }
 }

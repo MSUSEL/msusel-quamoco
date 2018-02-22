@@ -25,23 +25,20 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import java.math.BigDecimal;
-import java.util.Set;
-
+import com.google.common.graph.MutableNetwork;
+import com.google.common.graph.NetworkBuilder;
+import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
+import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
+import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
+import edu.montana.gsoc.msusel.quamoco.processor.NullProcessor;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.graph.MutableNetwork;
-import com.google.common.graph.NetworkBuilder;
-import edu.montana.gsoc.msusel.codetree.node.FileNode;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
-import edu.montana.gsoc.msusel.quamoco.processor.NullProcessor;
+import java.math.BigDecimal;
+import java.util.Set;
+
+import static org.junit.Assert.*;
 
 /**
  * The class <code>FindingsUnionNodeTest</code> contains tests for the class
@@ -107,9 +104,9 @@ public class FindingsUnionNodeTest {
 
         fixture.graph.addNode(fixture);
         final FindingNode fn = new FindingNode(fixture.graph, "finding", "finding", "rule", "tool");
-        fn.addFinding(new Finding(FileNode.builder("path").create(), "finding1", "rule"));
-        fn.addFinding(new Finding(FileNode.builder("path").create(), "finding2", "rule"));
-        fn.addFinding(new Finding(FileNode.builder("path").create(), "finding3", "rule"));
+        fn.addFinding(new Finding(FileNode.builder().key("path").create(), "finding1", "rule"));
+        fn.addFinding(new Finding(FileNode.builder().key("path").create(), "finding2", "rule"));
+        fn.addFinding(new Finding(FileNode.builder().key("path").create(), "finding3", "rule"));
         fixture.graph.addNode(fn);
         fixture.graph.addEdge(fn, fixture, new FindingToMeasureEdge("name", fn, fixture));
 

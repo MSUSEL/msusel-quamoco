@@ -29,9 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.annotation.Nonnull;
-import javax.swing.*;
-
 import static org.apache.commons.lang3.StringEscapeUtils.escapeXml10;
 
 import com.google.common.collect.Lists;
@@ -40,6 +37,12 @@ import edu.montana.gsoc.msusel.quamoco.io.JsonSerializable;
 import edu.montana.gsoc.msusel.quamoco.io.ScriptSerializable;
 import edu.montana.gsoc.msusel.quamoco.io.XMLSerializable;
 import edu.montana.gsoc.msusel.quamoco.io.YamlSerializable;
+import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
+import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.measure.NormalizationMeasure;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
 import lombok.*;
 
 /**

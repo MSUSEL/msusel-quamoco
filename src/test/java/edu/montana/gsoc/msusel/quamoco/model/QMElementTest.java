@@ -25,12 +25,11 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
+import edu.montana.gsoc.msusel.quamoco.model.factor.ProductFactor;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.aggregation.FindingsIntersectionMeasureAggregation;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;

@@ -27,35 +27,36 @@ package edu.montana.gsoc.msusel.quamoco.io;
 
 import org.w3c.dom.Element;
 
-import edu.montana.gsoc.msusel.quamoco.model.Evaluation;
-import edu.montana.gsoc.msusel.quamoco.model.HistCompMultiMeasureEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.HistogramCompFactorAggregation;
-import edu.montana.gsoc.msusel.quamoco.model.ManualEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.MaxFactorAggregation;
-import edu.montana.gsoc.msusel.quamoco.model.MaxMultiMeasureEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.MeanFactorAggregation;
-import edu.montana.gsoc.msusel.quamoco.model.MeanMultiMeasureEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.MedianFactorAggregation;
-import edu.montana.gsoc.msusel.quamoco.model.MedianMultiMeasureEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.MinFactorAggregation;
-import edu.montana.gsoc.msusel.quamoco.model.MinMultiMeasureEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.ModeFactorAggregation;
-import edu.montana.gsoc.msusel.quamoco.model.ModeMultiMeasureEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.QIESLEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.RangeFactorAggregation;
-import edu.montana.gsoc.msusel.quamoco.model.RangeMultiMeasureEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.SingleMeasureEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.StdDevFactorAggregation;
-import edu.montana.gsoc.msusel.quamoco.model.StdDevMultiMeasureEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.SummationMultiMeasureEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.TextEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.VarianceFactorAggregation;
-import edu.montana.gsoc.msusel.quamoco.model.VarianceMultiMeasureEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.WeightedSumFactorAggregation;
-import edu.montana.gsoc.msusel.quamoco.model.WeightedSumMultiMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.HistCompMultiMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.HistogramCompFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.ManualEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.MaxFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.MaxMultiMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.MeanFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.MeanMultiMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.MedianFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.MedianMultiMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.MinFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.MinMultiMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.ModeFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.ModeMultiMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.QIESLEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.RangeFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.RangeMultiMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.SingleMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.StdDevFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.StdDevMultiMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.SummationMultiMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.TextEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.VarianceFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.VarianceMultiMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.WeightedSumFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.WeightedSumMultiMeasureEvaluation;
 
 /**
  * @author Isaac Griffith
+ * @version 1.2.0
  */
 public class EvaluationFactory extends AbstractQMElementFactory {
 

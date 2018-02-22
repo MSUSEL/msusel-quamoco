@@ -25,16 +25,16 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
-import java.util.Set;
-
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
+
+import java.util.Set;
 
 /**
  * Typing Interface indicating that a realizing edge is meant to convey and
  * normalize finding sets between nodes.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public interface FindingsEdge {
 

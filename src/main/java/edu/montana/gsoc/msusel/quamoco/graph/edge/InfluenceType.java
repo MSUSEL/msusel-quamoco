@@ -30,6 +30,7 @@ package edu.montana.gsoc.msusel.quamoco.graph.edge;
  * FIXME: This should be an enumeration
  *
  * @author Isaac Griffith
+ * @version 1.2.0
  */
 public interface InfluenceType {
 

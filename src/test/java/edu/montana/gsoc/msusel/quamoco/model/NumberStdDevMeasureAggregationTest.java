@@ -25,6 +25,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
+import edu.montana.gsoc.msusel.quamoco.model.measurement.aggregation.NumberStdDevMeasureAggregation;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -25,19 +25,19 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.normalizers;
 
-import java.math.BigDecimal;
-import java.util.Set;
-
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
 
+import java.math.BigDecimal;
+import java.util.Set;
+
 /**
  * A normalizer which simply return a 0.0 value.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class NullNormalizer extends Normalizer {
 

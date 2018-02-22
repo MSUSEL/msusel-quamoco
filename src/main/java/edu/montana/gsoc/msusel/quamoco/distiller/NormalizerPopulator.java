@@ -25,10 +25,6 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.graph.EndpointPair;
 import com.google.common.graph.MutableNetwork;
@@ -37,27 +33,30 @@ import edu.montana.gsoc.msusel.quamoco.graph.edge.RankedEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.montana.gsoc.msusel.quamoco.model.*;
+import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.WeightedSumFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.MeasureRanking;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.WeightedSumMultiMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.func.Function;
+import edu.montana.gsoc.msusel.quamoco.model.func.LinearFunction;
+import edu.montana.gsoc.msusel.quamoco.model.func.LinearIncreasingFunction;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.FactorRanking;
 import edu.montana.gsoc.msusel.quamoco.processor.NormalizerFactory;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.NegativeLinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.PositiveLinearDistribution;
-import edu.montana.gsoc.msusel.quamoco.model.Evaluation;
-import edu.montana.gsoc.msusel.quamoco.model.Factor;
-import edu.montana.gsoc.msusel.quamoco.model.FactorRanking;
-import edu.montana.gsoc.msusel.quamoco.model.Function;
-import edu.montana.gsoc.msusel.quamoco.model.LinearFunction;
-import edu.montana.gsoc.msusel.quamoco.model.LinearIncreasingFunction;
-import edu.montana.gsoc.msusel.quamoco.model.Measure;
-import edu.montana.gsoc.msusel.quamoco.model.MeasureRanking;
-import edu.montana.gsoc.msusel.quamoco.model.QMElement;
-import edu.montana.gsoc.msusel.quamoco.model.Ranking;
-import edu.montana.gsoc.msusel.quamoco.model.WeightedSumFactorAggregation;
-import edu.montana.gsoc.msusel.quamoco.model.WeightedSumMultiMeasureEvaluation;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class to populate the model processing graph edges with normalizers
  * 
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class NormalizerPopulator implements GraphModifier {
 

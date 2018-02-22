@@ -25,15 +25,14 @@
  */
 package edu.montana.gsoc.msusel.quamoco.io;
 
-import java.io.IOException;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
+import java.io.IOException;
 
 /**
  * @author Isaac Griffith
- *
+ * @version 1.2.0
  */
 public class QMRXMLReader extends AbstractQuamocoReader {
 

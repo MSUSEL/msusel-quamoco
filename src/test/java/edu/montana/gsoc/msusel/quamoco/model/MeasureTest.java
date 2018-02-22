@@ -28,6 +28,9 @@ package edu.montana.gsoc.msusel.quamoco.model;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import edu.montana.gsoc.msusel.quamoco.io.MeasuresType;
+import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
 import org.junit.Before;
 import org.junit.Test;
 

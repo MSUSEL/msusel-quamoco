@@ -25,19 +25,19 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph;
 
+import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
+import edu.montana.gsoc.msusel.quamoco.processor.Processor;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
-
-import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
-import edu.montana.gsoc.msusel.quamoco.processor.Processor;
 
 /**
  * Defines the basic interface of nodes for a Distilled Quality Model processing
  * graph.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public interface INode {
 

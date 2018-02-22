@@ -35,19 +35,19 @@ import com.google.common.graph.EndpointPair;
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.INode;
-import edu.montana.gsoc.msusel.quamoco.model.Evaluation;
-import edu.montana.gsoc.msusel.quamoco.model.Factor;
-import edu.montana.gsoc.msusel.quamoco.model.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
 import edu.montana.gsoc.msusel.quamoco.model.QMElement;
 
-import edu.montana.gsoc.msusel.quamoco.model.MeasurementMethod;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
 import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 
 /**
  * A utility class for dealing with quality model objects.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public final class QualityModelUtils {
 

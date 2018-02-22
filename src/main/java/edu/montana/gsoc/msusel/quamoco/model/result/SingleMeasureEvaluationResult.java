@@ -25,16 +25,14 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.result;
 
-import javax.annotation.Nonnull;
-
-import edu.montana.gsoc.msusel.quamoco.model.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * @author Isaac Griffith
- *
+ * @version 1.2.0
  */
 public class SingleMeasureEvaluationResult extends EvaluationResult {
 

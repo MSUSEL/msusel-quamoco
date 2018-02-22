@@ -25,24 +25,23 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.WeightedRankedEdge;
+import com.google.common.graph.Network;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
+import edu.montana.gsoc.msusel.quamoco.graph.edge.WeightedRankedEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * This class is used to update the weights associated with the edges between
  * factors of a distilled quality model graph.
  * 
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class WeightUpdater {
 
@@ -59,7 +58,7 @@ public class WeightUpdater {
      * @param graph
      *            Distilled quality model processing graph to update
      */
-    public void updateWeights(DirectedSparseGraph<Node, Edge> graph)
+    public void updateWeights(Network<Node, Edge> graph)
     {
         List<FactorNode> factors = getFactors(graph);
 
@@ -75,7 +74,7 @@ public class WeightUpdater {
      *            Distilled quality model processing graph
      */
     @VisibleForTesting
-    void updateWeights(FactorNode factor, DirectedSparseGraph<Node, Edge> graph)
+    void updateWeights(FactorNode factor, Network<Node, Edge> graph)
     {
         List<WeightedRankedEdge> edges = getWeightedEdges(factor, graph);
 
@@ -114,11 +113,11 @@ public class WeightUpdater {
      * @return List of incoming weighted ranked edges of the given factor node
      */
     @VisibleForTesting
-    List<WeightedRankedEdge> getWeightedEdges(FactorNode factor, DirectedSparseGraph<Node, Edge> graph)
+    List<WeightedRankedEdge> getWeightedEdges(FactorNode factor, Network<Node, Edge> graph)
     {
         List<WeightedRankedEdge> edges = Lists.newLinkedList();
 
-        graph.getInEdges(factor).forEach((edge) -> {
+        graph.inEdges(factor).forEach((edge) -> {
             if (edge instanceof WeightedRankedEdge)
             {
                 edges.add((WeightedRankedEdge) edge);
@@ -137,10 +136,10 @@ public class WeightUpdater {
      * @return List of factor nodes contained within the graph
      */
     @VisibleForTesting
-    List<FactorNode> getFactors(DirectedSparseGraph<Node, Edge> graph)
+    List<FactorNode> getFactors(Network<Node, Edge> graph)
     {
         List<FactorNode> factors = Lists.newLinkedList();
-        graph.getVertices().forEach((node) -> {
+        graph.nodes().forEach((node) -> {
             if (node instanceof FactorNode)
             {
                 factors.add((FactorNode) node);

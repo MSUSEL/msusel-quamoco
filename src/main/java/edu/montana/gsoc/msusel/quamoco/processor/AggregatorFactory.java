@@ -42,7 +42,7 @@ import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMaxAggregator
  * based on its current state.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class AggregatorFactory extends ProcessorFactory {
 

@@ -31,7 +31,7 @@ package edu.montana.gsoc.msusel.quamoco.graph.node;
  * FIXME: This should be an Enumeration
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public interface MeasureMethod {
 

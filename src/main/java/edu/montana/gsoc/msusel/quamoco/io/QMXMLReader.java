@@ -40,7 +40,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import edu.montana.gsoc.msusel.quamoco.distiller.ModelManager;
 import lombok.Getter;
-import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -52,17 +51,17 @@ import org.xml.sax.SAXException;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Maps;
 import edu.montana.gsoc.msusel.quamoco.model.Annotation;
-import edu.montana.gsoc.msusel.quamoco.model.Entity;
-import edu.montana.gsoc.msusel.quamoco.model.Evaluation;
-import edu.montana.gsoc.msusel.quamoco.model.Factor;
-import edu.montana.gsoc.msusel.quamoco.model.FactorRanking;
-import edu.montana.gsoc.msusel.quamoco.model.Function;
+import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
+import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.FactorRanking;
+import edu.montana.gsoc.msusel.quamoco.model.func.Function;
 import edu.montana.gsoc.msusel.quamoco.model.Impact;
 import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
-import edu.montana.gsoc.msusel.quamoco.model.LinearDecreasingFunction;
-import edu.montana.gsoc.msusel.quamoco.model.LinearIncreasingFunction;
-import edu.montana.gsoc.msusel.quamoco.model.Measure;
-import edu.montana.gsoc.msusel.quamoco.model.MeasureRanking;
+import edu.montana.gsoc.msusel.quamoco.model.func.LinearDecreasingFunction;
+import edu.montana.gsoc.msusel.quamoco.model.func.LinearIncreasingFunction;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.MeasureRanking;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.model.QMElement;
 import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
@@ -76,7 +75,7 @@ import edu.montana.gsoc.msusel.quamoco.model.Tool;
  * Quality Model Editor
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class QMXMLReader extends AbstractQuamocoReader {
 

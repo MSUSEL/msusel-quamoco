@@ -25,10 +25,10 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
-import java.math.BigDecimal;
-
 import edu.montana.gsoc.msusel.quamoco.processor.LinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
+
+import java.math.BigDecimal;
 
 /**
  * Typing interface for edges which have a ranking capability.
@@ -36,7 +36,7 @@ import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
  * move this to another type
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public interface RankedEdge {
 

@@ -1,20 +1,20 @@
 /**
  * The MIT License (MIT)
- *
+ * <p>
  * MSUSEL Quamoco Implementation
  * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,33 +25,33 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-
-import java.math.BigDecimal;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.codetree.CodeTree;
-import edu.montana.gsoc.msusel.codetree.node.FileNode;
-import edu.montana.gsoc.msusel.codetree.node.MethodNode;
-import edu.montana.gsoc.msusel.codetree.node.ProjectNode;
-import edu.montana.gsoc.msusel.codetree.node.TypeNode;
+import edu.montana.gsoc.msusel.codetree.node.member.MethodNode;
+import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
+import edu.montana.gsoc.msusel.codetree.node.structural.ProjectNode;
+import edu.montana.gsoc.msusel.codetree.node.type.ClassNode;
+import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
+import edu.montana.gsoc.msusel.metrics.MeasuresTable;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureFindingsEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
-import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggregator;
+import edu.montana.gsoc.msusel.quamoco.processor.extents.Extent;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.math.BigDecimal;
+
+import static org.junit.Assert.*;
 
 /**
  * The class <code>ExtentTest</code> contains tests for the class
@@ -63,11 +63,11 @@ import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggreg
  */
 public class ExtentTest {
 
-    private Extent     fixture;
-    private FileNode   file;
-    private FileNode   file2;
-    private FileNode   file3;
-    
+    private Extent fixture;
+    private FileNode file;
+    private FileNode file2;
+    private FileNode file3;
+
     private Finding fileFinding;
     private Finding methodFinding;
     private Finding typeFinding;
@@ -81,8 +81,7 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testFindExtent_1() throws Exception
-    {
+    public void testFindExtent_1() throws Exception {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.FILE;
 
@@ -99,8 +98,7 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testFindExtent_2() throws Exception
-    {
+    public void testFindExtent_2() throws Exception {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.CLASS;
 
@@ -117,8 +115,7 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testFindExtent_3() throws Exception
-    {
+    public void testFindExtent_3() throws Exception {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.METHOD;
 
@@ -135,8 +132,7 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testFindExtent_4() throws Exception
-    {
+    public void testFindExtent_4() throws Exception {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.NA;
 
@@ -153,8 +149,7 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testFindExtent_7() throws Exception
-    {
+    public void testFindExtent_7() throws Exception {
         final String metric = "";
         final NormalizationRange range = NormalizationRange.CLASS;
 
@@ -168,8 +163,7 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testFindExtent_8() throws Exception
-    {
+    public void testFindExtent_8() throws Exception {
         final String metric = null;
         final NormalizationRange range = NormalizationRange.CLASS;
 
@@ -183,8 +177,7 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testFindExtent_9() throws Exception
-    {
+    public void testFindExtent_9() throws Exception {
         final String metric = "LOC";
         final NormalizationRange range = null;
 
@@ -199,8 +192,7 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testFindMeasureExtent_1() throws Exception
-    {
+    public void testFindMeasureExtent_1() throws Exception {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.FILE;
 
@@ -219,8 +211,7 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testFindMeasureExtent_2() throws Exception
-    {
+    public void testFindMeasureExtent_2() throws Exception {
         final String metric = "";
         final NormalizationRange range = NormalizationRange.FILE;
 
@@ -237,8 +228,7 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testFindMeasureExtent_3() throws Exception
-    {
+    public void testFindMeasureExtent_3() throws Exception {
         final String metric = null;
         final NormalizationRange range = NormalizationRange.FILE;
 
@@ -254,8 +244,7 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testFindMeasureExtent_4() throws Exception
-    {
+    public void testFindMeasureExtent_4() throws Exception {
         final String metric = "LOC";
         final NormalizationRange range = null;
 
@@ -271,8 +260,7 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testFindMeasureExtent_5() throws Exception
-    {
+    public void testFindMeasureExtent_5() throws Exception {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.FILE;
 
@@ -287,8 +275,7 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testGetInstance_1() throws Exception
-    {
+    public void testGetInstance_1() throws Exception {
         final Extent result = Extent.getInstance();
         final Extent result2 = Extent.getInstance();
 
@@ -306,38 +293,34 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         fixture = Extent.getInstance();
         fixture.clearExtents();
-        final MetricsContext context = MetricsContext.getCleanInstance();
 
         CodeTree tree = new CodeTree();
         MethodNode method = null;
         TypeNode type = null;
-        ProjectNode proj = ProjectNode.builder("Test")
+        ProjectNode proj = ProjectNode.builder().key("Test")
                 .file(
-                        file = FileNode.builder("path")
+                        file = FileNode.builder().key("path")
                                 .metric("LOC", 200.0)
                                 .type(
-                                        type = TypeNode.builder()
-                                                .name("Type")
-                                                .identifier("namespace.Type")
+                                        type = ClassNode.builder()
+                                                .key("namespace.Type")
                                                 .start(1)
                                                 .end(100)
                                                 .metric("LOC", 100.0)
                                                 .method("method",
                                                         method = MethodNode.builder()
-                                                                .name("method")
-                                                                .identifier("namespace.Type#method")
+                                                                .key("namespace.Type#method")
                                                                 .start(20)
                                                                 .end(100)
                                                                 .metric("LOC", 80.0)
                                                                 .create())
                                                 .create())
                                 .create())
-                .file(file2 = FileNode.builder("path2").metric("LOC", 200.0).create())
-                .file(file3 = FileNode.builder("path3").metric("LOC", 200.0).create())
+                .file(file2 = FileNode.builder().key("path2").metric("LOC", 200.0).create())
+                .file(file3 = FileNode.builder().key("path3").metric("LOC", 200.0).create())
                 .metric("LOC", 1000.0)
                 .metric("NOM", 2.0)
                 .metric("NIV", 10.0)
@@ -349,7 +332,7 @@ public class ExtentTest {
         methodFinding = new Finding(method, "issue", "issue");
         typeFinding = new Finding(type, "issue", "issue");
 
-        context.merge(tree);
+        MeasuresTable.getInstance().merge(tree);
     }
 
     /**
@@ -360,8 +343,7 @@ public class ExtentTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         // Add additional tear down code here
     }
 
@@ -372,19 +354,18 @@ public class ExtentTest {
      *            the command line arguments
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         new org.junit.runner.JUnitCore().run(ExtentTest.class);
     }
 
-    private void buildGraph()
-    {
+    private void buildGraph() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
                 .expectedNodeCount(10000)
                 .expectedEdgeCount(10000)
                 .build();
+
         measure = new MeasureNode(graph, "dest", "owner");
         measure.setType(MeasureType.FINDINGS);
         final MeasureNode src = new MeasureNode(graph, "src", "owner");

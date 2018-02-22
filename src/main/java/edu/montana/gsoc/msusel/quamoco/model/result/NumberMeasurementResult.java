@@ -25,16 +25,14 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.result;
 
-import javax.annotation.Nonnull;
-
-import edu.montana.gsoc.msusel.quamoco.model.MeasurementMethod;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * @author Isaac Griffith
- *
+ * @version 1.2.0
  */
 public class NumberMeasurementResult extends MeasurementResult {
 

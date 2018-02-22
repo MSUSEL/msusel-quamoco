@@ -30,6 +30,7 @@ import org.w3c.dom.Element;
 
 /**
  * @author Isaac Griffith
+ * @version 1.2.0
  */
 public abstract class AbstractQMElementFactory {
 

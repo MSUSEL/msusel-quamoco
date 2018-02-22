@@ -37,7 +37,7 @@ import java.util.Map;
  * Abstract base class for Quamoco XML reader.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public abstract class AbstractQuamocoReader {
 

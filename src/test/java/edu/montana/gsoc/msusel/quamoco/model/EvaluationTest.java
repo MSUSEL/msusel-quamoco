@@ -25,6 +25,9 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
+import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.SingleMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
 import org.junit.Before;
 import org.junit.Test;
 

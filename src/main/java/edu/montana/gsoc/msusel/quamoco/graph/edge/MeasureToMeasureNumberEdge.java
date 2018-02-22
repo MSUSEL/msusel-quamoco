@@ -25,17 +25,17 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
+import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
 /**
  * This edge type connects two MeasureNodes whose type is both NUMBER (rather
  * than FINDINGS) and is only concerned with the aggregation of these values.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class MeasureToMeasureNumberEdge extends WeightedRankedEdge {
 

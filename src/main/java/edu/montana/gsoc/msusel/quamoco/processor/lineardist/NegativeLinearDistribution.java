@@ -31,7 +31,7 @@ import java.math.BigDecimal;
  * Convenience class for defining a Positive linear distribution
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class NegativeLinearDistribution extends AbstractLinearDistribution {
 

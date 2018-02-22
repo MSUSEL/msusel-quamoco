@@ -28,11 +28,16 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
 import edu.montana.gsoc.msusel.quamoco.model.*;
+import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.SingleMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.factor.ProductFactor;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.RuleBasedInstrument;
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Assert;

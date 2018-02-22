@@ -25,12 +25,13 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.result;
 
-import edu.montana.gsoc.msusel.quamoco.model.MeasurementMethod;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * @author Isaac Griffith
+ * @version 1.2.0
  */
 public abstract class MeasurementResult extends AbstractResult {
 

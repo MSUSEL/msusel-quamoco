@@ -1,23 +1,16 @@
+/target
 *.class
 *.jar
-./target
-/target/
-/sonar-project.properties
-/SparQLine_Quamoco.csv
-/SparQLine_Quamoco.udb
-/tree-java.json
-/tree-m-cs.json
-/tree-m-java.json
-/tree-s-cs.json
-/tree-s-java.json
-/tree.json
+/.sonar
+/.sonar/**
+*.udb
 /.settings/
-/.sonar/
-/testdata/
 /.classpath
 /.project
-/.Rhistory
-/csharp.qm.bak
+/build.sh
+/deploy.sh
+*.iml
+
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -26,10 +19,6 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
-.idea/
-*.iml
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
-*.iml
-

@@ -25,19 +25,19 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.evaluators;
 
+import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.montana.gsoc.msusel.quamoco.processor.Evaluator;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
-
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.processor.Evaluator;
 
 /**
  * Default evaluator for factors with more than one incoming measure. This
  * evaluator simply provides the arithmetic mean of the incoming values.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class MeanEvaluator extends Evaluator {
 

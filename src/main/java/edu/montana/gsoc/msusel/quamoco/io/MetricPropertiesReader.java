@@ -25,18 +25,18 @@
  */
 package edu.montana.gsoc.msusel.quamoco.io;
 
-import java.io.IOException;
-import java.util.Properties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.Properties;
 
 /**
  * Properties reader for files describing the language specific metrics produced
  * by quamoco
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public final class MetricPropertiesReader {
 
@@ -64,7 +64,7 @@ public final class MetricPropertiesReader {
         try
         {
             prop.load(MetricPropertiesReader.class.getResourceAsStream("metrics.properties"));
-            temp = prop.getProperty("metrics");
+            temp = prop.getProperty("edu/montana/gsoc/msusel/metrics");
             prop = new Properties();
         }
         catch (final IOException e)

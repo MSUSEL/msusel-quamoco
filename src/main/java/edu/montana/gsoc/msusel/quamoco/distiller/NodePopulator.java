@@ -29,12 +29,12 @@ import java.util.List;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.graph.MutableNetwork;
-import edu.montana.gsoc.msusel.quamoco.model.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
 import edu.montana.gsoc.msusel.quamoco.model.QMElement;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
-import edu.montana.gsoc.msusel.quamoco.model.Factor;
-import edu.montana.gsoc.msusel.quamoco.model.ManualInstrument;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.ManualInstrument;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorMethod;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
@@ -43,18 +43,18 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureMethod;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.graph.node.NormalizationNode;
-import edu.montana.gsoc.msusel.quamoco.model.Entity;
+import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
-import edu.montana.gsoc.msusel.quamoco.model.MeasurementMethod;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
 import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 import edu.montana.gsoc.msusel.quamoco.model.Tool;
-import edu.montana.gsoc.msusel.quamoco.model.ToolBasedInstrument;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.ToolBasedInstrument;
 
 /**
  * Populates the Quamoco Processing Graph with nodes.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class NodePopulator implements GraphModifier {
 

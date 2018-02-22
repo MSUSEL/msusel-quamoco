@@ -25,14 +25,15 @@
  */
 package edu.montana.gsoc.msusel.quamoco.io;
 
-import edu.montana.gsoc.msusel.quamoco.model.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
 import org.w3c.dom.Element;
 
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
-import edu.montana.gsoc.msusel.quamoco.model.NormalizationMeasure;
+import edu.montana.gsoc.msusel.quamoco.model.measure.NormalizationMeasure;
 
 /**
  * @author Isaac Griffith
+ * @version 1.2.0
  */
 public class MeasureFactory extends AbstractQMElementFactory {
 

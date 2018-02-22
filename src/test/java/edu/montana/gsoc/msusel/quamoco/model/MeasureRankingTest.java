@@ -25,6 +25,8 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.MeasureRanking;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
 import org.junit.Before;
 import org.junit.Test;
 

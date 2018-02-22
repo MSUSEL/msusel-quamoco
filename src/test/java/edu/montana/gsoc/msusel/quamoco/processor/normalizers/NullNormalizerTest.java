@@ -25,19 +25,18 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.normalizers;
 
-import java.math.BigDecimal;
-import java.util.Set;
-
+import com.google.common.collect.Sets;
+import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
+import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureNumberEdge;
+import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
+import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.collect.Sets;
-import edu.montana.gsoc.msusel.codetree.node.FileNode;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureNumberEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
-import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
+import java.math.BigDecimal;
+import java.util.Set;
 
 /**
  * The class <code>NullNormalizerTest</code> contains tests for the class
@@ -73,7 +72,7 @@ public class NullNormalizerTest {
     public void testNormalize_2() throws Exception
     {
         final Set<Finding> findings = Sets.newHashSet();
-        findings.add(new Finding(FileNode.builder("path").create(), "issue", "issue"));
+        findings.add(new Finding(FileNode.builder().key("path").create(), "issue", "issue"));
         final BigDecimal result = fixture.normalize(findings);
 
         // add additional test code here

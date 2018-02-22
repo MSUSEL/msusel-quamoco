@@ -1,20 +1,20 @@
 /**
  * The MIT License (MIT)
- *
+ * <p>
  * MSUSEL Quamoco Implementation
  * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,9 +24,6 @@
  * SOFTWARE.
  */
 package edu.montana.gsoc.msusel.quamoco.graph.node;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.google.common.graph.EndpointPair;
@@ -39,12 +36,15 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 /**
  * Abstract base class for the nodes in the distilled quality model processing
  * graph.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 @EqualsAndHashCode(of = {"name", "ownedBy"})
 @ToString(of = "name")
@@ -53,55 +53,57 @@ public abstract class Node implements INode {
     /**
      * Graph to which this node belongs
      */
-    @Getter @Setter
+    @Getter
+    @Setter
     transient protected MutableNetwork<Node, Edge> graph;
     /**
      * Value associated with node after evaluation
      */
-    protected BigDecimal                                value       = BigDecimal.ZERO;
+    protected BigDecimal value = BigDecimal.ZERO;
     /**
      * lower result of this node (min of all incoming values)
      */
-    protected BigDecimal                                lowerResult = BigDecimal.ZERO;
+    protected BigDecimal lowerResult = BigDecimal.ZERO;
     /**
      * upper result of this node (max of all incoming values)
      */
-    protected BigDecimal                                upperResult = BigDecimal.ONE;
+    protected BigDecimal upperResult = BigDecimal.ONE;
     /**
      * fully qualified identifier of the quamoco model entity from which this
      * node was derived
      */
-    @Getter @Setter
-    protected String                                    ownedBy;
+    @Getter
+    protected String ownedBy;
     /**
      * name of this node
      */
-    @Getter @Setter
-    protected String                                    name;
+    @Getter
+    protected String name;
     /**
      * description of this node
      * TODO remove this
      */
-    @Getter @Setter
-    protected String                                    description;
+    @Getter
+    protected String description;
     /**
      * The process associated with this node, which facilitates the evaluation
      */
-    @Getter @Setter
+    @Getter
+    @Setter
     protected Processor processor;
     /**
      * Boolean flag indicating that this node has already successfully been
      * calculated.
      */
     @Getter
-    protected boolean                                   calculated;
+    protected boolean calculated;
 
     /**
      * Constructs a new Node which is contained in the given graph,
      * identified by the given name, extracted from the quamoco model entity
      * with
      * the given identifier.
-     * 
+     *
      * @param graph
      *            Graph to which this node belongs
      * @param name
@@ -109,10 +111,8 @@ public abstract class Node implements INode {
      * @param owner
      *            Identifier of the quamoco model entity this node came from
      */
-    public Node(final MutableNetwork<Node, Edge> graph, final String name, final String owner)
-    {
-        if (name == null || name.isEmpty() || owner == null || owner.isEmpty())
-        {
+    public Node(final MutableNetwork<Node, Edge> graph, final String name, final String owner) {
+        if (name == null || name.isEmpty() || owner == null || owner.isEmpty()) {
             throw new IllegalArgumentException();
         }
 
@@ -138,14 +138,10 @@ public abstract class Node implements INode {
      * {@inheritDoc}
      */
     @Override
-    public void setDescription(final String description)
-    {
-        if (description == null)
-        {
+    public void setDescription(final String description) {
+        if (description == null) {
             this.description = "";
-        }
-        else
-        {
+        } else {
             this.description = description;
         }
     }
@@ -154,10 +150,8 @@ public abstract class Node implements INode {
      * {@inheritDoc}
      */
     @Override
-    public void setName(final String name)
-    {
-        if (name == null || name.isEmpty())
-        {
+    public void setName(final String name) {
+        if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException();
         }
 
@@ -168,10 +162,8 @@ public abstract class Node implements INode {
      * {@inheritDoc}
      */
     @Override
-    public void setOwnedBy(final String ownedBy)
-    {
-        if (ownedBy == null || ownedBy.isEmpty())
-        {
+    public void setOwnedBy(final String ownedBy) {
+        if (ownedBy == null || ownedBy.isEmpty()) {
             throw new IllegalArgumentException();
         }
 
@@ -182,14 +174,13 @@ public abstract class Node implements INode {
      * {@inheritDoc}
      */
     @Override
-    public List<BigDecimal> getValues()
-    {
+    public List<BigDecimal> getValues() {
         final List<BigDecimal> list = Lists.newArrayList();
         list.add(getValue());
 
         return list;
     }
-    
+
     public Node getOpposite(Edge e) {
         EndpointPair<Node> pair = graph.incidentNodes(e);
         if (pair.target().equals(this))

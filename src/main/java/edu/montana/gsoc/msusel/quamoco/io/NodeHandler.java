@@ -29,7 +29,7 @@ import org.w3c.dom.Node;
 
 /**
  * @author Isaac Griffith
- *
+ * @version 1.2.0
  */
 @FunctionalInterface
 interface NodeHandler {

@@ -25,19 +25,20 @@
  */
 package edu.montana.gsoc.msusel.quamoco.io;
 
-import edu.montana.gsoc.msusel.quamoco.model.TechnicalIssue;
+import edu.montana.gsoc.msusel.quamoco.model.factor.TechnicalIssue;
 import org.w3c.dom.Element;
 
-import edu.montana.gsoc.msusel.quamoco.model.Factor;
-import edu.montana.gsoc.msusel.quamoco.model.Goal;
-import edu.montana.gsoc.msusel.quamoco.model.ProductFactor;
-import edu.montana.gsoc.msusel.quamoco.model.ProductQualityAttribute;
-import edu.montana.gsoc.msusel.quamoco.model.QualityInUseAttribute;
-import edu.montana.gsoc.msusel.quamoco.model.Requirement;
-import edu.montana.gsoc.msusel.quamoco.model.StakeholderSatisfaction;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Goal;
+import edu.montana.gsoc.msusel.quamoco.model.factor.ProductFactor;
+import edu.montana.gsoc.msusel.quamoco.model.factor.ProductQualityAttribute;
+import edu.montana.gsoc.msusel.quamoco.model.factor.QualityInUseAttribute;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Requirement;
+import edu.montana.gsoc.msusel.quamoco.model.factor.StakeholderSatisfaction;
 
 /**
  * @author Isaac Griffith
+ * @version 1.2.0
  */
 public class FactorFactory extends AbstractQMElementFactory {
 

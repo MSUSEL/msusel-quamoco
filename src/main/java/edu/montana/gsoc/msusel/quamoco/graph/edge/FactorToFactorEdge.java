@@ -25,25 +25,25 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
 import lombok.Getter;
-import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Edge connecting one FactorNode to another FactorNode.
  *
  * @author Isaac Griffith
+ * @version 1.2.0
  */
 public class FactorToFactorEdge extends WeightedRankedEdge implements InfluenceEdge {
 
     /**
      * Influence type
      */
-    @Getter @Setter
+    @Getter
     private String inf;
 
     /**

@@ -25,13 +25,12 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
+import edu.montana.gsoc.msusel.codetree.node.AbstractNode;
+import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import edu.montana.gsoc.msusel.codetree.INode;
-import edu.montana.gsoc.msusel.codetree.node.FileNode;
 
 /**
  * The class <code>FindingTest</code> contains tests for the class
@@ -52,7 +51,7 @@ public class FindingTest {
     @Test
     public void testFinding_1() throws Exception
     {
-        final INode location = FileNode.builder("/some/path").create();
+        final AbstractNode location = FileNode.builder().key("/some/path").create();
         final String issueKey = "issueKey";
         final String issueName = "issueName";
 
@@ -73,7 +72,7 @@ public class FindingTest {
     @Test
     public void testFinding_2() throws Exception
     {
-        final INode location = FileNode.builder("/some/path").create();
+        final AbstractNode location = FileNode.builder().key("/some/path").create();
         final String issueKey = "";
         final String issueName = "issueName";
 
@@ -97,7 +96,7 @@ public class FindingTest {
     @Test
     public void testFinding_3() throws Exception
     {
-        final INode location = FileNode.builder("/some/path").create();
+        final AbstractNode location = FileNode.builder().key("/some/path").create();
         final String issueKey = "issueKey";
         final String issueName = "";
 
@@ -121,7 +120,7 @@ public class FindingTest {
     @Test
     public void testFinding_4() throws Exception
     {
-        final INode location = FileNode.builder("/some/path").create();
+        final AbstractNode location = FileNode.builder().key("/some/path").create();
         final String issueKey = null;
         final String issueName = "issueName";
 
@@ -145,7 +144,7 @@ public class FindingTest {
     @Test
     public void testFinding_5() throws Exception
     {
-        final INode location = FileNode.builder("/some/path").create();
+        final AbstractNode location = FileNode.builder().key("/some/path").create();
         final String issueKey = "issueKey";
         final String issueName = null;
 
@@ -169,7 +168,7 @@ public class FindingTest {
     @Test
     public void testFinding_6() throws Exception
     {
-        final INode location = null;
+        final AbstractNode location = null;
         final String issueKey = "issueKey";
         final String issueName = "issueName";
 
@@ -193,8 +192,8 @@ public class FindingTest {
     @Test
     public void testEquals_1() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder("/some/path").create(), "issueKey", "issueName");
-        final Finding obj = new Finding(FileNode.builder("/some/path").create(), "issueKey", "issueName");
+        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
+        final Finding obj = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
 
         final boolean result = fixture.equals(obj);
 
@@ -214,7 +213,7 @@ public class FindingTest {
     @Test
     public void testEquals_2() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder("/some/path").create(), "issueKey", "issueName");
+        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
         final Object obj = null;
 
         final boolean result = fixture.equals(obj);
@@ -232,7 +231,7 @@ public class FindingTest {
     @Test
     public void testEquals_3() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder("/some/path").create(), "issueKey", "issueName");
+        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
         final Object obj = new Object();
 
         final boolean result = fixture.equals(obj);
@@ -250,8 +249,8 @@ public class FindingTest {
     @Test
     public void testEquals_4() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder("/some/path").create(), "issueKey", "issueName");
-        final Finding obj = new Finding(FileNode.builder("/some/path").create(), "otherKey", "issueName");
+        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
+        final Finding obj = new Finding(FileNode.builder().key("/some/path").create(), "otherKey", "issueName");
 
         final boolean result = fixture.equals(obj);
 
@@ -268,8 +267,8 @@ public class FindingTest {
     @Test
     public void testEquals_5() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder("/some/path").create(), "issueKey", "issueName");
-        final Finding obj = new Finding(FileNode.builder("/some/path").create(), "issueKey", "otherName");
+        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
+        final Finding obj = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "otherName");
 
         final boolean result = fixture.equals(obj);
 
@@ -286,8 +285,8 @@ public class FindingTest {
     @Test
     public void testEquals_6() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder("/some/path").create(), "issueKey", "issueName");
-        final Finding obj = new Finding(FileNode.builder("/other/path").create(), "issueKey", "issueName");
+        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
+        final Finding obj = new Finding(FileNode.builder().key("/other/path").create(), "issueKey", "issueName");
 
         final boolean result = fixture.equals(obj);
 
@@ -304,7 +303,7 @@ public class FindingTest {
     @Test
     public void testGetIssueKey_1() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder("/some/path").create(), "issueKey", "issueName");
+        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
 
         final String result = fixture.getIssueKey();
 
@@ -321,7 +320,7 @@ public class FindingTest {
     @Test
     public void testGetIssueName_1() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder("/some/path").create(), "issueKey", "issueName");
+        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
 
         final String result = fixture.getIssueName();
 
@@ -338,15 +337,14 @@ public class FindingTest {
     @Test
     public void testGetLocation_1() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder("/some/path").create(), "issueKey", "issueName");
+        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
 
-        final INode result = fixture.getLocation();
+        final AbstractNode result = (AbstractNode) fixture.getLocation();
 
         // add additional test code here
         Assert.assertNotNull(result);
-        Assert.assertEquals("/some/path", result.getQIdentifier());
-        Assert.assertEquals(1, ((FileNode) result).getLength());
-        Assert.assertEquals("FILE", result.getType());
+        Assert.assertEquals("/some/path", result.getKey());
+        Assert.assertEquals("FILE", result.type());
     }
 
     /**
@@ -358,7 +356,7 @@ public class FindingTest {
     @Test
     public void testSetIssueKey_1() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder("/some/path").create(), "issueKey", "issueName");
+        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
         final String issueKey = "";
 
         fixture.setIssueKey(issueKey);
@@ -382,7 +380,7 @@ public class FindingTest {
     @Test
     public void testSetIssueName_1() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder("/some/path").create(), "issueKey", "issueName");
+        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
         String issueName = "";
 
         fixture.setIssueName(issueName);
@@ -407,8 +405,8 @@ public class FindingTest {
     @Test
     public void testSetLocation_1() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder("/some/path").create(), "issueKey", "issueName");
-        final INode location = FileNode.builder("/some/other/path").create();
+        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
+        final AbstractNode location = FileNode.builder().key("/some/other/path").create();
 
         fixture.setLocation(location);
 

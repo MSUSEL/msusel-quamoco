@@ -34,7 +34,7 @@ import java.math.RoundingMode;
  * Edge connection two measure nodes which handles both Findings and Values.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class MeasureToMeasureFindingsNumberEdge extends WeightedRankedEdge {
 

@@ -33,7 +33,7 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
  * Strategy to modify a graph based on available distiller data.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public interface GraphModifier {
 

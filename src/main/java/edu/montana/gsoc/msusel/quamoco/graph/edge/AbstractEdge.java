@@ -25,9 +25,6 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
@@ -36,13 +33,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 /**
  * An abstract representation of an Edge for the Quamoco
  * processing graph. In the Quamoco Graph, edges normalize the value of the
  * source and provide this normalized value to the dest.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 @EqualsAndHashCode(of = {"id", "name"})
 @ToString(of = {"id"})

@@ -25,20 +25,20 @@
  */
 package edu.montana.gsoc.msusel.quamoco.io;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.Properties;
-
 import edu.montana.gsoc.msusel.quamoco.distiller.Grade;
 import edu.montana.gsoc.msusel.quamoco.distiller.GradeThresholdException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Properties;
+
 /**
  * Properties reader for the default grade scheme for quamoco.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class GradeSchemePropertiesReader {
 

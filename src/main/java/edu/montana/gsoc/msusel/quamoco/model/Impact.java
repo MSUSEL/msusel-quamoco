@@ -26,9 +26,9 @@
 package edu.montana.gsoc.msusel.quamoco.model;
 
 import java.util.UUID;
-import javax.annotation.Nonnull;
 
 import edu.montana.gsoc.msusel.quamoco.io.XMLSerializable;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
 import lombok.*;
 import org.apache.commons.lang3.StringEscapeUtils;
 

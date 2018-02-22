@@ -34,6 +34,6 @@
  * the CodeTree.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 package edu.montana.gsoc.msusel.quamoco.processor;

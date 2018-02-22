@@ -27,16 +27,13 @@ package edu.montana.gsoc.msusel.quamoco.model.result;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.Nonnull;
-
 /**
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class ResultSet {
 

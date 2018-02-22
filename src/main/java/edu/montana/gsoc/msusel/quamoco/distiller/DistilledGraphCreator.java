@@ -25,19 +25,19 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import java.util.List;
-
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 
+import java.util.List;
+
 /**
  * DistilledGraphCreator - builds the Quamoco processing graph.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class DistilledGraphCreator {
 

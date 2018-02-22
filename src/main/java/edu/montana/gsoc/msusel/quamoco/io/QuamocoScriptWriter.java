@@ -43,7 +43,7 @@ import java.util.Map;
  * produced by the Quamoco Quality Model Editor.
  * 
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class QuamocoScriptWriter extends AbstractWriter {
 

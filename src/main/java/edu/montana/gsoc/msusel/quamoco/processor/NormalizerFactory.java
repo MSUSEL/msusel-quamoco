@@ -38,7 +38,7 @@ import edu.montana.gsoc.msusel.quamoco.processor.normalizers.UnrangedNormalizer;
  * Normalizers for edges in the distilled quality model graph.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class NormalizerFactory {
 

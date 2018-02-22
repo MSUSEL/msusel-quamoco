@@ -25,19 +25,19 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.aggregators;
 
+import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.montana.gsoc.msusel.quamoco.processor.Aggregator;
+
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
-
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.processor.Aggregator;
 
 /**
  * A value based aggregator for measures with type NUMBER. Simply this collects
  * the incoming values and returns the max of the set.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class NumberMaxAggregator extends Aggregator {
 

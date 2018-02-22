@@ -31,7 +31,7 @@ import java.math.BigDecimal;
  * Provides the base interface for the LinearDistribution classes.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public interface LinearDistribution {
 

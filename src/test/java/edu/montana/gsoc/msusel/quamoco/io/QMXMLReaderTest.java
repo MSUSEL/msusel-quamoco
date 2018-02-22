@@ -26,6 +26,17 @@
 package edu.montana.gsoc.msusel.quamoco.io;
 
 import edu.montana.gsoc.msusel.quamoco.model.*;
+import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.WeightedSumFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.MeasureRanking;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.WeightedSumMultiMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.func.Function;
+import edu.montana.gsoc.msusel.quamoco.model.func.LinearFunction;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.FactorRanking;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.ToolBasedInstrument;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

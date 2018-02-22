@@ -31,7 +31,7 @@ import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 
 /**
  * @author Isaac Griffith
- *
+ * @version 1.2.0
  */
 public class QMJsonWriter extends AbstractWriter {
 

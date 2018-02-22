@@ -25,19 +25,19 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
-import java.math.BigDecimal;
-import java.util.Set;
-
 import com.google.common.collect.Sets;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
+import java.math.BigDecimal;
+import java.util.Set;
+
 /**
  * Edge connecting two MeasureNodes but which only aggregates Finding Sets
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class MeasureToMeasureFindingsEdge extends AbstractEdge implements FindingsEdge {
 
