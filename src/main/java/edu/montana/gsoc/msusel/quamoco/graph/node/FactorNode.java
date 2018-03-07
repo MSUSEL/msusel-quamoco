@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -61,11 +61,14 @@ public class FactorNode extends Node {
      * Constructs a new Factor node in the given graph, with the given name, and
      * associated with the owner id in a Quality Model.
      *
-     * @param graph Graph in which this factor will be located.
      * @param name  Name of the factor
      * @param owner Id of the entity in a quality model this node represents.
      */
-    public FactorNode(final MutableNetwork<Node, Edge> graph, final String name, final String owner) {
+    public FactorNode(final String name, final String owner) {
+        this(null, name, owner);
+    }
+
+    public FactorNode(MutableNetwork<Node, Edge> graph, final String name, final String owner) {
         super(graph, name, owner);
         method = FactorMethod.MEAN;
         findings = Sets.newHashSet();

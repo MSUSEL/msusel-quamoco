@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,18 +25,16 @@
  */
 package edu.montana.gsoc.msusel.quamoco.io;
 
-import java.util.Map;
-
-import javax.xml.stream.XMLStreamReader;
-
+import edu.montana.gsoc.msusel.quamoco.distiller.ModelManager;
+import edu.montana.gsoc.msusel.quamoco.io.qmr.QMRXMLReader;
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.montana.gsoc.msusel.quamoco.io.AbstractQuamocoReader;
-import edu.montana.gsoc.msusel.quamoco.io.QMRXMLReader;
+import javax.xml.stream.XMLStreamReader;
+import java.util.Map;
 
 /**
  * The class <code>AbstractQuamocoReaderTest</code> contains tests for the class
@@ -56,7 +54,7 @@ public class AbstractQuamocoReaderTest {
 	 */
 	@Test
 	public void testGetAttributes_1() throws Exception {
-		final AbstractQuamocoReader fixture = new QMRXMLReader();
+		final AbstractQuamocoReader fixture = new QMRXMLReader(new ModelManager());
 		final XMLStreamReader reader = EasyMock.createMock(XMLStreamReader.class);
 		// TODO: add mock object expectations here
 
@@ -90,7 +88,7 @@ public class AbstractQuamocoReaderTest {
 	 */
 	@Test
 	public void testGetAttributes_2() throws Exception {
-		final AbstractQuamocoReader fixture = new QMRXMLReader();
+		final AbstractQuamocoReader fixture = new QMRXMLReader(new ModelManager());
 		final XMLStreamReader reader = null;
 
 		final Map<String, String> result = fixture.getAttributes(reader);

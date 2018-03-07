@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -80,8 +80,6 @@ public class ValueNode extends Node {
      * identified by the given key, extracted from the quamoco model entity with
      * the given identifier and measured by the tool with the given identifier
      * 
-     * @param graph
-     *            Graph to which this node belongs
      * @param key
      *            Identifier of this node
      * @param owner
@@ -89,13 +87,19 @@ public class ValueNode extends Node {
      * @param tool
      *            Tool which provides the values for this node
      */
-    public ValueNode(final MutableNetwork<Node, Edge> graph, final String key, final String owner, final String tool)
+    public ValueNode(final String key, final String owner, final String tool)
+    {
+        this(null, key, owner, tool);
+    }
+
+    public ValueNode(MutableNetwork<Node, Edge> graph, final String key, final String owner, final String tool)
     {
         super(graph, key, owner);
         this.tool = tool;
         values = Lists.newArrayList();
         value = BigDecimal.ZERO;
     }
+
 
     /**
      * @return the key identifying this node

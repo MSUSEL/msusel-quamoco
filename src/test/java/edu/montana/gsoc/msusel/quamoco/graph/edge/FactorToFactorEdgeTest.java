@@ -1,20 +1,20 @@
 /**
  * The MIT License (MIT)
- *
+ * <p>
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,19 +25,6 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.math.BigDecimal;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
@@ -46,6 +33,14 @@ import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.PositiveLinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.math.BigDecimal;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * The class <code>InfluenceEdgeTest</code> contains tests for the class
@@ -66,8 +61,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testFactorToFactorEdge_1() throws Exception
-    {
+    public void testFactorToFactorEdge_1() throws Exception {
         final String name = "TestEdge";
 
         final FactorToFactorEdge result = new FactorToFactorEdge(name, null, null, InfluenceEffect.POSITIVE);
@@ -88,8 +82,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetInf_1() throws Exception
-    {
+    public void testGetInf_1() throws Exception {
         final String result = fixture.getInf();
 
         // TODO: add additional test code here
@@ -103,8 +96,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetLowerBound_1() throws Exception
-    {
+    public void testGetLowerBound_1() throws Exception {
         final BigDecimal result = fixture.getLowerBound();
 
         // TODO: add additional test code here
@@ -118,8 +110,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetUpperBound_1() throws Exception
-    {
+    public void testGetUpperBound_1() throws Exception {
         final BigDecimal result = fixture.getUpperBound();
 
         // TODO: add additional test code here
@@ -133,8 +124,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_1() throws Exception
-    {
+    public void testGetValue_1() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -166,8 +156,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_2() throws Exception
-    {
+    public void testGetValue_2() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -199,8 +188,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_3() throws Exception
-    {
+    public void testGetValue_3() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -231,8 +219,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_4() throws Exception
-    {
+    public void testGetValue_4() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -263,8 +250,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_5() throws Exception
-    {
+    public void testGetValue_5() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -272,7 +258,7 @@ public class FactorToFactorEdgeTest {
                 .expectedEdgeCount(10000)
                 .build();
         final FactorNode dest = new FactorNode(graph, "dest", "dest");
-        // final ValueNode src = new ValueNode(graph, "source", "source", "");
+//        final ValueNode src = new ValueNode(graph, "source", "source", "");
 
         FactorNode src = mock(FactorNode.class);
         when(src.getValue()).thenReturn(new BigDecimal(-1));
@@ -280,7 +266,7 @@ public class FactorToFactorEdgeTest {
         fixture.setDist(null);
         fixture.setInf(null);
         fixture.setNormalizer(null);
-
+//
         graph.addEdge(src, dest, fixture);
         fixture.source = src;
         fixture.dest = dest;
@@ -295,8 +281,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_6() throws Exception
-    {
+    public void testGetValue_6() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -328,8 +313,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetWeight_1() throws Exception
-    {
+    public void testGetWeight_1() throws Exception {
         final BigDecimal result = fixture.getWeight();
 
         // TODO: add additional test code here
@@ -343,8 +327,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetInf_1() throws Exception
-    {
+    public void testSetInf_1() throws Exception {
         final String inf = "";
 
         fixture.setInf(inf);
@@ -358,8 +341,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetInf_2() throws Exception
-    {
+    public void testSetInf_2() throws Exception {
         final String inf = null;
 
         fixture.setInf(inf);
@@ -373,8 +355,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetInf_3() throws Exception
-    {
+    public void testSetInf_3() throws Exception {
         final String inf = InfluenceType.POS;
 
         fixture.setInf(inf);
@@ -388,8 +369,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetInf_4() throws Exception
-    {
+    public void testSetInf_4() throws Exception {
         final String inf = InfluenceType.NEG;
 
         fixture.setInf(inf);
@@ -403,8 +383,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetInf_5() throws Exception
-    {
+    public void testSetInf_5() throws Exception {
         final String inf = "test";
 
         fixture.setInf(inf);
@@ -417,8 +396,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetLowerBound_1() throws Exception
-    {
+    public void testSetLowerBound_1() throws Exception {
         final BigDecimal lowerBound = BigDecimal.ZERO;
 
         fixture.setLowerBound(lowerBound);
@@ -432,8 +410,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetLowerBound_2() throws Exception
-    {
+    public void testSetLowerBound_2() throws Exception {
         final BigDecimal lowerBound = new BigDecimal(2.0);
 
         fixture.setLowerBound(lowerBound);
@@ -446,8 +423,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetUpperBound_1() throws Exception
-    {
+    public void testSetUpperBound_1() throws Exception {
         final BigDecimal upperBound = BigDecimal.ZERO;
         fixture.setLowerBound(BigDecimal.ONE);
         fixture.setUpperBound(upperBound);
@@ -460,8 +436,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetUpperBound_2() throws Exception
-    {
+    public void testSetUpperBound_2() throws Exception {
         final BigDecimal upperBound = new BigDecimal(2.0);
 
         fixture.setUpperBound(upperBound);
@@ -475,8 +450,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetWeight_1() throws Exception
-    {
+    public void testSetWeight_1() throws Exception {
         final BigDecimal weight = BigDecimal.ZERO;
 
         fixture.setWeight(weight);
@@ -490,8 +464,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetWeight_2() throws Exception
-    {
+    public void testSetWeight_2() throws Exception {
         final BigDecimal weight = new BigDecimal(-1.0);
 
         fixture.setWeight(weight);
@@ -505,8 +478,7 @@ public class FactorToFactorEdgeTest {
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetWeight_3() throws Exception
-    {
+    public void testSetWeight_3() throws Exception {
         final BigDecimal weight = new BigDecimal(1.5);
 
         fixture.setWeight(weight);
@@ -520,8 +492,7 @@ public class FactorToFactorEdgeTest {
      *            the command line arguments
      * @generatedBy CodePro at 5/30/15 3:38 PM
      */
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         new org.junit.runner.JUnitCore().run(FactorToFactorEdgeTest.class);
     }
 
@@ -529,8 +500,7 @@ public class FactorToFactorEdgeTest {
      *
      */
     @Before
-    public void setUp()
-    {
+    public void setUp() {
         fixture = new FactorToFactorEdge("", null, null, InfluenceEffect.POSITIVE);
         fixture.setInf(InfluenceType.POS);
         fixture.setUpperBound(BigDecimal.ONE);

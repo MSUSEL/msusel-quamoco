@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -84,6 +84,11 @@ public abstract class Evaluation extends QMElement {
      */
     @Getter @Setter
     protected Double maximumPoints;
+    @Setter
+    protected String modelName;
+    @Setter
+    @Getter
+    protected String name;
     /**
      * A title is an optional additional name for the evaluation.
      */
@@ -104,9 +109,10 @@ public abstract class Evaluation extends QMElement {
         super(identifier);
     }
 
-    protected Evaluation(Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
+    protected Evaluation(String name, Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
                          String identifier, Source originatesFrom, List<Tag> taggedBy, List<Annotation> annotations) {
         super(identifier, originatesFrom, taggedBy, annotations);
+        this.name = name;
         this.completeness = completeness;
         this.maximumPoints = maximumPoints;
         this.title = title;
@@ -115,6 +121,21 @@ public abstract class Evaluation extends QMElement {
     }
 
     public abstract double evaluate();
+
+    public String getFullName() {
+        StringBuilder builder = new StringBuilder();
+        if (modelName != null) {
+            builder.append(modelName);
+            builder.append("/");
+        }
+        if (evaluates != null) {
+            builder.append(evaluates.getFullName());
+            builder.append("/");
+        }
+        builder.append(getName());
+
+        return builder.toString();
+    }
 
     protected String generateXMLTag(String type) {
         return generateXMLTag(type, Maps.newHashMap());

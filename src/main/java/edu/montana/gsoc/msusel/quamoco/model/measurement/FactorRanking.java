@@ -1,20 +1,20 @@
 /**
  * The MIT License (MIT)
- * <p>
+ *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
- * <p>
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * <p>
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * <p>
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,7 +25,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.measurement;
 
-import edu.montana.gsoc.msusel.quamoco.io.RankingType;
+import edu.montana.gsoc.msusel.quamoco.io.factories.RankingType;
 import edu.montana.gsoc.msusel.quamoco.model.*;
 import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
 import lombok.Builder;
@@ -40,7 +40,7 @@ import java.util.List;
  * evaluation of another Factor
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class FactorRanking extends QMElement implements Ranking {
 
@@ -55,22 +55,25 @@ public class FactorRanking extends QMElement implements Ranking {
      */
     @Getter
     @Setter
-    @Builder.Default
     private int rank = 0;
     /**
      * Weight associated with the measure or factor
      */
     @Getter
     @Setter
-    @Builder.Default
     private double weight = 0.0;
     /**
      * Contribution Points
      */
     @Getter
     @Setter
-    @Builder.Default
     private double contributionPoints = 0.0;
+    /**
+     * Influence Type
+     */
+    @Getter
+    @Setter
+    private InfluenceEffect influence;
 
     /**
      * Constructs a new Factor ranking
@@ -87,12 +90,13 @@ public class FactorRanking extends QMElement implements Ranking {
     }
 
     @Builder(buildMethodName = "create")
-    protected FactorRanking(Factor factor, int rank, double weight, double contributionPoints, String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
+    protected FactorRanking(Factor factor, int rank, double weight, double contributionPoints, String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations, InfluenceEffect influence) {
         super(identifier, originatesFrom, tags, annotations);
         this.factor = factor;
         this.rank = rank;
         this.weight = weight;
         this.contributionPoints = contributionPoints;
+        this.influence = influence;
     }
 
     /**
@@ -113,5 +117,13 @@ public class FactorRanking extends QMElement implements Ranking {
     public String toScript() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    public String getName() {
+        if (factor != null) {
+            return factor.getFullName();
+        }
+
+        return "";
     }
 }

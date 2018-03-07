@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -66,14 +66,18 @@ public class FindingNode extends Node {
      * identified by the given name, extracted from the quamoco model entity
      * with the given identifier.
      *
-     * @param graph    Graph to which this node belongs
      * @param key      Identifier of this node
      * @param owner    Identifier of the quamoco model entity this node came from
      * @param ruleName Name of the rule to which this finding indicates a violation
      *                 of
      * @param toolName Tool which provides the rules
      */
-    public FindingNode(final MutableNetwork<Node, Edge> graph, final String key, final String owner,
+    public FindingNode(final String key, final String owner,
+                       final String ruleName, final String toolName) {
+        this(null, key, owner, ruleName, toolName);
+    }
+
+    public FindingNode(MutableNetwork<Node, Edge> graph, final String key, final String owner,
                        final String ruleName, final String toolName) {
         super(graph, key, owner);
         this.ruleName = ruleName;

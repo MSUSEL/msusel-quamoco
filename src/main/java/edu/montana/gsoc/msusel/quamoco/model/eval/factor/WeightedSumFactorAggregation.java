@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,10 +25,9 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.eval.factor;
 
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import edu.montana.gsoc.msusel.quamoco.io.EvaluationType;
+import edu.montana.gsoc.msusel.quamoco.io.factories.EvaluationType;
 import edu.montana.gsoc.msusel.quamoco.model.Annotation;
 import edu.montana.gsoc.msusel.quamoco.model.Source;
 import edu.montana.gsoc.msusel.quamoco.model.Tag;
@@ -39,7 +38,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
 
-import com.google.common.collect.Lists;
+import java.util.List;
 
 /**
  * An evaluation by calculating the weighted sum from the evaluation results of
@@ -52,7 +51,7 @@ import com.google.common.collect.Lists;
  * </ul>
  * 
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class WeightedSumFactorAggregation extends FactorAggregation {
 
@@ -82,9 +81,9 @@ public class WeightedSumFactorAggregation extends FactorAggregation {
     }
 
     @Builder(buildMethodName = "create")
-    protected WeightedSumFactorAggregation(@Singular List<FactorRanking> rankings, Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
+    protected WeightedSumFactorAggregation(String name, @Singular List<FactorRanking> rankings, Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
                                            String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
-        super(completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, tags, annotations);
+        super(name, completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, tags, annotations);
         if (rankings != null && !rankings.isEmpty())
             this.rankings = Lists.newArrayList(rankings);
     }

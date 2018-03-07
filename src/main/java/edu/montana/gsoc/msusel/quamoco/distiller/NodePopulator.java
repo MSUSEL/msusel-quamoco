@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,30 +25,24 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import java.util.List;
-
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.Lists;
 import com.google.common.graph.MutableNetwork;
-import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
-import edu.montana.gsoc.msusel.quamoco.model.QMElement;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
-import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
-import edu.montana.gsoc.msusel.quamoco.model.measurement.ManualInstrument;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FactorMethod;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
+import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FindingsUnionNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureMethod;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.graph.node.NormalizationNode;
-import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
+import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
-import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
+import edu.montana.gsoc.msusel.quamoco.model.QMElement;
 import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 import edu.montana.gsoc.msusel.quamoco.model.Tool;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.ManualInstrument;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
 import edu.montana.gsoc.msusel.quamoco.model.measurement.ToolBasedInstrument;
+
+import java.util.List;
 
 /**
  * Populates the Quamoco Processing Graph with nodes.
@@ -79,10 +73,11 @@ public class NodePopulator implements GraphModifier {
     @VisibleForTesting
     void addNode(DistillerData data, final MutableNetwork<Node, Edge> graph, final QMElement entity, final Node node)
     {
-        if (graph.nodes().contains(node))
+        if (node == null || graph.nodes().contains(node))
             return;
 
         graph.addNode(node);
+        node.setGraph(graph);
         data.addNode(entity, node);
     }
 
@@ -92,60 +87,23 @@ public class NodePopulator implements GraphModifier {
      *
      * @param data
      *            Data structure holding the information to be extracted.
-     * @param models
-     *            List of known quality models.
      * @param graph
      *            Graph to which the information will be added.
      */
     @VisibleForTesting
-    void extractFactorsAndMeasures(final DistillerData data, final List<QualityModel> models,
-            final MutableNetwork<Node, Edge> graph)
+    void extractFactorsAndMeasures(final DistillerData data, final MutableNetwork<Node, Edge> graph)
     {
-        for (final QualityModel model : models)
+        for (final QualityModel model : data.getManager().getModels())
         {
-            for (Measure meas : model.getMeasures())
+            List<QMElement> elements = Lists.newArrayList();
+            elements.addAll(model.getMeasures());
+            elements.addAll(model.getFactors());
+            elements.addAll(model.getMeasurementMethods());
+
+            for (QMElement element : elements)
             {
-                MeasureNode node = null;
-                if (meas.isNormalizer())
-                {
-                    node = new NormalizationNode(graph, meas.getName(), meas.getIdentifier());
-                    setMeasureNodeProperties(meas, node);
-                }
-                else
-                {
-                    node = new MeasureNode(graph, meas.getName(), meas.getIdentifier());
-                    setMeasureNodeProperties(meas, node);
-                }
-                addNode(data, graph, meas, node);
-            }
-
-            for (Factor fact : model.getFactors())
-            {
-                String name = fact.getName();
-
-                if (fact.getCharacterizes() != null)
-                {
-                    Entity ent = fact.getCharacterizes();
-
-                    if (ent != null)
-                    {
-                        if (ent instanceof Entity)
-                        {
-                            name = name.concat(" @" + ent.getName());
-                        }
-                    }
-                }
-
-                final FactorNode node = new FactorNode(graph, name, fact.getIdentifier());
-                if (!fact.getAnnotations().isEmpty() && fact.hasAggregationAnnotation())
-                {
-                    node.setMethod(fact.getAggregationAnnotationValue());
-                }
-                else
-                {
-                    node.setMethod(FactorMethod.MEAN);
-                }
-                addNode(data, graph, fact, node);
+                Node node = NodeFactory.getInstance().createNode(element);
+                addNode(data, graph, element, node);
             }
         }
     }
@@ -155,22 +113,19 @@ public class NodePopulator implements GraphModifier {
      *
      * @param data
      *            Data object holding distiller data.
-     * @param models
-     *            List of known QualityModel objects.
      * @param graph
      *            Graph to which the data nodes will be added.
      */
     @VisibleForTesting
-    void extractValues(final DistillerData data, final List<QualityModel> models,
-            final MutableNetwork<Node, Edge> graph)
+    void extractValues(final DistillerData data, final MutableNetwork<Node, Edge> graph)
     {
-        final List<MeasurementMethod> list = QualityModelUtils.getAllMeasurementMethods(models);
+        final List<MeasurementMethod> list = data.getManager().getAllMeasurementMethods();
         for (final MeasurementMethod method : list)
         {
-            Node node = null;
+            Node node;
             if (method instanceof ManualInstrument)
             {
-                node = new ValueNode(graph, method.getName(), method.getIdentifier(), ValueNode.MANUAL);
+                node = new ValueNode(method.getName(), method.getIdentifier(), ValueNode.MANUAL);
             }
             else if (method instanceof ToolBasedInstrument)
             {
@@ -190,16 +145,16 @@ public class NodePopulator implements GraphModifier {
                 if (type == MeasureType.FINDINGS)
                 {
                     node = new FindingNode(
-                            graph, method.getName(), method.getIdentifier(), method.getName(), toolName);
+                            method.getName(), method.getIdentifier(), method.getName(), toolName);
                 }
                 else
                 {
-                    node = new ValueNode(graph, method.getName(), method.getIdentifier(), toolName);
+                    node = new ValueNode(method.getName(), method.getIdentifier(), toolName);
                 }
             }
             else
             {
-                node = new FindingsUnionNode(graph, method.getName(), method.getIdentifier());
+                node = new FindingsUnionNode(method.getName(), method.getIdentifier());
             }
 
             if (!graph.nodes().contains(node))
@@ -223,27 +178,7 @@ public class NodePopulator implements GraphModifier {
     @Override
     public void modifyGraph(final DistillerData data, final MutableNetwork<Node, Edge> graph)
     {
-        extractFactorsAndMeasures(data, data.getModels(), graph);
-        extractValues(data, data.getModels(), graph);
-    }
-
-    /**
-     * Sets a given MeasureNode's properties.
-     *
-     * @param measure
-     *            Measure the MeasureNode represents
-     * @param node
-     *            Node for which properties will be set.
-     */
-    @VisibleForTesting
-    void setMeasureNodeProperties(final Measure measure, final MeasureNode node)
-    {
-        // TODO Need to add a field to qm files in order to specify the
-        // MeasureMethod correctly
-        node.setType(measure.getType());
-        if (measure.getType().equals(MeasureType.FINDINGS))
-            node.setMethod(MeasureMethod.UNION);
-        else
-            node.setMethod(MeasureMethod.MEAN);
+        extractFactorsAndMeasures(data, graph);
+        //extractValues(data, graph);
     }
 }

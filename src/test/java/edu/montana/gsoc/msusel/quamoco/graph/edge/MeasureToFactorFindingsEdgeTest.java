@@ -1,20 +1,20 @@
 /**
  * The MIT License (MIT)
- *
+ * <p>
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -63,8 +63,7 @@ public class MeasureToFactorFindingsEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testMeasureToFactorFindingsEdge_1() throws Exception
-    {
+    public void testMeasureToFactorFindingsEdge_1() throws Exception {
         final String name = "";
         final InfluenceEffect effect = InfluenceEffect.NEGATIVE;
 
@@ -92,8 +91,7 @@ public class MeasureToFactorFindingsEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testMeasureToFactorFindingsEdge_2() throws Exception
-    {
+    public void testMeasureToFactorFindingsEdge_2() throws Exception {
         final String name = "";
         final InfluenceEffect effect = null;
 
@@ -120,8 +118,7 @@ public class MeasureToFactorFindingsEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetInf_1() throws Exception
-    {
+    public void testGetInf_1() throws Exception {
         final String result = fixture.getInf();
 
         // add additional test code here
@@ -135,8 +132,7 @@ public class MeasureToFactorFindingsEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_1() throws Exception
-    {
+    public void testGetValue_1() throws Exception {
         fixture.setUsesLinearDist(false);
         fixture.setInf(InfluenceType.POS);
         final BigDecimal result = fixture.getValue();
@@ -152,8 +148,7 @@ public class MeasureToFactorFindingsEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_2() throws Exception
-    {
+    public void testGetValue_2() throws Exception {
         fixture.setUsesLinearDist(false);
         fixture.setInf(InfluenceType.NEG);
         final BigDecimal result = fixture.getValue();
@@ -169,8 +164,7 @@ public class MeasureToFactorFindingsEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_3() throws Exception
-    {
+    public void testGetValue_3() throws Exception {
         fixture.setUsesLinearDist(true);
         fixture.setInf(InfluenceType.POS);
         final BigDecimal result = fixture.getValue();
@@ -186,8 +180,7 @@ public class MeasureToFactorFindingsEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_4() throws Exception
-    {
+    public void testGetValue_4() throws Exception {
         fixture.setUsesLinearDist(true);
         fixture.setInf(InfluenceType.NEG);
         final BigDecimal result = fixture.getValue();
@@ -203,8 +196,7 @@ public class MeasureToFactorFindingsEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_5() throws Exception
-    {
+    public void testGetValue_5() throws Exception {
         fixture.setUsesLinearDist(false);
         fixture.setInf(InfluenceType.NEG);
         fixture.setWeight(new BigDecimal(0.5));
@@ -221,8 +213,7 @@ public class MeasureToFactorFindingsEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_6() throws Exception
-    {
+    public void testGetValue_6() throws Exception {
         fixture.setUsesLinearDist(true);
         fixture.setInf(InfluenceType.NEG);
         fixture.setWeight(new BigDecimal(0.5));
@@ -233,19 +224,18 @@ public class MeasureToFactorFindingsEdgeTest {
     }
 
     @Test
-    public void testGetValue_7() throws Exception
-    {
+    public void testGetValue_7() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
                 .expectedNodeCount(10000)
                 .expectedEdgeCount(10000)
                 .build();
-        final MeasureNode src = new MeasureNode(graph, "measure", "owner");
+        final MeasureNode src = new MeasureNode("measure", "owner");
         src.setType(MeasureType.FINDINGS);
         src.setProcessor(new FindingsUnionAggregator(src));
-        final FactorNode dest = new FactorNode(graph, "factor", "owner");
-        final FindingNode srcsrc = new FindingNode(graph, "key", "owner", "finding", "tool");
+        final FactorNode dest = new FactorNode("factor", "owner");
+        final FindingNode srcsrc = new FindingNode("key", "owner", "finding", "tool");
 
         fixture = new MeasureToFactorFindingsEdge("", src, dest, InfluenceEffect.NEGATIVE);
         graph.addEdge(srcsrc, src, new FindingToMeasureEdge("f2m", srcsrc, src));
@@ -269,8 +259,7 @@ public class MeasureToFactorFindingsEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetInf_1() throws Exception
-    {
+    public void testSetInf_1() throws Exception {
         final InfluenceEffect inf = InfluenceEffect.POSITIVE;
         fixture.setInf(inf.toString());
 
@@ -286,8 +275,7 @@ public class MeasureToFactorFindingsEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -323,8 +311,7 @@ public class MeasureToFactorFindingsEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         // Add additional tear down code here
     }
 }

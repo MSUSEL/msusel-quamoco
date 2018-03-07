@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,6 +27,7 @@ package edu.montana.gsoc.msusel.quamoco.io;
 
 import static org.junit.Assert.*;
 
+import edu.montana.gsoc.msusel.quamoco.io.qm.QMXMLWriter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,7 +55,7 @@ public class QMXMLWriterTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QMXMLWriter#QMXMLWriter()}.
+     * Test method for {@link QMXMLWriter#QMXMLWriter()}.
      */
     @Test
     public final void testQMXMLWriter()
@@ -63,7 +64,7 @@ public class QMXMLWriterTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QMXMLWriter#write(java.util.List)}.
+     * Test method for {@link QMXMLWriter#write(java.util.List)}.
      */
     @Test
     public final void testWrite()
@@ -72,7 +73,7 @@ public class QMXMLWriterTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QMXMLWriter#header(java.io.PrintWriter)}.
+     * Test method for {@link QMXMLWriter#header(java.io.PrintWriter)}.
      */
     @Test
     public final void testHeader()

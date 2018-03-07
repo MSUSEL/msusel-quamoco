@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,12 +25,12 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
-import java.util.UUID;
-
 import edu.montana.gsoc.msusel.quamoco.io.XMLSerializable;
 import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
 import lombok.*;
 import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.util.UUID;
 
 /**
  * The Impact concept defines an influence of one factor to another. More
@@ -61,7 +61,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
  * </ul>
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 @EqualsAndHashCode(exclude = {"justification"})
 @ToString(of = {"identifier", "effect"})

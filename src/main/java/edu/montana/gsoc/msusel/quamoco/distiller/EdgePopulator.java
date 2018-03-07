@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,26 +27,13 @@ package edu.montana.gsoc.msusel.quamoco.distiller;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.graph.MutableNetwork;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.FactorToFactorEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToFactorFindingsEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToFactorNumberEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureFindingsEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureFindingsNumberEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureNumberEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.ValueToMeasureEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
+import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.montana.gsoc.msusel.quamoco.model.Impact;
 import edu.montana.gsoc.msusel.quamoco.model.QMElement;
 import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
-import edu.montana.gsoc.msusel.quamoco.model.Impact;
-import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
 import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
-import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
 
 /**
@@ -65,8 +52,9 @@ public class EdgePopulator implements GraphModifier {
     {
         handleFactors(data, graph);
         handleMeasures(data, graph);
-        handleData(data, graph);
-        handleUnions(data, graph);
+        handleProviders(data, graph);
+//        handleData(data, graph);
+//        handleUnions(data, graph);
     }
 
     /**
@@ -74,75 +62,14 @@ public class EdgePopulator implements GraphModifier {
      *
      * @param graph
      *            Graph in which to add the edge.
-     * @param src
-     *            Source side of the edge.
-     * @param dest
-     *            Destination side of the edge.
-     * @param infEffect
-     *            The influence effect, can be POS or NEG (if null POS is
-     *            assumed)
+     * @param edge
+     *            the edge.
      */
     @VisibleForTesting
-    void addEdge(final MutableNetwork<Node, Edge> graph, final Node src, final Node dest,
-            final InfluenceEffect infEffect)
+    void addEdge(final MutableNetwork<Node, Edge> graph, Edge edge)
     {
-        if (src == null || dest == null)
-        {
-            return;
-        }
-
-        if (src instanceof ValueNode)
-        {
-
-            graph.addEdge(src, dest, new ValueToMeasureEdge(src.getName() + ":" + dest.getName(), src, dest));
-        }
-        else if (src instanceof FindingNode)
-        {
-            graph.addEdge(src, dest, new FindingToMeasureEdge(src.getName() + ":" + dest.getName(), dest, src));
-        }
-        else if (src instanceof MeasureNode && dest instanceof MeasureNode)
-        {
-            final MeasureNode sm = (MeasureNode) src;
-            final MeasureNode dm = (MeasureNode) dest;
-            if (sm.getType().equals(MeasureType.FINDINGS) && dm.getType().equals(MeasureType.FINDINGS))
-            {
-                graph.addEdge(
-                        src, dest, new MeasureToMeasureFindingsEdge(src.getName() + ":" + dest.getName(), src, dest));
-            }
-            else if (sm.getType().equals(MeasureType.NUMBER) && dm.getType().equals(MeasureType.NUMBER))
-            {
-                graph.addEdge(
-                        src, dest, new MeasureToMeasureNumberEdge(src.getName() + ":" + dest.getName(), src, dest));
-            }
-            else
-            {
-                graph.addEdge(
-                        src, dest,
-                        new MeasureToMeasureFindingsNumberEdge(src.getName() + ":" + dest.getName(), src, dest));
-            }
-        }
-        else if (src instanceof MeasureNode && dest instanceof FactorNode)
-        {
-            final MeasureNode sn = (MeasureNode) src;
-
-            if (sn.getType().equals(MeasureType.FINDINGS))
-            {
-                graph.addEdge(
-                        src, dest,
-                        new MeasureToFactorFindingsEdge(src.getName() + ":" + dest.getName(), src, dest, infEffect));
-            }
-            else
-            {
-                graph.addEdge(
-                        src, dest,
-                        new MeasureToFactorNumberEdge(src.getName() + ":" + dest.getName(), src, dest, infEffect));
-            }
-        }
-        else if (src instanceof FactorNode && dest instanceof FactorNode)
-        {
-            graph.addEdge(
-                    src, dest, new FactorToFactorEdge(src.getName() + ":" + dest.getName(), src, dest, infEffect));
-        }
+        if (edge != null)
+            graph.addEdge(edge.getSource(), edge.getDest(), edge);
     }
 
     /**
@@ -197,8 +124,8 @@ public class EdgePopulator implements GraphModifier {
                 if (method.getDetermines() != null)
                 {
                     Node dest = getDestNode(data, method.getDetermines());
-                    if (dest != null)
-                        addEdge(graph, union, dest, null);
+                    //if (dest != null)
+                        //addEdge(graph, union, dest, null);
                 }
 
                 for (final QMElement dataKey : data.getValues())
@@ -209,7 +136,7 @@ public class EdgePopulator implements GraphModifier {
                         if (src instanceof FindingNode) // FIXME verify this is
                                                         // correct
                         {
-                            addEdge(graph, src, union, null);
+                            //addEdge(graph, src, union, null);
                         }
                     }
                 }
@@ -238,8 +165,8 @@ public class EdgePopulator implements GraphModifier {
                 if (method.getDetermines() != null)
                 {
                     Node dest = getDestNode(data, method.getDetermines());
-                    if (dest != null)
-                        addEdge(graph, src, dest, null);
+//                    if (dest != null)
+//                        addEdge(graph, src, dest, null);
                 }
             }
         }
@@ -261,16 +188,13 @@ public class EdgePopulator implements GraphModifier {
             if (key instanceof Factor)
             {
                 final Factor factor = (Factor) key;
-                final Node src = data.getFactor(factor);
-                for (final Impact inf : factor.getInfluences())
+                for (final Impact inf : factor.getInfluences().values())
                 {
-                    final Node dest = data.getFactor(inf.getTarget());
-                    addEdge(graph, src, dest, inf.getEffect());
+                    addEdge(graph, EdgeFactory.getInstance().createEdge(factor, inf.getTarget(), data));
                 }
                 if (factor.getRefines() != null)
                 {
-                    final Node dest = data.getFactor(factor.getRefines());
-                    addEdge(graph, src, dest, null);
+                    addEdge(graph, EdgeFactory.getInstance().createEdge(factor, factor.getRefines(), data));
                 }
             }
         }
@@ -292,13 +216,25 @@ public class EdgePopulator implements GraphModifier {
             if (key instanceof Measure)
             {
                 final Measure measure = (Measure) key;
-                final Node src = data.getMeasure(measure);
-                
                 if (measure.getRefines() != null)
                 {
-                    Node dest = getDestNode(data, measure.getRefines());
-                    if (dest != null)
-                        addEdge(graph, src, dest, null);
+                    addEdge(graph, EdgeFactory.getInstance().createEdge(measure, measure.getRefines(), data));
+                }
+                measure.getMeasures().forEach((f) -> {
+                    addEdge(graph, EdgeFactory.getInstance().createEdge(measure, f, data));
+                });
+            }
+        }
+    }
+
+    @VisibleForTesting
+    void handleProviders(final DistillerData data, final MutableNetwork<Node, Edge> graph) {
+        for (final QMElement key : data.getManager().getAllMeasurementMethods()) {
+            if (key instanceof MeasurementMethod) {
+                MeasurementMethod method = (MeasurementMethod) key;
+
+                if (method.getDetermines() != null) {
+                    addEdge(graph, EdgeFactory.getInstance().createEdge(method, method.getDetermines(), data));
                 }
             }
         }

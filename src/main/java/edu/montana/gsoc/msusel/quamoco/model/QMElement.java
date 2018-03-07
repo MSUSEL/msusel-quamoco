@@ -1,20 +1,20 @@
 /**
  * The MIT License (MIT)
- * <p>
+ *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
- * <p>
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * <p>
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * <p>
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,12 +25,6 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.annotation.Nonnull;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -39,22 +33,27 @@ import edu.montana.gsoc.msusel.quamoco.io.JsonSerializable;
 import edu.montana.gsoc.msusel.quamoco.io.ScriptSerializable;
 import edu.montana.gsoc.msusel.quamoco.io.XMLSerializable;
 import edu.montana.gsoc.msusel.quamoco.io.YamlSerializable;
-import lombok.*;
-import org.apache.commons.lang3.StringEscapeUtils;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Abstract base class of all QMElements. This class contains the basic pieces
  * of all QMElements.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 @EqualsAndHashCode(of = {"identifier"})
 @ToString(of = {"identifier"})
 public abstract class QMElement implements XMLSerializable, YamlSerializable, JsonSerializable, ScriptSerializable {
 
     @Getter
-    @Builder.Default
     protected String identifier;
     /**
      * Link to where the original information for this element can be found
@@ -66,13 +65,11 @@ public abstract class QMElement implements XMLSerializable, YamlSerializable, Js
      * Tags for the element indicating additional information
      */
     @Getter
-    @Builder.Default
     protected List<Tag> taggedBy = Lists.newArrayList();
     /**
      * List of annotations
      */
     @Getter
-    @Builder.Default
     protected List<Annotation> annotations = Lists.newArrayList();
     @Getter
     private String qualifiedIdentifier;
@@ -214,6 +211,12 @@ public abstract class QMElement implements XMLSerializable, YamlSerializable, Js
 
         return builder.toString();
     }
+
+    public String getName() {
+        return "";
+    }
+
+    public String getFullName() { return getName(); }
 
     public abstract String xmlTag();
 }

@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,9 +29,6 @@ import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
-
-import java.util.List;
 
 /**
  * DistilledGraphCreator - builds the Quamoco processing graph.
@@ -45,12 +42,12 @@ public class DistilledGraphCreator {
      * Builder method to initialize and modify the graph based on data from the
      * known quality models.
      *
-     * @param models
-     *            List of known quality models.
+     * @param manager
+     *            The ModelManager
      * @return Graph constructed from information contained within the provided
      *         QualityModels and DecoratorContext.
      */
-    public MutableNetwork<Node, Edge> buildGraph(final List<QualityModel> models)
+    public MutableNetwork<Node, Edge> buildGraph(ModelManager manager)
     {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
@@ -63,7 +60,7 @@ public class DistilledGraphCreator {
         final GraphModifier processPop = new ProcessorPopulator();
         final GraphModifier normPop = new NormalizerPopulator();
 
-        final DistillerData data = new DistillerData(models);
+        final DistillerData data = new DistillerData(manager);
         nodePop.modifyGraph(data, graph);
         edgePop.modifyGraph(data, graph);
         processPop.modifyGraph(data, graph);

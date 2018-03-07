@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,9 +32,9 @@ import edu.montana.gsoc.msusel.metrics.MeasuresTable;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.RankedEdge;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
-import edu.montana.gsoc.msusel.quamoco.processor.extents.Extent;
 import edu.montana.gsoc.msusel.quamoco.processor.FindingsAggregator;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
+import edu.montana.gsoc.msusel.quamoco.processor.extents.Extent;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -75,11 +75,14 @@ public class MeasureNode extends Node {
      * with
      * the given identifier.
      *
-     * @param graph Graph to which this node belongs
      * @param name  Identifier of this node
      * @param owner Identifier of the quamoco model entity this node came from
      */
-    public MeasureNode(final MutableNetwork<Node, Edge> graph, final String name, final String owner) {
+    public MeasureNode(final String name, final String owner) {
+        this(null, name, owner);
+    }
+
+    public MeasureNode(MutableNetwork<Node, Edge> graph, final String name, final String owner) {
         super(graph, name, owner);
         type = MeasureType.FINDINGS;
         findings = Sets.newHashSet();

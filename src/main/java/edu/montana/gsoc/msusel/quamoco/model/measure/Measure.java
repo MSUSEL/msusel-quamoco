@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,10 +25,9 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.measure;
 
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import edu.montana.gsoc.msusel.quamoco.io.factories.MeasuresType;
 import edu.montana.gsoc.msusel.quamoco.model.*;
 import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
 import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
@@ -38,8 +37,8 @@ import lombok.Setter;
 import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import com.google.common.collect.Lists;
-import edu.montana.gsoc.msusel.quamoco.io.MeasuresType;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A measure defines how a specific entity is measured. For the concrete
@@ -47,7 +46,7 @@ import edu.montana.gsoc.msusel.quamoco.io.MeasuresType;
  * manual measurement, or an aggregation of other measures.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class Measure extends QMElement {
 
@@ -70,7 +69,6 @@ public class Measure extends QMElement {
      * the method by which it does that
      */
     @Getter
-    @Builder.Default
     protected List<Factor> measures = Lists.newArrayList();
     /**
      * A title can be an alternative, more readable identifier for the measure.
@@ -127,6 +125,10 @@ public class Measure extends QMElement {
         if (measures != null && !measures.isEmpty())
             this.measures = Lists.newArrayList(measures);
         this.type = type;
+    }
+
+    public String getFullName() {
+        return characterizes == null ? name : name + " @" + characterizes.getName();
     }
 
     /**

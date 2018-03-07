@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,26 +28,22 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import java.util.List;
-
+import com.google.common.graph.MutableNetwork;
+import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
+import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
+import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
+import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.WeightedSumFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.SingleMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
+import edu.montana.gsoc.msusel.quamoco.model.factor.ProductFactor;
+import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.FactorRanking;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.google.common.collect.Lists;
-import com.google.common.graph.MutableNetwork;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
-import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
-import edu.montana.gsoc.msusel.quamoco.model.measurement.FactorRanking;
-import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
-import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
-import edu.montana.gsoc.msusel.quamoco.model.factor.ProductFactor;
-import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
-import edu.montana.gsoc.msusel.quamoco.model.eval.measure.SingleMeasureEvaluation;
-import edu.montana.gsoc.msusel.quamoco.model.eval.factor.WeightedSumFactorAggregation;
 
 /**
  * The class <code>DistilledGraphCreatorTest</code> contains tests for the class
@@ -85,7 +81,7 @@ public class DistilledGraphCreatorTest {
     public void testBuildGraph_1() throws Exception
     {
         final DistilledGraphCreator fixture = new DistilledGraphCreator();
-        final List<QualityModel> models = Lists.newArrayList();
+        ModelManager manager = new ModelManager();
         Factor f2 = null;
         Measure m1 = null;
         Factor f1 = null;
@@ -104,11 +100,11 @@ public class DistilledGraphCreatorTest {
                         .title("")
                         .type(MeasureType.FINDINGS)
                         .create())
-                .evaluation((Evaluation) SingleMeasureEvaluation.builder().identifier("eval1")
+                .evaluation("eval1", (Evaluation) SingleMeasureEvaluation.builder().identifier("eval1")
                         .basedOn(m1)
                         .evaluates(f1)
                         .create())
-                .evaluation((Evaluation) WeightedSumFactorAggregation.builder().identifier("eval2")
+                .evaluation("eval2", (Evaluation) WeightedSumFactorAggregation.builder().identifier("eval2")
                         .ranking(FactorRanking.builder()
                                 .identifier("rank1")
                                 .factor(f1)
@@ -122,9 +118,9 @@ public class DistilledGraphCreatorTest {
                         .title("")
                         .create())
                 .create();
-        models.add(model);
+        manager.addModel(model);
 
-        final MutableNetwork<Node, Edge> result = fixture.buildGraph(models);
+        final MutableNetwork<Node, Edge> result = fixture.buildGraph(manager);
 
         Assert.assertEquals(3, result.nodes().size());
     }

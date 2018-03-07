@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,7 +26,7 @@
 package edu.montana.gsoc.msusel.quamoco.model.eval;
 
 import com.google.common.collect.Maps;
-import edu.montana.gsoc.msusel.quamoco.io.EvaluationType;
+import edu.montana.gsoc.msusel.quamoco.io.factories.EvaluationType;
 import edu.montana.gsoc.msusel.quamoco.model.Annotation;
 import edu.montana.gsoc.msusel.quamoco.model.Source;
 import edu.montana.gsoc.msusel.quamoco.model.Tag;
@@ -50,7 +50,7 @@ import java.util.Map;
  * </ul>
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class TextEvaluation extends Evaluation {
 
@@ -73,9 +73,9 @@ public class TextEvaluation extends Evaluation {
     }
 
     @Builder(buildMethodName = "create")
-    protected TextEvaluation(String specification, Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
+    protected TextEvaluation(String name, String specification, Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
                              String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
-        super(completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, tags, annotations);
+        super(name, completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, tags, annotations);
         this.specification = specification;
     }
 

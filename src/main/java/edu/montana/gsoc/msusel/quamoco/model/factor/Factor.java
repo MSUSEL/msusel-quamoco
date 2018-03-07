@@ -1,20 +1,20 @@
 /**
  * The MIT License (MIT)
- * <p>
+ *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
- * <p>
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * <p>
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * <p>
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,19 +25,17 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.factor;
 
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import edu.montana.gsoc.msusel.quamoco.model.*;
 import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Factors are one of the basic elements of quality models. A factor constitutes
@@ -74,7 +72,7 @@ import com.google.common.collect.Lists;
  * </ul>
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public abstract class Factor extends QMElement {
 
@@ -101,8 +99,7 @@ public abstract class Factor extends QMElement {
      * List of impacts which indicate the factors which this factor influences
      */
     @Getter
-    @Builder.Default
-    protected List<Impact> influences = Lists.newArrayList();
+    protected Map<String, Impact> influences;
     /**
      * List of factors which this factor refines (note: must be of same type as
      * this factor)
@@ -117,7 +114,7 @@ public abstract class Factor extends QMElement {
     public Factor(String name) {
         super();
         this.name = name;
-        influences = Lists.newArrayList();
+        influences = Maps.newHashMap();
     }
 
     /**
@@ -127,10 +124,10 @@ public abstract class Factor extends QMElement {
     public Factor(String name, String identifier) {
         super(identifier);
         this.name = name;
-        influences = Lists.newArrayList();
+        influences = Maps.newHashMap();
     }
 
-    public Factor(String name, String description, Entity characterizes, String title, @Singular List<Impact> influences, Factor refines,
+    public Factor(String name, String description, Entity characterizes, String title, @Singular Map<String, Impact> influences, Factor refines,
                   String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
         super(identifier, originatesFrom, tags, annotations);
         this.name = name;
@@ -139,17 +136,23 @@ public abstract class Factor extends QMElement {
         this.title = title;
         this.refines = refines;
         if (influences != null && !influences.isEmpty())
-            this.influences = Lists.newArrayList(influences);
+            this.influences = Maps.newHashMap(influences);
+        else
+            this.influences = Maps.newHashMap();
+    }
+
+    public String getFullName() {
+        return characterizes == null ? name : name + " @" + characterizes.getName();
     }
 
     public void addInfluence(Impact impact) {
-        if (impact != null && !influences.contains(impact))
-            influences.add(impact);
+        if (impact != null)
+            influences.put(impact.getTarget().getQualifiedIdentifier(), impact);
     }
 
     public void removeInfluence(Impact impact) {
-        if (impact != null && influences.contains(impact))
-            influences.remove(impact);
+        if (impact != null && influences.containsKey(impact.getTarget().getQualifiedIdentifier()))
+            influences.remove(impact.getTarget().getQualifiedIdentifier());
     }
 
     protected String generateXMLTag(String type) {
@@ -168,7 +171,7 @@ public abstract class Factor extends QMElement {
         if (getRefines() != null)
             content.add(String.format("<refines parent=\"%s\" />", getRefines().getQualifiedIdentifier()));
 
-        influences.forEach((inf) -> content.add(inf.xmlTag()));
+        influences.forEach((key, inf) -> content.add(inf.xmlTag()));
 
         return generateXMLTag(tag, type, attrs, content);
     }
@@ -179,5 +182,16 @@ public abstract class Factor extends QMElement {
 
     public String getAggregationAnnotationValue() {
         return "";
+    }
+
+    public InfluenceEffect getInfluenceOn(Factor evaluates) {
+        if (refines != null && refines.equals(evaluates))
+            return InfluenceEffect.REFINEMENT;
+        else {
+            if (influences.containsKey(evaluates.getQualifiedIdentifier()))
+                    return influences.get(evaluates.getQualifiedIdentifier()).getEffect();
+        }
+
+        return InfluenceEffect.NONE;
     }
 }

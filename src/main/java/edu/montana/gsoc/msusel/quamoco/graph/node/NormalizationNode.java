@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -48,10 +48,14 @@ public class NormalizationNode extends MeasureNode {
     private NormalizationRange range;
 
     /**
-     * @param graph
      * @param owner
      */
-    public NormalizationNode(final MutableNetwork<Node, Edge> graph, final String name, final String owner)
+    public NormalizationNode(final String name, final String owner)
+    {
+        this(null, name, owner);
+    }
+
+    public NormalizationNode(MutableNetwork<Node, Edge> graph, final String name, final String owner)
     {
         super(graph, name, owner);
         range = NormalizationRange.NA;

@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,6 +27,7 @@ package edu.montana.gsoc.msusel.quamoco.io;
 
 import static org.junit.Assert.*;
 
+import edu.montana.gsoc.msusel.quamoco.io.qmr.QMRXMLReader;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,7 +55,7 @@ public class QMRXMLReaderTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QMRXMLReader#QMRXMLReader()}.
+     * Test method for {@link QMRXMLReader#QMRXMLReader()}.
      */
     @Test
     public final void testQMRXMLReader()

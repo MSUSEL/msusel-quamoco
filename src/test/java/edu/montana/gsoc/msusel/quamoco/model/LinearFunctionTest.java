@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,7 +25,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
-import edu.montana.gsoc.msusel.quamoco.io.FunctionType;
+import edu.montana.gsoc.msusel.quamoco.io.factories.FunctionType;
 import edu.montana.gsoc.msusel.quamoco.model.func.LinearFunction;
 import edu.montana.gsoc.msusel.quamoco.model.func.LinearIncreasingFunction;
 import org.junit.Before;

@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,6 +24,8 @@
  * SOFTWARE.
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
+
+import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -67,4 +69,8 @@ public interface Edge {
      * @return The set of values provided by the incoming side of the edge
      */
     List<BigDecimal> getValues();
+
+    Node getSource();
+
+    Node getDest();
 }

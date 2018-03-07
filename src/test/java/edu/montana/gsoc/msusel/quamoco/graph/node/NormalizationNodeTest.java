@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,17 +25,18 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
-import java.math.BigDecimal;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.math.BigDecimal;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * The class <code>NormalizationNodeTest</code> contains tests for the class
@@ -69,13 +70,13 @@ public class NormalizationNodeTest {
         final NormalizationNode result = new NormalizationNode(graph, name, owner);
 
         // add additional test code here
-        Assert.assertNotNull(result);
-        Assert.assertEquals(null, result.getMethod());
-        Assert.assertEquals(MeasureType.FINDINGS, result.getType());
-        Assert.assertEquals("node", result.getOwnedBy());
-        Assert.assertEquals("", result.getDescription());
-        Assert.assertEquals("Node(name=norm)", result.toString());
-        Assert.assertEquals("norm", result.getName());
+        assertNotNull(result);
+        assertEquals(null, result.getMethod());
+        assertEquals(MeasureType.FINDINGS, result.getType());
+        assertEquals("node", result.getOwnedBy());
+        assertEquals("", result.getDescription());
+        assertEquals("Node(name=norm)", result.toString());
+        assertEquals("norm", result.getName());
     }
 
     /**
@@ -100,13 +101,13 @@ public class NormalizationNodeTest {
         final NormalizationNode result = new NormalizationNode(graph, name, owner);
 
         // add additional test code here
-        Assert.assertNotNull(result);
-        Assert.assertEquals(null, result.getMethod());
-        Assert.assertEquals(MeasureType.FINDINGS, result.getType());
-        Assert.assertEquals("node", result.getOwnedBy());
-        Assert.assertEquals("", result.getDescription());
-        Assert.assertEquals("Node(name=norm)", result.toString());
-        Assert.assertEquals("norm", result.getName());
+        assertNotNull(result);
+        assertEquals(null, result.getMethod());
+        assertEquals(MeasureType.FINDINGS, result.getType());
+        assertEquals("node", result.getOwnedBy());
+        assertEquals("", result.getDescription());
+        assertEquals("Node(name=norm)", result.toString());
+        assertEquals("norm", result.getName());
     }
 
     /**
@@ -121,7 +122,7 @@ public class NormalizationNodeTest {
         final NormalizationNode fixture = new NormalizationNode(null, "norm", "norm");
 
         final BigDecimal result = fixture.getValue();
-        Assert.assertEquals(BigDecimal.ZERO, result);
+        assertEquals(BigDecimal.ZERO, result);
     }
 
     /**

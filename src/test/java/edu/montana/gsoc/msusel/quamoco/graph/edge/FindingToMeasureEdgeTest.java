@@ -1,20 +1,20 @@
 /**
  * The MIT License (MIT)
- *
+ * <p>
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -61,8 +61,7 @@ public class FindingToMeasureEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testFindingToMeasureEdge_1() throws Exception
-    {
+    public void testFindingToMeasureEdge_1() throws Exception {
         final String name = "edge";
 
         final FindingToMeasureEdge result = new FindingToMeasureEdge(name, null, null);
@@ -80,8 +79,7 @@ public class FindingToMeasureEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetFindings_1() throws Exception
-    {
+    public void testGetFindings_1() throws Exception {
         final Set<Finding> result = fixture.getFindings();
 
         // add additional test code here
@@ -96,8 +94,7 @@ public class FindingToMeasureEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetFindings_2() throws Exception
-    {
+    public void testGetFindings_2() throws Exception {
         final Set<Finding> result = fixture.getFindings();
 
         // add additional test code here
@@ -112,8 +109,7 @@ public class FindingToMeasureEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_1() throws Exception
-    {
+    public void testGetValue_1() throws Exception {
         final BigDecimal result = fixture.getValue();
 
         // add additional test code here
@@ -128,8 +124,7 @@ public class FindingToMeasureEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -152,8 +147,7 @@ public class FindingToMeasureEdgeTest {
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         // Add additional tear down code here
     }
 
@@ -164,8 +158,7 @@ public class FindingToMeasureEdgeTest {
      *            the command line arguments
      * @generatedBy CodePro at 1/26/16 6:38 PM
      */
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         new org.junit.runner.JUnitCore().run(FindingToMeasureEdgeTest.class);
     }
 }

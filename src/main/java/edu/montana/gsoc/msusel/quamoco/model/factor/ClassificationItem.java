@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,11 +25,15 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.factor;
 
-import edu.montana.gsoc.msusel.quamoco.model.*;
+import edu.montana.gsoc.msusel.quamoco.model.Annotation;
+import edu.montana.gsoc.msusel.quamoco.model.Impact;
+import edu.montana.gsoc.msusel.quamoco.model.Source;
+import edu.montana.gsoc.msusel.quamoco.model.Tag;
 import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
 import lombok.Singular;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Classification items are used to group related factors.
@@ -56,10 +60,10 @@ public abstract class ClassificationItem extends Factor {
         super(name, identifier);
     }
 
-    protected ClassificationItem(String name, String description, Entity characterizes, String title, @Singular List<Impact> influences, Factor refines,
+    protected ClassificationItem(String name, String description, Entity characterizes, String title, @Singular Map<String, Impact> influences, Factor refines,
                                  String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations)
     {
-        super(name, description, characterizes, title,influences, refines,
+        super(name, description, characterizes, title, influences, refines,
                 identifier, originatesFrom, tags, annotations);
     }
 }

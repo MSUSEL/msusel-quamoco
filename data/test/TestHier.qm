@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qm:QualityModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qm="http://www.quamoco.de/qm/v17" xmi:id="_tnK9QCCcEeilqPdqMwBsKA" description="TestHier" name="TestHier" title="TestHier">
+  <originatesFrom href="Test.qm#_HttvcBUEEei0lMAbFVod2Q"/>
+  <taggedBy href="Test.qm#_HDZAEBUEEei0lMAbFVod2Q"/>
+  <entities xmi:id="_BF7cACCdEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="Class Type" name="Class" title="Type">
+    <isA xmi:id="_UGLZ0CCdEeimKObN-DS5AA">
+      <parent href="Test.qm#_A3o0ABT6Eei0lMAbFVod2Q"/>
+    </isA>
+  </entities>
+  <factors xmi:id="_wjvmoCCdEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="Reliability" name="Reliability" title="Reliability">
+    <influences xmi:id="_2AI94CCdEeimKObN-DS5AA">
+      <target href="Test.qm#_S-rHUBT5Eei0lMAbFVod2Q"/>
+    </influences>
+    <influences xmi:id="_2AI94SCdEeimKObN-DS5AA">
+      <target href="Test.qm#_8efzEBUFEei0lMAbFVod2Q"/>
+    </influences>
+  </factors>
+  <factors xmi:id="_PFlGYCCgEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="RelManual" name="RelManual" title="RelManual">
+    <influences xmi:id="_XgSMYCChEeimKObN-DS5AA" target="_wjvmoCCdEeimKObN-DS5AA" effect="NEGATIVE"/>
+  </factors>
+  <factors xmi:id="_SKtrUCCgEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="RelMultMeasure" name="RelMultMeasure" title="RelMultMeasure">
+    <influences xmi:id="_XgbWUCChEeimKObN-DS5AA" target="_wjvmoCCdEeimKObN-DS5AA"/>
+  </factors>
+  <factors xmi:id="_UCE1kCCgEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="RelQIESL" name="RelQIESL" title="RelQIESL">
+    <influences xmi:id="_XgbWUSChEeimKObN-DS5AA" target="_wjvmoCCdEeimKObN-DS5AA" effect="NEGATIVE"/>
+  </factors>
+  <factors xmi:id="_svYc0CCgEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="RelText" name="RelText" title="RelText">
+    <influences xmi:id="_XgbWUiChEeimKObN-DS5AA" target="_wjvmoCCdEeimKObN-DS5AA"/>
+  </factors>
+  <factors xmi:id="_Cj9BwCC0EeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="UnionFactor" name="UnionFactor" title="UnionFactor">
+    <influences xmi:id="_SkHSsCC0EeimKObN-DS5AA" target="_wjvmoCCdEeimKObN-DS5AA"/>
+  </factors>
+  <evaluations xsi:type="qm:TextEvaluation" xmi:id="_9OieQCCdEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="Test Hier TextEval" name="TextEvaluation" title="Test Hier TextEvaluation" evaluates="_svYc0CCgEeimKObN-DS5AA" specification=""/>
+  <evaluations xsi:type="qm:QIESLEvaluation" xmi:id="_-AdDYCCdEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="Test Hier QIESLEval" name="QIESLEvaluation" title="Test Hier QIESLEval" evaluates="_UCE1kCCgEeimKObN-DS5AA" specification="// EVALUATION FUNCTION (QIESLMeas)&#xA;// GENERATED QIESL – DO NOT MODIFY&#xA;// BASED ON MAXPOINT VALUE = 100&#xA;// Measure used for evaluation = QIESLMeas&#xA;// Scale = NUMBER&#xA;// Range = NA&#xA;// Measure used for normalization = NormMeas&#xA;// Mapping function = LinearDecreasing&#xA;// Lower bound = 0.0&#xA;// Upper bound = 1.0&#xA;&#xA;result = linearDistribution(%%QIESLMeas%%/%%NormMeas%%,0.0,100,1.0,0)"/>
+  <evaluations xsi:type="qm:ManualEvaluation" xmi:id="__APFYCCdEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="Test Hier Manual Eval" name="ManualEvaluation" title="Test Hier Manual Eval" evaluates="_PFlGYCCgEeimKObN-DS5AA"/>
+  <evaluations xsi:type="qm:WeightedSumMultiMeasureEvaluation" xmi:id="__f9uUCCdEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="Test Hier WSMME" name="WeightedSumMultiMeasureEvaluation" title="Test Hier WSMME" evaluates="_SKtrUCCgEeimKObN-DS5AA">
+    <rankings xmi:id="_G_29oCC6EeimKObN-DS5AA" measure="_Bjj9wCCeEeimKObN-DS5AA" normlizationMeasure="_CF0WQCCeEeimKObN-DS5AA" range="FILE" rank="1" weight="0.24999999999999992">
+      <function xsi:type="qm:LinearIncreasingFunction" xmi:id="_G_29oSC6EeimKObN-DS5AA" upperBound="1.0"/>
+    </rankings>
+    <rankings xmi:id="_G_29oiC6EeimKObN-DS5AA" measure="_iTyX8CCxEeimKObN-DS5AA" normlizationMeasure="_CF0WQCCeEeimKObN-DS5AA" range="FILE" rank="1" weight="0.24999999999999992">
+      <function xsi:type="qm:LinearDecreasingFunction" xmi:id="_G_29oyC6EeimKObN-DS5AA" upperBound="1.0"/>
+    </rankings>
+    <rankings xmi:id="_G_29pCC6EeimKObN-DS5AA" measure="_hsw0MCCxEeimKObN-DS5AA" normlizationMeasure="_CF0WQCCeEeimKObN-DS5AA" range="FILE" rank="1" weight="0.24999999999999992">
+      <function xsi:type="qm:LinearIncreasingFunction" xmi:id="_G_29pSC6EeimKObN-DS5AA" upperBound="1.0"/>
+    </rankings>
+    <rankings xmi:id="_G_29piC6EeimKObN-DS5AA" measure="_sZz60CCzEeimKObN-DS5AA" normlizationMeasure="_CF0WQCCeEeimKObN-DS5AA" range="FILE" rank="1" weight="0.24999999999999992">
+      <function xsi:type="qm:LinearDecreasingFunction" xmi:id="_G_29pyC6EeimKObN-DS5AA" upperBound="1.0"/>
+    </rankings>
+  </evaluations>
+  <evaluations xsi:type="qm:WeightedSumFactorAggregation" xmi:id="_xY0GECCgEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="Test Hier WSFA" name="WeightedSumFactorAggregation" title="Test Hier WSFA" evaluates="_wjvmoCCdEeimKObN-DS5AA">
+    <rankings xmi:id="_0cEroCC0EeimKObN-DS5AA" rank="1" weight="0.2" factor="_PFlGYCCgEeimKObN-DS5AA"/>
+    <rankings xmi:id="_0cEroSC0EeimKObN-DS5AA" rank="1" weight="0.2" factor="_SKtrUCCgEeimKObN-DS5AA"/>
+    <rankings xmi:id="_0cEroiC0EeimKObN-DS5AA" rank="1" weight="0.2" factor="_UCE1kCCgEeimKObN-DS5AA"/>
+    <rankings xmi:id="_0cEroyC0EeimKObN-DS5AA" rank="1" weight="0.2" factor="_svYc0CCgEeimKObN-DS5AA"/>
+    <rankings xmi:id="_0cErpCC0EeimKObN-DS5AA" rank="1" weight="0.2" factor="_Cj9BwCC0EeimKObN-DS5AA"/>
+  </evaluations>
+  <evaluations xsi:type="qm:SingleMeasureEvaluation" xmi:id="_HkCQcCC0EeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="UnionEval" name="SingleMeasureEvaluation" title="UnionEval" evaluates="_Cj9BwCC0EeimKObN-DS5AA" measure="_Xn6jwCC0EeimKObN-DS5AA" normlizationMeasure="_CF0WQCCeEeimKObN-DS5AA" range="NA">
+    <function xsi:type="qm:LinearIncreasingFunction" xmi:id="_wXc_oCC0EeimKObN-DS5AA" upperBound="1.0"/>
+  </evaluations>
+  <measures xmi:id="_Bjj9wCCeEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="Measure1" name="Measure1" title="Measure1" type="FINDINGS">
+    <measures xmi:id="_rKDYkCCyEeimKObN-DS5AA" parent="_SKtrUCCgEeimKObN-DS5AA"/>
+  </measures>
+  <measures xsi:type="qm:NormalizationMeasure" xmi:id="_CF0WQCCeEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="Test Hier NormMeas" name="NormMeas" title="Test Hier NormMeas" type="NUMBER"/>
+  <measures xmi:id="_hsw0MCCxEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="TestHier Measure 3" name="Measure3" title="TestHier Measure 3" type="FINDINGS">
+    <measures xmi:id="_rKgEgSCyEeimKObN-DS5AA" parent="_SKtrUCCgEeimKObN-DS5AA"/>
+  </measures>
+  <measures xmi:id="_iTyX8CCxEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="Measure2" name="Measure2" title="Measure2" type="FINDINGS">
+    <measures xmi:id="_rKgEgCCyEeimKObN-DS5AA" parent="_SKtrUCCgEeimKObN-DS5AA"/>
+  </measures>
+  <measures xmi:id="_XeqWkCCzEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" description="Manual Measure" name="ManualMeas" title="Manual Measure" type="NUMBER">
+    <measures xmi:id="_d6XOsCCzEeimKObN-DS5AA" parent="_PFlGYCCgEeimKObN-DS5AA"/>
+  </measures>
+  <measures xmi:id="_sZz60CCzEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="Tool Measure" name="ToolMeas" title="Tool Measure" type="FINDINGS">
+    <measures xmi:id="_CCAjkCC6EeimKObN-DS5AA" parent="_SKtrUCCgEeimKObN-DS5AA"/>
+  </measures>
+  <measures xmi:id="_Xn6jwCC0EeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="UnionMeas" name="UnionMeas" title="UnionMeas" type="FINDINGS">
+    <measures xmi:id="_fzGcgCC0EeimKObN-DS5AA" parent="_Cj9BwCC0EeimKObN-DS5AA"/>
+  </measures>
+  <measures xmi:id="_OCn1wCC6EeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="QIESL Measure" name="QIESLMeas" title="QIESL Measure" type="NUMBER">
+    <measures xmi:id="_VMOVsCC6EeimKObN-DS5AA" parent="_UCE1kCCgEeimKObN-DS5AA"/>
+  </measures>
+  <measures xmi:id="_bjCGwCC6EeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="Text Measure" name="TextMeas" title="Text Measure" type="FINDINGS">
+    <measures xmi:id="_iT59oCC6EeimKObN-DS5AA" parent="_svYc0CCgEeimKObN-DS5AA"/>
+  </measures>
+  <measurementMethods xsi:type="qm:ManualInstrument" xmi:id="_CqMOoCCeEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" determines="_XeqWkCCzEeimKObN-DS5AA" description="TestHier Manual" name="TestHier Manual" title="TestHier Manual"/>
+  <measurementMethods xsi:type="qm:TextAggregation" xmi:id="_D_RyQCCeEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" determines="_bjCGwCC6EeimKObN-DS5AA" description="TestHier Text Aggr" name="TestHier Text Aggr" title="TestHier Text Aggr"/>
+  <measurementMethods xsi:type="qm:QIESLAggregation" xmi:id="_FcGVkCCeEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" determines="_OCn1wCC6EeimKObN-DS5AA" description="TestHier QIESL Aggr" name="TestHier QIESL Aggr" title="TestHier QIESL Aggr"/>
+  <measurementMethods xsi:type="qm:FindingsUnionMeasureAggregation" xmi:id="_GVVDoCCeEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" determines="_Xn6jwCC0EeimKObN-DS5AA" description="TestHier Union Aggr" name="TestHier Union Aggr" title="TestHier Union Aggr"/>
+  <measurementMethods xsi:type="qm:NumberMeanMeasureAggregation" xmi:id="_HaBa0CCeEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" determines="_CF0WQCCeEeimKObN-DS5AA" description="TestHier Mean" name="TestHier Mean" title="TestHier Mean"/>
+  <measurementMethods xsi:type="qm:ToolBasedInstrument" xmi:id="_Oh-k4CCyEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" determines="_iTyX8CCxEeimKObN-DS5AA" tool="_IxWaICCeEeimKObN-DS5AA" metric="Test2"/>
+  <measurementMethods xsi:type="qm:ToolBasedInstrument" xmi:id="_tGbsECC6EeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" determines="_Bjj9wCCeEeimKObN-DS5AA" tool="_IxWaICCeEeimKObN-DS5AA" metric="Test1"/>
+  <measurementMethods xsi:type="qm:ToolBasedInstrument" xmi:id="_uSa-ECC6EeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" determines="_hsw0MCCxEeimKObN-DS5AA" tool="_IxWaICCeEeimKObN-DS5AA" metric="Test3"/>
+  <measurementMethods xsi:type="qm:ToolBasedInstrument" xmi:id="_7Uvk4CC6EeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" determines="_sZz60CCzEeimKObN-DS5AA" tool="_IxWaICCeEeimKObN-DS5AA" metric="Test4"/>
+  <tools xmi:id="_IxWaICCeEeimKObN-DS5AA" originatesFrom="_KjDBQCCeEeimKObN-DS5AA" taggedBy="_J15AUCCeEeimKObN-DS5AA" description="Test Hier Tool" name="TestHierTool" title="TestHierTool"/>
+  <tags xmi:id="_J15AUCCeEeimKObN-DS5AA" description="TestHier Tag" name="TestHier Tag" title="TestHier Tag"/>
+  <sources xmi:id="_KjDBQCCeEeimKObN-DS5AA" description="TestHier Source" name="TestHier Source" title="TestHier Source"/>
+  <requires href="Test.qm#_Lg7jYBT5Eei0lMAbFVod2Q"/>
+</qm:QualityModel>

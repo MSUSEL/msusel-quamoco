@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,7 +29,7 @@ package edu.montana.gsoc.msusel.quamoco.model;
  * Enumeration indicating the effect of a factor on another factor
  * 
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public enum InfluenceEffect {
 
@@ -42,5 +42,13 @@ public enum InfluenceEffect {
      * Indicates that the degree of which the target factor is possessed by the
      * product is hindered if the product possesses the source factor
      */
-    NEGATIVE
+    NEGATIVE,
+    /**
+     * Indicates that the influence is based on the refinement of one factor by another
+     */
+    REFINEMENT,
+    /**
+     * Indicates that there is no influence
+     */
+    NONE
 }

@@ -1,20 +1,20 @@
 /**
  * The MIT License (MIT)
- * <p>
+ *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
- * <p>
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * <p>
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * <p>
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,17 +25,21 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.factor;
 
-import edu.montana.gsoc.msusel.quamoco.model.*;
+import edu.montana.gsoc.msusel.quamoco.model.Annotation;
+import edu.montana.gsoc.msusel.quamoco.model.Impact;
+import edu.montana.gsoc.msusel.quamoco.model.Source;
+import edu.montana.gsoc.msusel.quamoco.model.Tag;
 import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
 import lombok.Singular;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * A factor representing an aspect of a descriptive quality model.
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public abstract class QualityAspect extends Factor {
 
@@ -57,7 +61,7 @@ public abstract class QualityAspect extends Factor {
         super(name, identifier);
     }
 
-    protected QualityAspect(String name, String description, Entity characterizes, String title, @Singular List<Impact> influences, Factor refines,
+    protected QualityAspect(String name, String description, Entity characterizes, String title, @Singular Map<String, Impact> influences, Factor refines,
                             String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
         super(name, description, characterizes, title, influences, refines,
                 identifier, originatesFrom, tags, annotations);

@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,13 +25,17 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.factor;
 
-import edu.montana.gsoc.msusel.quamoco.io.FactorType;
-import edu.montana.gsoc.msusel.quamoco.model.*;
+import edu.montana.gsoc.msusel.quamoco.io.factories.FactorType;
+import edu.montana.gsoc.msusel.quamoco.model.Annotation;
+import edu.montana.gsoc.msusel.quamoco.model.Impact;
+import edu.montana.gsoc.msusel.quamoco.model.Source;
+import edu.montana.gsoc.msusel.quamoco.model.Tag;
 import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
 import lombok.Builder;
 import lombok.Singular;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Technical issues are also a way to decompose the abstract concept of quality.
@@ -41,7 +45,7 @@ import java.util.List;
  * NOTE: Cannot characterize specific entities
  * 
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class TechnicalIssue extends ClassificationItem {
 
@@ -66,7 +70,7 @@ public class TechnicalIssue extends ClassificationItem {
     }
 
     @Builder(buildMethodName = "create")
-    protected TechnicalIssue(String name, String description, Entity characterizes, String title, @Singular List<Impact> influences, Factor refines,
+    protected TechnicalIssue(String name, String description, Entity characterizes, String title, @Singular Map<String, Impact> influences, Factor refines,
                              String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations)
     {
         super(name, description, characterizes, title, influences, refines,

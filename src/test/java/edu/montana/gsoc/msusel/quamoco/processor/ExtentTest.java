@@ -1,20 +1,20 @@
 /**
  * The MIT License (MIT)
- * <p>
+ *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
- * <p>
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * <p>
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * <p>
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -33,6 +33,7 @@ import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
 import edu.montana.gsoc.msusel.codetree.node.structural.ProjectNode;
 import edu.montana.gsoc.msusel.codetree.node.type.ClassNode;
 import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
+import edu.montana.gsoc.msusel.metrics.Measurement;
 import edu.montana.gsoc.msusel.metrics.MeasuresTable;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
@@ -298,38 +299,38 @@ public class ExtentTest {
         fixture.clearExtents();
 
         CodeTree tree = new CodeTree();
-        MethodNode method = null;
-        TypeNode type = null;
-        ProjectNode proj = ProjectNode.builder().key("Test")
-                .file(
-                        file = FileNode.builder().key("path")
-                                .metric("LOC", 200.0)
-                                .type(
-                                        type = ClassNode.builder()
-                                                .key("namespace.Type")
-                                                .start(1)
-                                                .end(100)
-                                                .metric("LOC", 100.0)
-                                                .method("method",
-                                                        method = MethodNode.builder()
-                                                                .key("namespace.Type#method")
-                                                                .start(20)
-                                                                .end(100)
-                                                                .metric("LOC", 80.0)
-                                                                .create())
-                                                .create())
-                                .create())
-                .file(file2 = FileNode.builder().key("path2").metric("LOC", 200.0).create())
-                .file(file3 = FileNode.builder().key("path3").metric("LOC", 200.0).create())
-                .metric("LOC", 1000.0)
-                .metric("NOM", 2.0)
-                .metric("NIV", 10.0)
-                .metric("NOC", 2.0)
-                .create();
+
+        ProjectNode proj = ProjectNode.builder().key("Test").create();
+        MeasuresTable.getInstance().store(Measurement.of("LOC").on(proj).withValue(1000.0));
+        MeasuresTable.getInstance().store(Measurement.of("NOM").on(proj).withValue(2.0));
+        MeasuresTable.getInstance().store(Measurement.of("NIV").on(proj).withValue(10.0));
+        MeasuresTable.getInstance().store(Measurement.of("NOC").on(proj).withValue(2.0));
+
+        file = FileNode.builder().key("path").create();
+        MeasuresTable.getInstance().store(Measurement.of("LOC").on(file).withValue(200.0));
+
+        TypeNode type = ClassNode.builder().key("namespace.Type").start(1).end(100).create();
+        MeasuresTable.getInstance().store(Measurement.of("LOC").on(type).withValue(100.0));
+        file.addChild(type);
+
+        MethodNode method1 = MethodNode.builder().key("namespace.Type#method").start(20).end(100).create();
+        MeasuresTable.getInstance().store(Measurement.of("LOC").on(method1).withValue(80.0));
+        type.addChild(method1);
+
+        file2 = FileNode.builder().key("path2").create();
+        MeasuresTable.getInstance().store(Measurement.of("LOC").on(file2).withValue(200.0));
+
+        file3 = FileNode.builder().key("path3").create();
+        MeasuresTable.getInstance().store(Measurement.of("LOC").on(file3).withValue(200.0));
+
+        proj.addChild(file);
+        proj.addChild(file2);
+        proj.addChild(file3);
+
         tree.setProject(proj);
 
         fileFinding = new Finding(file, "issue", "issue");
-        methodFinding = new Finding(method, "issue", "issue");
+        methodFinding = new Finding(method1, "issue", "issue");
         typeFinding = new Finding(type, "issue", "issue");
 
         MeasuresTable.getInstance().merge(tree);

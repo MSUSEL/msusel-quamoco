@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qm:QualityModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qm="http://www.quamoco.de/qm/v17" xmi:id="_Lg7jYBT5Eei0lMAbFVod2Q" description="A Test Model" name="Test" title="Test Model">
+  <entities xmi:id="_liJCgBT5Eei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="A Product" name="Product"/>
+  <entities xmi:id="_ojZ0EBT5Eei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="A Product part" name="Product Part">
+    <partOf xmi:id="_ojtWEBT5Eei0lMAbFVod2Q" parent="_liJCgBT5Eei0lMAbFVod2Q"/>
+  </entities>
+  <entities xmi:id="_tKJ8wBT5Eei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Source Code" name="Source Code">
+    <partOf xmi:id="_xwUPkBT5Eei0lMAbFVod2Q" parent="_liJCgBT5Eei0lMAbFVod2Q"/>
+  </entities>
+  <entities xmi:id="_5JeOcBT5Eei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="A Comment" name="Comment">
+    <isA xmi:id="_5JeOcRT5Eei0lMAbFVod2Q" parent="_ojZ0EBT5Eei0lMAbFVod2Q"/>
+  </entities>
+  <entities xmi:id="_A3o0ABT6Eei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Part of Source Code" name="Source Code Part">
+    <isA xmi:id="_A3o0ART6Eei0lMAbFVod2Q" parent="_ojZ0EBT5Eei0lMAbFVod2Q"/>
+    <partOf xmi:id="_EF4RoBT6Eei0lMAbFVod2Q" parent="_tKJ8wBT5Eei0lMAbFVod2Q"/>
+  </entities>
+  <factors xmi:id="_S-rHUBT5Eei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Product Quality" name="Quality" title="Software Quality" characterizes="_liJCgBT5Eei0lMAbFVod2Q"/>
+  <factors xmi:id="_OFLMUBT6Eei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Test for Maintainability" name="Maintainability" title="Test Maintainability">
+    <influences xmi:id="_XGLSwBT6Eei0lMAbFVod2Q" target="_S-rHUBT5Eei0lMAbFVod2Q"/>
+    <influences xmi:id="_GnSoABUGEei0lMAbFVod2Q" target="_8efzEBUFEei0lMAbFVod2Q"/>
+  </factors>
+  <factors xmi:id="_X-NG8BT6Eei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Security" name="Security">
+    <influences xmi:id="_uxtS8BUFEei0lMAbFVod2Q" target="_S-rHUBT5Eei0lMAbFVod2Q"/>
+    <influences xmi:id="_GnSoARUGEei0lMAbFVod2Q" target="_8efzEBUFEei0lMAbFVod2Q"/>
+  </factors>
+  <factors xmi:id="_8efzEBUFEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Source Code Part Quality" name="Quality" characterizes="_A3o0ABT6Eei0lMAbFVod2Q">
+    <refines xmi:id="_AvoREBUGEei0lMAbFVod2Q" parent="_S-rHUBT5Eei0lMAbFVod2Q"/>
+  </factors>
+  <evaluations xsi:type="qm:SingleMeasureEvaluation" xmi:id="_ZHJrABUFEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Security test measue evaluation" name="SingleMeasureEvaluation" title="Test Measure for Security" evaluates="_X-NG8BT6Eei0lMAbFVod2Q" measure="_CpKQcBUEEei0lMAbFVod2Q" normlizationMeasure="_Dd6uMBUEEei0lMAbFVod2Q" range="FILE">
+    <function xsi:type="qm:LinearDecreasingFunction" xmi:id="_UPP2ABUHEei0lMAbFVod2Q" upperBound="1.0"/>
+  </evaluations>
+  <evaluations xsi:type="qm:SingleMeasureEvaluation" xmi:id="_dAcQwBUFEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Test evaluation for maintainability" name="SingleMeasureEvaluation" evaluates="_OFLMUBT6Eei0lMAbFVod2Q" measure="_CpKQcBUEEei0lMAbFVod2Q" normlizationMeasure="_Dd6uMBUEEei0lMAbFVod2Q" range="FILE">
+    <function xsi:type="qm:LinearIncreasingFunction" xmi:id="_Kzlz4BUHEei0lMAbFVod2Q" upperBound="1.0"/>
+  </evaluations>
+  <evaluations xsi:type="qm:WeightedSumFactorAggregation" xmi:id="_pGkVEBUFEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Aggregates Product Quality" name="WeightedSumFactorAggregation" title="Product Quality Aggregation" evaluates="_S-rHUBT5Eei0lMAbFVod2Q">
+    <rankings xmi:id="_TJuN0BUGEei0lMAbFVod2Q" rank="1" weight="0.33333333333333326" factor="_OFLMUBT6Eei0lMAbFVod2Q"/>
+    <rankings xmi:id="_TJuN0RUGEei0lMAbFVod2Q" rank="1" weight="0.33333333333333326" factor="_X-NG8BT6Eei0lMAbFVod2Q"/>
+    <rankings xmi:id="_TJuN0hUGEei0lMAbFVod2Q" rank="1" weight="0.33333333333333326" factor="_8efzEBUFEei0lMAbFVod2Q"/>
+  </evaluations>
+  <evaluations xsi:type="qm:WeightedSumFactorAggregation" xmi:id="_DCRCEBUGEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Aggregates Source Code Quality" name="WeightedSumFactorAggregation" title="Source Code Quality Eval" evaluates="_8efzEBUFEei0lMAbFVod2Q">
+    <rankings xmi:id="_IqIpgBUGEei0lMAbFVod2Q" rank="1" weight="0.5" factor="_OFLMUBT6Eei0lMAbFVod2Q"/>
+    <rankings xmi:id="_IqIpgRUGEei0lMAbFVod2Q" rank="1" weight="0.5" factor="_X-NG8BT6Eei0lMAbFVod2Q"/>
+  </evaluations>
+  <measures xmi:id="_CpKQcBUEEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Test Measure" name="Test Measure" title="Test measure" characterizes="_A3o0ABT6Eei0lMAbFVod2Q" type="FINDINGS">
+    <measures xmi:id="_WXxToBUFEei0lMAbFVod2Q" parent="_X-NG8BT6Eei0lMAbFVod2Q"/>
+    <measures xmi:id="_ljBV0BUFEei0lMAbFVod2Q" parent="_OFLMUBT6Eei0lMAbFVod2Q"/>
+    <refines xmi:id="_GnjjMBUFEei0lMAbFVod2Q" parent="_3UisIBUEEei0lMAbFVod2Q"/>
+  </measures>
+  <measures xsi:type="qm:NormalizationMeasure" xmi:id="_Dd6uMBUEEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Test Normalization" name="Test Normalization" title="Test Normalization" characterizes="_A3o0ABT6Eei0lMAbFVod2Q" type="NUMBER"/>
+  <measures xmi:id="_3UisIBUEEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Parent measure" name="Parent" title="Parent Measure" characterizes="_ojZ0EBT5Eei0lMAbFVod2Q" type="FINDINGS"/>
+  <measures xmi:id="_Ti8UMBUIEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Mean" name="Mean" title="Mean" characterizes="_liJCgBT5Eei0lMAbFVod2Q" type="NUMBER"/>
+  <measurementMethods xsi:type="qm:ToolBasedInstrument" xmi:id="_EmVu0BUEEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" determines="_Dd6uMBUEEei0lMAbFVod2Q" tool="_F2NbQBUEEei0lMAbFVod2Q" metric="Test"/>
+  <measurementMethods xsi:type="qm:ToolBasedInstrument" xmi:id="_GMzZgBUIEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" determines="_CpKQcBUEEei0lMAbFVod2Q" tool="_F2NbQBUEEei0lMAbFVod2Q" metric="Test2"/>
+  <measurementMethods xsi:type="qm:NumberMeanMeasureAggregation" xmi:id="_M1Mp0BUIEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" determines="_Ti8UMBUIEei0lMAbFVod2Q" description="Mean Test" name="Mean Test" title="Mean Test"/>
+  <tools xmi:id="_F2NbQBUEEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Test Tool" name="Test Tool" title="Test Tool"/>
+  <tags xmi:id="_HDZAEBUEEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" description="Test Tag" name="Test Tag" title="Test Tag"/>
+  <sources xmi:id="_HttvcBUEEei0lMAbFVod2Q" description="Test Source" name="Test Source" title="Test Source"/>
+</qm:QualityModel>

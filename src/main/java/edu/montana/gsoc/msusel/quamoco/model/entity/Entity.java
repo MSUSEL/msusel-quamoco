@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,7 +31,6 @@ import edu.montana.gsoc.msusel.quamoco.model.Annotation;
 import edu.montana.gsoc.msusel.quamoco.model.QMElement;
 import edu.montana.gsoc.msusel.quamoco.model.Source;
 import edu.montana.gsoc.msusel.quamoco.model.Tag;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.Singular;
@@ -68,8 +67,7 @@ public abstract class Entity extends QMElement {
     /**
      * List of entities which are children of this Entity
      */
-    @Builder.Default
-    protected List<Entity> isAs = Lists.newArrayList();
+    private List<Entity> isAs = Lists.newArrayList();
     /**
      * Entity of which this entity is a part
      */
@@ -145,11 +143,10 @@ public abstract class Entity extends QMElement {
         isAs.remove(ent);
     }
 
-    protected String generateXMLTag(String type) {
+    public String generateXMLTag(String type) {
         String tag = "entities";
         Map<String, String> attrs = Maps.newHashMap();
         List<String> content = Lists.newArrayList();
-        StringBuilder builder = new StringBuilder();
 
         if (getTitle() != null)
             attrs.put("title", StringEscapeUtils.escapeXml10(getTitle()));

@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,7 +32,6 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggregator;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.NegativeLinearDistribution;
@@ -43,6 +42,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+
+import static edu.montana.gsoc.msusel.quamoco.model.MeasureType.FINDINGS;
+import static edu.montana.gsoc.msusel.quamoco.model.MeasureType.NUMBER;
 
 /**
  * The class <code>MeasureToMeasureFindingsNumberEdgeTest</code> contains tests
@@ -130,9 +132,9 @@ public class MeasureToMeasureFindingsNumberEdgeTest {
                 .expectedEdgeCount(10000)
                 .build();
         final MeasureNode dest = new MeasureNode(graph, "dest", "owner");
-        dest.setType(MeasureType.NUMBER);
+        dest.setType(NUMBER);
         final MeasureNode src = new MeasureNode(graph, "src", "owner");
-        src.setType(MeasureType.FINDINGS);
+        src.setType(FINDINGS);
         final FindingNode srcsrc = new FindingNode(graph, "key", "owner", "rule", "tool");
         final FindingToMeasureEdge f2m = new FindingToMeasureEdge("preedge", srcsrc, src);
         srcsrc.addFinding(new Finding(FileNode.builder().key("path").create(), "issue", "issue"));

@@ -1,20 +1,20 @@
 /**
  * The MIT License (MIT)
- *
+ * <p>
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -31,7 +31,7 @@ import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.io.QMXMLReader;
+import edu.montana.gsoc.msusel.quamoco.io.qm.QMXMLReader;
 import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +61,7 @@ public class ModelDistiller {
     /**
      * Logger
      */
-    private static final Logger        LOG = LoggerFactory.getLogger(ModelDistiller.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ModelDistiller.class);
     /**
      * Processing graph to be created
      */
@@ -69,31 +69,29 @@ public class ModelDistiller {
     /**
      * Language
      */
-    private String                     language;
+    private String language;
     /**
-     * List of known quality models
+     *
      */
-    List<QualityModel>                 models;
+    private ModelManager manager;
 
     /**
      * Constructor
      */
-    public ModelDistiller()
-    {
+    public ModelDistiller(ModelManager manager) {
         graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
                 .expectedNodeCount(10000)
                 .expectedEdgeCount(10000)
                 .build();
-        models = Lists.newArrayList();
+        this.manager = manager;
     }
 
     /**
      * Controls the construction of the graph.
      */
-    public void buildGraph()
-    {
+    public void buildGraph() {
         final String[] files = selectQMFiles();
         buildGraph(files);
     }
@@ -101,40 +99,36 @@ public class ModelDistiller {
     /**
      * @param files
      */
-    public void buildGraph(String... files)
-    {
-        models = readInQualityModels(files);
+    public void buildGraph(String... files) {
+        readInQualityModels(files);
         final DistilledGraphCreator creator = new DistilledGraphCreator();
-        graph = creator.buildGraph(models);
+        graph = creator.buildGraph(manager);
     }
 
     /**
      * Controls the construction of the graph based on the given path to a
      * Quality Model file.
-     * 
+     *
      * @param path
      *            path to the quality model to load
      */
-    public void buildGraph(Path path)
-    {
-        models = readInQualityModels(path);
+    public void buildGraph(Path path) {
+        //readInQualityModels(path);
         final DistilledGraphCreator creator = new DistilledGraphCreator();
-        graph = creator.buildGraph(models);
+        graph = creator.buildGraph(manager);
     }
 
     /**
      * @return The processing graph.
      */
-    public MutableNetwork<Node, Edge> getGraph()
-    {
+    public MutableNetwork<Node, Edge> getGraph() {
         return graph;
     }
 
     /**
      * @return the language
      */
-    public String getLanguage()
-    {
+    public String getLanguage() {
         return language;
     }
 
@@ -145,32 +139,21 @@ public class ModelDistiller {
      *            list of quality models to be read from the Jar file.
      * @return List of Quality Model objects created from the read files.
      */
-    private List<QualityModel> readInQualityModels(final String... args)
-    {
-        final QMXMLReader qmRead = new QMXMLReader();
-        final List<QualityModel> models = Lists.newArrayList();
-        if (args != null)
-        {
-            try
-            {
-                for (final String arg : args)
-                {
+    public void readInQualityModels(final String... args) {
+        final QMXMLReader qmRead = new QMXMLReader(manager);
+        if (args != null) {
+            try {
+                for (final String arg : args) {
                     qmRead.firstPass(arg);
-                    models.add(qmRead.getModel());
                 }
 
-                for (final String arg : args)
-                {
+                for (final String arg : args) {
                     qmRead.secondPass(arg);
                 }
-            }
-            catch (ParserConfigurationException | SAXException | IOException e)
-            {
+            } catch (ParserConfigurationException | SAXException | IOException e) {
                 ModelDistiller.LOG.warn(e.getMessage(), e);
             }
         }
-
-        return models;
     }
 
     /**
@@ -178,14 +161,13 @@ public class ModelDistiller {
      * path is a file and it actually exists, it will be treated as the lowest
      * level quality model (closest to a language). Any other quality models
      * that the given model depends upon will then be loaded as needed.
-     * 
+     *
      * @param path
      *            Path to the lowest level quality model.
      * @return List of quality models loaded
      */
-    private List<QualityModel> readInQualityModels(Path path)
-    {
-        final QMXMLReader qmRead = new QMXMLReader();
+    public List<QualityModel> readInQualityModels(Path path) {
+        final QMXMLReader qmRead = new QMXMLReader(manager);
         final List<QualityModel> models = Lists.newArrayList();
         final Path baseDir = path.toAbsolutePath().getParent();
         Queue<Path> paths = Queues.newArrayDeque();
@@ -194,45 +176,34 @@ public class ModelDistiller {
 
         Map<String, QualityModel> modelMap = new HashMap<>();
 
-        while (!paths.isEmpty())
-        {
+        while (!paths.isEmpty()) {
             Path p = paths.poll();
             pStack.offer(p);
-            if (Files.exists(p))
-            {
-                try
-                {
+            if (Files.exists(p)) {
+                try {
                     final XMLInputFactory factory = XMLInputFactory.newInstance();
                     final InputStream stream = Files.newInputStream(p, StandardOpenOption.READ);
                     final XMLStreamReader reader = factory.createXMLStreamReader(stream);
-                    while (reader.hasNext())
-                    {
+                    while (reader.hasNext()) {
                         final int event = reader.next();
 
-                        switch (event)
-                        {
-                        case XMLStreamConstants.START_ELEMENT:
-                            if (reader.getLocalName().equals("requires"))
-                            {
-                                String other = reader.getAttributeValue(null, "href");
-                                if (other.contains("#"))
-                                {
-                                    String x = other.split("#")[0];
+                        switch (event) {
+                            case XMLStreamConstants.START_ELEMENT:
+                                if (reader.getLocalName().equals("requires")) {
+                                    String other = reader.getAttributeValue(null, "href");
+                                    if (other.contains("#")) {
+                                        String x = other.split("#")[0];
 
-                                    if (!modelMap.containsKey(x))
-                                    {
-                                        if (baseDir != null)
-                                        {
-                                            Path next = baseDir.resolve(x);
-                                            paths.offer(next);
-                                        }
-                                        else
-                                        {
-                                            paths.offer(Paths.get(x));
+                                        if (!modelMap.containsKey(x)) {
+                                            if (baseDir != null) {
+                                                Path next = baseDir.resolve(x);
+                                                paths.offer(next);
+                                            } else {
+                                                paths.offer(Paths.get(x));
+                                            }
                                         }
                                     }
                                 }
-                            }
                         }
                     }
 
@@ -240,22 +211,16 @@ public class ModelDistiller {
                     QualityModel model = qmRead.getModel();
                     modelMap.put(p.getFileName().toString(), model);
                     models.add(qmRead.getModel());
-                }
-                catch (XMLStreamException | ParserConfigurationException | SAXException | IOException e)
-                {
+                } catch (XMLStreamException | ParserConfigurationException | SAXException | IOException e) {
                     LOG.warn("Could not read file at: " + path.toString());
                 }
             }
         }
 
-        while (!pStack.isEmpty())
-        {
-            try
-            {
+        while (!pStack.isEmpty()) {
+            try {
                 qmRead.secondPass(pStack.poll().toString());
-            }
-            catch (ParserConfigurationException | SAXException | IOException e)
-            {
+            } catch (ParserConfigurationException | SAXException | IOException e) {
                 e.printStackTrace();
             }
         }
@@ -267,22 +232,17 @@ public class ModelDistiller {
      * @return List of string names representing the selected quality model
      *         files.
      */
-    private String[] selectQMFiles()
-    {
+    private String[] selectQMFiles() {
         String[] retVal = null;
-        if (language != null && !language.isEmpty())
-        {
+        if (language != null && !language.isEmpty()) {
             final Properties prop = new Properties();
-            try
-            {
+            try {
                 final InputStream stream = this.getClass().getResourceAsStream("languages.properties");
                 prop.load(stream);
                 stream.close();
 
                 retVal = ((String) prop.get(language)).split(",");
-            }
-            catch (final IOException e)
-            {
+            } catch (final IOException e) {
                 ModelDistiller.LOG.warn(e.getMessage(), e);
             }
         }
@@ -294,25 +254,15 @@ public class ModelDistiller {
      * @param language
      *            the language to set
      */
-    public void setLanguage(final String language)
-    {
+    public void setLanguage(final String language) {
         this.language = language;
-    }
-
-    /**
-     * @return List of all loaded quality models
-     */
-    public List<QualityModel> getModelList()
-    {
-        return models;
     }
 
     /**
      * @param qmFileLocations
      */
-    public void buildGraph(Map<Class, String> qmFileLocations)
-    {
+    public void buildGraph(Map<Class, String> qmFileLocations) {
         // TODO Auto-generated method stub
-        
+
     }
 }

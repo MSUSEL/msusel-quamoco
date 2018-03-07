@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,6 +25,8 @@
  */
 package edu.montana.gsoc.msusel.quamoco.io;
 
+import edu.montana.gsoc.msusel.quamoco.distiller.ModelManager;
+import edu.montana.gsoc.msusel.quamoco.io.qm.QMXMLReader;
 import edu.montana.gsoc.msusel.quamoco.model.*;
 import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
 import edu.montana.gsoc.msusel.quamoco.model.eval.factor.WeightedSumFactorAggregation;
@@ -61,7 +63,7 @@ public class QMXMLReaderTest {
     @Test
     public void testQMXMLReader_1() throws Exception
     {
-        final QMXMLReader result = new QMXMLReader();
+        final QMXMLReader result = new QMXMLReader(new ModelManager());
 
         // TODO: add additional test code here
         assertNotNull(result);
@@ -73,7 +75,7 @@ public class QMXMLReaderTest {
     @Test
     public void testGetModel_1() throws Exception
     {
-        final QMXMLReader fixture = new QMXMLReader();
+        final QMXMLReader fixture = new QMXMLReader(new ModelManager());
         QualityModel result = fixture.getModel();
         assertNull(result);
 
@@ -88,7 +90,7 @@ public class QMXMLReaderTest {
     @Test
     public void testRead_1() throws Exception
     {
-        final QMXMLReader fixture = new QMXMLReader();
+        final QMXMLReader fixture = new QMXMLReader(new ModelManager());
 
         fixture.read("testdata/test.qm");
 
@@ -286,7 +288,7 @@ public class QMXMLReaderTest {
     @Test
     public void testRead_2() throws Exception
     {
-        final QMXMLReader fixture = new QMXMLReader();
+        final QMXMLReader fixture = new QMXMLReader(new ModelManager());
 
         fixture.read("");
 
@@ -302,7 +304,7 @@ public class QMXMLReaderTest {
     @Test
     public void testRead_3() throws Exception
     {
-        final QMXMLReader fixture = new QMXMLReader();
+        final QMXMLReader fixture = new QMXMLReader(new ModelManager());
 
         fixture.read(null);
 

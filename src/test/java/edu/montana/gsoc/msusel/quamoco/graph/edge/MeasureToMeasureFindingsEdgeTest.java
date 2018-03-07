@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -120,11 +120,13 @@ public class MeasureToMeasureFindingsEdgeTest {
                 .expectedNodeCount(10000)
                 .expectedEdgeCount(10000)
                 .build();
-        final MeasureNode dest = new MeasureNode(graph, "dest", "owner");
+        final MeasureNode dest = new MeasureNode("dest", "owner");
+        dest.setGraph(graph);
         dest.setType(MeasureType.FINDINGS);
-        final MeasureNode src = new MeasureNode(graph, "src", "owner");
+        final MeasureNode src = new MeasureNode("src", "owner");
+        src.setGraph(graph);
         src.setType(MeasureType.FINDINGS);
-        final FindingNode srcsrc = new FindingNode(graph, "key", "owner", "rule", "tool");
+        final FindingNode srcsrc = new FindingNode("key", "owner", "rule", "tool");
         final FindingToMeasureEdge f2m = new FindingToMeasureEdge("preedge", srcsrc, src);
         fixture = new MeasureToMeasureFindingsEdge("fixture", src, dest);
         src.setProcessor(new FindingsUnionAggregator(src));

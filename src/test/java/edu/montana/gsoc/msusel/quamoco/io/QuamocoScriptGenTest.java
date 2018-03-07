@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,6 +27,7 @@ package edu.montana.gsoc.msusel.quamoco.io;
 
 import static org.junit.Assert.*;
 
+import edu.montana.gsoc.msusel.quamoco.io.qm.QuamocoScriptWriter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,7 +55,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#main(java.lang.String[])}.
+     * Test method for {@link QuamocoScriptWriter#main(java.lang.String[])}.
      */
     @Test
     public final void testMain()
@@ -63,7 +64,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#execute(org.apache.commons.cli.CommandLine)}.
+     * Test method for {@link QuamocoScriptWriter#execute(org.apache.commons.cli.CommandLine)}.
      */
     @Test
     public final void testExecute()
@@ -72,7 +73,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#readInQualityModels(String[])}.
+     * Test method for {@link QuamocoScriptWriter#readInQualityModels(String[])}.
      */
     @Test
     public final void testReadInQualityModels()
@@ -81,7 +82,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#QuamocoScriptGen()}.
+     * Test method for {@link QuamocoScriptWriter#QuamocoScriptGen()}.
      */
     @Test
     public final void testQuamocoScriptGen()
@@ -90,7 +91,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#generate(QualityModel, Map)}.
+     * Test method for {@link QuamocoScriptWriter#generate(QualityModel, Map)}.
      */
     @Test
     public final void testGenerateQualityModelMapOfStringQualityModel()
@@ -99,7 +100,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#generate(Entity, QualityModel, Map)}.
+     * Test method for {@link QuamocoScriptWriter#generate(Entity, QualityModel, Map)}.
      */
     @Test
     public final void testGenerateEntityQualityModelMapOfStringQualityModel()
@@ -108,7 +109,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#generate(Factor, QualityModel, Map)}.
+     * Test method for {@link QuamocoScriptWriter#generate(Factor, QualityModel, Map)}.
      */
     @Test
     public final void testGenerateFactorQualityModelMapOfStringQualityModel()
@@ -117,7 +118,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#generate(Influence, QualityModel, Map)}.
+     * Test method for {@link QuamocoScriptWriter#generate(Influence, QualityModel, Map)}.
      */
     @Test
     public final void testGenerateInfluenceQualityModelMapOfStringQualityModel()
@@ -126,7 +127,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#generate(Evaluation, QualityModel, Map)}.
+     * Test method for {@link QuamocoScriptWriter#generate(Evaluation, QualityModel, Map)}.
      */
     @Test
     public final void testGenerateEvaluationQualityModelMapOfStringQualityModel()
@@ -135,7 +136,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#generate(Ranking, QualityModel, Map)}.
+     * Test method for {@link QuamocoScriptWriter#generate(Ranking, QualityModel, Map)}.
      */
     @Test
     public final void testGenerateRankingQualityModelMapOfStringQualityModel()
@@ -144,7 +145,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#generate(Function, QualityModel, Map)}.
+     * Test method for {@link QuamocoScriptWriter#generate(Function, QualityModel, Map)}.
      */
     @Test
     public final void testGenerateFunctionQualityModelMapOfStringQualityModel()
@@ -153,7 +154,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#generate(Measure, QualityModel, Map)}.
+     * Test method for {@link QuamocoScriptWriter#generate(Measure, QualityModel, Map)}.
      */
     @Test
     public final void testGenerateMeasureQualityModelMapOfStringQualityModel()
@@ -162,7 +163,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#generate(MeasurementMethod, QualityModel, Map)}.
+     * Test method for {@link QuamocoScriptWriter#generate(MeasurementMethod, QualityModel, Map)}.
      */
     @Test
     public final void testGenerateMeasurementMethodQualityModelMapOfStringQualityModel()
@@ -171,7 +172,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#generate(Tool, QualityModel, Map)}.
+     * Test method for {@link QuamocoScriptWriter#generate(Tool, QualityModel, Map)}.
      */
     @Test
     public final void testGenerateToolQualityModelMapOfStringQualityModel()
@@ -180,7 +181,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#generate(Tag, QualityModel, Map)}.
+     * Test method for {@link QuamocoScriptWriter#generate(Tag, QualityModel, Map)}.
      */
     @Test
     public final void testGenerateTagQualityModelMapOfStringQualityModel()
@@ -189,7 +190,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#generate(Source, QualityModel, Map)}.
+     * Test method for {@link QuamocoScriptWriter#generate(Source, QualityModel, Map)}.
      */
     @Test
     public final void testGenerateSourceQualityModelMapOfStringQualityModel()
@@ -198,7 +199,7 @@ public class QuamocoScriptGenTest {
     }
 
     /**
-     * Test method for {@link edu.montana.gsoc.msusel.quamoco.io.QuamocoScriptWriter#saveOutput(java.lang.String, java.lang.String, java.lang.String)}.
+     * Test method for {@link QuamocoScriptWriter#saveOutput(java.lang.String, java.lang.String, java.lang.String)}.
      */
     @Test
     public final void testSaveOutput()

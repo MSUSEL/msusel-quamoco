@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,17 +25,14 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
+import com.google.common.collect.Lists;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import com.google.common.collect.Lists;
+import java.util.List;
 
 /**
  * A tag is a keyword that can be added to model elements.
@@ -47,7 +44,7 @@ import com.google.common.collect.Lists;
  * </ul>
  * 
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class Tag extends QMElement {
 

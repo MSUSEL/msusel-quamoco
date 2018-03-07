@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,7 +25,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.entity;
 
-import edu.montana.gsoc.msusel.quamoco.io.EntityType;
+import edu.montana.gsoc.msusel.quamoco.io.factories.EntityType;
 import edu.montana.gsoc.msusel.quamoco.model.Annotation;
 import edu.montana.gsoc.msusel.quamoco.model.Source;
 import edu.montana.gsoc.msusel.quamoco.model.Tag;
@@ -40,7 +40,7 @@ import java.util.List;
  * entity Product, which is also characterized by all ISO 25010 -ilities
  * 
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class ProductPart extends Entity {
 

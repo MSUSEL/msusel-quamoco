@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,6 +26,7 @@
 package edu.montana.gsoc.msusel.quamoco.io;
 
 import com.google.common.collect.Maps;
+import edu.montana.gsoc.msusel.quamoco.distiller.ModelManager;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -41,11 +42,14 @@ import java.util.Map;
  */
 public abstract class AbstractQuamocoReader {
 
+    protected ModelManager manager;
+
     /**
      * Constructs a new instance
      */
-    public AbstractQuamocoReader()
+    public AbstractQuamocoReader(ModelManager manager)
     {
+        this.manager = manager;
     }
 
     /**

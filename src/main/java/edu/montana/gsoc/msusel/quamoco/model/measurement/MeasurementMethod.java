@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -41,15 +41,15 @@ import java.util.Map;
 
 /**
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public abstract class MeasurementMethod extends QMElement {
 
     @Getter
     @Setter
     protected Measure determines;
-    @Getter
     @Setter
+    @Getter
     protected String name;
     @Getter
     @Setter
@@ -57,6 +57,9 @@ public abstract class MeasurementMethod extends QMElement {
     @Getter
     @Setter
     protected String title;
+    @Getter
+    @Setter
+    protected String modelName;
 
     public MeasurementMethod(String name) {
         super();
@@ -69,7 +72,8 @@ public abstract class MeasurementMethod extends QMElement {
     }
 
     protected MeasurementMethod(Measure determines, String name, String description, String title,
-                                String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations)
+                                String identifier, Source originatesFrom, @Singular List<Tag> tags,
+                                @Singular List<Annotation> annotations)
     {
         super(identifier, originatesFrom, tags, annotations);
         this.determines = determines;
@@ -78,7 +82,22 @@ public abstract class MeasurementMethod extends QMElement {
         this.title = title;
     }
 
-    protected String generateXMLTag(String type) {
+    public String getFullName() {
+        StringBuilder builder = new StringBuilder();
+        if (modelName != null) {
+            builder.append(modelName);
+            builder.append("/");
+        }
+        if (determines != null) {
+            builder.append(determines.getFullName());
+            builder.append("/");
+        }
+        builder.append(name);
+
+        return builder.toString();
+    }
+
+    public String generateXMLTag(String type) {
         return generateXMLTag(type, Maps.newHashMap());
     }
 

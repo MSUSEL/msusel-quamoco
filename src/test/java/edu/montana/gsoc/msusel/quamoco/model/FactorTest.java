@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -95,7 +95,7 @@ public class FactorTest {
     public void getInfluences() throws Exception {
         Impact inf = mock(Impact.class);
         element.addInfluence(inf);
-        assertTrue(element.getInfluences().contains(inf));
+        assertTrue(element.getInfluences().values().contains(inf));
     }
 
     @Test

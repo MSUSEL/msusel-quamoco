@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,18 +25,17 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
-import java.math.BigDecimal;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.ValueToMeasureEdge;
 import edu.montana.gsoc.msusel.quamoco.processor.NullProcessor;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.math.BigDecimal;
 
 /**
  * The class <code>FactorNodeTest</code> contains tests for the class
@@ -70,7 +69,7 @@ public class FactorNodeTest {
         final String owner = "owner";
 
         final FactorNode result = new FactorNode(graph, name, owner);
-        
+
         // TODO: add additional test code here
         Assert.assertNotNull(result);
         Assert.assertEquals(FactorMethod.MEAN, result.getMethod());

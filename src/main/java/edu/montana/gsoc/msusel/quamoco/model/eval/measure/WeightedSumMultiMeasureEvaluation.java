@@ -1,20 +1,20 @@
 /**
  * The MIT License (MIT)
- * <p>
+ *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
- * <p>
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * <p>
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * <p>
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,10 +25,9 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model.eval.measure;
 
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import edu.montana.gsoc.msusel.quamoco.io.EvaluationType;
+import edu.montana.gsoc.msusel.quamoco.io.factories.EvaluationType;
 import edu.montana.gsoc.msusel.quamoco.model.Annotation;
 import edu.montana.gsoc.msusel.quamoco.model.Source;
 import edu.montana.gsoc.msusel.quamoco.model.Tag;
@@ -38,14 +37,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
 
-import com.google.common.collect.Lists;
+import java.util.List;
 
 /**
  * Indicates that the factor should aggregate incoming measures using
  * the weighted summation operator
  *
  * @author Isaac Griffith
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class WeightedSumMultiMeasureEvaluation extends MultiMeasureEvaluation {
 
@@ -69,9 +68,9 @@ public class WeightedSumMultiMeasureEvaluation extends MultiMeasureEvaluation {
     }
 
     @Builder(buildMethodName = "create")
-    protected WeightedSumMultiMeasureEvaluation(@Singular List<MeasureRanking> rankings, Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
+    protected WeightedSumMultiMeasureEvaluation(String name, @Singular List<MeasureRanking> rankings, Double completeness, Double maximumPoints, String title, String description, Factor evaluates,
                                                 String identifier, Source originatesFrom, @Singular List<Tag> tags, @Singular List<Annotation> annotations) {
-        super(completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, tags, annotations);
+        super(name, completeness, maximumPoints, title, description, evaluates, identifier, originatesFrom, tags, annotations);
         if (rankings != null && !rankings.isEmpty())
             rankings = Lists.newArrayList(rankings);
     }
@@ -80,11 +79,11 @@ public class WeightedSumMultiMeasureEvaluation extends MultiMeasureEvaluation {
         if (rank == null || rankings.contains(rank))
             return;
 
-        rankings.remove(rank);
+        rankings.add(rank);
     }
 
     public void removeRanking(MeasureRanking rank) {
-        if (rank == null || rankings.contains(rank))
+        if (rank == null || !rankings.contains(rank))
             return;
 
         rankings.remove(rank);

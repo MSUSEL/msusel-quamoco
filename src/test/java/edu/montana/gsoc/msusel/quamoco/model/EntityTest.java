@@ -2,7 +2,7 @@
  * The MIT License (MIT)
  *
  * MSUSEL Quamoco Implementation
- * Copyright (c) 2015-2017 Montana State University, Gianforte School of Computing,
+ * Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
  * Software Engineering Laboratory
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,7 +25,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
-import edu.montana.gsoc.msusel.quamoco.io.EntityType;
+import edu.montana.gsoc.msusel.quamoco.io.factories.EntityType;
 import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
 import edu.montana.gsoc.msusel.quamoco.model.entity.ProductPart;
 import org.junit.Before;
