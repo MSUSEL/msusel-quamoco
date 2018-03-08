@@ -25,6 +25,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.extents;
 
+import edu.montana.gsoc.msusel.codetree.INode;
 import edu.montana.gsoc.msusel.codetree.node.AbstractNode;
 import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
 import edu.montana.gsoc.msusel.metrics.MeasuresTable;
@@ -38,7 +39,7 @@ import java.math.BigDecimal;
  */
 public class MethodNodeExtentDecorator extends AbstractNodeExtentDecorator {
 
-    public MethodNodeExtentDecorator(AbstractNode node) {
+    public MethodNodeExtentDecorator(INode node) {
         super(node);
     }
 
@@ -73,7 +74,7 @@ public class MethodNodeExtentDecorator extends AbstractNodeExtentDecorator {
      */
     @Override
     public BigDecimal findMethodExtent(String metric) {
-        return new BigDecimal((double) MeasuresTable.instance.retrieve(decorated, metric));
+        return new BigDecimal((double) MeasuresTable.instance.retrieve((AbstractNode) decorated, metric));
     }
 
     /**

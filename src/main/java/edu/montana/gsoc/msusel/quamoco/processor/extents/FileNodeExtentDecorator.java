@@ -25,7 +25,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.extents;
 
-import edu.montana.gsoc.msusel.codetree.node.AbstractNode;
+import edu.montana.gsoc.msusel.codetree.INode;
 import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
 import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
 import edu.montana.gsoc.msusel.metrics.MeasuresTable;
@@ -40,7 +40,7 @@ import java.util.List;
  */
 public class FileNodeExtentDecorator extends AbstractNodeExtentDecorator {
 
-    public FileNodeExtentDecorator(AbstractNode node) {
+    public FileNodeExtentDecorator(INode node) {
         super(node);
     }
 

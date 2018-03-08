@@ -25,6 +25,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.extents;
 
+import edu.montana.gsoc.msusel.codetree.INode;
 import edu.montana.gsoc.msusel.codetree.node.AbstractNode;
 import edu.montana.gsoc.msusel.codetree.node.member.MethodNode;
 import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
@@ -40,13 +41,13 @@ import java.util.List;
  */
 public class TypeNodeExtentDecorator extends AbstractNodeExtentDecorator {
 
-    public TypeNodeExtentDecorator(AbstractNode node) {
+    public TypeNodeExtentDecorator(INode node) {
         super(node);
     }
 
     @Override
     public NormalizationRange findRange(String metric) {
-        if (MeasuresTable.instance.hasMetric(decorated, metric)) {
+        if (MeasuresTable.instance.hasMetric((AbstractNode) decorated, metric)) {
             return NormalizationRange.CLASS;
         } else {
             return NormalizationRange.FILE;
@@ -67,7 +68,7 @@ public class TypeNodeExtentDecorator extends AbstractNodeExtentDecorator {
 
     @Override
     public BigDecimal findClassExtent(String metric) {
-        return new BigDecimal((double) MeasuresTable.instance.retrieve(decorated, metric));
+        return new BigDecimal((double) MeasuresTable.instance.retrieve((AbstractNode) decorated, metric));
     }
 
 

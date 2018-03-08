@@ -43,7 +43,7 @@ public abstract class AbstractNodeExtentDecorator extends AbstractNode {
 
     protected INode decorated;
 
-    public AbstractNodeExtentDecorator(AbstractNode node) {
+    public AbstractNodeExtentDecorator(INode node) {
         super(null, null);
         this.decorated = node;
     }

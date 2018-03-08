@@ -25,6 +25,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.extents;
 
+import edu.montana.gsoc.msusel.codetree.INode;
 import edu.montana.gsoc.msusel.codetree.node.AbstractNode;
 import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
 import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
@@ -39,7 +40,7 @@ import java.math.BigDecimal;
  */
 public class FieldNodeExtentDecorator extends AbstractNodeExtentDecorator {
 
-    public FieldNodeExtentDecorator(AbstractNode node) {
+    public FieldNodeExtentDecorator(INode node) {
         super(node);
     }
 
