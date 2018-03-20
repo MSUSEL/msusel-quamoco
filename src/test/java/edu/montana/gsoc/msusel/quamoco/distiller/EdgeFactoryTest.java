@@ -23,43 +23,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package edu.montana.gsoc.msusel.quamoco.io;
+package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import static org.junit.Assert.*;
+public class EdgeFactoryTest {
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+    public void testCreateEdge() {
 
-/**
- * @author Isaac Griffith
- *
- */
-public class QMRJsonWriterTest {
-
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception
-    {
     }
-
-    /**
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-    }
-
-    /**
-     * Test method for {@link com.sparqline.quamoco.io.QMRJsonWriter#QMRJsonWriter()}.
-     */
-    @Test
-    public final void testQMRJsonWriter()
-    {
-        fail("Not yet implemented"); // TODO
-    }
-
 }

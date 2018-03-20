@@ -32,11 +32,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * The class <code>ValueNodeTest</code> contains tests for the class
@@ -75,7 +71,7 @@ public class ValueNodeTest {
         // TODO: add additional test code here
         assertNotNull(result);
         assertEquals("tool", result.getTool());
-        assertEquals(BigDecimal.ZERO, result.getValue());
+        assertEquals(0.0, result.getValue(), 0.001);
         assertEquals("node", result.getKey());
         assertEquals("owner", result.getOwnedBy());
         assertEquals("", result.getDescription());
@@ -107,7 +103,7 @@ public class ValueNodeTest {
         // TODO: add additional test code here
         assertNotNull(result);
         assertEquals("tool", result.getTool());
-        assertEquals(BigDecimal.ZERO, result.getValue());
+        assertEquals(0.0, result.getValue(), 0.001);
         assertEquals("node", result.getKey());
         assertEquals("owner", result.getOwnedBy());
         assertEquals("", result.getDescription());
@@ -153,15 +149,15 @@ public class ValueNodeTest {
     @Test
     public void testGetValue_1() throws Exception
     {
-        fixture.addValue(new BigDecimal(1));
-        fixture.addValue(new BigDecimal(1));
-        fixture.addValue(new BigDecimal(1));
-        fixture.addValue(new BigDecimal(-2));
+        fixture.addValue(1.0);
+        fixture.addValue(1.0);
+        fixture.addValue(1.0);
+        fixture.addValue(-2.0);
 
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // TODO: add additional test code here
-        assertEquals(BigDecimal.ONE, result);
+        assertEquals(1.0, result, 0.001);
     }
 
     /**

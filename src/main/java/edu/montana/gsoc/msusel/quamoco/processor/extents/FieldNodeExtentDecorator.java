@@ -32,8 +32,6 @@ import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
 import edu.montana.gsoc.msusel.metrics.MeasuresTable;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
-import java.math.BigDecimal;
-
 /**
  * @author Isaac Griffith
  * @version 1.2.0
@@ -47,7 +45,7 @@ public class FieldNodeExtentDecorator extends AbstractNodeExtentDecorator {
     @Override
     public NormalizationRange findRange(String metric) {
         AbstractNode parent = (AbstractNode) MeasuresTable.getInstance().getTree().getUtils().findParent(decorated);
-        if (MeasuresTable.instance.hasMetric(this, metric)) {
+        if (MeasuresTable.instance.hasMetric(decorated, metric)) {
             return NormalizationRange.CLASS;
         } else {
             return NormalizationRange.FILE;
@@ -55,30 +53,30 @@ public class FieldNodeExtentDecorator extends AbstractNodeExtentDecorator {
     }
 
     @Override
-    public BigDecimal findFileExtent(String metric) {
+    public double findFileExtent(String metric) {
         AbstractNode type = (AbstractNode) MeasuresTable.getInstance().getTree().getUtils().findParent(decorated);
         AbstractNode file = (AbstractNode) MeasuresTable.getInstance().getTree().getUtils().findParent(type);
 
         if (file instanceof FileNode) {
-            return new BigDecimal((double) MeasuresTable.instance.retrieve(file, metric));
+            return (double) MeasuresTable.instance.retrieve(file, metric);
         }
 
-        return BigDecimal.ZERO;
+        return 0.0;
     }
 
     @Override
-    public BigDecimal findMethodExtent(String metric) {
-        return null;
+    public double findMethodExtent(String metric) {
+        return 0.0;
     }
 
     @Override
-    public BigDecimal findClassExtent(String metric) {
+    public double findClassExtent(String metric) {
         AbstractNode p = (AbstractNode) MeasuresTable.getInstance().getTree().getUtils().findParent(decorated);
 
         if (p instanceof TypeNode) {
-            return new BigDecimal((double) MeasuresTable.instance.retrieve(p, metric));
+            return (double) MeasuresTable.instance.retrieve(p, metric);
         }
 
-        return BigDecimal.ZERO;
+        return 0.0;
     }
 }

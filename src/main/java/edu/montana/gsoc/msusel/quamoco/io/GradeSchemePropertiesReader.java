@@ -31,7 +31,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.Properties;
 
 /**
@@ -68,8 +67,8 @@ public class GradeSchemePropertiesReader {
 
             for (final Grade g : Grade.getGrades())
             {
-                final BigDecimal lower = new BigDecimal(prop.getProperty(g.getName() + "_GRADE.lower"));
-                final BigDecimal upper = new BigDecimal(prop.getProperty(g.getName() + "_GRADE.upper"));
+                final double lower = Double.valueOf(prop.getProperty(g.getName() + "_GRADE.lower"));
+                final double upper = Double.valueOf(prop.getProperty(g.getName() + "_GRADE.upper"));
                 try
                 {
                     g.setThresholds(lower, upper);

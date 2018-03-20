@@ -35,7 +35,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 /**
@@ -53,8 +52,7 @@ public class NullNormalizerTest {
      * Run the NullNormalizer(Edge,String,NormalizationRange) constructor test.
      */
     @Test
-    public void testNullNormalizer_1() throws Exception
-    {
+    public void testNullNormalizer_1() throws Exception {
         final NormalizationRange range = NormalizationRange.CLASS;
 
         final NullNormalizer result = new NullNormalizer(
@@ -69,27 +67,25 @@ public class NullNormalizerTest {
      * Run the BigDecimal normalize(List<Finding>) method test.
      */
     @Test
-    public void testNormalize_2() throws Exception
-    {
+    public void testNormalize_2() throws Exception {
         final Set<Finding> findings = Sets.newHashSet();
         findings.add(new Finding(FileNode.builder().key("path").create(), "issue", "issue"));
-        final BigDecimal result = fixture.normalize(findings);
+        final double result = fixture.normalize(findings);
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ZERO, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
      * Run the BigDecimal normalize(List<Finding>) method test.
      */
     @Test
-    public void testNormalize_3() throws Exception
-    {
+    public void testNormalize_3() throws Exception {
         final Set<Finding> findings = null;
-        final BigDecimal result = fixture.normalize(findings);
+        final double result = fixture.normalize(findings);
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ZERO, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -99,8 +95,7 @@ public class NullNormalizerTest {
      *             if the initialization fails for some reason
      */
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         fixture = new NullNormalizer(
                 new MeasureToMeasureNumberEdge("edge", null, null), "LOC", NormalizationRange.CLASS);
     }
@@ -112,19 +107,7 @@ public class NullNormalizerTest {
      *             if the clean-up fails for some reason
      */
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(NullNormalizerTest.class);
     }
 }

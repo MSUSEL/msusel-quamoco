@@ -93,7 +93,7 @@ public class WeightedSumFactorAggregation extends FactorAggregation {
      */
     public void addRanking(FactorRanking rank)
     {
-        if (rank == null || rankings.contains(rank))
+        if (rank == null || rankings.contains(rank) || rank.getRank() <= 0)
             return;
 
         rankings.add(rank);

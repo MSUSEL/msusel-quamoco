@@ -28,6 +28,7 @@ package edu.montana.gsoc.msusel.quamoco.processor.aggregators;
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
+import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingsEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.processor.FindingsAggregator;
@@ -61,13 +62,15 @@ public class FindingsUnionAggregator extends FindingsAggregator {
     protected Set<Finding> aggregate()
     {
         final MutableNetwork<Node, Edge> graph = owner.getGraph();
-
         final Set<Finding> retVal = Sets.newHashSet();
 
         for (final Edge edge : graph.inEdges(owner))
         {
-            final Node other = owner.getOpposite(edge);
-            retVal.addAll(other.getFindings());
+            if (edge instanceof FindingsEdge) {
+                retVal.addAll(((FindingsEdge) edge).getFindings());
+            }
+//            final Node other = owner.getOpposite(edge);
+//            retVal.addAll(other.getFindings());
         }
 
         return retVal;

@@ -25,8 +25,6 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.lineardist;
 
-import java.math.BigDecimal;
-
 /**
  * Convenience class for defining a Positive linear distribution
  *
@@ -39,10 +37,10 @@ public class NegativeLinearDistribution extends AbstractLinearDistribution {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal calculate(final BigDecimal maxPoints, final BigDecimal proportion)
+    public double calculate(final double maxPoints, final double proportion)
     {
         // return proportion;
-        return super.calculate(proportion, BigDecimal.ZERO, maxPoints, BigDecimal.ONE, BigDecimal.ZERO);
+        return super.calculate(proportion, maxPoints, 0.0, 0.0, 1.0);
     }
 
 }

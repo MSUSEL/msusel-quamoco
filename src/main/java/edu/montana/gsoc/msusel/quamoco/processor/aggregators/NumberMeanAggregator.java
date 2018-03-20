@@ -28,8 +28,6 @@ package edu.montana.gsoc.msusel.quamoco.processor.aggregators;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.processor.Aggregator;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 /**
@@ -56,20 +54,20 @@ public class NumberMeanAggregator extends Aggregator {
      * {@inheritDoc}
      */
     @Override
-    protected BigDecimal aggregate(final List<BigDecimal> values)
+    protected double aggregate(final List<Double> values)
     {
-        BigDecimal total = BigDecimal.ZERO;
+        double total = 0.0;
         if (values == null || values.isEmpty())
         {
-            return BigDecimal.ZERO;
+            return 0.0;
         }
 
-        for (final BigDecimal value : values)
+        for (final double value : values)
         {
-            total = total.add(value);
+            total = total + value;
         }
 
-        return total.divide(new BigDecimal(values.size()), 15, RoundingMode.HALF_UP);
+        return total / values.size();
     }
 
 }

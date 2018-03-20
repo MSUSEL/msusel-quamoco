@@ -27,15 +27,18 @@ package edu.montana.gsoc.msusel.quamoco.distiller;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.model.QMElement;
+import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
 import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
 import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
 import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
 import lombok.Getter;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -91,6 +94,24 @@ public class DistillerData {
         evaluatesMap = Maps.newHashMap();
     }
 
+    private void createEvalMap() {
+        List<QualityModel> models = manager.getSortedModelList();
+
+        for (QualityModel model : models) {
+            model.getEvaluations().forEach((key, eval) -> {
+                if (eval.getEvaluates() != null && !evaluatesMap.containsKey(eval.getEvaluates()))
+                    evaluatesMap.put(eval.getEvaluates(), eval);
+            });
+        }
+    }
+
+    public List<Evaluation> getEvaluations() {
+        if (evaluatesMap.isEmpty())
+            createEvalMap();
+
+        return Lists.newArrayList(evaluatesMap.values());
+    }
+
     /**
      * @return Map of evaluations
      */
@@ -142,18 +163,6 @@ public class DistillerData {
     }
 
     /**
-     * Retrieves the MeasurementMethod entity from which the given ValueNode was
-     * derived
-     *
-     * @param source
-     *            ValueNode
-     * @return MeasurementMethod entity
-     */
-    public QMElement getValueOwner(Node source) {
-        return valuesMap.inverse().get(source);
-    }
-
-    /**
      * Retrieves the associated ValueNode for the given MeasurementMethod entity
      *
      * @param method
@@ -166,22 +175,6 @@ public class DistillerData {
             return null;
 
         return valuesMap.get(method);
-    }
-
-    /**
-     * Retrieves the associated MeasurementMethod entity associated with the
-     * given FindingsUnion node.
-     *
-     * @param source
-     *            FindingsUnionNode
-     * @return MeasurementMethod associated with the given node, or null if no
-     *         such association exists.
-     */
-    public QMElement getUnionOwner(Node source) {
-        if (source == null || !unionsMap.containsValue(source))
-            return null;
-
-        return unionsMap.inverse().get(source);
     }
 
     /**
@@ -204,6 +197,8 @@ public class DistillerData {
             valuesMap.put(entity, node);
         } else if (node instanceof FindingsUnionNode) {
             unionsMap.put(entity, node);
+        } else if (node instanceof FindingNode) {
+            valuesMap.put(entity, node);
         }
     }
 
@@ -229,33 +224,6 @@ public class DistillerData {
      */
     public Set<QMElement> getValues() {
         return valuesMap.keySet();
-    }
-
-    /**
-     * Adds a FindingsUnionNode associated with the given MeasurementMethod
-     * entity.
-     *
-     * @param method
-     *            MeasurementMethod entity
-     * @param node
-     *            FindingsUnionNode
-     */
-    public void addUnion(MeasurementMethod method, Node node) {
-        if (method != null && node != null)
-            unionsMap.put(method, node);
-    }
-
-    /**
-     * Adds the given value node for the given measurement method to the data.
-     *
-     * @param method
-     *            MeasurementMethod
-     * @param node
-     *            ValueNode
-     */
-    public void addValue(MeasurementMethod method, Node node) {
-        if (method != null && node != null)
-            valuesMap.put(method, node);
     }
 
     /**

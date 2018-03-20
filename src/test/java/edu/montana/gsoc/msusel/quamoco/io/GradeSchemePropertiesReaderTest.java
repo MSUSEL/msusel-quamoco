@@ -25,14 +25,11 @@
  */
 package edu.montana.gsoc.msusel.quamoco.io;
 
-import java.math.BigDecimal;
-
+import edu.montana.gsoc.msusel.quamoco.distiller.Grade;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import edu.montana.gsoc.msusel.quamoco.distiller.Grade;
 
 /**
  * The class <code>GradeSchemePropertiesReaderTest</code> contains tests for the
@@ -51,8 +48,7 @@ public class GradeSchemePropertiesReaderTest {
      * @generatedBy CodePro at 5/30/15 3:42 PM
      */
     @Test
-    public void testGradeSchemePropertiesReader_1() throws Exception
-    {
+    public void testGradeSchemePropertiesReader_1() throws Exception {
         final GradeSchemePropertiesReader fixture = new GradeSchemePropertiesReader();
 
         Assert.assertNotNull(fixture);
@@ -65,31 +61,30 @@ public class GradeSchemePropertiesReaderTest {
      * @generatedBy CodePro at 5/30/15 3:42 PM
      */
     @Test
-    public void testRead_1() throws Exception
-    {
+    public void testRead_1() throws Exception {
         final GradeSchemePropertiesReader fixture = new GradeSchemePropertiesReader();
         fixture.read();
 
-        Assert.assertEquals(1.5, Grade.A.getUpperThreshold().doubleValue(), 0.001);
-        Assert.assertEquals(0.98, Grade.A.getLowerThreshold().doubleValue(), 0.001);
+        Assert.assertEquals(1.5, Grade.A.getUpperThreshold(), 0.001);
+        Assert.assertEquals(0.98, Grade.A.getLowerThreshold(), 0.001);
 
-        Assert.assertEquals(0.98, Grade.B.getUpperThreshold().doubleValue(), 0.001);
-        Assert.assertEquals(0.96, Grade.B.getLowerThreshold().doubleValue(), 0.001);
+        Assert.assertEquals(0.98, Grade.B.getUpperThreshold(), 0.001);
+        Assert.assertEquals(0.96, Grade.B.getLowerThreshold(), 0.001);
 
-        Assert.assertEquals(0.96, Grade.C.getUpperThreshold().doubleValue(), 0.001);
-        Assert.assertEquals(0.94, Grade.C.getLowerThreshold().doubleValue(), 0.001);
+        Assert.assertEquals(0.96, Grade.C.getUpperThreshold(), 0.001);
+        Assert.assertEquals(0.94, Grade.C.getLowerThreshold(), 0.001);
 
-        Assert.assertEquals(0.94, Grade.D.getUpperThreshold().doubleValue(), 0.001);
-        Assert.assertEquals(0.92, Grade.D.getLowerThreshold().doubleValue(), 0.001);
+        Assert.assertEquals(0.94, Grade.D.getUpperThreshold(), 0.001);
+        Assert.assertEquals(0.92, Grade.D.getLowerThreshold(), 0.001);
 
-        Assert.assertEquals(0.92, Grade.E.getUpperThreshold().doubleValue(), 0.001);
-        Assert.assertEquals(0.90, Grade.E.getLowerThreshold().doubleValue(), 0.001);
+        Assert.assertEquals(0.92, Grade.E.getUpperThreshold(), 0.001);
+        Assert.assertEquals(0.90, Grade.E.getLowerThreshold(), 0.001);
 
-        Assert.assertEquals(0.90, Grade.F.getUpperThreshold().doubleValue(), 0.001);
-        Assert.assertEquals(0.0, Grade.F.getLowerThreshold().doubleValue(), 0.001);
+        Assert.assertEquals(0.90, Grade.F.getUpperThreshold(), 0.001);
+        Assert.assertEquals(0.0, Grade.F.getLowerThreshold(), 0.001);
 
-        Assert.assertEquals(0.0, Grade.U.getUpperThreshold().doubleValue(), 0.001);
-        Assert.assertEquals(-1.0, Grade.U.getLowerThreshold().doubleValue(), 0.001);
+        Assert.assertEquals(0.0, Grade.U.getUpperThreshold(), 0.001);
+        Assert.assertEquals(-1.0, Grade.U.getLowerThreshold(), 0.001);
     }
 
     /**
@@ -100,8 +95,7 @@ public class GradeSchemePropertiesReaderTest {
      * @generatedBy CodePro at 5/30/15 3:42 PM
      */
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         // TODO: add additional set up code here
     }
 
@@ -113,8 +107,7 @@ public class GradeSchemePropertiesReaderTest {
      * @generatedBy CodePro at 5/30/15 3:42 PM
      */
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         // TODO: add additional tear down code here
     }
 
@@ -125,8 +118,7 @@ public class GradeSchemePropertiesReaderTest {
      *            the command line arguments
      * @generatedBy CodePro at 5/30/15 3:42 PM
      */
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         new org.junit.runner.JUnitCore().run(GradeSchemePropertiesReaderTest.class);
     }
 }

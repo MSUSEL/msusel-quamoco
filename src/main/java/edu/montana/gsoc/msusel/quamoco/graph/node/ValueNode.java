@@ -32,7 +32,6 @@ import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -50,36 +49,36 @@ public class ValueNode extends Node {
      * FIXME: This needs to be moved
      * Constant indicating that this is a value from a manual instrument
      */
-    public static final String     MANUAL = "ManualInstrument";
+    public static final String MANUAL = "ManualInstrument";
     /**
      * FIXME: This needs to be moved
      * Constant indicating that this is a measure which unions findings
      */
-    public static final String     UNION  = "FindingsUnionMeasureAggregation";
+    public static final String UNION = "FindingsUnionMeasureAggregation";
     /**
      * Name of the tool providing the values for this name
      */
     @Getter
-    private final String           tool;
+    private final String tool;
     /**
      * List of actual measurement values.
      * TODO Provide a means by which these values can be related to where they
      * came from (INode)
      */
     @Getter
-    private final List<BigDecimal> values;
+    private final List<Double> values;
     /**
      * Name of the name for which the provided measures exist.
      */
     @Getter
     @Setter
-    private String                 metric;
+    private String metric;
 
     /**
      * Constructs a new ValueNode which is contained in the given graph,
      * identified by the given key, extracted from the quamoco model entity with
      * the given identifier and measured by the tool with the given identifier
-     * 
+     *
      * @param key
      *            Identifier of this node
      * @param owner
@@ -87,25 +86,22 @@ public class ValueNode extends Node {
      * @param tool
      *            Tool which provides the values for this node
      */
-    public ValueNode(final String key, final String owner, final String tool)
-    {
+    public ValueNode(final String key, final String owner, final String tool) {
         this(null, key, owner, tool);
     }
 
-    public ValueNode(MutableNetwork<Node, Edge> graph, final String key, final String owner, final String tool)
-    {
+    public ValueNode(MutableNetwork<Node, Edge> graph, final String key, final String owner, final String tool) {
         super(graph, key, owner);
         this.tool = tool;
         values = Lists.newArrayList();
-        value = BigDecimal.ZERO;
+        value = 0.0;
     }
 
 
     /**
      * @return the key identifying this node
      */
-    public String getKey()
-    {
+    public String getKey() {
         return getName();
     }
 
@@ -113,17 +109,13 @@ public class ValueNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getValue()
-    {
-        if (!calculated)
-        {
-            value = BigDecimal.ZERO;
-            for (final BigDecimal v : values)
-            {
-                value = value.add(v);
-            }
-            // calculated = true;
+    public double getValue() {
+        value = 0.0;
+
+        for (final double v : values) {
+            value += v;
         }
+
         return value;
     }
 
@@ -131,8 +123,7 @@ public class ValueNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public String getXMLTag()
-    {
+    public String getXMLTag() {
         return String.format("<nodes name=\"%s\" owner=\"%s\" type=\"VALUE\" />", name, ownedBy);
     }
 
@@ -140,10 +131,8 @@ public class ValueNode extends Node {
      * @param key
      *            the key to set
      */
-    public void setKey(final String key)
-    {
-        if (key == null || key.isEmpty())
-        {
+    public void setKey(final String key) {
+        if (key == null || key.isEmpty()) {
             throw new IllegalArgumentException();
         }
 
@@ -154,19 +143,15 @@ public class ValueNode extends Node {
      * @param value
      *            A new measurement for this node
      */
-    public void addValue(final BigDecimal value)
-    {
+    public void addValue(final double value) {
         values.add(value);
-
-        this.value = this.value.add(value);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getLowerResult()
-    {
+    public double getLowerResult() {
         return Collections.min(values);
     }
 
@@ -174,8 +159,7 @@ public class ValueNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getUpperResult()
-    {
+    public double getUpperResult() {
         return Collections.max(values);
     }
 
@@ -183,8 +167,7 @@ public class ValueNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public Set<Finding> getFindings()
-    {
+    public Set<Finding> getFindings() {
         return Sets.newHashSet();
     }
 }

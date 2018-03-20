@@ -43,7 +43,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -68,13 +67,13 @@ public class FindingsAggregatorTest {
     @Test
     public void testAggregate_1() throws Exception
     {
-        final List<BigDecimal> values = Lists.newArrayList();
-        values.add(new BigDecimal(10.0));
-        values.add(new BigDecimal(20.0));
-        values.add(new BigDecimal(0.0));
-        final BigDecimal result = fixture.aggregate(values);
+        final List<Double> values = Lists.newArrayList();
+        values.add(10.0);
+        values.add(20.0);
+        values.add(0.0);
+        final double result = fixture.aggregate(values);
 
-        Assert.assertEquals(new BigDecimal(1.0), result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -139,17 +138,5 @@ public class FindingsAggregatorTest {
     public void tearDown() throws Exception
     {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(FindingsAggregatorTest.class);
     }
 }

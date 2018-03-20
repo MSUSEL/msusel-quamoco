@@ -28,7 +28,6 @@ package edu.montana.gsoc.msusel.quamoco.processor.aggregators;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.processor.Aggregator;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
@@ -56,11 +55,11 @@ public class NumberMaxAggregator extends Aggregator {
      * {@inheritDoc}
      */
     @Override
-    protected BigDecimal aggregate(final List<BigDecimal> values)
+    protected double aggregate(final List<Double> values)
     {
         if (values == null || values.isEmpty())
         {
-            return BigDecimal.ZERO;
+            return 0.0;
         }
 
         return Collections.max(values);

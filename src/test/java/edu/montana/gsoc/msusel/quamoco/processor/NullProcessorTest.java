@@ -43,8 +43,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 /**
  * The class <code>NullProcessorTest</code> contains tests for the class
  * <code>{@link NullProcessor}</code>.
@@ -78,7 +76,7 @@ public class NullProcessorTest {
 
         // add additional test code here
         Assert.assertNotNull(result);
-        Assert.assertEquals(BigDecimal.ONE, result.process());
+        Assert.assertEquals(0.0, result.process(), 0.001);
     }
 
     /**
@@ -90,10 +88,10 @@ public class NullProcessorTest {
     @Test
     public void testProcess_1() throws Exception
     {
-        final BigDecimal result = fixture.process();
+        final double result = fixture.process();
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -121,7 +119,7 @@ public class NullProcessorTest {
                 InfluenceEffect.POSITIVE);
         graph.addEdge(mn, owner, m2fn);
         m2fn.setNormalizer(new NullNormalizer(m2fn, "LOC", NormalizationRange.CLASS));
-        vn.addValue(new BigDecimal(100));
+        vn.addValue(100.0);
         mn.setProcessor(new NumberMeanAggregator(mn));
 
         fixture = new NullProcessor(owner);
@@ -139,17 +137,5 @@ public class NullProcessorTest {
     public void tearDown() throws Exception
     {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(NullProcessorTest.class);
     }
 }

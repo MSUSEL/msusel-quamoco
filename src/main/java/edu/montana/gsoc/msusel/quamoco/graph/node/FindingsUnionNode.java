@@ -30,7 +30,6 @@ import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingsEdge;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 
@@ -73,31 +72,28 @@ public class FindingsUnionNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getLowerResult()
+    public double getLowerResult()
     {
-        // TODO Auto-generated method stub
-        return BigDecimal.ZERO;
+        return 0.0;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getUpperResult()
+    public double getUpperResult()
     {
-        // TODO Auto-generated method stub
-        return BigDecimal.ONE;
+        return 1.0;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getValue()
+    public double getValue()
     {
-        // TODO Auto-generated method stub
-        calculated = true;
-        return BigDecimal.ZERO;
+//        calculated = true;
+        return 0.0;
     }
 
     /**

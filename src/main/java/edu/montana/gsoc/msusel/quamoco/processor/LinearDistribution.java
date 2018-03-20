@@ -25,8 +25,6 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor;
 
-import java.math.BigDecimal;
-
 /**
  * Provides the base interface for the LinearDistribution classes.
  *
@@ -45,7 +43,7 @@ public interface LinearDistribution {
      *            Proportion that this measure affects the software system.
      * @return interpolated value of the measure according to the distribution
      */
-    BigDecimal calculate(BigDecimal maxPoints, BigDecimal proportion);
+    double calculate(double maxPoints, double proportion);
 
     /**
      * Calculates the value of a measure within a software system.
@@ -62,6 +60,6 @@ public interface LinearDistribution {
      *            Highest resulting value of the measure.
      * @return interpolated value of the measure according to the distribution.
      */
-    BigDecimal calculate(BigDecimal proportion, BigDecimal lowerBound, BigDecimal lowerResult, BigDecimal upperBound,
-            BigDecimal upperResult);
+    double calculate(double proportion, double lowerBound, double lowerResult, double upperBound,
+            double upperResult);
 }

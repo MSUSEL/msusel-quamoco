@@ -37,8 +37,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 /**
  * The class <code>ValueToMeasureEdgeTest</code> contains tests for the class
  * <code>{@link ValueToMeasureEdge}</code>.
@@ -78,10 +76,10 @@ public class ValueToMeasureEdgeTest {
     @Test
     public void testGetValue_1() throws Exception
     {
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.TEN, result);
+        Assert.assertEquals(10.0, result, 0.001);
     }
 
     /**
@@ -103,7 +101,7 @@ public class ValueToMeasureEdgeTest {
         final ValueNode src = new ValueNode(graph, "key", "owner", "tool");
         final MeasureNode dest = new MeasureNode(graph, "name", "owner");
 
-        src.addValue(BigDecimal.TEN);
+        src.addValue(10.0);
 
         fixture = new ValueToMeasureEdge("edge", src, dest);
         fixture.norm = new NullNormalizer(fixture, "LOC", NormalizationRange.CLASS);
@@ -120,17 +118,5 @@ public class ValueToMeasureEdgeTest {
     public void tearDown() throws Exception
     {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(ValueToMeasureEdgeTest.class);
     }
 }

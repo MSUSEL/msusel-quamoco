@@ -29,9 +29,6 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
 import lombok.Getter;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 /**
  * Edge connecting one FactorNode to another FactorNode.
  *
@@ -49,18 +46,13 @@ public class FactorToFactorEdge extends WeightedRankedEdge implements InfluenceE
     /**
      * Constructs a new MeasureToMeasureNumberEdge with the given name
      * connecting the source and dest nodes.
-     * 
-     * @param name
-     *            Name of this edge
-     * @param src
-     *            Source node
-     * @param dest
-     *            Dest node
-     * @param effect
-     *            Influence type of this edge
+     *
+     * @param name   Name of this edge
+     * @param src    Source node
+     * @param dest   Dest node
+     * @param effect Influence type of this edge
      */
-    public FactorToFactorEdge(final String name, final Node src, final Node dest, final InfluenceEffect effect)
-    {
+    public FactorToFactorEdge(final String name, final Node src, final Node dest, final InfluenceEffect effect) {
         super(name, src, dest);
         inf = effect == null ? InfluenceType.POS : effect.toString();
     }
@@ -69,61 +61,52 @@ public class FactorToFactorEdge extends WeightedRankedEdge implements InfluenceE
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getValue()
-    {
-        BigDecimal value = BigDecimal.ZERO;
-
-        if (weight.compareTo(BigDecimal.ZERO) <= 0)
-            return weight;
-
-        value = source.getValue();
-
-        if (inf != null)
-
-        {
-            if (inf.equals(InfluenceType.NEG))
-            {
-                value = getMaxPoints().subtract(value.multiply(getMaxPoints()));
-                value = value.divide(getMaxPoints(), 15, RoundingMode.HALF_UP);
-            }
+    public double getValue() {
+        if (getRank() == 0 || Double.compare(weight, 0.0) == 0) {
+            return 1.0;
         }
 
-        value = value.multiply(weight);
+        double value = source.getValue();
 
-        // if (norm != null /* && !(norm instanceof UnrangedNormalizer) */)
-        // {
-        // BigDecimal n = norm.normalize(value);
-        // value = n;
-        // }
+        if (usesLinearDist) {
+            value = dist.calculate(getMaxPoints(), value) / getMaxPoints();
+        }
 
-        // }
+        if (inf != null) {
+            if (inf.equals(InfluenceType.NEG)) {
+                value = getMaxPoints() - (value * getMaxPoints());
+                value /= getMaxPoints();
+            }
 
-        // value = 1 - value;
+//            if (inf.equals(InfluenceType.POS)) {
+//                //System.out.println("Value: " + value);
+//                if (Double.compare(0.0, value) <= 0)
+//                    value = 1.0;
+//            }
+        }
 
-        return
+//        value = thresholdValue(value, lowerBound, upperBound);
+//        System.out.println(value);
+        value = value * weight;
 
-        thresholdValue(value);
+        return value;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setInf(final String inf)
-    {
-        if (inf == null)
-        {
+    public void setInf(final String inf) {
+        if (inf == null) {
             this.inf = inf;
             return;
         }
 
-        if (inf.isEmpty())
-        {
+        if (inf.isEmpty()) {
             throw new IllegalArgumentException("An influence type of empty string is invalid.");
         }
 
-        if (!(inf.equals(InfluenceType.POS) || inf.equals(InfluenceType.NEG)))
-        {
+        if (!(inf.equals(InfluenceType.POS) || inf.equals(InfluenceType.NEG))) {
             throw new IllegalArgumentException(inf + " is not a valid influence type.");
         }
 

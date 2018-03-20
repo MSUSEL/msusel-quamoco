@@ -27,7 +27,6 @@ package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -58,7 +57,7 @@ public class ValueToMeasureEdge extends AbstractEdge {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getValue()
+    public double getValue()
     {
         return source.getValue();
     }
@@ -67,7 +66,7 @@ public class ValueToMeasureEdge extends AbstractEdge {
      * {@inheritDoc}
      */
     @Override
-    public List<BigDecimal> getValues()
+    public List<Double> getValues()
     {
         return source.getValues();
     }

@@ -31,7 +31,6 @@ import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 /**
@@ -59,7 +58,7 @@ public class FindingNode extends Node {
      * The set of findings accumulated in this node.
      */
     @Getter
-    private final Set<Finding> findings;
+    private Set<Finding> findings;
 
     /**
      * Constructs a new FindingNode which is contained in the given graph,
@@ -89,9 +88,9 @@ public class FindingNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getValue() {
-        calculated = true;
-        return BigDecimal.ZERO;
+    public double getValue() {
+//        calculated = true;
+        return 0.0;
     }
 
     /**
@@ -125,15 +124,15 @@ public class FindingNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getLowerResult() {
-        return BigDecimal.ZERO;
+    public double getLowerResult() {
+        return 0.0;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getUpperResult() {
-        return BigDecimal.ONE;
+    public double getUpperResult() {
+        return 1.0;
     }
 }

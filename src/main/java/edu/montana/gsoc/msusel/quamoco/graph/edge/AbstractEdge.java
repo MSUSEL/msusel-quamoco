@@ -33,7 +33,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -44,30 +43,33 @@ import java.util.List;
  * @author Isaac Griffith
  * @version 1.2.0
  */
-@EqualsAndHashCode(of = {"id", "name"})
-@ToString(of = {"id"})
+@EqualsAndHashCode(of = {"name"})
+@ToString(of = {"name"})
 public abstract class AbstractEdge implements Edge {
 
     /**
      * Incoming side of the edge
      */
-    @Getter @Setter
+    @Getter
+    @Setter
     protected Node source;
     /**
      * Outgoing side of the edge
      */
-    @Getter @Setter
-    protected Node       dest;
+    @Getter
+    @Setter
+    protected Node dest;
     /**
      * Normalizer attached to this edge
      * FIXME: should only be available on Normalizable Edges
      */
-    @Getter @Setter
+    @Getter
+    @Setter
     protected Normalizer norm;
     /**
      * The next unique identification number for an edge
      */
-    private static long  NEXT_ID = 0;
+    private static long NEXT_ID = 0;
     /**
      * Name of this edge
      */
@@ -76,13 +78,14 @@ public abstract class AbstractEdge implements Edge {
     /**
      * The unique identifying number for this edge
      */
-    @Getter @Setter
-    private long         id;
+    @Getter
+    @Setter
+    private long id;
 
     /**
      * Constructs a new MeasureToMeasureNumberEdge with the given name
      * connecting the source and dest nodes.
-     * 
+     *
      * @param name
      *            Name of this edge
      * @param source
@@ -90,8 +93,7 @@ public abstract class AbstractEdge implements Edge {
      * @param dest
      *            Dest node
      */
-    AbstractEdge(final String name, final Node source, final Node dest)
-    {
+    AbstractEdge(final String name, final Node source, final Node dest) {
         this.name = name;
         id = AbstractEdge.NEXT_ID++;
         this.source = source;
@@ -102,9 +104,8 @@ public abstract class AbstractEdge implements Edge {
      * {@inheritDoc}
      */
     @Override
-    public List<BigDecimal> getValues()
-    {
-        final List<BigDecimal> list = Lists.newArrayList();
+    public List<Double> getValues() {
+        final List<Double> list = Lists.newArrayList();
         list.add(getValue());
 
         return list;
@@ -116,19 +117,18 @@ public abstract class AbstractEdge implements Edge {
      * range. Thus this method takes a value and if this value is less than 0.0,
      * returns 0.0, or if the value is greater than 1.0, returns 1.0. Otherwise
      * it returns the original value.
-     * 
+     *
      * @param value
      *            Input value
      * @return 0.0 if the input value is less than 0.0, 1.0 if the input value
      *         is greater than 1.0, and the original value otherwise.
      */
-    BigDecimal thresholdValue(BigDecimal value)
-    {
-        if (value.compareTo(BigDecimal.ZERO) < 0)
-            return BigDecimal.ZERO;
+    double thresholdValue(double value, double lower, double upper) {
+        if (Double.compare(value, lower) < 0)
+            return lower;
 
-        if (value.compareTo(BigDecimal.ONE) > 0)
-            return BigDecimal.ONE;
+        if (Double.compare(value, upper) > 0)
+            return upper;
 
         return value;
     }

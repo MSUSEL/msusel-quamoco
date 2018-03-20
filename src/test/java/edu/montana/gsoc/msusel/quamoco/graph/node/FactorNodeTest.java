@@ -35,15 +35,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 /**
  * The class <code>FactorNodeTest</code> contains tests for the class
  * <code>{@link FactorNode}</code>.
  *
  * @generatedBy CodePro at 5/30/15 3:38 PM
  * @author isaac
- * @version $Revision: BigDecimal.ONE $
+ * @version $Revision: 1.0 $
  */
 public class FactorNodeTest {
 
@@ -135,9 +133,9 @@ public class FactorNodeTest {
     {
         fixture.setProcessor(new NullProcessor(fixture));
 
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
-        Assert.assertEquals(BigDecimal.ZERO, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -150,12 +148,12 @@ public class FactorNodeTest {
     public void testGetValue_2() throws Exception
     {
         fixture.setProcessor(new NullProcessor(fixture));
-        fixture.value = BigDecimal.ONE;
+        fixture.value = 1.0;
         fixture.calculated = true;
 
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -207,38 +205,38 @@ public class FactorNodeTest {
     public void testGetUpperResult_1() throws Exception
     {
         final ValueNode vn1 = new ValueNode(fixture.getGraph(), "vn1", "owner", "tool");
-        vn1.addValue(new BigDecimal(100));
+        vn1.addValue(100.0);
         final ValueNode vn2 = new ValueNode(fixture.getGraph(), "vn2", "owner", "tool");
-        vn2.addValue(new BigDecimal(150));
+        vn2.addValue(150.0);
         final ValueNode vn3 = new ValueNode(fixture.getGraph(), "vn3", "owner", "tool");
-        vn3.addValue(new BigDecimal(200));
+        vn3.addValue(200.0);
 
         fixture.getGraph().addEdge(vn1, fixture, new ValueToMeasureEdge("edge1", vn1, fixture));
         fixture.getGraph().addEdge(vn2, fixture, new ValueToMeasureEdge("edge1", vn2, fixture));
         fixture.getGraph().addEdge(vn3, fixture, new ValueToMeasureEdge("edge1", vn3, fixture));
 
-        final BigDecimal result = fixture.getUpperResult();
+        final double result = fixture.getUpperResult();
 
-        Assert.assertEquals(new BigDecimal(200), result);
+        Assert.assertEquals(200.0, result, 0.001);
     }
 
     @Test
     public void testGetLowerResult_1() throws Exception
     {
         final ValueNode vn1 = new ValueNode(fixture.getGraph(), "vn1", "owner", "tool");
-        vn1.addValue(new BigDecimal(100));
+        vn1.addValue(100.0);
         final ValueNode vn2 = new ValueNode(fixture.getGraph(), "vn2", "owner", "tool");
-        vn2.addValue(new BigDecimal(150));
+        vn2.addValue(150.0);
         final ValueNode vn3 = new ValueNode(fixture.getGraph(), "vn3", "owner", "tool");
-        vn3.addValue(new BigDecimal(200));
+        vn3.addValue(200.0);
 
         fixture.getGraph().addEdge(vn1, fixture, new ValueToMeasureEdge("edge1", vn1, fixture));
         fixture.getGraph().addEdge(vn2, fixture, new ValueToMeasureEdge("edge1", vn2, fixture));
         fixture.getGraph().addEdge(vn3, fixture, new ValueToMeasureEdge("edge1", vn3, fixture));
 
-        final BigDecimal result = fixture.getLowerResult();
+        final double result = fixture.getLowerResult();
 
-        Assert.assertEquals(new BigDecimal(100), result);
+        Assert.assertEquals(100.0, result, 0.001);
     }
 
     /**

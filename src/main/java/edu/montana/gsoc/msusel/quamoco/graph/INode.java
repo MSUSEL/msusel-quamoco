@@ -28,7 +28,6 @@ package edu.montana.gsoc.msusel.quamoco.graph;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.processor.Processor;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -89,17 +88,17 @@ public interface INode {
     /**
      * @return The value of the lower result derived for this node
      */
-    BigDecimal getLowerResult();
+    double getLowerResult();
 
     /**
      * @return The value of the upper result derived for this node
      */
-    BigDecimal getUpperResult();
+    double getUpperResult();
 
     /**
      * @return The set of values incoming into this node
      */
-    List<BigDecimal> getValues();
+    List<Double> getValues();
 
     /**
      * @return The set of findings incoming into this node

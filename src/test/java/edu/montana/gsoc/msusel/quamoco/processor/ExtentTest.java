@@ -50,8 +50,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 import static org.junit.Assert.*;
 
 /**
@@ -86,10 +84,10 @@ public class ExtentTest {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.FILE;
 
-        final BigDecimal result = fixture.findExtent(metric, range);
+        final double result = fixture.findExtent(metric, range);
 
         // add additional test code here
-        assertEquals(new BigDecimal(600.0), result);
+        assertEquals(600.0, result, 0.001);
     }
 
     /**
@@ -103,10 +101,10 @@ public class ExtentTest {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.CLASS;
 
-        final BigDecimal result = fixture.findExtent(metric, range);
+        final double result = fixture.findExtent(metric, range);
 
         // add additional test code here
-        assertEquals(new BigDecimal(100.0), result);
+        assertEquals(100.0, result, 0.001);
     }
 
     /**
@@ -120,10 +118,10 @@ public class ExtentTest {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.METHOD;
 
-        final BigDecimal result = fixture.findExtent(metric, range);
+        final double result = fixture.findExtent(metric, range);
 
         // add additional test code here
-        assertEquals(new BigDecimal(80.0), result);
+        assertEquals(80.0, result, 0.001);
     }
 
     /**
@@ -137,10 +135,10 @@ public class ExtentTest {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.NA;
 
-        final BigDecimal result = fixture.findExtent(metric, range);
+        final double result = fixture.findExtent(metric, range);
 
         // add additional test code here
-        assertEquals(new BigDecimal(1000.0), result);
+        assertEquals(1000.0, result, 0.001);
     }
 
     /**
@@ -198,10 +196,10 @@ public class ExtentTest {
         final NormalizationRange range = NormalizationRange.FILE;
 
         buildGraph();
-        final BigDecimal result = fixture.findMeasureExtent(metric, range, measure);
+        final double result = fixture.findMeasureExtent(metric, range, measure);
 
         // add additional test code here
-        assertEquals(new BigDecimal(600.0), result);
+        assertEquals(600.0, result, 0.001);
     }
 
     /**
@@ -295,6 +293,7 @@ public class ExtentTest {
      */
     @Before
     public void setUp() throws Exception {
+        //MeasuresTable.getInstance().clean();
         fixture = Extent.getInstance();
         fixture.clearExtents();
 

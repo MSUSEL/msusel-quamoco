@@ -31,7 +31,6 @@ import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
 import edu.montana.gsoc.msusel.metrics.MeasuresTable;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -50,18 +49,18 @@ public class FileNodeExtentDecorator extends AbstractNodeExtentDecorator {
     }
 
     @Override
-    public BigDecimal findFileExtent(String metric) {
-        return new BigDecimal((double) MeasuresTable.instance.retrieve(this, metric));
+    public double findFileExtent(String metric) {
+        return (double) MeasuresTable.instance.retrieve(decorated, metric);
     }
 
     @Override
-    public BigDecimal findMethodExtent(String metric) {
+    public double findMethodExtent(String metric) {
         FileNode f = (FileNode) decorated;
         return sumMetrics(metric, f.methods());
     }
 
     @Override
-    public BigDecimal findClassExtent(String metric) {
+    public double findClassExtent(String metric) {
         FileNode f = (FileNode) decorated;
         return sumMetrics(metric, (List<TypeNode>) f.types());
     }

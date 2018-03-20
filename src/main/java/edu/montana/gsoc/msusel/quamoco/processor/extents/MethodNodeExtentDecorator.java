@@ -31,8 +31,6 @@ import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
 import edu.montana.gsoc.msusel.metrics.MeasuresTable;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
-import java.math.BigDecimal;
-
 /**
  * @author Isaac Griffith
  * @version 1.2.0
@@ -49,7 +47,7 @@ public class MethodNodeExtentDecorator extends AbstractNodeExtentDecorator {
     @Override
     public NormalizationRange findRange(String metric) {
         AbstractNode p = (AbstractNode) MeasuresTable.getInstance().getTree().getUtils().findParent(decorated);
-        if (MeasuresTable.instance.hasMetric(this, metric)) {
+        if (MeasuresTable.instance.hasMetric(decorated, metric)) {
             return NormalizationRange.METHOD;
         } else if (MeasuresTable.instance.hasMetric(p, metric)) {
             return NormalizationRange.CLASS;
@@ -62,32 +60,32 @@ public class MethodNodeExtentDecorator extends AbstractNodeExtentDecorator {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal findFileExtent(String metric) {
+    public double findFileExtent(String metric) {
         AbstractNode type = (AbstractNode) MeasuresTable.getInstance().getTree().getUtils().findParent(decorated);
         AbstractNode file = (AbstractNode) MeasuresTable.getInstance().getTree().getUtils().findParent(type);
 
-        return new BigDecimal((double) MeasuresTable.instance.retrieve(file, metric));
+        return (double) MeasuresTable.instance.retrieve(file, metric);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal findMethodExtent(String metric) {
-        return new BigDecimal((double) MeasuresTable.instance.retrieve((AbstractNode) decorated, metric));
+    public double findMethodExtent(String metric) {
+        return (double) MeasuresTable.instance.retrieve((AbstractNode) decorated, metric);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal findClassExtent(String metric) {
+    public double findClassExtent(String metric) {
         AbstractNode p = (AbstractNode) MeasuresTable.getInstance().getTree().getUtils().findParent(decorated);
 
         if (p instanceof TypeNode) {
-            return new BigDecimal((double) MeasuresTable.instance.retrieve(p, metric));
+            return (double) MeasuresTable.instance.retrieve(p, metric);
         }
 
-        return BigDecimal.ZERO;
+        return 0.0;
     }
 }

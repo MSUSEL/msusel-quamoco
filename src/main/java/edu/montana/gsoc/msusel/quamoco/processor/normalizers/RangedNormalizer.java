@@ -31,8 +31,6 @@ import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
 import edu.montana.gsoc.msusel.quamoco.processor.extents.Extent;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Set;
 
 /**
@@ -63,23 +61,27 @@ public class RangedNormalizer extends Normalizer {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal normalize(final Set<Finding> findings)
+    public double normalize(final Set<Finding> findings)
     {
         if (findings == null || findings.isEmpty())
-            return BigDecimal.ZERO;
+            return 0.0;
 
         Extent ext = Extent.getInstance();
-        BigDecimal totalAffected = BigDecimal.ZERO;
+        double totalAffected = 0.0;
+
         for (final Finding f : findings)
         {
-            totalAffected = totalAffected.add(ext.findExtent(f, metric, range));
+            totalAffected += ext.findExtent(f, metric, range);
         }
 
-        BigDecimal extent = ext.findExtent(metric, range);
+        double extent = ext.findExtent(metric, range);
 
-        if (BigDecimal.ZERO.compareTo(extent) == 0 || extent.compareTo(totalAffected) == 0)
-            return BigDecimal.ZERO;
+        double value = 0.0;
+        if (Double.compare(0.0, extent) == 0 || Double.compare(extent, totalAffected) == 0)
+            return 0.0;
         else
-            return totalAffected.divide(extent, 15, RoundingMode.HALF_UP);
+            value = totalAffected / extent;
+
+        return value;
     }
 }

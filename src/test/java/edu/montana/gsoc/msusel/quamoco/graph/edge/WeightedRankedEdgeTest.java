@@ -40,15 +40,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 /**
  * The class <code>WeightedRankedEdgeTest</code> contains tests for the class
  * <code>{@link WeightedRankedEdge}</code>.
  *
  * @generatedBy CodePro at 1/26/16 6:38 PM
  * @author fate
- * @version $Revision: BigDecimal.ONE $
+ * @version $Revision: 1.0 $
  */
 public class WeightedRankedEdgeTest {
 
@@ -79,10 +77,10 @@ public class WeightedRankedEdgeTest {
     @Test
     public void testGetLowerBound_1() throws Exception
     {
-        final BigDecimal result = fixture.getLowerBound();
+        final double result = fixture.getLowerBound();
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ZERO, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -94,10 +92,10 @@ public class WeightedRankedEdgeTest {
     @Test
     public void testGetMaxPoints_1() throws Exception
     {
-        final BigDecimal result = fixture.getMaxPoints();
+        final double result = fixture.getMaxPoints();
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -125,10 +123,10 @@ public class WeightedRankedEdgeTest {
     @Test
     public void testGetUpperBound_1() throws Exception
     {
-        final BigDecimal result = fixture.getUpperBound();
+        final double result = fixture.getUpperBound();
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -140,10 +138,10 @@ public class WeightedRankedEdgeTest {
     @Test
     public void testGetWeight_1() throws Exception
     {
-        final BigDecimal result = fixture.getWeight();
+        final double result = fixture.getWeight();
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -202,12 +200,12 @@ public class WeightedRankedEdgeTest {
     @Test
     public void testSetLowerBound_1() throws Exception
     {
-        final BigDecimal lowerBound = new BigDecimal(0.5);
+        final double lowerBound = 0.5;
 
         try
         {
             fixture.setLowerBound(lowerBound);
-            Assert.assertEquals(new BigDecimal(0.5), fixture.getLowerBound());
+            Assert.assertEquals(0.5, fixture.getLowerBound(), 0.001);
         }
         catch (final IllegalArgumentException e)
         {
@@ -225,8 +223,8 @@ public class WeightedRankedEdgeTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSetLowerBound_2() throws Exception
     {
-        fixture.setUpperBound(BigDecimal.ZERO);
-        final BigDecimal lowerBound = new BigDecimal(0.5);
+        fixture.setUpperBound(0.0);
+        final double lowerBound = 0.5;
 
         fixture.setLowerBound(lowerBound);
     }
@@ -240,10 +238,10 @@ public class WeightedRankedEdgeTest {
     @Test
     public void testSetMaxPoints_1() throws Exception
     {
-        final BigDecimal maxPoints = new BigDecimal(100.0);
+        final double maxPoints = 100.0;
 
         fixture.setMaxPoints(maxPoints);
-        Assert.assertEquals(maxPoints, fixture.getMaxPoints());
+        Assert.assertEquals(maxPoints, fixture.getMaxPoints(), 0.001);
     }
 
     /**
@@ -255,10 +253,10 @@ public class WeightedRankedEdgeTest {
     @Test
     public void testSetMaxPoints_2() throws Exception
     {
-        final BigDecimal maxPoints = BigDecimal.ZERO;
+        final double maxPoints = 0.0;
 
         fixture.setMaxPoints(maxPoints);
-        Assert.assertEquals(maxPoints, fixture.getMaxPoints());
+        Assert.assertEquals(maxPoints, fixture.getMaxPoints(), 0.001);
     }
 
     /**
@@ -270,7 +268,7 @@ public class WeightedRankedEdgeTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSetMaxPoints_3() throws Exception
     {
-        final BigDecimal maxPoints = new BigDecimal(-1.0);
+        final double maxPoints = -1.0;
 
         fixture.setMaxPoints(maxPoints);
     }
@@ -303,12 +301,12 @@ public class WeightedRankedEdgeTest {
     @Test
     public void testSetUpperBound_1() throws Exception
     {
-        final BigDecimal upperBound = new BigDecimal(0.5);
+        final double upperBound = 0.5;
 
         try
         {
             fixture.setUpperBound(upperBound);
-            Assert.assertEquals(upperBound, fixture.getUpperBound());
+            Assert.assertEquals(upperBound, fixture.getUpperBound(), 0.001);
         }
         catch (final IllegalArgumentException e)
         {
@@ -325,8 +323,8 @@ public class WeightedRankedEdgeTest {
     @Test
     public void testSetUpperBound_2() throws Exception
     {
-        fixture.setLowerBound(BigDecimal.ONE);
-        final BigDecimal upperBound = new BigDecimal(0.5);
+        fixture.setLowerBound(1.0);
+        final double upperBound = 0.5;
 
         try
         {
@@ -335,7 +333,7 @@ public class WeightedRankedEdgeTest {
         }
         catch (final IllegalArgumentException e)
         {
-            Assert.assertEquals(BigDecimal.ONE, fixture.getUpperBound());
+            Assert.assertEquals(1.0, fixture.getUpperBound(), 0.001);
         }
     }
 
@@ -364,12 +362,12 @@ public class WeightedRankedEdgeTest {
     @Test
     public void testSetWeight_1() throws Exception
     {
-        final BigDecimal weight = BigDecimal.ONE;
+        final double weight = 1.0;
 
         try
         {
             fixture.setWeight(weight);
-            Assert.assertEquals(weight, fixture.getWeight());
+            Assert.assertEquals(weight, fixture.getWeight(), 0.001);
         }
         catch (final IllegalArgumentException e)
         {
@@ -386,7 +384,7 @@ public class WeightedRankedEdgeTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSetWeight_2() throws Exception
     {
-        final BigDecimal weight = new BigDecimal(-1.0);
+        final double weight = -1.0;
 
         fixture.setWeight(weight);
     }
@@ -400,10 +398,10 @@ public class WeightedRankedEdgeTest {
     @Test
     public void testSetWeight_3() throws Exception
     {
-        final BigDecimal weight = BigDecimal.ZERO;
+        final double weight = 0.0;
 
         fixture.setWeight(weight);
-        Assert.assertEquals(weight, fixture.getWeight());
+        Assert.assertEquals(weight, fixture.getWeight(), 0.001);
     }
 
     /**
@@ -415,7 +413,7 @@ public class WeightedRankedEdgeTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSetWeight_4() throws Exception
     {
-        final BigDecimal weight = new BigDecimal(2.0);
+        final double weight = 2.0;
 
         fixture.setWeight(weight);
     }
@@ -441,13 +439,13 @@ public class WeightedRankedEdgeTest {
         final FactorNode dest = new FactorNode(graph, "src", "factor");
         fixture = new MeasureToMeasureFindingsNumberEdge("edge", src, dest);
 
-        fixture.upperBound = BigDecimal.ONE;
+        fixture.upperBound = 1.0;
         fixture.norm = new NullNormalizer(fixture, "LOC", NormalizationRange.CLASS);
         fixture.dist = new PositiveLinearDistribution();
         fixture.usesLinearDist = true;
-        fixture.weight = BigDecimal.ONE;
-        fixture.maxPoints = BigDecimal.ONE;
-        fixture.lowerBound = BigDecimal.ZERO;
+        fixture.weight = 1.0;
+        fixture.maxPoints = 1.0;
+        fixture.lowerBound = 0.0;
     }
 
     /**
@@ -461,17 +459,5 @@ public class WeightedRankedEdgeTest {
     public void tearDown() throws Exception
     {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(WeightedRankedEdgeTest.class);
     }
 }

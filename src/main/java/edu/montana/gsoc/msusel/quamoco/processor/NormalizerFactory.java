@@ -89,7 +89,7 @@ public class NormalizerFactory {
     {
         Normalizer retVal = null;
 
-        if (isBadMetric(metric) || isBadRange(range) || isFIndingsOrNormalizable(edge))
+        if (isBadMetric(metric) || isBadRange(range) || !isFindingsOrNormalizable(edge))
         {
             retVal = createNullNormalizer(edge, metric, range);
         }
@@ -117,8 +117,8 @@ public class NormalizerFactory {
         return new NullNormalizer(edge, metric, range);
     }
 
-    boolean isFIndingsOrNormalizable(Edge edge) {
-        return !((edge instanceof FindingsEdge) || (edge instanceof Normalizable));
+    boolean isFindingsOrNormalizable(Edge edge) {
+        return ((edge instanceof FindingsEdge) || (edge instanceof Normalizable));
     }
 
     boolean isBadRange(NormalizationRange range) {

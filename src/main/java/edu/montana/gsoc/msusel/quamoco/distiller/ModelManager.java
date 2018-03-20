@@ -29,8 +29,9 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.graph.EndpointPair;
+import com.google.common.graph.GraphBuilder;
+import com.google.common.graph.MutableGraph;
 import com.google.common.graph.MutableNetwork;
-import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.model.*;
 import edu.montana.gsoc.msusel.quamoco.model.entity.Entity;
 import edu.montana.gsoc.msusel.quamoco.model.eval.Evaluation;
@@ -38,6 +39,7 @@ import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
 import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
 import edu.montana.gsoc.msusel.quamoco.model.measure.NormalizationMeasure;
 import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 import java.util.Map;
@@ -51,25 +53,30 @@ import java.util.function.Predicate;
 public class ModelManager {
 
     Map<String, QualityModel> models;
+    Map<String, QualityModel> modelsByFileName;
 
     /**
      *
      */
     public ModelManager() {
+        modelsByFileName = Maps.newHashMap();
         models = Maps.newHashMap();
     }
 
     public void addModel(QualityModel model) {
         if (model != null) {
+            if (model.getFileName() != null) {
+                modelsByFileName.put(model.getFileName(), model);
+            }
             models.put(model.getIdentifier(), model);
         }
     }
 
     private QualityModel selectModel(String identifier) {
-        String modelKey = identifier.split("\\.qm#")[0];
+        String modelKey = identifier.split("#")[0];
 
-        if (models.containsKey(modelKey)) {
-            return getModelByName(modelKey);
+        if (modelsByFileName.containsKey(modelKey)) {
+            return modelsByFileName.get(modelKey);
         }
 
         return null;
@@ -144,8 +151,8 @@ public class ModelManager {
      */
     public Measure findMeasure(String identifier) {
         return (Measure) findElement(identifier,
-                (m) -> m.hasMeasure(identifier),
-                (m) -> m.getMeasure(identifier));
+                (m) -> m.hasMeasure(trimIdentifier(identifier)),
+                (m) -> m.getMeasure(trimIdentifier(identifier)));
     }
 
     /**
@@ -182,21 +189,20 @@ public class ModelManager {
      * Produces a sorted list of known quality models, which are sorted by least
      * dependent first.
      *
-     * @param models Unsorted List of known quality models
      * @return Sorted List of known quality models in ascending order of
      * dependence
      */
     @VisibleForTesting
-    static List<QualityModel> getSortedModelList(List<QualityModel> models) {
-        MutableNetwork<QualityModel, String> g = NetworkBuilder.directed().allowsSelfLoops(false).build();
+    public List<QualityModel> getSortedModelList() {
+        MutableGraph<QualityModel> g = GraphBuilder.directed().allowsSelfLoops(false).build();
 
         if (models != null) {
-            for (QualityModel model : models) {
+            for (QualityModel model : models.values()) {
                 g.addNode(model);
             }
-            for (QualityModel model : models) {
+            for (QualityModel model : models.values()) {
                 for (QualityModel qm : model.getRequires()) {
-                    g.addEdge(model, qm, "requires: " + model.getName() + " - " + qm.getName());
+                    g.putEdge(model, qm);
                 }
             }
         }
@@ -211,7 +217,7 @@ public class ModelManager {
      * @return Topologically sorted list of quality models
      */
     @VisibleForTesting
-    static List<QualityModel> topologicalSort(MutableNetwork<QualityModel, String> graph) {
+    static List<QualityModel> topologicalSort(MutableGraph<QualityModel> graph) {
         List<QualityModel> list = Lists.newArrayList();
         List<QualityModel> set = Lists.newArrayList();
 
@@ -224,21 +230,26 @@ public class ModelManager {
         while (!set.isEmpty()) {
             QualityModel q = set.remove(0);
             list.add(q);
-            List<String> toRemove = Lists.newArrayList();
-            for (String edge : graph.outEdges(q)) {
-                QualityModel x = getOpposite(q, edge, graph);
-                toRemove.add(edge);
+            List<Pair<QualityModel, QualityModel>> toRemove = Lists.newArrayList();
+            for (QualityModel x : graph.successors(q)) {
+                toRemove.add(Pair.of(q, x));
                 if (graph.inDegree(x) <= 1) {
                     set.add(x);
                 }
             }
-            for (String edge : toRemove) {
-                graph.removeEdge(edge);
+            for (Pair<QualityModel, QualityModel> pair : toRemove) {
+                graph.removeEdge(pair.getLeft(), pair.getRight());
             }
         }
         if (graph.edges().size() > 0) {
             System.out.println("Graph has Cycles");
         }
+
+        List<QualityModel> other = Lists.newArrayList();
+        for (QualityModel m : list) {
+            other.add(0, m);
+        }
+
         return list;
     }
 

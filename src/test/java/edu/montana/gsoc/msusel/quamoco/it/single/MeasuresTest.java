@@ -74,6 +74,8 @@ public class MeasuresTest extends BaseTestClass {
         Measure m = manager.findMeasureByName("Test Measure @Source Code Part");
         assertNotNull(m);
 
+        System.out.println(m.getQualifiedIdentifier());
+
         assertEquals("Test measure", m.getTitle());
         assertEquals("Test Measure", m.getDescription());
         assertEquals("Source Code Part", m.getCharacterizes().getName());

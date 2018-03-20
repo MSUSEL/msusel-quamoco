@@ -29,7 +29,6 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -61,9 +60,9 @@ public class FindingToMeasureEdge extends AbstractEdge implements FindingsEdge {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getValue()
+    public double getValue()
     {
-        return BigDecimal.ZERO;
+        return 0.0;
     }
 
     /**

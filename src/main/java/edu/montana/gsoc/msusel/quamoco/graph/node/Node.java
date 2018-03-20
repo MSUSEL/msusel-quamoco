@@ -36,7 +36,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -55,19 +54,19 @@ public abstract class Node implements INode {
      */
     @Getter
     @Setter
-    transient protected MutableNetwork<Node, Edge> graph;
+    protected MutableNetwork<Node, Edge> graph;
     /**
      * Value associated with node after evaluation
      */
-    protected BigDecimal value = BigDecimal.ZERO;
+    protected double value = 0.0;
     /**
      * lower result of this node (min of all incoming values)
      */
-    protected BigDecimal lowerResult = BigDecimal.ZERO;
+    protected double lowerResult = 0.0;
     /**
      * upper result of this node (max of all incoming values)
      */
-    protected BigDecimal upperResult = BigDecimal.ONE;
+    protected double upperResult = 1.0;
     /**
      * fully qualified identifier of the quamoco model entity from which this
      * node was derived
@@ -140,7 +139,7 @@ public abstract class Node implements INode {
      * @return The evaluated value of this node, which is dependent on all
      *         incoming nodes.
      */
-    public abstract BigDecimal getValue();
+    public abstract double getValue();
 
     /**
      * @return The xml tag associated with node
@@ -187,8 +186,8 @@ public abstract class Node implements INode {
      * {@inheritDoc}
      */
     @Override
-    public List<BigDecimal> getValues() {
-        final List<BigDecimal> list = Lists.newArrayList();
+    public List<Double> getValues() {
+        final List<Double> list = Lists.newArrayList();
         list.add(getValue());
 
         return list;

@@ -36,7 +36,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -75,7 +74,7 @@ public class SingleMeasureEvaluatorTest {
     }
 
     /**
-     * Run the BigDecimal evaluate(List<BigDecimal>) method test.
+     * Run the BigDecimal evaluate(List<Double>) method test.
      *
      * @throws Exception
      * @generatedBy CodePro at 1/26/16 6:35 PM
@@ -83,20 +82,20 @@ public class SingleMeasureEvaluatorTest {
     @Test
     public void testEvaluate_1() throws Exception
     {
-        final List<BigDecimal> values = Lists.newArrayList();
+        final List<Double> values = Lists.newArrayList();
 
-        values.add(new BigDecimal(100.0));
-        values.add(new BigDecimal(20.0));
-        values.add(new BigDecimal(-5.0));
+        values.add(100.0);
+        values.add(20.0);
+        values.add(-5.0);
 
-        final BigDecimal result = fixture.evaluate(values);
+        final double result = fixture.evaluate(values);
 
         // add additional test code here
-        Assert.assertEquals(new BigDecimal(115.0), result);
+        Assert.assertEquals(115.0, result, 0.001);
     }
 
     /**
-     * Run the BigDecimal evaluate(List<BigDecimal>) method test.
+     * Run the BigDecimal evaluate(List<Double>) method test.
      *
      * @throws Exception
      * @generatedBy CodePro at 1/26/16 6:35 PM
@@ -104,16 +103,16 @@ public class SingleMeasureEvaluatorTest {
     @Test
     public void testEvaluate_2() throws Exception
     {
-        final List<BigDecimal> values = Lists.newArrayList();
+        final List<Double> values = Lists.newArrayList();
 
-        final BigDecimal result = fixture.evaluate(values);
+        final double result = fixture.evaluate(values);
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     /**
-     * Run the BigDecimal evaluate(List<BigDecimal>) method test.
+     * Run the BigDecimal evaluate(List<Double>) method test.
      *
      * @throws Exception
      * @generatedBy CodePro at 1/26/16 6:35 PM
@@ -121,12 +120,12 @@ public class SingleMeasureEvaluatorTest {
     @Test
     public void testEvaluate_3() throws Exception
     {
-        final List<BigDecimal> values = null;
+        final List<Double> values = null;
 
-        final BigDecimal result = fixture.evaluate(values);
+        final double result = fixture.evaluate(values);
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -159,17 +158,5 @@ public class SingleMeasureEvaluatorTest {
     public void tearDown() throws Exception
     {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(SingleMeasureEvaluatorTest.class);
     }
 }

@@ -38,8 +38,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 /**
  * The class <code>AggregatorTest</code> contains tests for the class
  * <code>{@link Aggregator}</code>.
@@ -61,11 +59,11 @@ public class AggregatorTest {
     @Test
     public void testProcess_1() throws Exception
     {
-        final BigDecimal result = fixture.process();
+        final double result = fixture.process();
 
         // add additional test code here
         double exp = 15;
-        double res = result.doubleValue();
+        double res = result;
         Assert.assertEquals(exp, res, 0.001);
     }
 
@@ -89,8 +87,8 @@ public class AggregatorTest {
         final MeasureNode mn = new MeasureNode(graph, "measure", "owner");
         fixture = new NumberMeanAggregator(mn);
         mn.setProcessor(fixture);
-        vn.addValue(new BigDecimal(10));
-        vn.addValue(new BigDecimal(20));
+        vn.addValue(10.0);
+        vn.addValue(20.0);
         graph.addEdge(vn, mn, new ValueToMeasureEdge("v2m", vn, mn));
     }
 
@@ -105,17 +103,5 @@ public class AggregatorTest {
     public void tearDown() throws Exception
     {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(AggregatorTest.class);
     }
 }

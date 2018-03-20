@@ -28,8 +28,6 @@ package edu.montana.gsoc.msusel.quamoco.graph.edge;
 import edu.montana.gsoc.msusel.quamoco.processor.LinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
 
-import java.math.BigDecimal;
-
 /**
  * Typing interface for edges which have a ranking capability.
  * FIXME Currently this also includes stuff with linear distributions, should
@@ -45,14 +43,14 @@ public interface RankedEdge {
      * 
      * @return the lowerBound
      */
-    BigDecimal getLowerBound();
+    double getLowerBound();
 
     /**
      * FIXME move to another type
      * 
      * @return the upperBound
      */
-    BigDecimal getUpperBound();
+    double getUpperBound();
 
     /**
      * FIXME move to another type
@@ -60,7 +58,7 @@ public interface RankedEdge {
      * @param lowerBound
      *            the lowerBound to set
      */
-    void setLowerBound(BigDecimal lowerBound);
+    void setLowerBound(double lowerBound);
 
     /**
      * FIXME move to another type
@@ -68,7 +66,7 @@ public interface RankedEdge {
      * @param upperBound
      *            the upperBound to set
      */
-    void setUpperBound(BigDecimal upperBound);
+    void setUpperBound(double upperBound);
 
     /**
      * FIXME move to WeightedEdge
@@ -76,7 +74,7 @@ public interface RankedEdge {
      * @param weight
      *            the weight to set
      */
-    void setWeight(BigDecimal weight);
+    void setWeight(double weight);
 
     /**
      * FIXME move to normalizable
@@ -92,14 +90,14 @@ public interface RankedEdge {
      * @param maximumPoints
      *            New value of Maximum points
      */
-    void setMaxPoints(BigDecimal maximumPoints);
+    void setMaxPoints(double maximumPoints);
 
     /**
      * FIXME move to another type
      * 
      * @return Maximum points
      */
-    BigDecimal getMaxPoints();
+    double getMaxPoints();
 
     /**
      * FIXME move to another type
@@ -142,11 +140,11 @@ public interface RankedEdge {
      * @param rank
      *            The new rank of this RankedEdge
      */
-    void setRank(BigDecimal rank);
+    Edge setRank(int rank);
 
     /**
      * @return The current rank of this RankedEdge
      */
-    BigDecimal getRank();
+    int getRank();
 
 }

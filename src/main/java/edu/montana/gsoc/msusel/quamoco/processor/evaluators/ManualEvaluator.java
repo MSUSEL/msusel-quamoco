@@ -28,7 +28,6 @@ package edu.montana.gsoc.msusel.quamoco.processor.evaluators;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.processor.Evaluator;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -55,10 +54,9 @@ public class ManualEvaluator extends Evaluator {
      * {@inheritDoc}
      */
     @Override
-    protected BigDecimal evaluate(final List<BigDecimal> values)
+    protected double evaluate(final List<Double> values)
     {
-        // TODO Auto-generated method stub
-        return BigDecimal.ZERO;
+        return 0.0;
     }
 
 }

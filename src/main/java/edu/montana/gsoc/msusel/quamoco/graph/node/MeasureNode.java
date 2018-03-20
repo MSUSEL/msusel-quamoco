@@ -39,7 +39,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -92,17 +91,17 @@ public class MeasureNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getValue() {
-        if (type.equals(MeasureType.NUMBER)) {
-            if (!calculated) {
-                value = processor.process();
-            }
-
-            calculated = true;
-            return value;
+    public double getValue() {
+        if (type == MeasureType.NUMBER) {
+            return processor.process();
         }
 
-        return BigDecimal.ZERO;
+        return 1.0;
+    }
+
+    public double normalize(double value) {
+        double norm = (value - getLowerResult()) / (getUpperResult() - getLowerResult());
+        return Double.isNaN(norm) ? 0.0 : norm;
     }
 
     /**
@@ -121,10 +120,8 @@ public class MeasureNode extends Node {
      */
     @Override
     public Set<Finding> getFindings() {
-        if (findings == null || findings.isEmpty()) {
-            if (type.equals(MeasureType.FINDINGS)) {
-                findings = ((FindingsAggregator) processor).processFindings();
-            }
+        if (type.equals(MeasureType.FINDINGS)) {
+            findings = ((FindingsAggregator) processor).processFindings();
         }
 
         return findings;
@@ -134,28 +131,28 @@ public class MeasureNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getLowerResult() {
-        final List<BigDecimal> values = collectFindingExtents();
+    public double getLowerResult() {
+        final List<Double> values = collectFindingExtents();
 
-        return values.isEmpty() ? BigDecimal.ZERO : Collections.min(values);
+        return values.isEmpty() ? 0.0 : Collections.min(values);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getUpperResult() {
-        final List<BigDecimal> values = collectFindingExtents();
+    public double getUpperResult() {
+        final List<Double> values = collectFindingExtents();
 
-        return values.isEmpty() ? BigDecimal.ONE : Collections.max(values);
+        return values.isEmpty() ? 1.0 : Collections.max(values);
     }
 
     /**
      * @return the list of extents of the findings attached to this
      * measure
      */
-    private List<BigDecimal> collectFindingExtents() {
-        final List<BigDecimal> values = Lists.newArrayList();
+    private List<Double> collectFindingExtents() {
+        final List<Double> values = Lists.newArrayList();
 
         if (type.equals(MeasureType.FINDINGS)) {
             for (final Edge e : graph.inEdges(this)) {

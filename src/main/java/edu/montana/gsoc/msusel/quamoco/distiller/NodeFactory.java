@@ -34,6 +34,7 @@ import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
 import edu.montana.gsoc.msusel.quamoco.model.measurement.ManualInstrument;
 import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
 import edu.montana.gsoc.msusel.quamoco.model.measurement.ToolBasedInstrument;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.aggregation.FindingsUnionMeasureAggregation;
 
 public class NodeFactory {
 
@@ -64,35 +65,51 @@ public class NodeFactory {
         String name = element.getFullName();
 
         final FactorNode node = new FactorNode(name, element.getIdentifier());
-        if (!element.getAnnotations().isEmpty() && element.hasAggregationAnnotation()) {
-            node.setMethod(element.getAggregationAnnotationValue());
-        } else {
-            node.setMethod(FactorMethod.MEAN);
-        }
+//        if (!element.getAnnotations().isEmpty() && element.hasAggregationAnnotation()) {
+//            node.setMethod(element.getAggregationAnnotationValue());
+//        } else {
+//            node.setMethod(FactorMethod.MEAN);
+//        }
 
         return node;
     }
 
     private Node createProviderNode(MeasurementMethod element) {
-        Node node;
+        Node node = null;
         String repo = "";
+
         if (element instanceof ManualInstrument) {
             repo = ValueNode.MANUAL;
-        } else if (element instanceof ToolBasedInstrument) {
+        } else if (element instanceof ToolBasedInstrument && ((ToolBasedInstrument) element).getTool() != null) {
             repo = ((ToolBasedInstrument) element).getTool().getName();
         }
 
-        MeasureType type = null;
-        if (element.getDetermines() != null) {
-            final Measure determines = element.getDetermines();
+        if (element instanceof ToolBasedInstrument) {
 
-            type = determines.getType();
-        }
+            MeasureType type = null;
+            if (element.getDetermines() != null) {
+                final Measure determines = element.getDetermines();
 
-        if (type == MeasureType.FINDINGS) {
+                type = determines.getType();
+            }
+
+            if (type == MeasureType.FINDINGS) {
+                node = new FindingNode(element.getName(), element.getIdentifier(), element.getName(), repo);
+            } else {
+                node = new ValueNode(element.getName(), element.getIdentifier(), repo);
+            }
+        } else if (element instanceof FindingsUnionMeasureAggregation) {
             node = new FindingsUnionNode(element.getName(), element.getIdentifier());
-        } else {
-            node = new ValueNode(element.getName(), element.getIdentifier(), repo);
+        } else if (element instanceof ManualInstrument) {
+            ManualInstrument mi = (ManualInstrument) element;
+            MeasureType type = MeasureType.NUMBER;
+            if (mi.getDetermines() != null)
+                type = mi.getDetermines().getType();
+
+            if (type == MeasureType.NUMBER)
+                node = new ValueNode(element.getName(), element.getIdentifier(), repo);
+            else
+                node = new FindingNode(element.getName(), element.getIdentifier(), element.getName(), repo);
         }
 
         return node;

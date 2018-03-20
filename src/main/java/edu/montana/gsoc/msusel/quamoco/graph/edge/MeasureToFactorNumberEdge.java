@@ -29,9 +29,6 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
 import lombok.Getter;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 /**
  * Edge connection a Measure node to a Factor node and for which the Measure has
  * type NUMBER. Thus, this edge does not pass findings.
@@ -47,7 +44,7 @@ public class MeasureToFactorNumberEdge extends WeightedRankedEdge implements Inf
     /**
      * Constructs a new MeasureToFactorNumberEdge with the given name
      * connecting the source and dest nodes.
-     * 
+     *
      * @param name
      *            Name of this edge
      * @param src
@@ -55,8 +52,7 @@ public class MeasureToFactorNumberEdge extends WeightedRankedEdge implements Inf
      * @param dest
      *            Dest node
      */
-    public MeasureToFactorNumberEdge(final String name, final Node src, final Node dest, final InfluenceEffect effect)
-    {
+    public MeasureToFactorNumberEdge(final String name, final Node src, final Node dest, final InfluenceEffect effect) {
         super(name, src, dest);
         inf = effect == null ? InfluenceType.POS : effect.toString();
     }
@@ -65,29 +61,25 @@ public class MeasureToFactorNumberEdge extends WeightedRankedEdge implements Inf
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getValue()
-    {
-        BigDecimal value = BigDecimal.ZERO;
+    public double getValue() {
+        if (this.getRank() == 0)
+            return 0.0;
 
-        if (this.getRank().compareTo(value) == 0)
-            return value;
+        double value = source.getValue();
 
-        value = source.getValue();
-
-        if (inf != null && inf.equals(InfluenceType.NEG))
-        {
-            value = (getMaxPoints().subtract(getMaxPoints().multiply(value)))
-                    .divide(getMaxPoints(), 15, RoundingMode.HALF_UP);
+        if (inf != null) {
+            if (inf.equals(InfluenceType.NEG)) {
+                value = (getMaxPoints() - (getMaxPoints() * value)) / getMaxPoints();
+            }
         }
 
-        if (usesLinearDist)
-        {
-            value = dist.calculate(value.multiply(getMaxPoints()).divide(getMaxPoints(), 15, RoundingMode.HALF_UP), getMaxPoints());
+        if (usesLinearDist) {
+            value = dist.calculate(getMaxPoints(), value) / getMaxPoints();
         }
-        else
-        {
-            value = value.multiply(weight);
-        }
+
+        value = value * weight;
+
+//        value = thresholdValue(value, lowerBound, upperBound);
 
         return value;
     }
@@ -96,21 +88,17 @@ public class MeasureToFactorNumberEdge extends WeightedRankedEdge implements Inf
      * {@inheritDoc}
      */
     @Override
-    public void setInf(final String inf)
-    {
-        if (inf == null)
-        {
+    public void setInf(final String inf) {
+        if (inf == null) {
             this.inf = inf;
             return;
         }
 
-        if (inf.isEmpty())
-        {
+        if (inf.isEmpty()) {
             throw new IllegalArgumentException("Influence cannot be the empty string.");
         }
 
-        if (!inf.equals(InfluenceType.NEG) && !inf.equals(InfluenceType.POS))
-        {
+        if (!inf.equals(InfluenceType.NEG) && !inf.equals(InfluenceType.POS)) {
             throw new IllegalArgumentException(
                     "Influence must be either: " + InfluenceType.POS + " or " + InfluenceType.NEG);
         }

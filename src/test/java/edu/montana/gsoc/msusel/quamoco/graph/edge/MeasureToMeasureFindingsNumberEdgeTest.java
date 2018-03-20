@@ -41,8 +41,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 import static edu.montana.gsoc.msusel.quamoco.model.MeasureType.FINDINGS;
 import static edu.montana.gsoc.msusel.quamoco.model.MeasureType.NUMBER;
 
@@ -74,12 +72,12 @@ public class MeasureToMeasureFindingsNumberEdgeTest {
         // add additional test code here
         Assert.assertNotNull(result);
         Assert.assertEquals(null, result.getDist());
-        Assert.assertEquals(new BigDecimal(100), result.getMaxPoints());
+        Assert.assertEquals(100.0, result.getMaxPoints(), 0.001);
         Assert.assertEquals(false, result.isUsesLinearDist());
         Assert.assertEquals(null, result.getNormalizer());
-        Assert.assertEquals(BigDecimal.ONE, result.getWeight());
-        Assert.assertEquals(BigDecimal.ONE, result.getUpperBound());
-        Assert.assertEquals(BigDecimal.ZERO, result.getLowerBound());
+        Assert.assertEquals(1.0, result.getWeight(), 0.001);
+        Assert.assertEquals(1.0, result.getUpperBound(), 0.001);
+        Assert.assertEquals(0.0, result.getLowerBound(), 0.001);
         Assert.assertEquals("", result.getName());
     }
 
@@ -93,10 +91,10 @@ public class MeasureToMeasureFindingsNumberEdgeTest {
     public void testGetValue_1() throws Exception
     {
         fixture.usesLinearDist = false;
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ZERO, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -109,10 +107,10 @@ public class MeasureToMeasureFindingsNumberEdgeTest {
     public void testGetValue_2() throws Exception
     {
         fixture.usesLinearDist = true;
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -145,13 +143,13 @@ public class MeasureToMeasureFindingsNumberEdgeTest {
         graph.addEdge(src, dest, fixture);
         graph.addEdge(srcsrc, src, f2m);
 
-        fixture.maxPoints = new BigDecimal(100.0);
-        fixture.setRank(BigDecimal.ONE);
+        fixture.maxPoints = 100.0;
+        fixture.setRank(1);
         fixture.usesLinearDist = false;
-        fixture.lowerBound = BigDecimal.ZERO;
-        fixture.setWeight(BigDecimal.ONE);
+        fixture.lowerBound = 0.0;
+        fixture.setWeight(1.0);
         fixture.setNormalizer(new NullNormalizer(fixture, "LOC", NormalizationRange.CLASS));
-        fixture.upperBound = BigDecimal.ONE;
+        fixture.upperBound = 1.0;
     }
 
     /**

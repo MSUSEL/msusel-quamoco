@@ -27,7 +27,6 @@ package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -54,7 +53,7 @@ public interface Edge {
      *
      * @return The value
      */
-    BigDecimal getValue();
+    double getValue();
 
     /**
      * Sets the identifying number for this edge to the given value. Note that
@@ -68,7 +67,7 @@ public interface Edge {
     /**
      * @return The set of values provided by the incoming side of the edge
      */
-    List<BigDecimal> getValues();
+    List<Double> getValues();
 
     Node getSource();
 

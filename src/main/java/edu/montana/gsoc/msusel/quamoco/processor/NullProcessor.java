@@ -27,8 +27,6 @@ package edu.montana.gsoc.msusel.quamoco.processor;
 
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
-import java.math.BigDecimal;
-
 /**
  * Processor which represents a null calculation. In this case it simply return
  * Zero.
@@ -53,10 +51,10 @@ public class NullProcessor extends Processor {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal process()
+    public double process()
     {
         // TODO Auto-generated method stub
-        return BigDecimal.ZERO;
+        return 0.0;
     }
 
 }

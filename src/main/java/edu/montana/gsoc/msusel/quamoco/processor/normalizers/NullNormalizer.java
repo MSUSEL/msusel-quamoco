@@ -30,7 +30,6 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 /**
@@ -61,14 +60,14 @@ public class NullNormalizer extends Normalizer {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal normalize(final Set<Finding> findings)
+    public double normalize(final Set<Finding> findings)
     {
         if (findings == null || findings.isEmpty())
         {
-            return BigDecimal.ZERO;
+            return 0.0;
         }
 
-        return BigDecimal.ZERO;
+        return 0.0;
     }
 
 }

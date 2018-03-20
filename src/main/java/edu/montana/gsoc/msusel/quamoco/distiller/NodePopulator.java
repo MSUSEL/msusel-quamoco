@@ -29,18 +29,16 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FindingsUnionNode;
+import edu.montana.gsoc.msusel.quamoco.graph.node.FactorMethod;
+import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
-import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.model.QMElement;
 import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
-import edu.montana.gsoc.msusel.quamoco.model.Tool;
-import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
-import edu.montana.gsoc.msusel.quamoco.model.measurement.ManualInstrument;
+import edu.montana.gsoc.msusel.quamoco.model.eval.ManualEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.factor.WeightedSumFactorAggregation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.SingleMeasureEvaluation;
+import edu.montana.gsoc.msusel.quamoco.model.eval.measure.WeightedSumMultiMeasureEvaluation;
 import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
-import edu.montana.gsoc.msusel.quamoco.model.measurement.ToolBasedInstrument;
 
 import java.util.List;
 
@@ -122,53 +120,8 @@ public class NodePopulator implements GraphModifier {
         final List<MeasurementMethod> list = data.getManager().getAllMeasurementMethods();
         for (final MeasurementMethod method : list)
         {
-            Node node;
-            if (method instanceof ManualInstrument)
-            {
-                node = new ValueNode(method.getName(), method.getIdentifier(), ValueNode.MANUAL);
-            }
-            else if (method instanceof ToolBasedInstrument)
-            {
-                MeasureType type = null;
-                if (method.getDetermines() != null)
-                {
-                    final Measure determines = method.getDetermines();
-
-                    type = determines.getType();
-                }
-
-                final Tool tool = ((ToolBasedInstrument) method).getTool();
-                String toolName = "";
-
-                toolName = tool.getName();
-
-                if (type == MeasureType.FINDINGS)
-                {
-                    node = new FindingNode(
-                            method.getName(), method.getIdentifier(), method.getName(), toolName);
-                }
-                else
-                {
-                    node = new ValueNode(method.getName(), method.getIdentifier(), toolName);
-                }
-            }
-            else
-            {
-                node = new FindingsUnionNode(method.getName(), method.getIdentifier());
-            }
-
-            if (!graph.nodes().contains(node))
-            {
-                if (node instanceof FindingsUnionNode)
-                {
-                    data.addUnion(method, node);
-                }
-                else
-                {
-                    data.addValue(method, node);
-                }
-                graph.addNode(node);
-            }
+            Node node = NodeFactory.getInstance().createNode(method);
+            addNode(data, graph, method, node);
         }
     }
 
@@ -179,6 +132,23 @@ public class NodePopulator implements GraphModifier {
     public void modifyGraph(final DistillerData data, final MutableNetwork<Node, Edge> graph)
     {
         extractFactorsAndMeasures(data, graph);
-        //extractValues(data, graph);
+        updateFactorMethods(data, graph);
+        extractValues(data, graph);
+    }
+
+    private void updateFactorMethods(DistillerData data, MutableNetwork<Node, Edge> graph) {
+        data.getEvaluations().forEach((eval) -> {
+            FactorNode fn = (FactorNode) data.getFactor(eval.getEvaluates());
+            if (fn != null) {
+                if (eval instanceof WeightedSumMultiMeasureEvaluation || eval instanceof WeightedSumFactorAggregation)
+                    fn.setMethod(FactorMethod.RANKING);
+                else if (eval instanceof SingleMeasureEvaluation)
+                    fn.setMethod(FactorMethod.ONE);
+                else if (eval instanceof ManualEvaluation)
+                    fn.setMethod(FactorMethod.MANUAL);
+                else
+                    fn.setMethod(FactorMethod.MEAN);
+            }
+        });
     }
 }

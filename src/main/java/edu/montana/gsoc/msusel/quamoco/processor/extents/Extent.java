@@ -35,7 +35,6 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,7 +90,7 @@ public class Extent {
      * Map of project-wide name extents: key = range, value = (key = name
      * name, value = name) extent value
      */
-    private final Map<NormalizationRange, Map<String, BigDecimal>> totalMetricExtents;
+    private final Map<NormalizationRange, Map<String, Double>> totalMetricExtents;
 
     /**
      * A private static inner class used to hold the singleton instance of this
@@ -140,7 +139,7 @@ public class Extent {
      *             if the measure is null or its type is NUMBER, the name is
      *             null or empty, or the range is null.
      */
-    public BigDecimal findMeasureExtent(final String metric, final NormalizationRange range, final MeasureNode measure) {
+    public double findMeasureExtent(final String metric, final NormalizationRange range, final MeasureNode measure) {
         if (measure == null) {
             throw new IllegalArgumentException("Measure cannot be null");
         }
@@ -157,9 +156,10 @@ public class Extent {
         final Set<Finding> findingsSet = Sets.newHashSet();
         findingsSet.addAll(measure.getFindings());
 
-        BigDecimal total = findFindingsExtent(metric, findingsSet, range);
+        double total = findFindingsExtent(metric, findingsSet, range);
 
-        return total.compareTo(BigDecimal.ZERO) == 0 ? BigDecimal.ZERO : total;
+        return Double.compare(total, 0.0) == 0 ? 0.0 : total;
+//        return total;
     }
 
     /**
@@ -174,8 +174,8 @@ public class Extent {
      *            Normalization range
      * @return Extent of the normalization name for the given finding
      */
-    public BigDecimal findExtent(final Finding finding, final String metric, final NormalizationRange range) {
-        BigDecimal value = BigDecimal.ZERO;
+    public double findExtent(final Finding finding, final String metric, final NormalizationRange range) {
+        double value = 0.0;
         AbstractNodeExtentDecorator node = NodeExtentDecoratorFactory.getInstance().getDecorator(finding.getLocation());
 
         switch (range) {
@@ -205,7 +205,7 @@ public class Extent {
      * @throws IllegalArgumentException
      *             if the name name is null or empty or the range is null.
      */
-    public BigDecimal findExtent(final String metric, final NormalizationRange range) {
+    public double findExtent(final String metric, final NormalizationRange range) {
         if (metric == null || metric.isEmpty()) {
             throw new IllegalArgumentException("Metric cannot be null or empty");
         }
@@ -220,7 +220,7 @@ public class Extent {
             }
         }
 
-        BigDecimal total = BigDecimal.ZERO;
+        double total = 0.0;
         List<Double> values = null;
         switch (range) {
             case CLASS:
@@ -233,16 +233,16 @@ public class Extent {
                 values = MeasuresTable.getInstance().getAllMethodValues(metric);
                 break;
             case NA:
-                return new BigDecimal(MeasuresTable.getInstance().getProjectMetric(metric));
+                return (Double) MeasuresTable.getInstance().getProjectMetric(metric);
         }
 
         for (Double value : values) {
-            total = total.add(new BigDecimal(value));
+            total = total + value;
         }
 
         totalMetricExtents.get(range).put(metric, total);
 
-        return total.compareTo(BigDecimal.ZERO) == 0 ? BigDecimal.ONE : total;
+        return Double.compare(total, 0.0) == 0 ? 0.0 : total;
     }
 
     /**
@@ -295,9 +295,9 @@ public class Extent {
      * @return The ratio representing the presence that this FindingNode has
      *         within the system as a whole.
      */
-    public BigDecimal findFindingExtent(CodeTree tree, String metric, NormalizationRange normalizationRange,
+    public double findFindingExtent(CodeTree tree, String metric, NormalizationRange normalizationRange,
                                         FindingNode n) {
-        BigDecimal value = BigDecimal.ZERO;
+        double value = 0.0;
         NormalizationRange range = normalizationRange;
         if (!n.getFindings().isEmpty()) {
             if (range == NormalizationRange.NA) {
@@ -307,7 +307,7 @@ public class Extent {
             value = findFindingsExtent(metric, n.getFindings(), range);
         }
 
-        value = value.divide(findExtent(metric, range), BigDecimal.ROUND_HALF_UP);
+        value = value / findExtent(metric, range);
 
         return value;
     }
@@ -327,11 +327,11 @@ public class Extent {
      * @return The extent of affect this set of findings has within the entire
      *         system (un-normalized)
      */
-    private BigDecimal findFindingsExtent(String metric, Set<Finding> findings, NormalizationRange range) {
-        BigDecimal value = BigDecimal.ZERO;
+    private double findFindingsExtent(String metric, Set<Finding> findings, NormalizationRange range) {
+        double value = 0.0;
 
         for (Finding f : findings) {
-            value = value.add(findExtent(f, metric, range));
+            value = value + findExtent(f, metric, range);
         }
 
         return value;

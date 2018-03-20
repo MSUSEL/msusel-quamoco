@@ -42,23 +42,23 @@ import java.util.Set;
 public class DistilledView {
 
     public static void main(String args[]) {
-        Path p2 = Paths.get("msusel-quamoco/data/test/Test.qm");
-        Path p = Paths.get("msusel-quamoco/data/test/TestHier.qm");
+        Path p2 = Paths.get("msusel-quamoco/data/test/TestHier.qm");
         Path dot = Paths.get(".");
 
         ModelManager manager = new ModelManager();
         final ModelDistiller distiller = new ModelDistiller(manager);
-        distiller.readInQualityModels(p2.toString(), p.toString());
-        distiller.buildGraph(p);
+        distiller.readInQualityModels(p2);
+        distiller.buildGraph(p2);
         Network<Node, Edge> graph = distiller.getGraph();
 
         saveDOTFile("/home/isaac/test/linux2win/distilled.dot", graph, null);
     }
 
+
     public static String generateDot(Network<Node, Edge> graph, String name) {
         StringBuilder builder = new StringBuilder();
         if (name != null)
-            builder.append("digraph \"" + name + "\" {\n");
+            builder.append("digraph \"" + name.replaceAll("\"", "") + "\" {\n");
         else
             builder.append("digraph {\n");
 
@@ -67,7 +67,7 @@ public class DistilledView {
             EndpointPair<Node> pair = graph.incidentNodes(e);
             set.add(pair.nodeU());
             set.add(pair.nodeV());
-            builder.append("\t\"" + pair.source().getName() + "\" -> \"" + pair.target().getName() + "\"\n");
+            builder.append("\t\"" + pair.source().getName().replaceAll("\"", "") + "\" -> \"" + pair.target().getName().replaceAll("\"", "") + "\"\n");
         }
 
         for (Node n : graph.nodes()) {

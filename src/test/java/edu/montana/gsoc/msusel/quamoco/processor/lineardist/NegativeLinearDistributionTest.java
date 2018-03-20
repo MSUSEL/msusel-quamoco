@@ -30,8 +30,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 /**
  * The class <code>NegativeLinearDistributionTest</code> contains tests for the
  * class <code>{@link NegativeLinearDistribution}</code>.
@@ -66,31 +64,31 @@ public class NegativeLinearDistributionTest {
     public void testCalculate_1() throws Exception
     {
         final NegativeLinearDistribution fixture = new NegativeLinearDistribution();
-        final BigDecimal maxPoints = new BigDecimal(100.0);
-        final BigDecimal proportion = new BigDecimal(0.5);
+        final double maxPoints = 100.0;
+        final double proportion = 0.5;
 
-        BigDecimal result = fixture.calculate(maxPoints, proportion);
+        double result = fixture.calculate(maxPoints, proportion);
 
         // add additional test code here
-        Assert.assertEquals(50.0, result.doubleValue(), 0.001);
+        Assert.assertEquals(50.0, result, 0.001);
 
-        result = fixture.calculate(maxPoints, new BigDecimal(0.75));
-        Assert.assertEquals(25.0, result.doubleValue(), 0.001);
+        result = fixture.calculate(maxPoints, 0.75);
+        Assert.assertEquals(25.0, result, 0.001);
 
-        result = fixture.calculate(maxPoints, new BigDecimal(0.25));
-        Assert.assertEquals(75.0, result.doubleValue(), 0.001);
+        result = fixture.calculate(maxPoints, 0.25);
+        Assert.assertEquals(75.0, result, 0.001);
 
-        result = fixture.calculate(maxPoints, new BigDecimal(0));
-        Assert.assertEquals(100.0, result.doubleValue(), 0.001);
+        result = fixture.calculate(maxPoints, 0);
+        Assert.assertEquals(100.0, result, 0.001);
 
-        result = fixture.calculate(maxPoints, new BigDecimal(1.0));
-        Assert.assertEquals(0.0, result.doubleValue(), 0.001);
+        result = fixture.calculate(maxPoints, 1.0);
+        Assert.assertEquals(0.0, result, 0.001);
 
-        result = fixture.calculate(maxPoints, new BigDecimal(1.5));
-        Assert.assertEquals(0.0, result.doubleValue(), 0.001);
+        result = fixture.calculate(maxPoints, 1.5);
+        Assert.assertEquals(0.0, result, 0.001);
 
-        result = fixture.calculate(maxPoints, new BigDecimal(-1.5));
-        Assert.assertEquals(100.0, result.doubleValue(), 0.001);
+        result = fixture.calculate(maxPoints, -1.5);
+        Assert.assertEquals(100.0, result, 0.001);
     }
 
     /**

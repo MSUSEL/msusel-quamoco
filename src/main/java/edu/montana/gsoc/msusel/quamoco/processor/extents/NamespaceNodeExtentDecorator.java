@@ -33,7 +33,6 @@ import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
 import edu.montana.gsoc.msusel.metrics.MeasuresTable;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -53,7 +52,7 @@ public class NamespaceNodeExtentDecorator extends AbstractNodeExtentDecorator {
     }
 
     @Override
-    public BigDecimal findFileExtent(String metric) {
+    public double findFileExtent(String metric) {
         NamespaceNode p = (NamespaceNode) decorated;
         Set<FileNode> files = Sets.newHashSet();
         for (TypeNode tn : (List<TypeNode>) p.types()) {
@@ -64,13 +63,13 @@ public class NamespaceNodeExtentDecorator extends AbstractNodeExtentDecorator {
     }
 
     @Override
-    public BigDecimal findMethodExtent(String metric) {
+    public double findMethodExtent(String metric) {
         NamespaceNode p = (NamespaceNode) decorated;
         return sumMetrics(metric, p.methods());
     }
 
     @Override
-    public BigDecimal findClassExtent(String metric) {
+    public double findClassExtent(String metric) {
         NamespaceNode p = (NamespaceNode) decorated;
         return sumMetrics(metric, (List<TypeNode>) p.types());
     }

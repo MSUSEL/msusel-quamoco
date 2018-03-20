@@ -36,8 +36,6 @@ import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -48,7 +46,7 @@ import static org.mockito.Mockito.when;
  *
  * @generatedBy CodePro at 5/30/15 3:38 PM
  * @author isaac
- * @version $Revision: BigDecimal.ONE $
+ * @version $Revision: 1.0 $
  */
 public class FactorToFactorEdgeTest {
 
@@ -68,10 +66,10 @@ public class FactorToFactorEdgeTest {
 
         // TODO: add additional test code here
         assertNotNull(result);
-        assertEquals(BigDecimal.ONE, result.getWeight());
+        assertEquals(1.0, result.getWeight(), 0.001);
         assertEquals(InfluenceType.POS, result.getInf());
-        assertEquals(BigDecimal.ONE, result.getUpperBound());
-        assertEquals(BigDecimal.ZERO, result.getLowerBound());
+        assertEquals(1.0, result.getUpperBound(), 0.001);
+        assertEquals(0.0, result.getLowerBound(), 0.001);
         assertEquals(name, result.getName());
     }
 
@@ -97,10 +95,10 @@ public class FactorToFactorEdgeTest {
      */
     @Test
     public void testGetLowerBound_1() throws Exception {
-        final BigDecimal result = fixture.getLowerBound();
+        final double result = fixture.getLowerBound();
 
         // TODO: add additional test code here
-        assertEquals(BigDecimal.ZERO, result);
+        assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -111,10 +109,10 @@ public class FactorToFactorEdgeTest {
      */
     @Test
     public void testGetUpperBound_1() throws Exception {
-        final BigDecimal result = fixture.getUpperBound();
+        final double result = fixture.getUpperBound();
 
         // TODO: add additional test code here
-        assertEquals(BigDecimal.ONE, result);
+        assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -133,11 +131,11 @@ public class FactorToFactorEdgeTest {
                 .build();
         final FactorNode dest = new FactorNode(graph, "dest", "dest");
         FactorNode src = mock(FactorNode.class);
-        when(src.getValue()).thenReturn(new BigDecimal(0.5));
+        when(src.getValue()).thenReturn(0.5);
 
         fixture.setDist(null);
-        fixture.setMaxPoints(new BigDecimal(100));
-        fixture.setWeight(new BigDecimal(0.5));
+        fixture.setMaxPoints(100.0);
+        fixture.setWeight(0.5);
         fixture.setInf(InfluenceType.POS);
         fixture.setNormalizer(null);
 
@@ -146,7 +144,7 @@ public class FactorToFactorEdgeTest {
         fixture.dest = dest;
 
         // TODO: add additional test code here
-        assertEquals(new BigDecimal(0.25), fixture.getValue());
+        assertEquals(0.25, fixture.getValue(), 0.001);
     }
 
     /**
@@ -165,11 +163,11 @@ public class FactorToFactorEdgeTest {
                 .build();
         final FactorNode dest = new FactorNode(graph, "dest", "dest");
         FactorNode src = mock(FactorNode.class);
-        when(src.getValue()).thenReturn(new BigDecimal(0.75));
+        when(src.getValue()).thenReturn(0.75);
 
         fixture.setDist(null);
-        fixture.setMaxPoints(BigDecimal.ONE);
-        fixture.setWeight(new BigDecimal(0.5));
+        fixture.setMaxPoints(1.0);
+        fixture.setWeight(0.5);
         fixture.setInf(InfluenceType.NEG);
         fixture.setNormalizer(null);
 
@@ -178,7 +176,7 @@ public class FactorToFactorEdgeTest {
         fixture.dest = dest;
 
         // TODO: add additional test code here
-        assertEquals(0, fixture.getValue().compareTo(new BigDecimal(0.125)));
+        assertEquals(0.125, fixture.getValue(), 0.001);
     }
 
     /**
@@ -197,10 +195,10 @@ public class FactorToFactorEdgeTest {
                 .build();
         final FactorNode dest = new FactorNode(graph, "dest", "dest");
         FactorNode src = mock(FactorNode.class);
-        when(src.getValue()).thenReturn(new BigDecimal(0.5));
+        when(src.getValue()).thenReturn(0.5);
 
         fixture.setDist(new PositiveLinearDistribution());
-        fixture.setMaxPoints(new BigDecimal(100));
+        fixture.setMaxPoints(100.0);
         fixture.setInf(null);
         fixture.setNormalizer(null);
 
@@ -209,7 +207,7 @@ public class FactorToFactorEdgeTest {
         fixture.dest = dest;
 
         // TODO: add additional test code here
-        assertEquals(new BigDecimal(0.5), fixture.getValue());
+        assertEquals(0.5, fixture.getValue(), 0.001);
     }
 
     /**
@@ -228,10 +226,10 @@ public class FactorToFactorEdgeTest {
                 .build();
         final FactorNode dest = new FactorNode(graph, "dest", "dest");
         FactorNode src = mock(FactorNode.class);
-        when(src.getValue()).thenReturn(new BigDecimal(1.5));
+        when(src.getValue()).thenReturn(1.5);
 
         fixture.setDist(new PositiveLinearDistribution());
-        fixture.setMaxPoints(BigDecimal.ONE);
+        fixture.setMaxPoints(1.0);
         fixture.setInf(null);
         fixture.setNormalizer(null);
 
@@ -240,7 +238,7 @@ public class FactorToFactorEdgeTest {
         fixture.dest = dest;
 
         // TODO: add additional test code here
-        assertEquals(BigDecimal.ONE, fixture.getValue());
+        assertEquals(1.0, fixture.getValue(), 0.001);
     }
 
     /**
@@ -261,7 +259,7 @@ public class FactorToFactorEdgeTest {
 //        final ValueNode src = new ValueNode(graph, "source", "source", "");
 
         FactorNode src = mock(FactorNode.class);
-        when(src.getValue()).thenReturn(new BigDecimal(-1));
+        when(src.getValue()).thenReturn(-1.0);
 
         fixture.setDist(null);
         fixture.setInf(null);
@@ -271,7 +269,7 @@ public class FactorToFactorEdgeTest {
         fixture.source = src;
         fixture.dest = dest;
 
-        assertEquals(BigDecimal.ZERO, fixture.getValue());
+        assertEquals(0.0, fixture.getValue(), 0.001);
     }
 
     /**
@@ -290,11 +288,11 @@ public class FactorToFactorEdgeTest {
                 .build();
         final FactorNode dest = new FactorNode(graph, "dest", "dest");
         FactorNode src = mock(FactorNode.class);
-        when(src.getValue()).thenReturn(new BigDecimal(0.75));
+        when(src.getValue()).thenReturn(0.75);
 
         fixture.setDist(null);
-        fixture.setMaxPoints(BigDecimal.ONE);
-        fixture.setWeight(new BigDecimal(0.5));
+        fixture.setMaxPoints(1.0);
+        fixture.setWeight(0.5);
         fixture.setInf(InfluenceType.POS);
         fixture.setNormalizer(new NullNormalizer(fixture, "NOM", NormalizationRange.CLASS));
 
@@ -303,7 +301,7 @@ public class FactorToFactorEdgeTest {
         fixture.dest = dest;
 
         // TODO: add additional test code here
-        assertEquals(new BigDecimal(0.375), fixture.getValue());
+        assertEquals(0.375, fixture.getValue(), 0.001);
     }
 
     /**
@@ -314,10 +312,10 @@ public class FactorToFactorEdgeTest {
      */
     @Test
     public void testGetWeight_1() throws Exception {
-        final BigDecimal result = fixture.getWeight();
+        final double result = fixture.getWeight();
 
         // TODO: add additional test code here
-        assertEquals(BigDecimal.ONE, result);
+        assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -397,10 +395,10 @@ public class FactorToFactorEdgeTest {
      */
     @Test
     public void testSetLowerBound_1() throws Exception {
-        final BigDecimal lowerBound = BigDecimal.ZERO;
+        final double lowerBound = 0.0;
 
         fixture.setLowerBound(lowerBound);
-        assertEquals(lowerBound, fixture.getLowerBound());
+        assertEquals(lowerBound, fixture.getLowerBound(), 0.001);
     }
 
     /**
@@ -411,7 +409,7 @@ public class FactorToFactorEdgeTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testSetLowerBound_2() throws Exception {
-        final BigDecimal lowerBound = new BigDecimal(2.0);
+        final double lowerBound = 2.0;
 
         fixture.setLowerBound(lowerBound);
     }
@@ -424,8 +422,8 @@ public class FactorToFactorEdgeTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testSetUpperBound_1() throws Exception {
-        final BigDecimal upperBound = BigDecimal.ZERO;
-        fixture.setLowerBound(BigDecimal.ONE);
+        final double upperBound = 0.0;
+        fixture.setLowerBound(1.0);
         fixture.setUpperBound(upperBound);
     }
 
@@ -437,10 +435,10 @@ public class FactorToFactorEdgeTest {
      */
     @Test
     public void testSetUpperBound_2() throws Exception {
-        final BigDecimal upperBound = new BigDecimal(2.0);
+        final double upperBound = 2.0;
 
         fixture.setUpperBound(upperBound);
-        assertEquals(upperBound, fixture.getUpperBound());
+        assertEquals(upperBound, fixture.getUpperBound(), 0.001);
     }
 
     /**
@@ -451,10 +449,10 @@ public class FactorToFactorEdgeTest {
      */
     @Test
     public void testSetWeight_1() throws Exception {
-        final BigDecimal weight = BigDecimal.ZERO;
+        final double weight = 0.0;
 
         fixture.setWeight(weight);
-        assertEquals(weight, fixture.getWeight());
+        assertEquals(weight, fixture.getWeight(), 0.001);
     }
 
     /**
@@ -465,7 +463,7 @@ public class FactorToFactorEdgeTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testSetWeight_2() throws Exception {
-        final BigDecimal weight = new BigDecimal(-1.0);
+        final double weight = -1.0;
 
         fixture.setWeight(weight);
         fail();
@@ -479,21 +477,10 @@ public class FactorToFactorEdgeTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testSetWeight_3() throws Exception {
-        final BigDecimal weight = new BigDecimal(1.5);
+        final double weight = 1.5;
 
         fixture.setWeight(weight);
         fail();
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 5/30/15 3:38 PM
-     */
-    public static void main(final String[] args) {
-        new org.junit.runner.JUnitCore().run(FactorToFactorEdgeTest.class);
     }
 
     /**
@@ -503,8 +490,8 @@ public class FactorToFactorEdgeTest {
     public void setUp() {
         fixture = new FactorToFactorEdge("", null, null, InfluenceEffect.POSITIVE);
         fixture.setInf(InfluenceType.POS);
-        fixture.setUpperBound(BigDecimal.ONE);
-        fixture.setWeight(BigDecimal.ONE);
-        fixture.setLowerBound(BigDecimal.ZERO);
+        fixture.setUpperBound(1.0);
+        fixture.setWeight(1.0);
+        fixture.setLowerBound(0.0);
     }
 }

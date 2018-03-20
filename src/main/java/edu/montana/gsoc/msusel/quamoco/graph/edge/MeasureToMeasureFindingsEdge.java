@@ -30,7 +30,6 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 /**
@@ -64,15 +63,17 @@ public class MeasureToMeasureFindingsEdge extends AbstractEdge implements Findin
     public Set<Finding> getFindings()
     {
         final MeasureNode sn = (MeasureNode) source;
-        return Sets.newHashSet(sn.getFindings());
+        Set<Finding> findings = Sets.newHashSet(sn.getFindings());
+
+        return findings;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getValue()
+    public double getValue()
     {
-        return BigDecimal.ZERO;
+        return 0.0;
     }
 }

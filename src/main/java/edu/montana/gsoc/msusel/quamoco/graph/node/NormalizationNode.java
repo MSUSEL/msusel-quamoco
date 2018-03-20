@@ -31,8 +31,6 @@ import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
 /**
  * Node originally meant to provide the means by which normalization was to
  * occur, currently this node is no longer needed and should be removed
@@ -65,9 +63,9 @@ public class NormalizationNode extends MeasureNode {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getValue()
+    public double getValue()
     {
-        return BigDecimal.ZERO;
+        return 0.0;
     }
 
     /**

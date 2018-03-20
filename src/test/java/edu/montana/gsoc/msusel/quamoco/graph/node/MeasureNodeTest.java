@@ -35,8 +35,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -131,7 +129,7 @@ public class MeasureNodeTest {
         fixture.setType(MeasureType.NONE);
         fixture.setMethod("");
         fixture.name = "";
-        fixture.value = BigDecimal.ONE;
+        fixture.value = 1.0;
         fixture.graph = graph;
         fixture.ownedBy = "";
         fixture.description = "";
@@ -161,7 +159,7 @@ public class MeasureNodeTest {
         fixture.setType(MeasureType.NONE);
         fixture.setMethod("");
         fixture.name = "";
-        fixture.value = BigDecimal.ONE;
+        fixture.value = 1.0;
         fixture.graph = graph;
         fixture.ownedBy = "";
         fixture.description = "";
@@ -192,15 +190,15 @@ public class MeasureNodeTest {
         final ValueToMeasureEdge edge = new ValueToMeasureEdge("edge", fixture, value);
         fixture.setProcessor(new NullProcessor(fixture));
         fixture.setType(MeasureType.NUMBER);
-        fixture.value = BigDecimal.ONE;
+        fixture.value = 1.0;
 
         graph.addEdge(value, fixture, edge);
 
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
-        assertEquals(BigDecimal.ZERO, result);
-        fixture.value = BigDecimal.ONE;
-        assertEquals(BigDecimal.ONE, fixture.getValue());
+        assertEquals(0.0, result, 0.001);
+        fixture.value = 1.0;
+        assertEquals(1.0, fixture.getValue(), 0.001);
     }
 
     /**
@@ -227,7 +225,7 @@ public class MeasureNodeTest {
 
         graph.addEdge(value, fixture, edge);
 
-        assertEquals(BigDecimal.ZERO, fixture.getValue());
+        assertEquals(0.0, fixture.getValue(), 0.001);
     }
 
     /**
@@ -253,9 +251,9 @@ public class MeasureNodeTest {
 //
 //        graph.addEdge(value, fixture, edge);
 //
-//        final BigDecimal result = fixture.getValue();
+//        final double result = fixture.getValue();
 //
-//        assertEquals(BigDecimal.ZERO, result);
+//        assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -277,7 +275,7 @@ public class MeasureNodeTest {
         fixture.setType(MeasureType.NUMBER);
         fixture.setMethod("");
         fixture.name = "";
-        fixture.value = BigDecimal.ONE;
+        fixture.value = 1.0;
         fixture.graph = graph;
         fixture.ownedBy = "";
         fixture.description = "";
@@ -308,7 +306,7 @@ public class MeasureNodeTest {
         fixture.setType(MeasureType.NONE);
         fixture.setMethod("");
         fixture.name = "";
-        fixture.value = BigDecimal.ONE;
+        fixture.value = 1.0;
         fixture.graph = graph;
         fixture.ownedBy = "";
         fixture.description = "";
@@ -339,7 +337,7 @@ public class MeasureNodeTest {
         fixture.setType(MeasureType.NONE);
         fixture.setMethod("");
         fixture.name = "";
-        fixture.value = BigDecimal.ONE;
+        fixture.value = 1.0;
         fixture.graph = graph;
         fixture.ownedBy = "";
         fixture.description = "";
@@ -374,17 +372,5 @@ public class MeasureNodeTest {
     public void tearDown() throws Exception
     {
         // TODO: add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 5/30/15 3:38 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(MeasureNodeTest.class);
     }
 }

@@ -45,8 +45,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 /**
  * The class <code>EvaluatorTest</code> contains tests for the class
  * <code>{@link Evaluator}</code>.
@@ -68,10 +66,10 @@ public class EvaluatorTest {
     @Test
     public void testProcess_1() throws Exception
     {
-        final BigDecimal result = fixture.process();
+        final double result = fixture.process();
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -92,13 +90,13 @@ public class EvaluatorTest {
                 "m2f", mn, fixture.owner, InfluenceEffect.POSITIVE);
         m2f.setUsesLinearDist(false);
         m2f.setNormalizer(new NullNormalizer(m2f, "LOC", NormalizationRange.CLASS));
-        vn.addValue(BigDecimal.TEN);
+        vn.addValue(10.0);
         mn.getGraph().addEdge(mn, fixture.owner, m2f);
 
-        final BigDecimal result = fixture.process();
+        final double result = fixture.process();
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(10.0, result, 0.001);
     }
 
     /**
@@ -134,17 +132,5 @@ public class EvaluatorTest {
     public void tearDown() throws Exception
     {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(EvaluatorTest.class);
     }
 }

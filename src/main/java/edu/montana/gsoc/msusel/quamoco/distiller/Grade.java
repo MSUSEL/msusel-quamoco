@@ -25,7 +25,6 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -54,12 +53,12 @@ public enum Grade {
     /**
      * The lower threshold value for this grade.
      */
-    private BigDecimal lower;
+    private double lower;
 
     /**
      * The upper threshold value for this grade.
      */
-    private BigDecimal upper;
+    private double upper;
 
     /**
      * Constructor
@@ -70,8 +69,8 @@ public enum Grade {
     Grade(final String name)
     {
         this.name = name;
-        lower = BigDecimal.ZERO;
-        upper = BigDecimal.ONE;
+        lower = 0.0;
+        upper = 1.0;
     }
 
     /**
@@ -83,13 +82,13 @@ public enum Grade {
      *         should be assigned a grader higher than this one, or <= -1 if the
      *         value should be assigned a lower grade than this one.
      */
-    public int evaluate(final BigDecimal val)
+    public int evaluate(final double val)
     {
-        if (val.compareTo(lower) > 0 && val.compareTo(upper) <= 0)
+        if (Double.compare(val, lower) > 0 && Double.compare(val, upper) <= 0)
         {
             return 0;
         }
-        else if (val.compareTo(lower) <= 0)
+        else if (Double.compare(val, lower) <= 0)
         {
             return -1;
         }
@@ -117,9 +116,9 @@ public enum Grade {
      * @throws GradeThresholdException
      *             if the lower threshold is greater than the upper threshold.
      */
-    public void setThresholds(final BigDecimal lower, final BigDecimal upper) throws GradeThresholdException
+    public void setThresholds(final double lower, final double upper) throws GradeThresholdException
     {
-        if (lower.compareTo(upper) > 0)
+        if (Double.compare(lower, upper) > 0)
         {
             throw new GradeThresholdException(
                     "In Grade " + name + ", the lower grade threshold cannot exceed the upper grade threshold.");
@@ -132,7 +131,7 @@ public enum Grade {
     /**
      * @return the lower threshold
      */
-    public BigDecimal getLowerThreshold()
+    public double getLowerThreshold()
     {
         return lower;
     }
@@ -140,7 +139,7 @@ public enum Grade {
     /**
      * @return the upper threshold
      */
-    public BigDecimal getUpperThreshold()
+    public double getUpperThreshold()
     {
         return upper;
     }

@@ -73,7 +73,7 @@ public class EdgeFactory {
         Node src = data.getFactor(source);
         Node dest = data.getFactor(target);
         if (src != null && dest != null)
-            return new FactorToFactorEdge(source.getName() + ":" + target.getName(), src, dest, source.getInfluenceOn(target));
+            return new FactorToFactorEdge(source.getFullName() + ":" + target.getFullName(), src, dest, source.getInfluenceOn(target));
         return null;
     }
 
@@ -83,11 +83,11 @@ public class EdgeFactory {
 
         if (src != null && dest != null) {
             if (source.getType() == MeasureType.FINDINGS) {
-                return new MeasureToFactorFindingsEdge(source.getName() + ":" + target.getName(),
-                        src, dest, InfluenceEffect.POSITIVE);
+                return new MeasureToFactorFindingsEdge(source.getFullName() + ":" + target.getFullName(),
+                        src, dest, InfluenceEffect.POSITIVE).setRank(1);
             } else {
-                return new MeasureToFactorNumberEdge(source.getName() + ":" + target.getName(),
-                        src, dest, InfluenceEffect.POSITIVE);
+                return new MeasureToFactorNumberEdge(source.getFullName() + ":" + target.getFullName(),
+                        src, dest, InfluenceEffect.POSITIVE).setRank(1);
             }
         }
 
@@ -101,15 +101,15 @@ public class EdgeFactory {
         if (src != null && dest != null) {
             if (source.getType().equals(MeasureType.FINDINGS) && target.getType().equals(MeasureType.FINDINGS))
             {
-                return new MeasureToMeasureFindingsEdge(source.getName() + ":" + target.getName(), src, dest);
+                return new MeasureToMeasureFindingsEdge(source.getFullName() + ":" + target.getFullName(), src, dest);
             }
             else if (source.getType().equals(MeasureType.NUMBER) && target.getType().equals(MeasureType.NUMBER))
             {
-                new MeasureToMeasureNumberEdge(source.getName() + ":" + target.getName(), src, dest);
+                new MeasureToMeasureNumberEdge(source.getFullName() + ":" + target.getFullName(), src, dest);
             }
             else
             {
-                new MeasureToMeasureFindingsNumberEdge(source.getName() + ":" + target.getName(), src, dest);
+                new MeasureToMeasureFindingsNumberEdge(source.getFullName() + ":" + target.getFullName(), src, dest);
             }
         }
 
@@ -120,12 +120,12 @@ public class EdgeFactory {
         Node src = data.getValue(source);
         if (src == null)
             src = data.getUnion(source);
-        System.out.println("Node: " + source.getName() + " Determines: " + source.getDetermines().getName());
+
         if (src != null) {
             if (src instanceof ValueNode) {
-                return new ValueToMeasureEdge(source.getName() + ":" + target.getName(), src, data.getMeasure(target));
+                return new ValueToMeasureEdge(source.getFullName() + ":" + target.getFullName(), src, data.getMeasure(target));
             } else {
-                return new FindingToMeasureEdge(source.getName() + ":" + target.getName(), src, data.getMeasure(target));
+                return new FindingToMeasureEdge(source.getFullName() + ":" + target.getFullName(), src, data.getMeasure(target));
             }
         }
         return null;

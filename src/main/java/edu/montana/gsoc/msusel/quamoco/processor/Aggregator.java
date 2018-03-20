@@ -28,7 +28,6 @@ package edu.montana.gsoc.msusel.quamoco.processor;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,9 +54,9 @@ public abstract class Aggregator extends Processor {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal process()
+    public double process()
     {
-        final List<BigDecimal> values = new ArrayList<>();
+        final List<Double> values = new ArrayList<>();
         for (final Edge n : owner.getGraph().inEdges(owner))
         {
             values.addAll(n.getValues());
@@ -74,5 +73,5 @@ public abstract class Aggregator extends Processor {
      *            Values to aggregate
      * @return The aggregate value
      */
-    protected abstract BigDecimal aggregate(List<BigDecimal> values);
+    protected abstract double aggregate(List<Double> values);
 }

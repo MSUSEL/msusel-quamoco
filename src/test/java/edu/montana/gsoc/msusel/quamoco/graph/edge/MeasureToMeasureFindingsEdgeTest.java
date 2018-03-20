@@ -39,7 +39,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 /**
@@ -69,7 +68,7 @@ public class MeasureToMeasureFindingsEdgeTest {
 
         // add additional test code here
         Assert.assertNotNull(result);
-        Assert.assertEquals(BigDecimal.ZERO, result.getValue());
+        Assert.assertEquals(0.0, result.getValue(), 0.001);
         Assert.assertEquals("edge", result.getName());
     }
 
@@ -98,10 +97,10 @@ public class MeasureToMeasureFindingsEdgeTest {
     @Test
     public void testGetValue_1() throws Exception
     {
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ZERO, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -150,17 +149,5 @@ public class MeasureToMeasureFindingsEdgeTest {
     public void tearDown() throws Exception
     {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(MeasureToMeasureFindingsEdgeTest.class);
     }
 }

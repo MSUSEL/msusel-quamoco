@@ -28,7 +28,6 @@ package edu.montana.gsoc.msusel.quamoco.processor.evaluators;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.processor.Evaluator;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -54,18 +53,18 @@ public class SingleMeasureEvaluator extends Evaluator {
      * {@inheritDoc}
      */
     @Override
-    protected BigDecimal evaluate(final List<BigDecimal> values)
+    protected double evaluate(final List<Double> values)
     {
-        BigDecimal total = BigDecimal.ZERO;
+        double total = 0.0;
 
         if (values == null || values.isEmpty())
         {
-            return BigDecimal.ZERO;
+            return 0.0;
         }
 
-        for (final BigDecimal x : values)
+        for (final double x : values)
         {
-            total = total.add(x);
+            total = total + x;
         }
 
         return total;

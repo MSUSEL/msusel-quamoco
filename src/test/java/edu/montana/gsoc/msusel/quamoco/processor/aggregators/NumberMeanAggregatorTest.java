@@ -36,7 +36,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -58,8 +57,7 @@ public class NumberMeanAggregatorTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testNumberMeanAggregator_1() throws Exception
-    {
+    public void testNumberMeanAggregator_1() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -81,14 +79,13 @@ public class NumberMeanAggregatorTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testAggregate_1() throws Exception
-    {
-        final List<BigDecimal> values = Lists.newArrayList();
+    public void testAggregate_1() throws Exception {
+        final List<Double> values = Lists.newArrayList();
 
-        final BigDecimal result = fixture.aggregate(values);
+        final double result = fixture.aggregate(values);
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -98,14 +95,13 @@ public class NumberMeanAggregatorTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testAggregate_2() throws Exception
-    {
-        final List<BigDecimal> values = null;
+    public void testAggregate_2() throws Exception {
+        final List<Double> values = null;
 
-        final BigDecimal result = fixture.aggregate(values);
+        final double result = fixture.aggregate(values);
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -115,17 +111,16 @@ public class NumberMeanAggregatorTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testAggregate_3() throws Exception
-    {
-        final List<BigDecimal> values = Lists.newArrayList();
-        values.add(new BigDecimal(10.0));
-        values.add(new BigDecimal(20.0));
-        values.add(new BigDecimal(3.0));
+    public void testAggregate_3() throws Exception {
+        final List<Double> values = Lists.newArrayList();
+        values.add(10.0);
+        values.add(20.0);
+        values.add(3.0);
 
-        final BigDecimal result = fixture.aggregate(values);
+        final double result = fixture.aggregate(values);
 
         // add additional test code here
-        Assert.assertEquals(11.0, result.doubleValue(), 0.001);
+        Assert.assertEquals(11.0, result, 0.001);
     }
 
     /**
@@ -136,8 +131,7 @@ public class NumberMeanAggregatorTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -156,20 +150,7 @@ public class NumberMeanAggregatorTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(NumberMeanAggregatorTest.class);
     }
 }

@@ -30,9 +30,6 @@ import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 /**
  * Edge connecting a MeasureNode to a FactorNode for the purpose of passing
  * and normalizing findings sets.
@@ -45,24 +42,20 @@ public class MeasureToFactorFindingsEdge extends WeightedRankedEdge implements I
     /**
      * Influence type
      */
-    @Getter @Setter
+    @Getter
+    @Setter
     private String inf;
 
     /**
      * Constructs a new MeasureToFactorFindingsEdge with the given name
      * connecting the source and dest nodes.
-     * 
-     * @param name
-     *            Name of this edge
-     * @param src
-     *            Source node
-     * @param dest
-     *            Dest node
-     * @param effect
-     *            Influence type of this edge
+     *
+     * @param name   Name of this edge
+     * @param src    Source node
+     * @param dest   Dest node
+     * @param effect Influence type of this edge
      */
-    public MeasureToFactorFindingsEdge(final String name, final Node src, final Node dest, final InfluenceEffect effect)
-    {
+    public MeasureToFactorFindingsEdge(final String name, final Node src, final Node dest, final InfluenceEffect effect) {
         super(name, src, dest);
         inf = effect == null ? InfluenceType.POS : effect.toString();
     }
@@ -71,28 +64,34 @@ public class MeasureToFactorFindingsEdge extends WeightedRankedEdge implements I
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getValue()
-    {
-        BigDecimal value = BigDecimal.ZERO;
+    public double getValue() {
+        double value = 0.0;
 
-        if (this.getRank().compareTo(value) == 0)
-            return value;
+        if (this.getRank() == 0 || Double.compare(this.getWeight(), 0.0) <= 0)
+            return 1.0;
 
-        value = norm.normalize(source.getFindings());
-
-        if (inf != null && inf.equals(InfluenceType.NEG))
-        {
-            value = (getMaxPoints().subtract(getMaxPoints().multiply(value)))
-                    .divide(getMaxPoints(), 15, RoundingMode.HALF_UP);
+        if (norm != null) {
+            value = norm.normalize(source.getFindings());
         }
 
-        if (usesLinearDist)
-        {
-            value = dist.calculate(value, getMaxPoints());
+        if (inf != null && inf.equals(InfluenceType.NEG)) {
+            value = (getMaxPoints() - (value * getMaxPoints())) / getMaxPoints();
         }
 
-        value = value.multiply(weight);
-        // value = thresholdValue(value);
+//        if (inf != null && inf.equals(InfluenceType.POS)) {
+//            //System.out.println("Value: " + value);
+//            if (Double.compare(0.0, value) <= 0)
+//                value = 1.0;
+//        }
+
+
+        if (usesLinearDist) {
+            value = dist.calculate(getMaxPoints(), value) / getMaxPoints();
+        }
+
+//        value = thresholdValue(value, lowerBound, upperBound);
+        value = value * weight;
+
 
         return value;
     }

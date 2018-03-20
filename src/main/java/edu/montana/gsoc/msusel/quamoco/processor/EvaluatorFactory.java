@@ -29,6 +29,7 @@ import edu.montana.gsoc.msusel.quamoco.graph.INode;
 import edu.montana.gsoc.msusel.quamoco.processor.evaluators.ManualEvaluator;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorMethod;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
+import edu.montana.gsoc.msusel.quamoco.processor.evaluators.MeanEvaluator;
 import edu.montana.gsoc.msusel.quamoco.processor.evaluators.SingleMeasureEvaluator;
 import edu.montana.gsoc.msusel.quamoco.processor.evaluators.WeightedSumEvaluator;
 
@@ -84,8 +85,8 @@ public class EvaluatorFactory extends ProcessorFactory {
             switch (factorNode.getMethod()) {
                 case FactorMethod.ONE:
                     return new SingleMeasureEvaluator(factorNode);
-                case FactorMethod.RANKING:
-                    return new WeightedSumEvaluator(factorNode);
+                case FactorMethod.MEAN:
+                    return new MeanEvaluator(factorNode);
                 case FactorMethod.MANUAL:
                     return new ManualEvaluator(factorNode);
                 default:

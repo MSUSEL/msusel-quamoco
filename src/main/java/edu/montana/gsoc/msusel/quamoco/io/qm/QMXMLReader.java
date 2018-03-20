@@ -43,6 +43,7 @@ import edu.montana.gsoc.msusel.quamoco.model.func.Function;
 import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
 import edu.montana.gsoc.msusel.quamoco.model.measurement.FactorRanking;
 import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
+import edu.montana.gsoc.msusel.quamoco.model.measurement.ToolBasedInstrument;
 import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -207,8 +208,14 @@ public class QMXMLReader extends AbstractQuamocoReader {
         map.put("taggedBy", (n) -> model.addTaggedBy(manager.findTag(((Element) n).getAttribute("href"))));
 
         processNodes(doc, map);
+    }
 
-        map.clear();
+    public void thirdPass(String file) throws ParserConfigurationException, SAXException, IOException {
+        Document doc = getDocument(file);
+        handleRoot(doc, (qm) -> updateQualityModel((Element) qm));
+
+        Map<String, NodeHandler> map = Maps.newHashMap();
+
         map.put("measurementMethods", (n) -> createMeasurementMethod((Element) n));
         map.put("evaluations", (n) -> createEvaluation((Element) n));
 
@@ -363,20 +370,18 @@ public class QMXMLReader extends AbstractQuamocoReader {
         handleTaggedBy(meas, e, map);
         handleAnnotation(meas, map);
 
-        map.put("measures", (n) -> meas.addMeasures(manager.findFactor(((Element) n).getAttribute("parent"))));
-        e.getElementsByTagName("measures"); // can be multiple -> Factors has
-        // parent attribute or tag
-        if (e.hasAttribute("refines")) {
-            meas.setRefines(manager.findMeasure(e.getAttribute("refines")));
-        } else {
-            map.put("refines", (n) -> {
-                Element ele = (Element) n;
-                if (ele.hasAttribute("parent"))
-                    meas.setRefines(manager.findMeasure(ele.getAttribute("parent")));
-                else
-                    meas.setRefines(manager.findMeasure(getSingleHref(ele, "refines")));
-            });
+        if (e.hasAttribute("measures")) {
+            meas.addMeasures(manager.findFactor(e.getAttribute("measures")));
         }
+        map.put("measures", (n) -> meas.addMeasures(manager.findFactor(((Element) n).getAttribute("parent")))); // can be multiple -> Factors has
+        map.put("refines", (n) -> meas.setRefines(manager.findMeasure(((Element) n).getAttribute("parent"))));
+
+        // parent attribute or tag
+        if (e.hasAttribute("parent"))
+            meas.setRefines(manager.findMeasure(e.getAttribute("parent")));
+        else if (e.hasAttribute("refines"))
+            meas.setRefines(manager.findMeasure(e.getAttribute("refines")));
+
         if (e.hasAttribute("characterizes"))
             meas.setCharacterizes(manager.findEntity(e.getAttribute("characterizes")));
         else {
@@ -436,7 +441,8 @@ public class QMXMLReader extends AbstractQuamocoReader {
      * @param e
      */
     private void createMeasurementMethod(Element e) {
-        MeasurementMethod method = MeasurementMethodFactory.instance().create(e, manager);
+        Measure determines = manager.findMeasure(e.hasAttribute("determines") ? e.getAttribute("determines") : getSingleHref(e, "determines"));
+        MeasurementMethod method = MeasurementMethodFactory.instance().create(e, manager, determines);
         model.addMeasurementMethod(method);
         method.setModelName(model.getName());
 
@@ -444,6 +450,10 @@ public class QMXMLReader extends AbstractQuamocoReader {
 
         handleOriginatesFrom(method, e, map);
         handleTaggedBy(method, e, map);
+
+        if (method instanceof ToolBasedInstrument) {
+            ((ToolBasedInstrument) method).setTool(manager.findTool(e.hasAttribute("tool") ? e.getAttribute("tool") : getSingleHref(e, "tool")));
+        }
 
         for (Entry<String, NodeHandler> set : map.entrySet()) {
             NodeList nodes = e.getElementsByTagName(set.getKey());
@@ -459,7 +469,7 @@ public class QMXMLReader extends AbstractQuamocoReader {
 
         Map<String, NodeHandler> map = Maps.newHashMap();
 
-        eval.setEvaluates(manager.findFactor(e.getAttribute("evaluates")));
+        eval.setEvaluates(manager.findFactor(e.hasAttribute("evaluates") ? e.getAttribute("evaluates") : getSingleHref(e, "evaluates")));
 
         handleOriginatesFrom(eval, e, map);
         handleTaggedBy(eval, e, map);
@@ -486,7 +496,10 @@ public class QMXMLReader extends AbstractQuamocoReader {
     private Ranking createRanking(Element r, Evaluation eval) {
         final Ranking rank;
 
-        if (r.hasAttribute("measure")) {
+        if (!r.hasAttribute("weight") || !r.hasAttribute("rank"))
+            return null;
+
+        if (r.hasAttribute("measure") || r.getElementsByTagName("measure").getLength() > 0) {
             rank = MeasureRanking.builder()
                     .identifier(r.getAttribute("xmi:id"))
                     .rank(r.hasAttribute("rank") ? Integer.parseInt(r.getAttribute("rank")) : 0)
@@ -510,7 +523,7 @@ public class QMXMLReader extends AbstractQuamocoReader {
                 NodeList nodes = r.getElementsByTagName(set.getKey());
                 handleNode(nodes, set.getValue());
             }
-        } else {
+        } else if (r.hasAttribute("factor") || r.getElementsByTagName("factor").getLength() > 0) {
             Factor factor = manager.findFactor(r.hasAttribute("factor") ? r.getAttribute("factor") : getSingleHref(r, "factor"));
             rank = FactorRanking.builder()
                     .identifier(r.getAttribute("xmi:id"))
@@ -519,6 +532,8 @@ public class QMXMLReader extends AbstractQuamocoReader {
                     .weight(r.hasAttribute("weight") ? Double.parseDouble(r.getAttribute("weight")) : 0.0)
                     .influence(factor.getInfluenceOn(eval.getEvaluates()))
                     .create();
+        } else {
+            rank = null;
         }
 
         return rank;
@@ -540,7 +555,6 @@ public class QMXMLReader extends AbstractQuamocoReader {
                 value = ((Element) n).getAttribute("href");
             }
         }
-
         return value;
     }
 

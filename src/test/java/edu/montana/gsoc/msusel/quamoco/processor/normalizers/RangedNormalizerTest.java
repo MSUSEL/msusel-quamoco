@@ -51,7 +51,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 /**
@@ -102,24 +101,24 @@ public class RangedNormalizerTest {
         findings.add(f1);
         findings.add(f2);
 
-        BigDecimal result = fixture.normalize(findings);
+        double result = fixture.normalize(findings);
         double exp = 0.66667;
-        double res = result.doubleValue();
+        double res = result;
         Assert.assertEquals(exp, res, 0.00001);
     }
 
     @Test
     public void testNormalize_Set_Finding_2() throws Exception {
-        BigDecimal result = fixture.normalize((Set<Finding>) null);
+        double result = fixture.normalize((Set<Finding>) null);
 
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     @Test
     public void testNormalize_Set_Finding_3() throws Exception {
-        BigDecimal result = fixture.normalize(Sets.newHashSet());
+        double result = fixture.normalize(Sets.newHashSet());
 
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     public void testNormalize_Set_Finding_4() throws Exception {
@@ -129,8 +128,8 @@ public class RangedNormalizerTest {
         findings.add(f1);
         findings.add(f2);
 
-        BigDecimal result = fixture.normalize(findings);
-        Assert.assertEquals(BigDecimal.ONE, result);
+        double result = fixture.normalize(findings);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -150,7 +149,7 @@ public class RangedNormalizerTest {
                 .build();
 
         final ValueNode vn = new ValueNode(graph, "LOC", "owner", "tool");
-        vn.addValue(new BigDecimal(100));
+        vn.addValue(100.0);
 
         final MeasureNode src = new MeasureNode(graph, "src", "owner");
         src.setProcessor(new NumberMeanAggregator(src));
@@ -217,16 +216,5 @@ public class RangedNormalizerTest {
     @After
     public void tearDown() throws Exception {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    public static void main(final String[] args) {
-        new org.junit.runner.JUnitCore().run(RangedNormalizerTest.class);
     }
 }

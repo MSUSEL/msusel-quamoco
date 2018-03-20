@@ -31,7 +31,6 @@ import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 /**
@@ -71,13 +70,13 @@ public abstract class Normalizer {
      * @throws IllegalArgumentException if the given owning edge is null, the name name is null or
      *                                  empty, or the range is null
      */
-    public Normalizer(final Edge owner, final String normMetric, final NormalizationRange range) {
+    public Normalizer(final Edge owner, final String normMetric, NormalizationRange range) {
         if (owner == null) {
             throw new IllegalArgumentException("Normalizer owner cannot be null.");
         }
 
         if (range == null) {
-            throw new IllegalArgumentException("Normalization Range cannot be null");
+            range = NormalizationRange.NA;
         }
 
         this.owner = owner;
@@ -92,5 +91,5 @@ public abstract class Normalizer {
      * @return normalized value for the findings set, representing the
      * proportion of the system affected by the given findings set.
      */
-    public abstract BigDecimal normalize(Set<Finding> findings);
+    public abstract double normalize(Set<Finding> findings);
 }

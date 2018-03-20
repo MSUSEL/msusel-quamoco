@@ -26,10 +26,8 @@
 package edu.montana.gsoc.msusel.quamoco.processor;
 
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import edu.montana.gsoc.msusel.quamoco.graph.edge.RankedEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,34 +51,34 @@ public abstract class Evaluator extends Processor {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal process()
+    public double process()
     {
-        final List<BigDecimal> values = new ArrayList<>();
+        final List<Double> values = new ArrayList<>();
 
         for (final Edge edge : owner.getGraph().inEdges(owner))
         {
-            if (edge instanceof RankedEdge)
-            {
-                if (((RankedEdge) edge).getRank().compareTo(BigDecimal.ZERO) <= 0)
-                    continue;
-            }
+//            if (edge instanceof RankedEdge)
+//            {
+//                if (Double.compare(((RankedEdge) edge).getRank(), 0.0) <= 0)
+//                    continue;
+//            }
             values.addAll(edge.getValues());
         }
 
-        return thresholdValue(evaluate(values));
+        return evaluate(values);
     }
 
     /**
      * @param value
      * @return
      */
-    private BigDecimal thresholdValue(BigDecimal value)
+    private double thresholdValue(double value)
     {
-        if (value.compareTo(BigDecimal.ZERO) < 0)
-            return BigDecimal.ZERO;
+        if (Double.compare(value, 0.0) < 0)
+            return 0.0;
 
-        if (value.compareTo(BigDecimal.ONE) > 0)
-            return BigDecimal.ONE;
+        if (Double.compare(value, 1.0) > 0)
+            return 1.0;
 
         return value;
     }
@@ -89,5 +87,5 @@ public abstract class Evaluator extends Processor {
      * @param valueMap
      * @return
      */
-    protected abstract BigDecimal evaluate(List<BigDecimal> valueMap);
+    protected abstract double evaluate(List<Double> valueMap);
 }

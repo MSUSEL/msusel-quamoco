@@ -23,52 +23,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package edu.montana.gsoc.msusel.quamoco.io;
+package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import static org.junit.Assert.*;
-
+import com.google.common.graph.MutableNetwork;
+import com.google.common.graph.NetworkBuilder;
+import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
+import edu.montana.gsoc.msusel.quamoco.graph.edge.FactorToFactorEdge;
+import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
+import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * @author Isaac Griffith
- *
- */
-public class EvaluationFactoryTest {
+public class WeightUpdaterTest {
 
-    /**
-     * @throws java.lang.Exception
-     */
+    MutableNetwork<Node, Edge> graph;
+    FactorNode root;
+
+    @Test
+    public void test() {
+        WeightUpdater wu = new WeightUpdater();
+        wu.updateWeights(graph);
+    }
+
     @Before
     public void setUp() throws Exception
     {
+        graph = NetworkBuilder.directed().allowsSelfLoops(false).build();
+
+        root = new FactorNode("root", "root");
+        FactorNode f1 = new FactorNode("f1", "f1");
+        FactorNode f2 = new FactorNode("f2", "f2");
+        FactorNode f3 = new FactorNode("f3", "f3");
+
+        graph.addEdge(f1, root, new FactorToFactorEdge("ffe1", f1, root, InfluenceEffect.POSITIVE).setRank(1));
+        graph.addEdge(f2, root, new FactorToFactorEdge("ffe2", f2, root, InfluenceEffect.POSITIVE).setRank(2));
+        graph.addEdge(f3, root, new FactorToFactorEdge("ffe3", f3, root, InfluenceEffect.POSITIVE).setRank(3));
     }
 
-    /**
-     * @throws java.lang.Exception
-     */
     @After
     public void tearDown() throws Exception
     {
+        // TODO: add additional tear down code here
     }
-
-    /**
-     * Test method for {@link com.sparqline.quamoco.io.EvaluationFactory#instance()}.
-     */
-    @Test
-    public final void testInstance()
-    {
-        fail("Not yet implemented"); // TODO
-    }
-
-    /**
-     * Test method for {@link com.sparqline.quamoco.io.EvaluationFactory#create(org.w3c.dom.Element)}.
-     */
-    @Test
-    public final void testCreateElement()
-    {
-        fail("Not yet implemented"); // TODO
-    }
-
 }

@@ -76,7 +76,7 @@ public class WeightedSumMultiMeasureEvaluation extends MultiMeasureEvaluation {
     }
 
     public void addRanking(MeasureRanking rank) {
-        if (rank == null || rankings.contains(rank))
+        if (rank == null || rankings.contains(rank) || rank.getRank() <= 0)
             return;
 
         rankings.add(rank);

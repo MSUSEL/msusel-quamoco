@@ -35,7 +35,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 /**
@@ -44,7 +43,7 @@ import java.util.Set;
  *
  * @generatedBy CodePro at 1/26/16 6:38 PM
  * @author fate
- * @version $Revision: BigDecimal.ONE $
+ * @version $Revision: 1.0 $
  */
 public class FindingNodeTest {
 
@@ -78,7 +77,7 @@ public class FindingNodeTest {
         Assert.assertEquals("rule", result.getRuleName());
         Assert.assertEquals(null, result.getXMLTag());
         Assert.assertEquals("tool", result.getToolName());
-        Assert.assertEquals(BigDecimal.ZERO, result.getValue());
+        Assert.assertEquals(0.0, result.getValue(), 0.001);
         Assert.assertEquals("owner", result.getOwnedBy());
         Assert.assertEquals("", result.getDescription());
         Assert.assertEquals(null, result.getProcessor());
@@ -130,9 +129,9 @@ public class FindingNodeTest {
     @Test
     public void testGetLowerResult_1() throws Exception
     {
-        final BigDecimal result = fixture.getLowerResult();
+        final double result = fixture.getLowerResult();
 
-        Assert.assertEquals(BigDecimal.ZERO, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -174,9 +173,9 @@ public class FindingNodeTest {
     @Test
     public void testGetUpperResult_1() throws Exception
     {
-        final BigDecimal result = fixture.getUpperResult();
+        final double result = fixture.getUpperResult();
 
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -188,10 +187,10 @@ public class FindingNodeTest {
     @Test
     public void testGetValue_1() throws Exception
     {
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ZERO, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -242,17 +241,5 @@ public class FindingNodeTest {
     public void tearDown() throws Exception
     {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(FindingNodeTest.class);
     }
 }

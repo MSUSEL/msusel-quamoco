@@ -25,8 +25,6 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
-import java.math.BigDecimal;
-
 /**
  * Typing interface indicating that the edge has a weight associated with its
  * value.
@@ -39,5 +37,5 @@ public interface WeightedEdge {
     /**
      * @return The weight associated with this edge.
      */
-    BigDecimal getWeight();
+    double getWeight();
 }

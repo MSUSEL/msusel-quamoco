@@ -46,6 +46,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+
 /**
  * The class <code>EdgePopulatorTest</code> contains tests for the class
  * <code>{@link EdgePopulator}</code>.
@@ -68,7 +71,7 @@ public class EdgePopulatorTest {
         final EdgePopulator result = new EdgePopulator();
 
         // TODO: add additional test code here
-        Assert.assertNotNull(result);
+        assertNotNull(result);
     }
 
     /**
@@ -131,6 +134,16 @@ public class EdgePopulatorTest {
 
         nodepop.modifyGraph(data, graph);
         fixture.modifyGraph(data, graph);
+
+        Node fn1 = data.getFactor(f1);
+        assertNotNull(fn1);
+        Node fn2 = data.getFactor(f2);
+        assertNotNull(fn2);
+        assertFalse(graph.edgesConnecting(fn1, fn2).isEmpty());
+
+        Node mn1 = data.getMeasure(m1);
+        assertNotNull(mn1);
+        assertFalse(graph.edgesConnecting(mn1, fn1).isEmpty());
 
         Assert.assertEquals(3, graph.nodes().size());
         Assert.assertEquals(2, graph.edges().size());

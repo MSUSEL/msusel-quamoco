@@ -25,7 +25,6 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.INode;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
@@ -53,18 +52,6 @@ public class ProcessorPopulator implements GraphModifier {
      */
     @Override
     public void modifyGraph(final DistillerData data, final MutableNetwork<Node, Edge> graph)
-    {
-        assignProcessors(graph);
-    }
-
-    /**
-     * Create and assign Value for any remaining Factor and Measure Nodes
-     *
-     * @param graph
-     *            Graph in which the nodes exist
-     */
-    @VisibleForTesting
-    void assignProcessors(final MutableNetwork<Node, Edge> graph)
     {
         for (final INode n : graph.nodes())
         {

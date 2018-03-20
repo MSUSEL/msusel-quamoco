@@ -31,9 +31,9 @@ import com.google.common.graph.Network;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.WeightedRankedEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
+import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -60,9 +60,13 @@ public class WeightUpdater {
      */
     public void updateWeights(Network<Node, Edge> graph)
     {
-        List<FactorNode> factors = getFactors(graph);
+        List<Node> nodes = getFactors(graph);
 
-        factors.forEach((factor) -> updateWeights(factor, graph));
+        nodes.forEach((factor) -> updateWeights(factor, graph));
+
+        nodes = getMeasures(graph);
+
+        nodes.forEach((measure) -> updateWeights(measure, graph));
     }
 
     /**
@@ -74,32 +78,62 @@ public class WeightUpdater {
      *            Distilled quality model processing graph
      */
     @VisibleForTesting
-    void updateWeights(FactorNode factor, Network<Node, Edge> graph)
+    void updateWeights(Node factor, Network<Node, Edge> graph)
     {
         List<WeightedRankedEdge> edges = getWeightedEdges(factor, graph);
 
-        BigDecimal highestRanking = BigDecimal.ZERO;
+        int highestRanking = 0;
         int numRankings = 0;
 
         for (WeightedRankedEdge edge : edges)
         {
-            if (edge.getRank().compareTo(BigDecimal.ZERO) > 0)
+            if (edge.getRank() > 0)
                 numRankings += 1;
-            if (edge.getRank().compareTo(highestRanking) > 0)
+            if (edge.getRank() > highestRanking)
                 highestRanking = edge.getRank();
         }
 
-        BigDecimal[] weights = new BigDecimal[edges.size()];
+        double[] weights = new double[numRankings + 1];
         for (int i = 1; i <= numRankings; i++)
         {
             double weight = 0.0;
             for (int j = i; j <= numRankings; j++)
             {
-                weight = weight + (1 / j);
+                weight += (1.0 / j);
             }
-            weights[i] = new BigDecimal(weight / numRankings);
+            weights[i] = weight / numRankings;
         }
 
+        int weightIndex = 1;
+        for (int i = 1; i <= highestRanking; i++) {
+            double weight = 0.0;
+            int usagesOfRanking = 0;
+            for (WeightedRankedEdge edge : edges) {
+                if (edge.getRank() == i)
+                    usagesOfRanking += 1;
+            }
+
+            if (usagesOfRanking > 0) {
+                for (int j = 1; j <= usagesOfRanking; j++) {
+                    weight += weights[weightIndex];
+                    weightIndex += 1;
+                }
+                weight /= (double) usagesOfRanking;
+
+                for (WeightedRankedEdge edge : edges) {
+                    if (edge.getRank() == i) {
+                        edge.setWeight(weight);
+                    }
+                }
+            }
+        }
+
+        for (WeightedRankedEdge edge : edges) {
+            if (edge.getRank() == 0) {
+                edge.setWeight(0.0);
+                edge.setMaxPoints(100.0);
+            }
+        }
     }
 
     /**
@@ -113,16 +147,16 @@ public class WeightUpdater {
      * @return List of incoming weighted ranked edges of the given factor node
      */
     @VisibleForTesting
-    List<WeightedRankedEdge> getWeightedEdges(FactorNode factor, Network<Node, Edge> graph)
+    List<WeightedRankedEdge> getWeightedEdges(Node factor, Network<Node, Edge> graph)
     {
-        List<WeightedRankedEdge> edges = Lists.newLinkedList();
+        List<WeightedRankedEdge> edges = Lists.newArrayList();
 
-        graph.inEdges(factor).forEach((edge) -> {
+        for (Edge edge : graph.inEdges(factor)) {
             if (edge instanceof WeightedRankedEdge)
             {
                 edges.add((WeightedRankedEdge) edge);
             }
-        });
+        }
 
         return edges;
     }
@@ -136,16 +170,27 @@ public class WeightUpdater {
      * @return List of factor nodes contained within the graph
      */
     @VisibleForTesting
-    List<FactorNode> getFactors(Network<Node, Edge> graph)
+    List<Node> getFactors(Network<Node, Edge> graph)
     {
-        List<FactorNode> factors = Lists.newLinkedList();
-        graph.nodes().forEach((node) -> {
+        List<Node> factors = Lists.newArrayList();
+        for(Node node : graph.nodes()) {
             if (node instanceof FactorNode)
             {
-                factors.add((FactorNode) node);
+                factors.add(node);
             }
-        });
+        }
 
         return factors;
+    }
+
+    List<Node> getMeasures(Network<Node, Edge> graph) {
+        List<Node> measures = Lists.newArrayList();
+        for (Node node : graph.nodes()) {
+            if (node instanceof MeasureNode) {
+                measures.add(node);
+            }
+        }
+
+        return measures;
     }
 }

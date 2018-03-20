@@ -51,7 +51,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 /**
@@ -101,24 +100,24 @@ public class UnrangedNormalizerTest {
         findings.add(f1);
         findings.add(f2);
 
-        BigDecimal result = fixture.normalize(findings);
-        double res = result.doubleValue();
+        double result = fixture.normalize(findings);
+        double res = result;
         double exp = 0.4;
         Assert.assertEquals(exp, res, 0.001);
     }
 
     @Test
     public void testNormalize_Set_Finding_2() throws Exception {
-        BigDecimal result = fixture.normalize((Set<Finding>) null);
+        double result = fixture.normalize((Set<Finding>) null);
 
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     @Test
     public void testNormalize_Set_Finding_3() throws Exception {
-        BigDecimal result = fixture.normalize(Sets.newHashSet());
+        double result = fixture.normalize(Sets.newHashSet());
 
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     @Test
@@ -129,9 +128,9 @@ public class UnrangedNormalizerTest {
         findings.add(f1);
         findings.add(f2);
 
-        BigDecimal result = fixture.normalize(findings);
+        double result = fixture.normalize(findings);
         double exp = 0.4;
-        double res = result.doubleValue();
+        double res = result;
         Assert.assertEquals(exp, res, 0.001);
     }
 
@@ -143,6 +142,7 @@ public class UnrangedNormalizerTest {
      */
     @Before
     public void setUp() throws Exception {
+        MeasuresTable.getInstance().clean();
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -151,7 +151,7 @@ public class UnrangedNormalizerTest {
                 .build();
 
         final ValueNode vn = new ValueNode(graph, "LOC", "owner", "tool");
-        vn.addValue(new BigDecimal(100.0));
+        vn.addValue(100.0);
 
         final MeasureNode src = new MeasureNode(graph, "src", "owner");
         src.setProcessor(new NumberMeanAggregator(src));
@@ -178,7 +178,7 @@ public class UnrangedNormalizerTest {
 
         MethodNode method = MethodNode.builder().key("namespace.Type#method").start(20).end(100).create();
         MeasuresTable.getInstance().store(Measurement.of("LOC").on(method).withValue(80.0));
-        //type.addChild(method);
+        type.addChild(method);
 
         file2 = FileNode.builder().key("path2").create();
 
@@ -203,15 +203,5 @@ public class UnrangedNormalizerTest {
     @After
     public void tearDown() throws Exception {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:34 PM
-     */
-    public static void main(final String[] args) {
-        new org.junit.runner.JUnitCore().run(UnrangedNormalizerTest.class);
     }
 }

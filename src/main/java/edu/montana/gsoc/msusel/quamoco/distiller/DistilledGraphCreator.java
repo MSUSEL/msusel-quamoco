@@ -50,7 +50,7 @@ public class DistilledGraphCreator {
     public MutableNetwork<Node, Edge> buildGraph(ModelManager manager)
     {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
-                .allowsParallelEdges(true)
+                .allowsParallelEdges(false)
                 .allowsSelfLoops(false)
                 .expectedNodeCount(10000)
                 .expectedEdgeCount(10000)
@@ -65,6 +65,9 @@ public class DistilledGraphCreator {
         edgePop.modifyGraph(data, graph);
         processPop.modifyGraph(data, graph);
         normPop.modifyGraph(data, graph);
+
+        WeightUpdater updater = new WeightUpdater();
+        updater.updateWeights(graph);
 
         return graph;
     }

@@ -54,8 +54,6 @@ import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
 /**
  * Abstract base edge type for edges which have both a weight and a rank.
  *
@@ -68,17 +66,17 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      * Weight applied to the input value
      */
     @Getter
-    protected BigDecimal weight;
+    protected double weight;
     /**
      * Lower bound on proportion (0.0 to 1.0)
      */
     @Getter
-    protected BigDecimal lowerBound;
+    protected double lowerBound;
     /**
      * Upper bound on proportion (0.0 to 1.0)
      */
     @Getter
-    protected BigDecimal upperBound;
+    protected double upperBound;
     /**
      * Flag indicating that a linear distribution should be applied to the
      * value.
@@ -95,12 +93,12 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      * Maximum points
      */
     @Getter
-    protected BigDecimal maxPoints;
+    protected double maxPoints;
     /**
      * Rank of the source in the evaluation of the dest
      */
     @Getter
-    private BigDecimal rank;
+    private int rank;
     /**
      * Flag indicating that the rank has been set
      */
@@ -124,19 +122,19 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      */
     WeightedRankedEdge(final String name, final Node src, final Node dest) {
         super(name, src, dest);
-        weight = BigDecimal.ONE;
-        lowerBound = BigDecimal.ZERO;
-        upperBound = BigDecimal.ONE;
-        maxPoints = new BigDecimal(100);
-        rank = BigDecimal.ZERO;
+        weight = 1.0;
+        lowerBound = 0.0;
+        upperBound = 1.0;
+        maxPoints = 100.0;
+        rank = 1;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setLowerBound(final BigDecimal lowerBound) {
-        if (upperBound.compareTo(lowerBound) < 0) {
+    public void setLowerBound(final double lowerBound) {
+        if (Double.compare(upperBound, lowerBound) < 0) {
             throw new IllegalArgumentException(
                     "Value of upper bound: " + upperBound + " cannot be less than value of lower bound: " + lowerBound);
         }
@@ -148,8 +146,8 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      * {@inheritDoc}
      */
     @Override
-    public void setUpperBound(final BigDecimal upperBound) {
-        if (upperBound.compareTo(lowerBound) < 0) {
+    public void setUpperBound(final double upperBound) {
+        if (Double.compare(upperBound, lowerBound) < 0) {
             throw new IllegalArgumentException(
                     "Value of upper bound: " + upperBound + " cannot be less than value of lower bound: " + lowerBound);
         }
@@ -161,11 +159,11 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      * {@inheritDoc}
      */
     @Override
-    public void setWeight(final BigDecimal weight) {
-        if (weight.compareTo(BigDecimal.ZERO) < 0) {
+    public void setWeight(final double weight) {
+        if (Double.compare(weight, 0.0) < 0) {
             throw new IllegalArgumentException("Value of weight cannot be less than 0.0.");
         }
-        if (weight.compareTo(BigDecimal.ONE) > 0) {
+        if (Double.compare(weight, 1.0) > 0) {
             throw new IllegalArgumentException("Value of weight cannot be greater than 1.0.");
         }
 
@@ -201,8 +199,8 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      * {@inheritDoc}
      */
     @Override
-    public void setMaxPoints(final BigDecimal maxPoints) {
-        if (maxPoints.compareTo(BigDecimal.ZERO) < 0) {
+    public void setMaxPoints(final double maxPoints) {
+        if (Double.compare(maxPoints, 0.0) < 0) {
             throw new IllegalArgumentException("Value of maximum points cannot be less than 0");
         }
 
@@ -221,16 +219,10 @@ public abstract class WeightedRankedEdge extends AbstractEdge implements Weighte
      * {@inheritDoc}
      */
     @Override
-    public void setRank(BigDecimal rank) {
-        if (rank == null)
-            return;
-
-        if (rankSet) {
-            System.out.println("Trying to set the rank twice");
-            return;
-        }
-
+    public Edge setRank(int rank) {
         this.rank = rank;
         rankSet = true;
+
+        return this;
     }
 }

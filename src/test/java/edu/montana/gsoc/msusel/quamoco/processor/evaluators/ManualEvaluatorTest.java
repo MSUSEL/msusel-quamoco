@@ -36,7 +36,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -58,8 +57,7 @@ public class ManualEvaluatorTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testManualEvaluator_1() throws Exception
-    {
+    public void testManualEvaluator_1() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -81,13 +79,12 @@ public class ManualEvaluatorTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testEvaluate_1() throws Exception
-    {
-        final List<BigDecimal> values = Lists.newArrayList();
-        final BigDecimal result = fixture.evaluate(values);
+    public void testEvaluate_1() throws Exception {
+        final List<Double> values = Lists.newArrayList();
+        final double result = fixture.evaluate(values);
         // add mock object expectations here
 
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(0.00, result, 0.001);
     }
 
     /**
@@ -98,8 +95,7 @@ public class ManualEvaluatorTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -117,20 +113,7 @@ public class ManualEvaluatorTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(ManualEvaluatorTest.class);
     }
 }

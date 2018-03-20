@@ -32,7 +32,6 @@ import edu.montana.gsoc.msusel.codetree.utils.CodeTreeUtils;
 import edu.montana.gsoc.msusel.metrics.MeasuresTable;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 
 /**
@@ -80,11 +79,11 @@ public abstract class AbstractNodeExtentDecorator extends AbstractNode {
 
     public abstract NormalizationRange findRange(String metric);
 
-    public abstract BigDecimal findFileExtent(String metric);
+    public abstract double findFileExtent(String metric);
 
-    public abstract BigDecimal findMethodExtent(String metric);
+    public abstract double findMethodExtent(String metric);
 
-    public abstract BigDecimal findClassExtent(String metric);
+    public abstract double findClassExtent(String metric);
 
     /**
      * Sums the values of the given name across the given collection of nodes.
@@ -99,14 +98,14 @@ public abstract class AbstractNodeExtentDecorator extends AbstractNode {
      *             stored in any of the nodes
      */
     @VisibleForTesting
-    BigDecimal sumMetrics(final String metric, Collection<? extends AbstractNode> nodes) {
+    double sumMetrics(final String metric, Collection<? extends AbstractNode> nodes) {
         if (metric == null || metric.isEmpty())
             throw new IllegalArgumentException("Metric name cannot be null or empty");
 
-        BigDecimal value = BigDecimal.ZERO;
+        double value = 0.0;
 
         for (AbstractNode node : nodes) {
-            value = value.add(new BigDecimal((double) MeasuresTable.getInstance().retrieve(node, metric)));
+            value = value + (Double) MeasuresTable.getInstance().retrieve(node, metric);
         }
 
         return value;

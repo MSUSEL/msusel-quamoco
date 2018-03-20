@@ -33,8 +33,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -121,8 +119,8 @@ public class NormalizationNodeTest {
     {
         final NormalizationNode fixture = new NormalizationNode(null, "norm", "norm");
 
-        final BigDecimal result = fixture.getValue();
-        assertEquals(BigDecimal.ZERO, result);
+        final double result = fixture.getValue();
+        assertEquals(0.0, result, 0.001);
     }
 
     /**

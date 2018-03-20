@@ -43,6 +43,9 @@ import lombok.ToString;
 @ToString
 public class Finding {
 
+    static long idnum = 0;
+
+    private long identifier;
     /**
      * Location in the CodeTree where the Finding was found
      */
@@ -72,6 +75,7 @@ public class Finding {
             throw new IllegalArgumentException();
         }
 
+        this.identifier = ++idnum;
         this.location = location;
         this.issueKey = issueKey;
         this.issueName = issueName;

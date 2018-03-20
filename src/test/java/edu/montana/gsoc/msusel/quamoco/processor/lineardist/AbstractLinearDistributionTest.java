@@ -30,8 +30,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 /**
  * The class <code>AbstractLinearDistributionTest</code> contains tests for the
  * class <code>{@link AbstractLinearDistribution}</code>.
@@ -55,16 +53,16 @@ public class AbstractLinearDistributionTest {
     @Test
     public void testCalculate_1() throws Exception
     {
-        final BigDecimal proportion = new BigDecimal(0.5);
-        final BigDecimal lowerBound = BigDecimal.ZERO;
-        final BigDecimal lowerResult = BigDecimal.ZERO;
-        final BigDecimal upperBound = BigDecimal.ONE;
-        final BigDecimal upperResult = new BigDecimal(100.0);
+        final double proportion = 0.5;
+        final double lowerBound = 0.0;
+        final double lowerResult = 0.0;
+        final double upperBound = 100.0;
+        final double upperResult = 1.0;
 
-        final BigDecimal result = fixture.calculate(proportion, lowerBound, lowerResult, upperBound, upperResult);
+        final double result = fixture.calculate(proportion, lowerBound, lowerResult, upperBound, upperResult);
 
         // add additional test code here
-        Assert.assertEquals(50.0, result.doubleValue(), 0.001);
+        Assert.assertEquals(50.0, result, 0.001);
     }
 
     /**
@@ -78,16 +76,16 @@ public class AbstractLinearDistributionTest {
     @Test
     public void testCalculate_2() throws Exception
     {
-        final BigDecimal proportion = new BigDecimal(1.5);
-        final BigDecimal lowerBound = BigDecimal.ZERO;
-        final BigDecimal lowerResult = BigDecimal.ZERO;
-        final BigDecimal upperBound = BigDecimal.ONE;
-        final BigDecimal upperResult = new BigDecimal(100.0);
+        final double proportion = 1.5;
+        final double lowerBound = 0.0;
+        final double lowerResult = 0.0;
+        final double upperBound = 100.0;
+        final double upperResult = 1.0;
 
-        final BigDecimal result = fixture.calculate(proportion, lowerBound, lowerResult, upperBound, upperResult);
+        final double result = fixture.calculate(proportion, lowerBound, lowerResult, upperBound, upperResult);
 
         // add additional test code here
-        Assert.assertEquals(new BigDecimal(100.0), result);
+        Assert.assertEquals(100.0, result, 0.001);
     }
 
     /**
@@ -101,16 +99,16 @@ public class AbstractLinearDistributionTest {
     @Test
     public void testCalculate_3() throws Exception
     {
-        final BigDecimal proportion = new BigDecimal(-0.5);
-        final BigDecimal lowerBound = BigDecimal.ZERO;
-        final BigDecimal lowerResult = BigDecimal.ZERO;
-        final BigDecimal upperBound = BigDecimal.ONE;
-        final BigDecimal upperResult = new BigDecimal(100.0);
+        final double proportion = -0.5;
+        final double lowerBound = 0.0;
+        final double lowerResult = 0.0;
+        final double upperBound = 1.0;
+        final double upperResult = 100.0;
 
-        final BigDecimal result = fixture.calculate(proportion, lowerBound, lowerResult, upperBound, upperResult);
+        final double result = fixture.calculate(proportion, lowerBound, lowerResult, upperBound, upperResult);
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ZERO, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -137,17 +135,5 @@ public class AbstractLinearDistributionTest {
     public void tearDown() throws Exception
     {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(AbstractLinearDistributionTest.class);
     }
 }

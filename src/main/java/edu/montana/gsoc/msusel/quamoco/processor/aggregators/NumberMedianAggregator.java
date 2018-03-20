@@ -29,8 +29,6 @@ import com.google.common.collect.Lists;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.processor.Aggregator;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.List;
 
@@ -58,29 +56,28 @@ public class NumberMedianAggregator extends Aggregator {
      * {@inheritDoc}
      */
     @Override
-    protected BigDecimal aggregate(final List<BigDecimal> values)
+    protected double aggregate(final List<Double> values)
     {
         if (values == null || values.isEmpty())
         {
-            return BigDecimal.ZERO;
+            return 0.0;
         }
 
-        final List<BigDecimal> temp = Lists.newArrayList();
+        final List<Double> temp = Lists.newArrayList();
         temp.addAll(values);
         if (!temp.isEmpty())
         {
             Collections.sort(temp);
             if (temp.size() % 2 == 0)
             {
-                return (temp.get(temp.size() / 2 - 1).add(temp.get(temp.size() / 2)))
-                        .divide(new BigDecimal(2), 15, RoundingMode.HALF_UP);
+                return (temp.get(temp.size() / 2 - 1) + temp.get(temp.size() / 2)) / 2;
             }
             else
             {
                 return temp.get(temp.size() / 2);
             }
         }
-        return BigDecimal.ZERO;
+        return 0.0;
     }
 
 }

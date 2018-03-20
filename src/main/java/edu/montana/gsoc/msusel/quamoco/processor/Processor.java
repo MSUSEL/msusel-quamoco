@@ -27,8 +27,6 @@ package edu.montana.gsoc.msusel.quamoco.processor;
 
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
-import java.math.BigDecimal;
-
 /**
  * Base abstract class for Node processors.
  *
@@ -57,5 +55,5 @@ public abstract class Processor {
      * @return Executes the processing code which takes input edges for the node
      *         and outputs some form of aggregated value.
      */
-    public abstract BigDecimal process();
+    public abstract double process();
 }

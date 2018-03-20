@@ -32,8 +32,6 @@ import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
 import edu.montana.gsoc.msusel.quamoco.processor.extents.Extent;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Set;
 
 /**
@@ -62,27 +60,30 @@ public class UnrangedNormalizer extends Normalizer {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal normalize(final Set<Finding> findings)
+    public double normalize(final Set<Finding> findings)
     {
         if (findings == null || findings.isEmpty())
-            return BigDecimal.ZERO;
+            return 0.0;
 
-        BigDecimal totalAffected = BigDecimal.ZERO;
+        double totalAffected = 0.0;
         NormalizationRange newRange = Extent.getInstance()
                 .findRange(MeasuresTable.getInstance().getTree(), metric, range, findings);
 
         Extent ext = Extent.getInstance();
         for (final Finding f : findings)
         {
-            totalAffected = totalAffected.add(ext.findExtent(f, metric, newRange));
+            totalAffected += ext.findExtent(f, metric, newRange);
         }
 
-        BigDecimal extent = ext.findExtent(metric, newRange);
+        double extent = ext.findExtent(metric, range);
+        double value;
 
-        if (BigDecimal.ZERO.compareTo(extent) == 0 && extent.compareTo(totalAffected) == 0)
-            return BigDecimal.ZERO;
+        if (Double.compare(0.0, extent) == 0 && Double.compare(extent, totalAffected) == 0)
+            return 0.0;
         else
-            return totalAffected.divide(ext.findExtent(metric, range), 15, RoundingMode.HALF_UP);
+            value = totalAffected / extent;
+
+        return value;
     }
 
 }

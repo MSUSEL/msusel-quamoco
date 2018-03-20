@@ -35,12 +35,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * The class <code>FindingsUnionNodeTest</code> contains tests for the class
@@ -76,9 +73,9 @@ public class FindingsUnionNodeTest {
         // add additional test code here
         assertNotNull(result);
         assertEquals(null, result.getXMLTag());
-        assertEquals(BigDecimal.ZERO, result.getLowerResult());
-        assertEquals(BigDecimal.ONE, result.getUpperResult());
-        assertEquals(BigDecimal.ZERO, result.getValue());
+        assertEquals(0.0, result.getLowerResult(), 0.001);
+        assertEquals(1.0, result.getUpperResult(), 0.001);
+        assertEquals(0.0, result.getValue(), 0.001);
         assertEquals("owner", result.getOwnedBy());
         assertEquals("", result.getDescription());
         assertEquals(null, result.getProcessor());
@@ -158,10 +155,10 @@ public class FindingsUnionNodeTest {
                 .build();
         final FindingsUnionNode fixture = new FindingsUnionNode(graph, "union", "owner");
 
-        final BigDecimal result = fixture.getLowerResult();
+        final double result = fixture.getLowerResult();
 
         // add additional test code here
-        assertEquals(BigDecimal.ZERO, result);
+        assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -181,10 +178,10 @@ public class FindingsUnionNodeTest {
                 .build();
         final FindingsUnionNode fixture = new FindingsUnionNode(graph, "union", "owner");
 
-        final BigDecimal result = fixture.getUpperResult();
+        final double result = fixture.getUpperResult();
 
         // add additional test code here
-        assertEquals(BigDecimal.ONE, result);
+        assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -204,10 +201,10 @@ public class FindingsUnionNodeTest {
                 .build();
         final FindingsUnionNode fixture = new FindingsUnionNode(graph, "union", "owner");
 
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(BigDecimal.ZERO, result);
+        assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -234,17 +231,5 @@ public class FindingsUnionNodeTest {
     public void tearDown() throws Exception
     {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(FindingsUnionNodeTest.class);
     }
 }

@@ -28,13 +28,12 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 /**
  * The class <code>GradeTest</code> contains tests for the class
@@ -56,12 +55,12 @@ public class GradeTest {
     public void testEvaluate_1() throws Exception
     {
         final Grade fixture = Grade.A;
-        final BigDecimal val = BigDecimal.ONE;
+        final double val = 1.0;
 
         final int result = fixture.evaluate(val);
 
         // TODO: add additional test code here
-        Assert.assertEquals(0, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -74,12 +73,12 @@ public class GradeTest {
     public void testEvaluate_2() throws Exception
     {
         final Grade fixture = Grade.A;
-        final BigDecimal val = BigDecimal.ONE;
+        final double val = 1.0;
 
         final int result = fixture.evaluate(val);
 
         // TODO: add additional test code here
-        Assert.assertEquals(0, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -92,12 +91,12 @@ public class GradeTest {
     public void testEvaluate_3() throws Exception
     {
         final Grade fixture = Grade.A;
-        final BigDecimal val = BigDecimal.ONE;
+        final double val = 1.0;
 
         final int result = fixture.evaluate(val);
 
         // TODO: add additional test code here
-        Assert.assertEquals(0, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -114,7 +113,7 @@ public class GradeTest {
 
         // TODO: add additional test code here
         Assert.assertNotNull(result);
-        Assert.assertEquals(7, result.size());
+        Assert.assertEquals(7.0, result.size(), 0.001);
     }
 
     /**
@@ -144,14 +143,14 @@ public class GradeTest {
     public void testSetThresholds_1() throws Exception
     {
         final Grade fixture = Grade.A;
-        final BigDecimal lower = BigDecimal.ONE;
-        final BigDecimal upper = BigDecimal.ONE;
+        final double lower = 1.0;
+        final double upper = 1.0;
 
         try
         {
             fixture.setThresholds(lower, upper);
-            Assert.assertEquals(lower, fixture.getLowerThreshold());
-            Assert.assertEquals(upper, fixture.getUpperThreshold());
+            Assert.assertEquals(lower, fixture.getLowerThreshold(), 0.001);
+            Assert.assertEquals(upper, fixture.getUpperThreshold(), 0.001);
         }
         catch (final IllegalArgumentException e)
         {
@@ -169,9 +168,9 @@ public class GradeTest {
     public void testSetThresholds_2() throws Exception
     {
         final Grade fixture = Grade.A;
-        fixture.setThresholds(BigDecimal.ZERO, BigDecimal.ONE);
-        final BigDecimal lower = BigDecimal.ONE;
-        final BigDecimal upper = BigDecimal.ZERO;
+        fixture.setThresholds(0.0, 1.0);
+        final double lower = 1.0;
+        final double upper = 0.0;
 
         fixture.setThresholds(lower, upper);
     }
@@ -200,17 +199,5 @@ public class GradeTest {
     public void tearDown() throws Exception
     {
         // TODO: add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 5/30/15 3:41 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(GradeTest.class);
     }
 }

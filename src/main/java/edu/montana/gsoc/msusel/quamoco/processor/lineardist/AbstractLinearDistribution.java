@@ -27,9 +27,6 @@ package edu.montana.gsoc.msusel.quamoco.processor.lineardist;
 
 import edu.montana.gsoc.msusel.quamoco.processor.LinearDistribution;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 /**
  * Base implementation of a LinearDistribution
  *
@@ -42,27 +39,27 @@ public abstract class AbstractLinearDistribution implements LinearDistribution {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal calculate(final BigDecimal proportion, final BigDecimal lowerBound, final BigDecimal lowerResult,
-            final BigDecimal upperBound, final BigDecimal upperResult)
+    public double calculate(final double proportion, final double lowerBound, final double lowerResult,
+            final double upperBound, final double upperResult)
     {
-        if (proportion.compareTo(lowerBound) <= 0)
+        if (Double.compare(proportion, lowerResult) < 0)
         {
-            return lowerResult;
+            return lowerBound;
         }
-        else if (proportion.compareTo(upperBound) >= 0)
+        else if (Double.compare(proportion, upperResult) > 0)
         {
-            return upperResult;
+            return upperBound;
         }
-        else if (upperBound.compareTo(lowerBound) == 0)
+        else if (Double.compare(upperResult, lowerResult) == 0)
         {
-            return upperResult;
+            return upperBound;
         }
         else
         {
-            BigDecimal slopeNum = upperResult.subtract(lowerResult);
-            BigDecimal slopeDen = upperBound.subtract(lowerBound);
-            final BigDecimal slope = slopeNum.divide(slopeDen, 15, RoundingMode.HALF_UP);
-            return slope.multiply(proportion.subtract(lowerBound)).add(lowerResult);
+            double slopeDen = upperResult - lowerResult;
+            double slopeNum = upperBound - lowerBound;
+            final double slope = slopeNum / slopeDen;
+            return slope * (proportion - lowerResult) + lowerBound;
         }
     }
 }

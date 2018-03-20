@@ -34,14 +34,12 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
 import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
-import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggregator;
+import edu.montana.gsoc.msusel.quamoco.processor.evaluators.WeightedSumEvaluator;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.PositiveLinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 
@@ -51,7 +49,7 @@ import static org.junit.Assert.*;
  *
  * @generatedBy CodePro at 1/26/16 6:38 PM
  * @author fate
- * @version $Revision: BigDecimal.ONE $
+ * @version $Revision: 1.0 $
  */
 public class MeasureToFactorNumberEdgeTest {
 
@@ -76,12 +74,12 @@ public class MeasureToFactorNumberEdgeTest {
         assertNotNull(result);
         assertEquals("NEGATIVE", result.getInf());
         assertEquals(null, result.getDist());
-        assertEquals(new BigDecimal(100), result.getMaxPoints());
+        assertEquals(100.0, result.getMaxPoints(), 0.001);
         assertEquals(false, result.isUsesLinearDist());
         assertEquals(null, result.getNormalizer());
-        assertEquals(BigDecimal.ONE, result.getWeight());
-        assertEquals(BigDecimal.ONE, result.getUpperBound());
-        assertEquals(BigDecimal.ZERO, result.getLowerBound());
+        assertEquals(1.0, result.getWeight(), 0.001);
+        assertEquals(1.0, result.getUpperBound(), 0.001);
+        assertEquals(0.0, result.getLowerBound(), 0.001);
         assertEquals("", result.getName());
     }
 
@@ -104,12 +102,12 @@ public class MeasureToFactorNumberEdgeTest {
         assertNotNull(result);
         assertEquals("POSITIVE", result.getInf());
         assertEquals(null, result.getDist());
-        assertEquals(new BigDecimal(100), result.getMaxPoints());
+        assertEquals(100.0, result.getMaxPoints(), 0.001);
         assertEquals(false, result.isUsesLinearDist());
         assertEquals(null, result.getNormalizer());
-        assertEquals(BigDecimal.ONE, result.getWeight());
-        assertEquals(BigDecimal.ONE, result.getUpperBound());
-        assertEquals(BigDecimal.ZERO, result.getLowerBound());
+        assertEquals(1.0, result.getWeight(), 0.001);
+        assertEquals(1.0, result.getUpperBound(), 0.001);
+        assertEquals(0.0, result.getLowerBound(), 0.001);
         assertEquals("", result.getName());
     }
 
@@ -137,18 +135,18 @@ public class MeasureToFactorNumberEdgeTest {
     @Test
     public void testGetValue_1() throws Exception
     {
-        fixture.weight = BigDecimal.ONE;
-        fixture.lowerBound = BigDecimal.ZERO;
-        fixture.upperBound = BigDecimal.ONE;
+        fixture.setRank(1);
+        fixture.weight = 1.0;
+        fixture.lowerBound = 0.0;
+        fixture.upperBound = 1.0;
         fixture.usesLinearDist = true;
-        fixture.maxPoints = BigDecimal.ONE;
         fixture.dist = new PositiveLinearDistribution();
         fixture.norm = new NullNormalizer(fixture, "norm", NormalizationRange.CLASS);
 
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(1.0, result.doubleValue(), 0.001);
+        assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -160,19 +158,20 @@ public class MeasureToFactorNumberEdgeTest {
     @Test
     public void testGetValue_2() throws Exception
     {
-        fixture.weight = new BigDecimal(0.5);
-        fixture.lowerBound = BigDecimal.ZERO;
-        fixture.upperBound = BigDecimal.ONE;
+        fixture.weight = 0.5;
+        fixture.lowerBound = 0.0;
+        fixture.upperBound = 1.0;
         fixture.usesLinearDist = false;
-        fixture.maxPoints = new BigDecimal(100);
-        fixture.setInf(InfluenceType.NEG);
+        fixture.maxPoints = 100.0;
+        fixture.setInf(InfluenceType.POS);
+        fixture.setRank(1);
         fixture.dist = new PositiveLinearDistribution();
         fixture.norm = new NullNormalizer(fixture, "norm", NormalizationRange.CLASS);
 
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(0.5, result.doubleValue(), 0.001);
+        assertEquals(0.5, result, 0.001);
     }
 
     /**
@@ -184,19 +183,19 @@ public class MeasureToFactorNumberEdgeTest {
     @Test
     public void testGetValue_3() throws Exception
     {
-        fixture.weight = BigDecimal.ONE;
-        fixture.lowerBound = BigDecimal.ZERO;
-        fixture.upperBound = BigDecimal.ONE;
+        fixture.weight = 1.0;
+        fixture.lowerBound = 0.0;
+        fixture.upperBound = 1.0;
         fixture.usesLinearDist = false;
-        fixture.maxPoints = BigDecimal.ONE;
-        fixture.setInf(InfluenceType.NEG);
+        fixture.maxPoints = 1.0;
+        fixture.setInf(InfluenceType.POS);
         fixture.dist = null;
         fixture.norm = new NullNormalizer(fixture, "norm", NormalizationRange.CLASS);
 
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(1.0, result.doubleValue(), 0.001);
+        assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -208,18 +207,20 @@ public class MeasureToFactorNumberEdgeTest {
     @Test
     public void testGetValue_4() throws Exception
     {
-        fixture.weight = BigDecimal.ONE;
-        fixture.lowerBound = BigDecimal.ZERO;
-        fixture.upperBound = new BigDecimal(1.0);
+        fixture.weight = 0.5;
+        fixture.lowerBound = 1.0;
+        fixture.upperBound = 0.0;
         fixture.usesLinearDist = true;
-        fixture.maxPoints = new BigDecimal(0.5);
+        fixture.setRank(1);
+        fixture.maxPoints = 100.0;
+        fixture.setInf(InfluenceType.POS);
         fixture.dist = new PositiveLinearDistribution();
         fixture.norm = null;
 
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(0.5, result.doubleValue(), 0.001);
+        assertEquals(0.5, result, 0.001);
     }
 
     /**
@@ -231,19 +232,18 @@ public class MeasureToFactorNumberEdgeTest {
     @Test
     public void testGetValue_5() throws Exception
     {
-        fixture.weight = BigDecimal.ONE;
-        fixture.lowerBound = BigDecimal.ZERO;
-        fixture.upperBound = BigDecimal.ONE;
+        fixture.weight = 1.0;
+        fixture.lowerBound = 0.0;
+        fixture.upperBound = 1.0;
         fixture.usesLinearDist = false;
-        fixture.maxPoints = BigDecimal.ONE;
         fixture.setInf(InfluenceType.NEG);
         fixture.dist = null;
         fixture.norm = null;
 
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(1.0, result.doubleValue(), 0.001);
+        assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -255,19 +255,18 @@ public class MeasureToFactorNumberEdgeTest {
     @Test
     public void testGetValue_6() throws Exception
     {
-        fixture.weight = BigDecimal.ONE;
-        fixture.lowerBound = BigDecimal.ZERO;
-        fixture.upperBound = BigDecimal.ONE;
+        fixture.weight = 1.0;
+        fixture.lowerBound = 0.0;
+        fixture.upperBound = 1.0;
         fixture.usesLinearDist = false;
-        fixture.maxPoints = BigDecimal.ONE;
         fixture.setInf(InfluenceType.POS);
         fixture.dist = null;
         fixture.norm = null;
 
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(0.0, result.doubleValue(), 0.001);
+        assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -279,19 +278,18 @@ public class MeasureToFactorNumberEdgeTest {
     @Test
     public void testGetValue_7() throws Exception
     {
-        fixture.weight = BigDecimal.ONE;
-        fixture.lowerBound = BigDecimal.ZERO;
-        fixture.upperBound = BigDecimal.ONE;
+        fixture.weight = 1.0;
+        fixture.lowerBound = 0.0;
+        fixture.upperBound = 1.0;
         fixture.usesLinearDist = false;
-        fixture.maxPoints = new BigDecimal(0.5);
         fixture.setInf(null);
         fixture.dist = null;
         fixture.norm = null;
 
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(0.0, result.doubleValue(), 0.001);
+        assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -415,22 +413,22 @@ public class MeasureToFactorNumberEdgeTest {
                 .build();
         final MeasureNode src = new MeasureNode(graph, "measure", "owner");
         src.setType(MeasureType.NUMBER);
-        src.setProcessor(new FindingsUnionAggregator(src));
+        src.setProcessor(new WeightedSumEvaluator(src));
         final FactorNode dest = new FactorNode(graph, "factor", "owner");
         final ValueNode srcsrc = new ValueNode(graph, "key", "owner", "tool");
-        srcsrc.addValue(BigDecimal.TEN);
-        srcsrc.addValue(new BigDecimal(100));
+        srcsrc.addValue(10.0);
+        srcsrc.addValue(100.0);
 
         fixture = new MeasureToFactorNumberEdge("", src, dest, InfluenceEffect.NEGATIVE);
         graph.addEdge(srcsrc, src, new ValueToMeasureEdge("v2m", srcsrc, src));
         graph.addEdge(src, dest, fixture);
 
-        fixture.weight = BigDecimal.ONE;
-        fixture.setRank(BigDecimal.ONE);
-        fixture.lowerBound = BigDecimal.ZERO;
-        fixture.upperBound = BigDecimal.ONE;
+        fixture.weight = 1.0;
+        fixture.setRank(1);
+        fixture.lowerBound = 0.0;
+        fixture.upperBound = 1.0;
         fixture.usesLinearDist = true;
-        fixture.maxPoints = BigDecimal.ONE;
+        fixture.maxPoints = 100.0;
         fixture.dist = new PositiveLinearDistribution();
         fixture.norm = new NullNormalizer(fixture, "norm", NormalizationRange.CLASS);
     }

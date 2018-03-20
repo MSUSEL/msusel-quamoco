@@ -26,6 +26,7 @@
 package edu.montana.gsoc.msusel.quamoco.it.single;
 
 import com.google.common.graph.Network;
+import edu.montana.gsoc.msusel.metrics.MeasuresTable;
 import edu.montana.gsoc.msusel.quamoco.distiller.ModelDistiller;
 import edu.montana.gsoc.msusel.quamoco.distiller.ModelManager;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
@@ -45,6 +46,7 @@ public class BaseTestClass {
 
     @Before
     public void setUp() throws Exception {
+        MeasuresTable.getInstance().clean();
         Path p2 = Paths.get("data/test/Test.qm");
         Path p = Paths.get("data/test/TestHier.qm");
         assertTrue(Files.exists(p));

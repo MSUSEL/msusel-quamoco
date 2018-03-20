@@ -66,11 +66,9 @@ public class MeasurementMethodFactory extends AbstractQMElementFactory {
         return Holder.INSTANCE;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public MeasurementMethod create(Element e, ModelManager manager) {
+    public MeasurementMethod create(Element e, ModelManager manager) { return null; }
+
+    public MeasurementMethod create(Element e, ModelManager manager, Measure determines) {
         MeasurementMethod method = null;
         this.manager = manager;
 
@@ -78,58 +76,58 @@ public class MeasurementMethodFactory extends AbstractQMElementFactory {
             MeasurementMethodType type = MeasurementMethodType.fromType(e.getAttribute("xsi:type"));
             switch (type) {
                 case TOOL_BASED_INSTRUMENT:
-                    method = createToolBasedInstrument(e);
+                    method = createToolBasedInstrument(e, determines);
                     break;
                 case MANUAL_INSTRUMENT:
-                    method = createManualInstrument(e);
+                    method = createManualInstrument(e, determines);
                     break;
                 case RULE_BASED_INSTRUMENT:
-                    method = createRuleBasedInstrument(e);
+                    method = createRuleBasedInstrument(e, determines);
                     break;
                 case METRIC_BASED_INSTRUMENT:
-                    method = createMetricBasedInstrument(e);
+                    method = createMetricBasedInstrument(e, determines);
                     break;
                 case QIESL_AGGREGATION:
-                    method = createQIESLAggregation(e);
+                    method = createQIESLAggregation(e, determines);
                     break;
                 case TEXT_AGGREGATION:
-                    method = createTextAggregation(e);
+                    method = createTextAggregation(e, determines);
                     break;
                 case FINDINGS_INTERSECTION_MEASURE_AGGREGATION:
-                    method = createFindingsIntersectionMeasureAggregation(e);
+                    method = createFindingsIntersectionMeasureAggregation(e, determines);
                     break;
                 case FINDINGS_UNION_MEASURE_AGGREGATION:
-                    method = createFindingsUnionMeasureAggregation(e);
+                    method = createFindingsUnionMeasureAggregation(e, determines);
                     break;
                 case NUMBER_HISTOGRAM_COMP_MEASURE_AGGREGATION:
-                    method = createNumberHistogramCompMeasureAggregation(e);
+                    method = createNumberHistogramCompMeasureAggregation(e, determines);
                     break;
                 case NUMBER_MAX_MEASURE_AGGREGATION:
-                    method = createNumberMaxMeasureAggregation(e);
+                    method = createNumberMaxMeasureAggregation(e, determines);
                     break;
                 case NUMBER_MEAN_MEASURE_AGGREGATION:
-                    method = createNumberMeanMeasureAggregation(e);
+                    method = createNumberMeanMeasureAggregation(e, determines);
                     break;
                 case NUMBER_MEDIAN_MEASURE_AGGREGATION:
-                    method = createNumberMedianMeasureAggregation(e);
+                    method = createNumberMedianMeasureAggregation(e, determines);
                     break;
                 case NUMBER_MIN_MEASURE_AGGREGATION:
-                    method = createNumberMinMeasureAggregation(e);
+                    method = createNumberMinMeasureAggregation(e, determines);
                     break;
                 case NUMBER_MODE_MEASURE_AGGREGATION:
-                    method = createNumberModeMeasureAggregation(e);
+                    method = createNumberModeMeasureAggregation(e, determines);
                     break;
                 case NUMBER_RANGE_MEASURE_AGGREGATION:
-                    method = createNumberRangeMeasureAggregation(e);
+                    method = createNumberRangeMeasureAggregation(e, determines);
                     break;
                 case NUMBER_STD_DEV_MEASURE_AGGREGATION:
-                    method = createNumberStdDevMeasureAggregation(e);
+                    method = createNumberStdDevMeasureAggregation(e, determines);
                     break;
                 case NUMBER_SUMMATION_MEASURE_AGGREGATION:
-                    method = createNumberSummationMeasureAggregation(e);
+                    method = createNumberSummationMeasureAggregation(e, determines);
                     break;
                 case NUMBER_VARIANCE_MEASURE_AGGREGATION:
-                    method = createNumberVarianceMeasureAggregation(e);
+                    method = createNumberVarianceMeasureAggregation(e, determines);
                     break;
             }
         }
@@ -137,186 +135,183 @@ public class MeasurementMethodFactory extends AbstractQMElementFactory {
         return method;
     }
 
-    private MeasurementMethod createToolBasedInstrument(Element e) {
-        Measure determines = manager.findMeasure(e.getAttribute("determines"));
-        if (determines.getType() == MeasureType.FINDINGS) {
-            return createRuleBasedInstrument(e);
+    private MeasurementMethod createToolBasedInstrument(Element e, Measure determines) {
+        if (determines == null || determines.getType() == MeasureType.FINDINGS) {
+            return createRuleBasedInstrument(e, determines);
         } else {
-            return createMetricBasedInstrument(e);
+            return createMetricBasedInstrument(e, determines);
         }
     }
 
-    private MeasurementMethod createManualInstrument(Element e) {
+    private MeasurementMethod createManualInstrument(Element e, Measure determines) {
         return ManualInstrument.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("name"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createRuleBasedInstrument(Element e) {
+    private MeasurementMethod createRuleBasedInstrument(Element e, Measure determines) {
         return RuleBasedInstrument.builder()
                 .identifier(e.getAttribute("xmi:id"))
-                .metric(e.getAttribute("metric"))
-                .tool(manager.findTool(e.getAttribute("tool")))
+                .metric(e.hasAttribute("metric") ? e.getAttribute("metric") : e.getAttribute("name"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createMetricBasedInstrument(Element e) {
+    private MeasurementMethod createMetricBasedInstrument(Element e, Measure determines) {
         return MetricBasedInstrument.builder()
                 .identifier(e.getAttribute("xmi:id"))
-                .metric(e.getAttribute("metric"))
-                .tool(manager.findTool(e.getAttribute("tool")))
+                .metric(e.hasAttribute("metric") ? e.getAttribute("metric") : e.getAttribute("name"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createQIESLAggregation(Element e) {
+    private MeasurementMethod createQIESLAggregation(Element e, Measure determines) {
         return QIESLAggregation.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("name"))
                 .specification(e.getAttribute("specification"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createTextAggregation(Element e) {
+    private MeasurementMethod createTextAggregation(Element e, Measure determines) {
         return TextAggregation.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("name"))
                 .specification(e.getAttribute("specification"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createFindingsIntersectionMeasureAggregation(Element e) {
+    private MeasurementMethod createFindingsIntersectionMeasureAggregation(Element e, Measure determines) {
         return FindingsIntersectionMeasureAggregation.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("name"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createFindingsUnionMeasureAggregation(Element e) {
+    private MeasurementMethod createFindingsUnionMeasureAggregation(Element e, Measure determines) {
         return FindingsUnionMeasureAggregation.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("name"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createNumberHistogramCompMeasureAggregation(Element e) {
+    private MeasurementMethod createNumberHistogramCompMeasureAggregation(Element e, Measure determines) {
         return NumberHistogramCompMeasureAggregation.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("metric"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createNumberMaxMeasureAggregation(Element e) {
+    private MeasurementMethod createNumberMaxMeasureAggregation(Element e, Measure determines) {
         return NumberMaxMeasureAggregation.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("metric"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createNumberMeanMeasureAggregation(Element e) {
+    private MeasurementMethod createNumberMeanMeasureAggregation(Element e, Measure determines) {
         return NumberMeanMeasureAggregation.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("name"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createNumberMedianMeasureAggregation(Element e) {
+    private MeasurementMethod createNumberMedianMeasureAggregation(Element e, Measure determines) {
         return NumberMedianMeasureAggregation.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("metric"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createNumberMinMeasureAggregation(Element e) {
+    private MeasurementMethod createNumberMinMeasureAggregation(Element e, Measure determines) {
         return NumberMinMeasureAggregation.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("metric"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createNumberModeMeasureAggregation(Element e) {
+    private MeasurementMethod createNumberModeMeasureAggregation(Element e, Measure determines) {
         return NumberModeMeasureAggregation.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("metric"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createNumberRangeMeasureAggregation(Element e) {
+    private MeasurementMethod createNumberRangeMeasureAggregation(Element e, Measure determines) {
         return NumberRangeMeasureAggregation.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("metric"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createNumberStdDevMeasureAggregation(Element e) {
+    private MeasurementMethod createNumberStdDevMeasureAggregation(Element e, Measure determines) {
         return NumberStdDevMeasureAggregation.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("metric"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createNumberSummationMeasureAggregation(Element e) {
+    private MeasurementMethod createNumberSummationMeasureAggregation(Element e, Measure determines) {
         return NumberSummationMeasureAggregation.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("metric"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 
-    private MeasurementMethod createNumberVarianceMeasureAggregation(Element e) {
+    private MeasurementMethod createNumberVarianceMeasureAggregation(Element e, Measure determines) {
         return NumberVarianceMeasureAggregation.builder()
                 .identifier(e.getAttribute("xmi:id"))
                 .metric(e.getAttribute("metric"))
                 .description(e.getAttribute("description"))
                 .title(e.getAttribute("title"))
-                .determines(manager.findMeasure(e.getAttribute("determines")))
+                .determines(determines)
                 .create();
     }
 }

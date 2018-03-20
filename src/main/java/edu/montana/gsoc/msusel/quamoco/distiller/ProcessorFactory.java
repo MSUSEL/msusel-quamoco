@@ -25,6 +25,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
+import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.model.QMElement;
@@ -63,8 +64,28 @@ public class ProcessorFactory {
             return createFactorProcessor((Evaluation) element, data);
         } else if (element instanceof MeasureAggregation) {
             return createMeasureProcessor((MeasureAggregation) element, data);
+        } else if (element instanceof MeasurementMethod) {
+            return createMeasurementMethodProcessor((MeasurementMethod) element, data);
         } else
             return null;
+    }
+
+    private Processor createMeasurementMethodProcessor(MeasurementMethod element, DistillerData data) {
+        Node node = data.getValue(element);
+        if (node != null) {
+            if (node instanceof FindingNode) {
+                return new FindingsUnionAggregator(node);
+            } else {
+                return new MeanEvaluator(node);
+            }
+        } else {
+            node = data.getUnion(element);
+            if (node != null) {
+                return new FindingsUnionAggregator(node);
+            }
+        }
+
+        return null;
     }
 
     public Processor createMeasureProcessor(MeasurementMethod method, DistillerData data) {

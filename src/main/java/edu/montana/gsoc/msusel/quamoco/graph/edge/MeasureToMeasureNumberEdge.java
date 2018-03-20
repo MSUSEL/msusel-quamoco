@@ -27,9 +27,6 @@ package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 /**
  * This edge type connects two MeasureNodes whose type is both NUMBER (rather
  * than FINDINGS) and is only concerned with the aggregation of these values.
@@ -42,7 +39,7 @@ public class MeasureToMeasureNumberEdge extends WeightedRankedEdge {
     /**
      * Constructs a new MeasureToMeasureNumberEdge with the given name
      * connecting the source and dest nodes.
-     * 
+     *
      * @param name
      *            Name of this edge
      * @param src
@@ -50,8 +47,7 @@ public class MeasureToMeasureNumberEdge extends WeightedRankedEdge {
      * @param dest
      *            Dest node
      */
-    public MeasureToMeasureNumberEdge(final String name, final Node src, final Node dest)
-    {
+    public MeasureToMeasureNumberEdge(final String name, final Node src, final Node dest) {
         super(name, src, dest);
     }
 
@@ -59,25 +55,16 @@ public class MeasureToMeasureNumberEdge extends WeightedRankedEdge {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getValue()
-    {
-        BigDecimal value = BigDecimal.ZERO;
+    public double getValue() {
+        double value = 0.0;
 
-        if (this.getRank().compareTo(value) == 0)
-            return value;
+        value = source.getValue();
 
-        if (usesLinearDist)
-        {
-            BigDecimal proportion = source.getValue();
-            // if (proportion <= 1.0) {
-            // proportion = proportion * getMaxPoints();
-            // }
-            value = dist.calculate(getMaxPoints(), proportion.divide(getMaxPoints(), 15, RoundingMode.HALF_UP));
+        if (usesLinearDist) {
+            value = dist.calculate(getMaxPoints(), value);
         }
-        else
-        {
-            value = source.getValue().multiply(weight);
-        }
+
+        value = value * weight;
 
         return value;
     }

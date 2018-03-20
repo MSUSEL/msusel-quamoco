@@ -36,7 +36,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -83,15 +82,15 @@ public class NumberMinAggregatorTest {
     @Test
     public void testAggregate_1() throws Exception
     {
-        final List<BigDecimal> values = Lists.newArrayList();
-        values.add(new BigDecimal(10.0));
-        values.add(new BigDecimal(20.0));
-        values.add(new BigDecimal(3.0));
+        final List<Double> values = Lists.newArrayList();
+        values.add(10.0);
+        values.add(20.0);
+        values.add(3.0);
 
-        final BigDecimal result = fixture.aggregate(values);
+        final double result = fixture.aggregate(values);
 
         // add additional test code here
-        Assert.assertEquals(new BigDecimal(3.0), result);
+        Assert.assertEquals(3.0, result, 0.001);
     }
 
     /**
@@ -103,12 +102,12 @@ public class NumberMinAggregatorTest {
     @Test
     public void testAggregate_2() throws Exception
     {
-        final List<BigDecimal> values = Lists.newArrayList();
+        final List<Double> values = Lists.newArrayList();
 
-        final BigDecimal result = fixture.aggregate(values);
+        final double result = fixture.aggregate(values);
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -120,12 +119,12 @@ public class NumberMinAggregatorTest {
     @Test
     public void testAggregate_3() throws Exception
     {
-        final List<BigDecimal> values = null;
+        final List<Double> values = null;
 
-        final BigDecimal result = fixture.aggregate(values);
+        final double result = fixture.aggregate(values);
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ONE, result);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -159,17 +158,5 @@ public class NumberMinAggregatorTest {
     public void tearDown() throws Exception
     {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:34 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(NumberMinAggregatorTest.class);
     }
 }

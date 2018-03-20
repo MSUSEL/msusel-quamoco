@@ -32,7 +32,6 @@ import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import lombok.Getter;
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -78,13 +77,17 @@ public class FactorNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getValue() {
-        if (!calculated) {
-            value = processor.process();
-        }
+    public double getValue() {
+        return processor.process();
+    }
 
-        calculated = true;
-        return value;
+    public double thresholdValue(double value) {
+        if (Double.compare(0.0, value) > 0)
+            return 0.0;
+        else if (Double.compare(1.0, value) < 0)
+            return 1.0;
+        else
+            return value;
     }
 
     /**
@@ -121,28 +124,28 @@ public class FactorNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getLowerResult() {
-        final List<BigDecimal> values = Lists.newArrayList();
+    public double getLowerResult() {
+        final List<Double> values = Lists.newArrayList();
         for (final Edge e : graph.inEdges(this)) {
             final Node n = getOpposite(e);
             values.add(n.getValue());
         }
 
-        return values.isEmpty() ? BigDecimal.ZERO : Collections.min(values);
+        return values.isEmpty() ? 0.0 : Collections.min(values);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getUpperResult() {
-        final List<BigDecimal> values = Lists.newArrayList();
+    public double getUpperResult() {
+        final List<Double> values = Lists.newArrayList();
         for (final Edge e : graph.inEdges(this)) {
             final Node n = getOpposite(e);
             values.add(n.getValue());
         }
 
-        return values.isEmpty() ? BigDecimal.ONE : Collections.max(values);
+        return values.isEmpty() ? 1.0 : Collections.max(values);
     }
 
     /**

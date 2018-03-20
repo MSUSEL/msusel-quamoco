@@ -80,7 +80,7 @@ public class EvaluationTest {
     @Test
     public void setEvaluates() throws Exception {
         element.setEvaluates(null);
-        assertNotNull(element.getEvaluates());
+        assertNull(element.getEvaluates());
         Factor fac = mock(Factor.class);
         element.setEvaluates(fac);
         assertEquals(fac, element.getEvaluates());

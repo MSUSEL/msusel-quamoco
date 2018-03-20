@@ -35,13 +35,18 @@ import edu.montana.gsoc.msusel.quamoco.io.qm.QMXMLReader;
 import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -150,6 +155,10 @@ public class ModelDistiller {
                 for (final String arg : args) {
                     qmRead.secondPass(arg);
                 }
+
+                for (final String arg : args) {
+                    qmRead.thirdPass(arg);
+                }
             } catch (ParserConfigurationException | SAXException | IOException e) {
                 ModelDistiller.LOG.warn(e.getMessage(), e);
             }
@@ -170,60 +179,50 @@ public class ModelDistiller {
         final QMXMLReader qmRead = new QMXMLReader(manager);
         final List<QualityModel> models = Lists.newArrayList();
         final Path baseDir = path.toAbsolutePath().getParent();
-        Queue<Path> paths = Queues.newArrayDeque();
-        Queue<Path> pStack = Queues.newArrayDeque();
-        paths.offer(path);
 
-        Map<String, QualityModel> modelMap = new HashMap<>();
+        Stack<Path> stack = new Stack<>();
+        Queue<Path> queue = Queues.newArrayDeque();
+        queue.offer(path);
 
-        while (!paths.isEmpty()) {
-            Path p = paths.poll();
-            pStack.offer(p);
-            if (Files.exists(p)) {
+        try {
+            while (!queue.isEmpty()) {
+                Path p = queue.poll();
+                if (!stack.contains(p))
+                    stack.push(p);
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder builder = dbFactory.newDocumentBuilder();
+                Document doc = builder.parse(Files.newInputStream(p, StandardOpenOption.READ));
+                doc.getDocumentElement().normalize();
+
+                XPath xPath = XPathFactory.newInstance().newXPath();
+                String expression = "QualityModel/requires";
                 try {
-                    final XMLInputFactory factory = XMLInputFactory.newInstance();
-                    final InputStream stream = Files.newInputStream(p, StandardOpenOption.READ);
-                    final XMLStreamReader reader = factory.createXMLStreamReader(stream);
-                    while (reader.hasNext()) {
-                        final int event = reader.next();
-
-                        switch (event) {
-                            case XMLStreamConstants.START_ELEMENT:
-                                if (reader.getLocalName().equals("requires")) {
-                                    String other = reader.getAttributeValue(null, "href");
-                                    if (other.contains("#")) {
-                                        String x = other.split("#")[0];
-
-                                        if (!modelMap.containsKey(x)) {
-                                            if (baseDir != null) {
-                                                Path next = baseDir.resolve(x);
-                                                paths.offer(next);
-                                            } else {
-                                                paths.offer(Paths.get(x));
-                                            }
-                                        }
-                                    }
+                    NodeList nodes = (NodeList) xPath.compile(expression).evaluate(doc, XPathConstants.NODESET);
+                    if (nodes.getLength() > 0) {
+                        for (int i = 0; i < nodes.getLength(); i++) {
+                            if (nodes.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+                                Element e = (Element) nodes.item(i);
+                                if (e.hasAttribute("href")) {
+                                    Path p2 = Paths.get(baseDir.toAbsolutePath().toString(), e.getAttribute("href").split("#")[0]);
+                                    if (!queue.contains(p2))
+                                        queue.offer(p2);
                                 }
+                            }
                         }
                     }
+                } catch (XPathExpressionException ex) {
 
-                    qmRead.firstPass(p.toString());
-                    QualityModel model = qmRead.getModel();
-                    modelMap.put(p.getFileName().toString(), model);
-                    models.add(qmRead.getModel());
-                } catch (XMLStreamException | ParserConfigurationException | SAXException | IOException e) {
-                    LOG.warn("Could not read file at: " + path.toString());
                 }
             }
+        } catch (Exception e) {
+
         }
 
-        while (!pStack.isEmpty()) {
-            try {
-                qmRead.secondPass(pStack.poll().toString());
-            } catch (ParserConfigurationException | SAXException | IOException e) {
-                e.printStackTrace();
-            }
-        }
+        List<String> list = Lists.newArrayList();
+        while (!stack.empty())
+            list.add(stack.pop().toAbsolutePath().toString());
+
+        readInQualityModels(list.toArray(new String[0]));
 
         return models;
     }

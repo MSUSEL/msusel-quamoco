@@ -36,16 +36,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * The class <code>WeightedSumEvaluatorTest</code> contains tests for the class
  * <code>{@link WeightedSumEvaluator}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:35 PM
  * @author fate
  * @version $Revision: 1.0 $
+ * @generatedBy CodePro at 1/26/16 6:35 PM
  */
 public class WeightedSumEvaluatorTest {
 
@@ -58,8 +57,7 @@ public class WeightedSumEvaluatorTest {
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testWeightedSumEvaluator_1() throws Exception
-    {
+    public void testWeightedSumEvaluator_1() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -75,69 +73,64 @@ public class WeightedSumEvaluatorTest {
     }
 
     /**
-     * Run the BigDecimal evaluate(List<BigDecimal>) method test.
+     * Run the BigDecimal evaluate(List<Double>) method test.
      *
      * @throws Exception
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testEvaluate_1() throws Exception
-    {
-        final List<BigDecimal> values = Lists.newArrayList();
-        values.add(new BigDecimal(10.0));
-        values.add(new BigDecimal(15.0));
-        values.add(new BigDecimal(20.0));
+    public void testEvaluate_1() throws Exception {
+        final List<Double> values = Lists.newArrayList();
+        values.add(10.0);
+        values.add(15.0);
+        values.add(20.0);
 
-        final BigDecimal result = fixture.evaluate(values);
+        final double result = fixture.evaluate(values);
 
         // add additional test code here
-        Assert.assertEquals(new BigDecimal(45.0), result);
+        Assert.assertEquals(45.0, result, 0.001);
     }
 
     /**
-     * Run the BigDecimal evaluate(List<BigDecimal>) method test.
+     * Run the BigDecimal evaluate(List<Double>) method test.
      *
      * @throws Exception
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testEvaluate_2() throws Exception
-    {
-        final List<BigDecimal> values = Lists.newArrayList();
+    public void testEvaluate_2() throws Exception {
+        final List<Double> values = Lists.newArrayList();
 
-        final BigDecimal result = fixture.evaluate(values);
+        final double result = fixture.evaluate(values);
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ZERO, result);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     /**
-     * Run the BigDecimal evaluate(List<BigDecimal>) method test.
+     * Run the BigDecimal evaluate(List<Double>) method test.
      *
      * @throws Exception
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testEvaluate_3() throws Exception
-    {
-        final List<BigDecimal> values = null;
+    public void testEvaluate_3() throws Exception {
+        final List<Double> values = null;
 
-        final BigDecimal result = fixture.evaluate(values);
+        final double result = fixture.evaluate(values);
 
         // add additional test code here
-        Assert.assertEquals(BigDecimal.ZERO, result);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     /**
      * Perform pre-test initialization.
      *
-     * @throws Exception
-     *             if the initialization fails for some reason
+     * @throws Exception if the initialization fails for some reason
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -151,25 +144,11 @@ public class WeightedSumEvaluatorTest {
     /**
      * Perform post-test clean-up.
      *
-     * @throws Exception
-     *             if the clean-up fails for some reason
+     * @throws Exception if the clean-up fails for some reason
      * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(WeightedSumEvaluatorTest.class);
     }
 }

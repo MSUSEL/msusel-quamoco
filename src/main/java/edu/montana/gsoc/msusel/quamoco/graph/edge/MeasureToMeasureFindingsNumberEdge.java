@@ -27,9 +27,6 @@ package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 /**
  * Edge connection two measure nodes which handles both Findings and Values.
  *
@@ -41,16 +38,12 @@ public class MeasureToMeasureFindingsNumberEdge extends WeightedRankedEdge {
     /**
      * Constructs a new MeasureToMeasureFindingsNumberEdge with the given name
      * connecting the source and dest nodes.
-     * 
-     * @param name
-     *            Name of this edge
-     * @param src
-     *            Source node
-     * @param dest
-     *            Dest node
+     *
+     * @param name Name of this edge
+     * @param src  Source node
+     * @param dest Dest node
      */
-    public MeasureToMeasureFindingsNumberEdge(final String name, final Node src, final Node dest)
-    {
+    public MeasureToMeasureFindingsNumberEdge(final String name, final Node src, final Node dest) {
         super(name, src, dest);
     }
 
@@ -58,22 +51,17 @@ public class MeasureToMeasureFindingsNumberEdge extends WeightedRankedEdge {
      * {@inheritDoc}
      */
     @Override
-    public BigDecimal getValue()
-    {
-        BigDecimal value = BigDecimal.ZERO;
+    public double getValue() {
+        if (this.getRank() == 0 || Double.compare(this.getWeight(), 0.0) <= 0)
+            return 0.0;
 
-        if (this.getRank().compareTo(value) == 0)
-            return value;
+        double value = norm.normalize(source.getFindings());
 
-        value = norm.normalize(source.getFindings());
-
-        if (usesLinearDist)
-        {
-            value = getDist().calculate(getMaxPoints(), value);
+        if (usesLinearDist) {
+            value = getDist().calculate(getMaxPoints(), value) / getMaxPoints();
         }
 
-        value = weight.multiply(value);
-        value = thresholdValue(value);
+        value = value * weight;
 
         return value;
     }

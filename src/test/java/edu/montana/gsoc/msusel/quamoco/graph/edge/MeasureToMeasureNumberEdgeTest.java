@@ -39,8 +39,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -50,7 +48,7 @@ import static org.junit.Assert.assertNotNull;
  *
  * @generatedBy CodePro at 1/26/16 6:38 PM
  * @author fate
- * @version $Revision: BigDecimal.ONE $
+ * @version $Revision: 1.0 $
  */
 public class MeasureToMeasureNumberEdgeTest {
 
@@ -72,12 +70,12 @@ public class MeasureToMeasureNumberEdgeTest {
         // add additional test code here
         assertNotNull(result);
         assertEquals(null, result.getDist());
-        assertEquals(new BigDecimal(100), result.getMaxPoints());
+        assertEquals(100.0, result.getMaxPoints(), 0.001);
         assertEquals(false, result.isUsesLinearDist());
         assertEquals(null, result.getNormalizer());
-        assertEquals(BigDecimal.ONE, result.getWeight());
-        assertEquals(BigDecimal.ONE, result.getUpperBound());
-        assertEquals(BigDecimal.ZERO, result.getLowerBound());
+        assertEquals(1.0, result.getWeight(), 0.001);
+        assertEquals(1.0, result.getUpperBound(), 0.001);
+        assertEquals(0.0, result.getLowerBound(), 0.001);
         assertEquals("", result.getName());
     }
 
@@ -91,11 +89,11 @@ public class MeasureToMeasureNumberEdgeTest {
     public void testGetValue_1() throws Exception
     {
         fixture.usesLinearDist = false;
-        fixture.setWeight(new BigDecimal(0.5));
-        final BigDecimal result = fixture.getValue();
+        fixture.setWeight(0.5);
+        final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(27.5, result.doubleValue(), 0.001);
+        assertEquals(27.5, result, 0.001);
     }
 
     /**
@@ -108,12 +106,12 @@ public class MeasureToMeasureNumberEdgeTest {
     public void testGetValue_2() throws Exception
     {
         fixture.usesLinearDist = false;
-        fixture.setWeight(new BigDecimal(0.5));
+        fixture.setWeight(0.5);
         fixture.setNormalizer(null);
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(27.5, result.doubleValue(), 0.001);
+        assertEquals(27.5, result, 0.001);
     }
 
     /**
@@ -126,12 +124,12 @@ public class MeasureToMeasureNumberEdgeTest {
     public void testGetValue_3() throws Exception
     {
         fixture.usesLinearDist = true;
-        fixture.setWeight(BigDecimal.ONE);
-        fixture.setMaxPoints(new BigDecimal(50.0));
-        final BigDecimal result = fixture.getValue();
+        fixture.setWeight(1.0);
+        fixture.setMaxPoints(50.0);
+        final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(50.0, result.doubleValue(), 0.001);
+        assertEquals(50.0, result, 0.001);
     }
 
     /**
@@ -144,12 +142,12 @@ public class MeasureToMeasureNumberEdgeTest {
     public void testGetValue_4() throws Exception
     {
         fixture.usesLinearDist = true;
-        fixture.setWeight(BigDecimal.ONE);
+        fixture.setWeight(1.0);
         fixture.setNormalizer(null);
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(55.0, result.doubleValue(), 0.001);
+        assertEquals(55.0, result, 0.001);
     }
 
     /**
@@ -162,11 +160,11 @@ public class MeasureToMeasureNumberEdgeTest {
     public void testGetValue_5() throws Exception
     {
         fixture.usesLinearDist = true;
-        fixture.setWeight(BigDecimal.ONE);
-        final BigDecimal result = fixture.getValue();
+        fixture.setWeight(1.0);
+        final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(55.0, result.doubleValue(), 0.001);
+        assertEquals(55.0, result, 0.001);
     }
 
     /**
@@ -179,12 +177,12 @@ public class MeasureToMeasureNumberEdgeTest {
     public void testGetValue_6() throws Exception
     {
         fixture.usesLinearDist = false;
-        fixture.setWeight(BigDecimal.ONE);
+        fixture.setWeight(1.0);
         fixture.setNormalizer(null);
-        final BigDecimal result = fixture.getValue();
+        final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(55.0, result.doubleValue(), 0.001);
+        assertEquals(55.0, result, 0.001);
     }
 
     /**
@@ -209,22 +207,22 @@ public class MeasureToMeasureNumberEdgeTest {
         src.setType(MeasureType.NUMBER);
         final ValueNode srcsrc = new ValueNode(graph, "srcsrc", "owner", "tool");
         final ValueToMeasureEdge v2m = new ValueToMeasureEdge("preedge", srcsrc, src);
-        srcsrc.addValue(BigDecimal.TEN);
-        srcsrc.addValue(new BigDecimal(100.0));
+        srcsrc.addValue(10.0);
+        srcsrc.addValue(100.0);
         fixture = new MeasureToMeasureNumberEdge("edge", src, dest);
         fixture.dist = new PositiveLinearDistribution();
-        fixture.setRank(BigDecimal.ONE);
+        fixture.setRank(1);
         src.setProcessor(new NumberMeanAggregator(src));
 
         graph.addEdge(src, dest, fixture);
         graph.addEdge(srcsrc, src, v2m);
 
-        fixture.maxPoints = new BigDecimal(100.0);
+        fixture.maxPoints = 100.0;
         fixture.usesLinearDist = false;
-        fixture.lowerBound = BigDecimal.ZERO;
-        fixture.weight = BigDecimal.ONE;
+        fixture.lowerBound = 0.0;
+        fixture.weight = 1.0;
         fixture.setNormalizer(new NullNormalizer(fixture, "LOC", NormalizationRange.CLASS));
-        fixture.upperBound = BigDecimal.ONE;
+        fixture.upperBound = 1.0;
 
         src.getValue();
     }
