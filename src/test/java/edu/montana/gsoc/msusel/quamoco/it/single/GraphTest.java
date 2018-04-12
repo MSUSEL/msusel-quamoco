@@ -26,6 +26,7 @@
 package edu.montana.gsoc.msusel.quamoco.it.single;
 
 import edu.montana.gsoc.msusel.codetree.CodeTree;
+import edu.montana.gsoc.msusel.codetree.DefaultCodeTree;
 import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
 import edu.montana.gsoc.msusel.codetree.node.structural.ProjectNode;
 import edu.montana.gsoc.msusel.metrics.Measurement;
@@ -63,14 +64,14 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(fixture);
         assertTrue(fixture instanceof FactorNode);
 
-        FileNode fn = new FileNode("file1", null);
-        FileNode fn2 = new FileNode("file2", null);
+        FileNode fn = new FileNode("file1", null, null);
+        FileNode fn2 = new FileNode("file2", null, null);
         MeasuresTable.getInstance().clean();
         MeasuresTable.getInstance().store(Measurement.of("Test Normalization @Source Code Part").on(fn).withValue(10.0));
         MeasuresTable.getInstance().store(Measurement.of("Test Normalization @Source Code Part").on(fn2).withValue(90.0));
         MeasuresTable.getInstance().store(Measurement.of("NormMeas").on(fn).withValue(10.0));
         MeasuresTable.getInstance().store(Measurement.of("NormMeas").on(fn2).withValue(90.0));
-        CodeTree tree = new CodeTree();
+        CodeTree tree = new DefaultCodeTree();
         tree.setProject(ProjectNode.builder().key("project").create());
         tree.getProject().addChild(fn);
         tree.getProject().addChild(fn2);
@@ -103,12 +104,12 @@ public class GraphTest extends BaseTestClass {
         Node fixture = findNodeByName("Security");
         assertNotNull(fixture);
 
-        FileNode fn = new FileNode("file1", null);
-        FileNode fn2 = new FileNode("file2", null);
+        FileNode fn = new FileNode("file1", null, null);
+        FileNode fn2 = new FileNode("file2", null, null);
         MeasuresTable.getInstance().clean();
         MeasuresTable.getInstance().store(Measurement.of("Test Normalization @Source Code Part").on(fn).withValue(10.0));
         MeasuresTable.getInstance().store(Measurement.of("Test Normalization @Source Code Part").on(fn2).withValue(90.0));
-        CodeTree tree = new CodeTree();
+        CodeTree tree = new DefaultCodeTree();
         tree.setProject(ProjectNode.builder().key("project").create());
         tree.getProject().addChild(fn);
         tree.getProject().addChild(fn2);
@@ -140,12 +141,12 @@ public class GraphTest extends BaseTestClass {
         Node fixture = findNodeByName("Maintainability");
         assertNotNull(fixture);
 
-        FileNode fn = new FileNode("file1", null);
-        FileNode fn2 = new FileNode("file2", null);
+        FileNode fn = new FileNode("file1", null, null);
+        FileNode fn2 = new FileNode("file2", null, null);
         MeasuresTable.getInstance().clean();
         MeasuresTable.getInstance().store(Measurement.of("Test Normalization @Source Code Part").on(fn).withValue(10.0));
         MeasuresTable.getInstance().store(Measurement.of("Test Normalization @Source Code Part").on(fn2).withValue(90.0));
-        CodeTree tree = new CodeTree();
+        CodeTree tree = new DefaultCodeTree();
         tree.setProject(ProjectNode.builder().key("project").create());
         tree.getProject().addChild(fn);
         tree.getProject().addChild(fn2);
@@ -184,12 +185,12 @@ public class GraphTest extends BaseTestClass {
         assertEquals(5, graph.inDegree(fixture));
 
         int i = 0;
-        FileNode fn = new FileNode("file1", null);
-        FileNode fn2 = new FileNode("file2", null);
+        FileNode fn = new FileNode("file1", null, null);
+        FileNode fn2 = new FileNode("file2", null, null);
         MeasuresTable.getInstance().clean();
         MeasuresTable.getInstance().store(Measurement.of("NormMeas").on(fn).withValue(10.0));
         MeasuresTable.getInstance().store(Measurement.of("NormMeas").on(fn2).withValue(90.0));
-        CodeTree tree = new CodeTree();
+        CodeTree tree = new DefaultCodeTree();
         tree.setProject(ProjectNode.builder().key("project").create());
         tree.getProject().addChild(fn);
         tree.getProject().addChild(fn2);
@@ -228,8 +229,8 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(measure.getOwnedBy());
         assertNotNull(measure.getProcessor());
 
-        Finding f1 = new Finding(new FileNode("file1", null), "key", "name");
-        Finding f2 = new Finding(new FileNode("file1", null), "key", "name2");
+        Finding f1 = new Finding(new FileNode("file1", null, null), "key", "name");
+        Finding f2 = new Finding(new FileNode("file1", null, null), "key", "name2");
 
         finding.addFinding(f1);
         finding.addFinding(f2);
@@ -270,12 +271,12 @@ public class GraphTest extends BaseTestClass {
         }
 
         int i = 0;
-        FileNode fn = new FileNode("file1", null);
-        FileNode fn2 = new FileNode("file2", null);
+        FileNode fn = new FileNode("file1", null, null);
+        FileNode fn2 = new FileNode("file2", null, null);
         MeasuresTable.getInstance().clean();
         MeasuresTable.getInstance().store(Measurement.of("NormMeas").on(fn).withValue(10.0));
         MeasuresTable.getInstance().store(Measurement.of("NormMeas").on(fn2).withValue(90.0));
-        CodeTree tree = new CodeTree();
+        CodeTree tree = new DefaultCodeTree();
         tree.setProject(ProjectNode.builder().key("project").create());
         tree.getProject().addChild(fn);
         tree.getProject().addChild(fn2);
@@ -416,8 +417,8 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(measure.getOwnedBy());
         assertNotNull(measure.getProcessor());
 
-        Finding f1 = new Finding(new FileNode("file1", null), "key", "name");
-        Finding f2 = new Finding(new FileNode("file1", null), "key", "name2");
+        Finding f1 = new Finding(new FileNode("file1", null, null), "key", "name");
+        Finding f2 = new Finding(new FileNode("file1", null, null), "key", "name2");
 
         finding.addFinding(f1);
         finding.addFinding(f2);
@@ -455,8 +456,8 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(measure.getOwnedBy());
         assertNotNull(measure.getProcessor());
 
-        Finding f1 = new Finding(new FileNode("file1", null), "key", "name");
-        Finding f2 = new Finding(new FileNode("file1", null), "key", "name2");
+        Finding f1 = new Finding(new FileNode("file1", null, null), "key", "name");
+        Finding f2 = new Finding(new FileNode("file1", null, null), "key", "name2");
 
         finding.addFinding(f1);
         finding.addFinding(f2);
@@ -494,8 +495,8 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(measure.getOwnedBy());
         assertNotNull(measure.getProcessor());
 
-        Finding f1 = new Finding(new FileNode("file1", null), "key", "name");
-        Finding f2 = new Finding(new FileNode("file1", null), "key", "name2");
+        Finding f1 = new Finding(new FileNode("file1", null, null), "key", "name");
+        Finding f2 = new Finding(new FileNode("file1", null, null), "key", "name2");
 
         finding.addFinding(f1);
         finding.addFinding(f2);
@@ -533,8 +534,8 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(measure.getOwnedBy());
         assertNotNull(measure.getProcessor());
 
-        Finding f1 = new Finding(new FileNode("file1", null), "key", "name");
-        Finding f2 = new Finding(new FileNode("file1", null), "key", "name2");
+        Finding f1 = new Finding(new FileNode("file1", null, null), "key", "name");
+        Finding f2 = new Finding(new FileNode("file1", null, null), "key", "name2");
 
         finding.addFinding(f1);
         finding.addFinding(f2);
@@ -583,8 +584,8 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(fn.getOwnedBy());
         //assertNotNull(fn.getProcessor());
 
-        Finding f1 = new Finding(new FileNode("file1", null), "key", "name");
-        Finding f2 = new Finding(new FileNode("file1", null), "key", "name2");
+        Finding f1 = new Finding(new FileNode("file1", null, null), "key", "name");
+        Finding f2 = new Finding(new FileNode("file1", null, null), "key", "name2");
 
         fn.addFinding(f1);
         fn.addFinding(f2);
@@ -608,8 +609,8 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(fn.getOwnedBy());
         //assertNotNull(fn.getProcessor());
 
-        Finding f1 = new Finding(new FileNode("file1", null), "key", "name");
-        Finding f2 = new Finding(new FileNode("file1", null), "key", "name2");
+        Finding f1 = new Finding(new FileNode("file1", null, null), "key", "name");
+        Finding f2 = new Finding(new FileNode("file1", null, null), "key", "name2");
 
         fn.addFinding(f1);
         fn.addFinding(f2);
@@ -633,8 +634,8 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(fn.getOwnedBy());
         //assertNotNull(fn.getProcessor());
 
-        Finding f1 = new Finding(new FileNode("file1", null), "key", "name");
-        Finding f2 = new Finding(new FileNode("file1", null), "key", "name2");
+        Finding f1 = new Finding(new FileNode("file1", null, null), "key", "name");
+        Finding f2 = new Finding(new FileNode("file1", null, null), "key", "name2");
 
         fn.addFinding(f1);
         fn.addFinding(f2);
@@ -658,8 +659,8 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(fn.getOwnedBy());
         //assertNotNull(fn.getProcessor());
 
-        Finding f1 = new Finding(new FileNode("file1", null), "key", "name");
-        Finding f2 = new Finding(new FileNode("file1", null), "key", "name2");
+        Finding f1 = new Finding(new FileNode("file1", null, null), "key", "name");
+        Finding f2 = new Finding(new FileNode("file1", null, null), "key", "name2");
 
         fn.addFinding(f1);
         fn.addFinding(f2);

@@ -29,6 +29,7 @@ import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.codetree.CodeTree;
+import edu.montana.gsoc.msusel.codetree.DefaultCodeTree;
 import edu.montana.gsoc.msusel.codetree.node.member.MethodNode;
 import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
 import edu.montana.gsoc.msusel.codetree.node.structural.ProjectNode;
@@ -166,7 +167,7 @@ public class UnrangedNormalizerTest {
         graph.addEdge(vn, src, new ValueToMeasureEdge("v2m", vn, src));
 
         // setup metrics
-        CodeTree tree = new CodeTree();
+        CodeTree tree = new DefaultCodeTree();
         ProjectNode proj = ProjectNode.builder().key("Test").create();
 
         file = FileNode.builder().key("path").create();

@@ -28,6 +28,7 @@ package edu.montana.gsoc.msusel.quamoco.processor;
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.codetree.CodeTree;
+import edu.montana.gsoc.msusel.codetree.DefaultCodeTree;
 import edu.montana.gsoc.msusel.codetree.node.member.MethodNode;
 import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
 import edu.montana.gsoc.msusel.codetree.node.structural.ProjectNode;
@@ -297,7 +298,7 @@ public class ExtentTest {
         fixture = Extent.getInstance();
         fixture.clearExtents();
 
-        CodeTree tree = new CodeTree();
+        CodeTree tree = new DefaultCodeTree();
 
         ProjectNode proj = ProjectNode.builder().key("Test").create();
         MeasuresTable.getInstance().store(Measurement.of("LOC").on(proj).withValue(1000.0));
