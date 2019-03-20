@@ -2,8 +2,9 @@
 @REM The MIT License (MIT)
 @REM
 @REM MSUSEL Quamoco Implementation
-@REM Copyright (c) 2015-2018 Montana State University, Gianforte School of Computing,
-@REM Software Engineering Laboratory
+@REM Copyright (c) 2015-2019 Montana State University, Gianforte School of Computing,
+@REM Software Engineering Laboratory and Idaho State University, Informatics and
+@REM Computer Science, Empirical Software Engineering Laboratory
 @REM
 @REM Permission is hereby granted, free of charge, to any person obtaining a copy
 @REM of this software and associated documentation files (the "Software"), to deal
