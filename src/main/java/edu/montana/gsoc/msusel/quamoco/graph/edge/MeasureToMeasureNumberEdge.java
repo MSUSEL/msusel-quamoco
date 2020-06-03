@@ -33,7 +33,7 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
  * than FINDINGS) and is only concerned with the aggregation of these values.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class MeasureToMeasureNumberEdge extends WeightedRankedEdge {
 

@@ -37,7 +37,7 @@ import java.util.Set;
  * Edge connecting two MeasureNodes but which only aggregates Finding Sets
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.23.0
  */
 public class MeasureToMeasureFindingsEdge extends AbstractEdge implements FindingsEdge {
 

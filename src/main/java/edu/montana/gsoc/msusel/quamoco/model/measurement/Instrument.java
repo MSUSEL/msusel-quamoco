@@ -39,7 +39,7 @@ import java.util.List;
  * can be, for example, a static analysis tool.
  * 
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public abstract class Instrument extends MeasurementMethod {
 

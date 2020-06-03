@@ -48,7 +48,7 @@ import java.util.Map;
  * measures which affect a factor.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class MeasureRanking extends MeasureEvaluation implements Ranking {
 

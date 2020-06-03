@@ -39,7 +39,7 @@ import java.util.Set;
  * that a static analysis rule was activated in a tool.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class FindingNode extends Node {
 

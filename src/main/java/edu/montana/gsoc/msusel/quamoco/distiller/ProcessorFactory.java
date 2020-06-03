@@ -46,6 +46,10 @@ import edu.montana.gsoc.msusel.quamoco.processor.evaluators.MeanEvaluator;
 import edu.montana.gsoc.msusel.quamoco.processor.evaluators.SingleMeasureEvaluator;
 import edu.montana.gsoc.msusel.quamoco.processor.evaluators.WeightedSumEvaluator;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class ProcessorFactory {
 
     private ProcessorFactory() {

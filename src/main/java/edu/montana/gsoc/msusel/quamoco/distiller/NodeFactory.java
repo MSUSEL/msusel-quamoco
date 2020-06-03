@@ -37,6 +37,10 @@ import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
 import edu.montana.gsoc.msusel.quamoco.model.measurement.ToolBasedInstrument;
 import edu.montana.gsoc.msusel.quamoco.model.measurement.aggregation.FindingsUnionMeasureAggregation;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class NodeFactory {
 
     private NodeFactory() {

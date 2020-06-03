@@ -26,18 +26,13 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.extents;
 
-import edu.montana.gsoc.msusel.codetree.node.AbstractNode;
-import edu.montana.gsoc.msusel.codetree.node.member.FieldNode;
-import edu.montana.gsoc.msusel.codetree.node.member.MethodNode;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
-import edu.montana.gsoc.msusel.codetree.node.structural.ModuleNode;
-import edu.montana.gsoc.msusel.codetree.node.structural.NamespaceNode;
-import edu.montana.gsoc.msusel.codetree.node.structural.ProjectNode;
-import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
+import edu.isu.isuese.datamodel.Module;
+import edu.isu.isuese.datamodel.System;
+import edu.isu.isuese.datamodel.*;
 
 /**
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class NodeExtentDecoratorFactory {
 
@@ -49,23 +44,32 @@ public class NodeExtentDecoratorFactory {
         return Holder.INSTANCE;
     }
 
-    public AbstractNodeExtentDecorator getDecorator(AbstractNode node) {
-        if (node instanceof TypeNode) {
-            return new TypeNodeExtentDecorator(node);
-        } else if (node instanceof MethodNode) {
-            return new MethodNodeExtentDecorator(node);
-        } else if (node instanceof FileNode) {
-            return new FileNodeExtentDecorator(node);
-        } else if (node instanceof FieldNode) {
-            return new FieldNodeExtentDecorator(node);
-        } else if (node instanceof ModuleNode) {
-            return new ModuleNodeExtentDecorator(node);
-        } else if (node instanceof NamespaceNode) {
-            return new NamespaceNodeExtentDecorator(node);
-        } else if (node instanceof ProjectNode) {
+    public AbstractExtentDecorator getDecorator(Measurable node) {
+        if (node instanceof Type) {
+            return new TypeExtentDecorator(node);
+        } else if (node instanceof Method) {
+            return new MethodExtentDecorator(node);
+        } else if (node instanceof File) {
+            return new FileExtentDecorator(node);
+        } else if (node instanceof Field) {
+            return new FieldExtentDecorator(node);
+        } else if (node instanceof Module) {
+            return new ModuleExtentDecorator(node);
+        } else if (node instanceof Namespace) {
+            return new NamespaceExtentDecorator(node);
+        } else if (node instanceof Project) {
             return new ProjectNodeExtentDecorator(node);
-        } else {
-            return new FileNodeExtentDecorator(node);
+        } else if (node instanceof PatternInstance) {
+            return new PatternInstanceExtentDecorator(node);
+        } else if (node instanceof System) {
+            return new SystemExtentDecorator(node);
+        } else if (node instanceof Literal) {
+            return new LiteralExtentDecorator(node);
+        } else if (node instanceof Initializer) {
+            return new InitializerExtentDecorator(node);
+        }
+        else {
+            return new FileExtentDecorator(node);
         }
     }
 

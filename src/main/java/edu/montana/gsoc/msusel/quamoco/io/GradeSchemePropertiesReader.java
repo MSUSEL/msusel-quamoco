@@ -38,7 +38,7 @@ import java.util.Properties;
  * Properties reader for the default grade scheme for quamoco.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class GradeSchemePropertiesReader {
 

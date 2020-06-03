@@ -47,7 +47,7 @@ import java.util.Map;
  * manual measurement, or an aggregation of other measures.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class Measure extends QMElement {
 

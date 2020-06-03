@@ -41,7 +41,7 @@ import java.util.List;
  * This can, for example, be part of a code review.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class ManualInstrument extends Instrument {
 

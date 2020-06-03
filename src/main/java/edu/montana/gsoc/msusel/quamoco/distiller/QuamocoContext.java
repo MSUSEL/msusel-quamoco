@@ -24,45 +24,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package edu.montana.gsoc.msusel.quamoco.processor.extents;
+package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import edu.montana.gsoc.msusel.codetree.INode;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
-import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
-import edu.montana.gsoc.msusel.metrics.MeasuresTable;
-import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
+import edu.isu.isuese.datamodel.Project;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.List;
+public class QuamocoContext {
 
-/**
- * @author Isaac Griffith
- * @version 1.2.0
- */
-public class FileNodeExtentDecorator extends AbstractNodeExtentDecorator {
+    @Getter
+    @Setter
+    private Project project;
 
-    public FileNodeExtentDecorator(INode node) {
-        super(node);
+    private QuamocoContext() {}
+
+    private static final class Holder {
+        private static final QuamocoContext INSTANCE = new QuamocoContext();
     }
 
-    @Override
-    public NormalizationRange findRange(String metric) {
-        return NormalizationRange.FILE;
-    }
-
-    @Override
-    public double findFileExtent(String metric) {
-        return (double) MeasuresTable.instance.retrieve(decorated, metric);
-    }
-
-    @Override
-    public double findMethodExtent(String metric) {
-        FileNode f = (FileNode) decorated;
-        return sumMetrics(metric, f.methods());
-    }
-
-    @Override
-    public double findClassExtent(String metric) {
-        FileNode f = (FileNode) decorated;
-        return sumMetrics(metric, (List<TypeNode>) f.types());
+    public static QuamocoContext instance() {
+        return Holder.INSTANCE;
     }
 }

@@ -27,55 +27,23 @@
 package edu.montana.gsoc.msusel.quamoco.processor.extents;
 
 import com.google.common.annotations.VisibleForTesting;
-import edu.montana.gsoc.msusel.codetree.INode;
-import edu.montana.gsoc.msusel.codetree.node.AbstractNode;
-import edu.montana.gsoc.msusel.codetree.utils.CodeTreeUtils;
-import edu.montana.gsoc.msusel.metrics.MeasuresTable;
+import edu.isu.isuese.datamodel.Measurable;
+import edu.isu.isuese.datamodel.Measure;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
-public abstract class AbstractNodeExtentDecorator extends AbstractNode {
+public abstract class AbstractExtentDecorator implements Measurable {
 
-    protected INode decorated;
+    protected Measurable decorated;
 
-    public AbstractNodeExtentDecorator(INode node) {
-        super(null, null);
+    public AbstractExtentDecorator(Measurable node) {
         this.decorated = node;
-    }
-
-    @Override
-    public Object type() {
-        return decorated.type();
-    }
-
-    @Override
-    public Object name() {
-        return decorated.name();
-    }
-
-    @Override
-    public void update(INode other) {
-        decorated.update(other);
-    }
-
-    @Override
-    public INode cloneNoChildren() {
-        return decorated.cloneNoChildren();
-    }
-
-    @Override
-    public Object extractTree(Object tree) {
-        return decorated.extractTree(tree);
-    }
-
-    @Override
-    public Object findParent(CodeTreeUtils utils) {
-        return decorated.findParent(utils);
     }
 
     public abstract NormalizationRange findRange(String metric);
@@ -85,6 +53,22 @@ public abstract class AbstractNodeExtentDecorator extends AbstractNode {
     public abstract double findMethodExtent(String metric);
 
     public abstract double findClassExtent(String metric);
+
+    /**
+     * @return The parent Measurable of this Measurable
+     */
+    @Override
+    public Measurable getParent() {
+        return decorated.getParent();
+    }
+
+    /**
+     * @return A key based on the id of this Measurable which will be used when constructing the reference held by a Measure
+     */
+    @Override
+    public String getRefKey() {
+        return decorated.getRefKey();
+    }
 
     /**
      * Sums the values of the given name across the given collection of nodes.
@@ -99,14 +83,14 @@ public abstract class AbstractNodeExtentDecorator extends AbstractNode {
      *             stored in any of the nodes
      */
     @VisibleForTesting
-    double sumMetrics(final String metric, Collection<? extends AbstractNode> nodes) {
+    double sumMetrics(final String metric, Collection<? extends Measurable> nodes) {
         if (metric == null || metric.isEmpty())
             throw new IllegalArgumentException("Metric name cannot be null or empty");
 
         double value = 0.0;
 
-        for (AbstractNode node : nodes) {
-            value = value + (Double) MeasuresTable.getInstance().retrieve(node, metric);
+        for (Measurable node : nodes) {
+            value = value + (Double) Objects.requireNonNull(Measure.retrieve(node, metric)).getValue();
         }
 
         return value;

@@ -62,7 +62,7 @@ import static org.apache.commons.lang3.StringEscapeUtils.escapeXml10;
  * </ul>
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 @ToString(of = {"name", "identifier", "fileName", "version"})
 @EqualsAndHashCode(of = {"name", "identifier", "fileName", "version"})

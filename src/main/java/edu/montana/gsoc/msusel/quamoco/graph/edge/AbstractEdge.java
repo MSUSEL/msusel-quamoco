@@ -42,7 +42,7 @@ import java.util.List;
  * source and provide this normalized value to the dest.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 @EqualsAndHashCode(of = {"name"})
 @ToString(of = {"name"})

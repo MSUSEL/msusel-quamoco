@@ -48,7 +48,7 @@ import java.util.UUID;
  * of all QMElements.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 @EqualsAndHashCode(of = {"identifier"})
 @ToString(of = {"identifier"})

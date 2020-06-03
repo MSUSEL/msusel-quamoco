@@ -44,7 +44,7 @@ import java.util.List;
  * produced by the Quamoco Quality Model Editor.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class QuamocoScriptWriter extends AbstractWriter {
 

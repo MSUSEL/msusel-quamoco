@@ -38,7 +38,7 @@ import java.util.Set;
  * Class used to normalize un-ranged sets of findings.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class RangedNormalizer extends Normalizer {
 

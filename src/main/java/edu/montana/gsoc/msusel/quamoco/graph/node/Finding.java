@@ -26,7 +26,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
-import edu.montana.gsoc.msusel.codetree.node.AbstractNode;
+import edu.isu.isuese.datamodel.Component;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -38,7 +38,7 @@ import lombok.ToString;
  * location in the CodeTree in which the rule was triggered.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 @EqualsAndHashCode
 @ToString
@@ -51,7 +51,7 @@ public class Finding {
      * Location in the CodeTree where the Finding was found
      */
     @Getter
-    private AbstractNode location;
+    private Component location;
     /**
      * Associated Issue Key (Rule Key) to which this finding belongs
      */
@@ -71,7 +71,7 @@ public class Finding {
      * @param issueKey  Issue Key
      * @param issueName Issue Name
      */
-    public Finding(final AbstractNode location, final String issueKey, final String issueName) {
+    public Finding(final Component location, final String issueKey, final String issueName) {
         if (location == null || issueKey == null || issueKey.isEmpty() || issueName == null || issueName.isEmpty()) {
             throw new IllegalArgumentException();
         }
@@ -85,7 +85,7 @@ public class Finding {
     /**
      * @param location the new location of the activated issue
      */
-    public void setLocation(final AbstractNode location) {
+    public void setLocation(final Component location) {
         if (location == null) {
             return;
         }

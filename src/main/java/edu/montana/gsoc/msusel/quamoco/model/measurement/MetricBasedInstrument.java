@@ -43,7 +43,7 @@ import java.util.List;
  * lines of code or clone coverage.
  * 
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class MetricBasedInstrument extends ToolBasedInstrument {
 

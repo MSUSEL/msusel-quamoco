@@ -36,7 +36,7 @@ import edu.montana.gsoc.msusel.quamoco.processor.ProcessorFactory;
  * Modifies the graph by adding Evaluators to existing Nodes.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class ProcessorPopulator implements GraphModifier {
 

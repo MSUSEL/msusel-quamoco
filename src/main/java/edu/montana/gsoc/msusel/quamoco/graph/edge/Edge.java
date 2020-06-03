@@ -34,7 +34,7 @@ import java.util.List;
  * The interface for edges used in the Quamoco processing graph.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public interface Edge {
 

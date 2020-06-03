@@ -36,7 +36,7 @@ import edu.montana.gsoc.msusel.quamoco.model.entity.Stakeholder;
 
 /**
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class EntityFactory extends AbstractQMElementFactory {
 

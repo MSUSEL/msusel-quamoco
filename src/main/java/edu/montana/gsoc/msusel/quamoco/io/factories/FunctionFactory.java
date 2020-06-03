@@ -33,6 +33,10 @@ import edu.montana.gsoc.msusel.quamoco.model.func.LinearDecreasingFunction;
 import edu.montana.gsoc.msusel.quamoco.model.func.LinearIncreasingFunction;
 import org.w3c.dom.Element;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class FunctionFactory extends AbstractQMElementFactory {
 
     private FunctionFactory() {

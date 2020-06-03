@@ -40,6 +40,10 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Set;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class DistilledView {
 
     public static void main(String args[]) {

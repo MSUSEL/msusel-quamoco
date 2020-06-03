@@ -41,7 +41,7 @@ import java.util.Set;
  * collects the incoming findings sets and returns the union of all the sets.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class FindingsUnionAggregator extends FindingsAggregator {
 

@@ -34,6 +34,10 @@ import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class DistillerTest {
 
     public static void main(String[] args) {

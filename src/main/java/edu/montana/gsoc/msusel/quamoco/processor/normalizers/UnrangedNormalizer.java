@@ -26,7 +26,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.normalizers;
 
-import edu.montana.gsoc.msusel.metrics.MeasuresTable;
+import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
@@ -39,7 +39,7 @@ import java.util.Set;
  * Class used to normalize un-ranged sets of findings.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class UnrangedNormalizer extends Normalizer {
 
@@ -68,7 +68,7 @@ public class UnrangedNormalizer extends Normalizer {
 
         double totalAffected = 0.0;
         NormalizationRange newRange = Extent.getInstance()
-                .findRange(MeasuresTable.getInstance().getTree(), metric, range, findings);
+                .findRange(QuamocoContext.instance().getProject(), metric, range, findings);
 
         Extent ext = Extent.getInstance();
         for (final Finding f : findings)

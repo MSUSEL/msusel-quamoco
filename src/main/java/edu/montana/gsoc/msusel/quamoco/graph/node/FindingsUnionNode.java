@@ -38,7 +38,7 @@ import java.util.Set;
  * Node which simply constructs a union of all input findings nodes.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class FindingsUnionNode extends Node {
 

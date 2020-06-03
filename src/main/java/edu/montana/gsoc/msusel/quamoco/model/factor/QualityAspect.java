@@ -40,7 +40,7 @@ import java.util.Map;
  * A factor representing an aspect of a descriptive quality model.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public abstract class QualityAspect extends Factor {
 

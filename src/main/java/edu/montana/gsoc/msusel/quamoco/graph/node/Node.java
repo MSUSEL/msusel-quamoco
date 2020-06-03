@@ -44,7 +44,7 @@ import java.util.List;
  * graph.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 @EqualsAndHashCode(of = {"name", "ownedBy"})
 @ToString(of = "name")

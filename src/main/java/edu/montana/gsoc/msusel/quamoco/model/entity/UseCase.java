@@ -40,7 +40,7 @@ import java.util.List;
  * If they are characterized by a factors, a Use Case-Factor results
  * 
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class UseCase extends Entity {
 

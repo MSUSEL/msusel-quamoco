@@ -30,7 +30,7 @@ package edu.montana.gsoc.msusel.quamoco.model;
  * Enumeration indicating the effect of a factor on another factor
  * 
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public enum InfluenceEffect {
 

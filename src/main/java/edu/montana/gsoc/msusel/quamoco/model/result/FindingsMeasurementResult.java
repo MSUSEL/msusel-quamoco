@@ -33,7 +33,7 @@ import lombok.ToString;
 
 /**
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 @ToString
 public class FindingsMeasurementResult extends MeasurementResult {

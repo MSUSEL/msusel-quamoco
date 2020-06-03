@@ -45,7 +45,7 @@ import java.util.List;
  * An evaluation by applying pre-defined operations on a single measure.
  * 
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class SingleMeasureEvaluation extends MeasureEvaluation {
 

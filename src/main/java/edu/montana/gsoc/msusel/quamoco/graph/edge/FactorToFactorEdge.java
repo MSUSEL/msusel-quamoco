@@ -34,7 +34,7 @@ import lombok.Getter;
  * Edge connecting one FactorNode to another FactorNode.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class FactorToFactorEdge extends WeightedRankedEdge implements InfluenceEdge {
 

@@ -37,7 +37,7 @@ import java.util.List;
  * the incoming values and returns the max of the set.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class NumberMaxAggregator extends Aggregator {
 

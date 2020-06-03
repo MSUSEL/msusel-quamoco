@@ -27,9 +27,9 @@
 package edu.montana.gsoc.msusel.quamoco.processor.extents;
 
 import com.google.common.collect.Sets;
-import edu.montana.gsoc.msusel.codetree.CodeTree;
-import edu.montana.gsoc.msusel.codetree.utils.CodeTreeUtils;
-import edu.montana.gsoc.msusel.metrics.MeasuresTable;
+import edu.isu.isuese.datamodel.Measure;
+import edu.isu.isuese.datamodel.Project;
+import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
@@ -83,7 +83,7 @@ import java.util.Set;
  * </ul>
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class Extent {
 
@@ -177,7 +177,7 @@ public class Extent {
      */
     public double findExtent(final Finding finding, final String metric, final NormalizationRange range) {
         double value = 0.0;
-        AbstractNodeExtentDecorator node = NodeExtentDecoratorFactory.getInstance().getDecorator(finding.getLocation());
+        AbstractExtentDecorator node = NodeExtentDecoratorFactory.getInstance().getDecorator(finding.getLocation());
 
         switch (range) {
             case CLASS:
@@ -225,16 +225,16 @@ public class Extent {
         List<Double> values = null;
         switch (range) {
             case CLASS:
-                values = MeasuresTable.getInstance().getAllClassValues(metric);
+                values = Measure.getAllClassValues(QuamocoContext.instance().getProject(), metric);
                 break;
             case FILE:
-                values = MeasuresTable.getInstance().getAllFileValues(metric);
+                values = Measure.getAllFileValues(QuamocoContext.instance().getProject(), metric);
                 break;
             case METHOD:
-                values = MeasuresTable.getInstance().getAllMethodValues(metric);
+                values = Measure.getAllMethodValues(QuamocoContext.instance().getProject(), metric);
                 break;
             case NA:
-                return (Double) MeasuresTable.getInstance().getProjectMetric(metric);
+                return Measure.getProjectMetric(QuamocoContext.instance().getProject(), metric);
         }
 
         for (Double value : values) {
@@ -266,12 +266,11 @@ public class Extent {
      *            The set of findings to search for the proper range over.
      * @return The new normalization range to be used.
      */
-    public NormalizationRange findRange(CodeTree tree, String metric, NormalizationRange prior, Set<Finding> findings) {
+    public NormalizationRange findRange(Project project, String metric, NormalizationRange prior, Set<Finding> findings) {
         NormalizationRange newRange = prior;
-        CodeTreeUtils utils = tree.getUtils();
         // First find the minimal range;
         for (final Finding f : findings) {
-            AbstractNodeExtentDecorator c = NodeExtentDecoratorFactory.getInstance().getDecorator(f.getLocation());
+            AbstractExtentDecorator c = NodeExtentDecoratorFactory.getInstance().getDecorator(f.getLocation());
             NormalizationRange temp = c.findRange(metric);
 
             if (temp.compareTo(newRange) < 0)
@@ -296,13 +295,13 @@ public class Extent {
      * @return The ratio representing the presence that this FindingNode has
      *         within the system as a whole.
      */
-    public double findFindingExtent(CodeTree tree, String metric, NormalizationRange normalizationRange,
-                                        FindingNode n) {
+    public double findFindingExtent(Project project, String metric, NormalizationRange normalizationRange,
+                                    FindingNode n) {
         double value = 0.0;
         NormalizationRange range = normalizationRange;
         if (!n.getFindings().isEmpty()) {
             if (range == NormalizationRange.NA) {
-                range = findRange(tree, metric, range, n.getFindings());
+                range = findRange(project, metric, range, n.getFindings());
             }
 
             value = findFindingsExtent(metric, n.getFindings(), range);

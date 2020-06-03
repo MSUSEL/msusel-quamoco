@@ -37,7 +37,7 @@ import java.util.Set;
  * An edge connecting a FindingNode to a MeasureNode.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class FindingToMeasureEdge extends AbstractEdge implements FindingsEdge {
 

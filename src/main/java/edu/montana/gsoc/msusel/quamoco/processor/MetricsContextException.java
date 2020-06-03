@@ -30,7 +30,7 @@ package edu.montana.gsoc.msusel.quamoco.processor;
  * Exception thrown when an issue occurs within the MetricsContext class.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class MetricsContextException extends Exception {
 

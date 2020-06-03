@@ -26,28 +26,28 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.extents;
 
-import edu.montana.gsoc.msusel.codetree.INode;
-import edu.montana.gsoc.msusel.codetree.node.AbstractNode;
-import edu.montana.gsoc.msusel.codetree.node.member.MethodNode;
-import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
-import edu.montana.gsoc.msusel.metrics.MeasuresTable;
+import edu.isu.isuese.datamodel.File;
+import edu.isu.isuese.datamodel.Measurable;
+import edu.isu.isuese.datamodel.Measure;
+import edu.isu.isuese.datamodel.Type;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
-import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
-public class TypeNodeExtentDecorator extends AbstractNodeExtentDecorator {
+public class FieldExtentDecorator extends AbstractExtentDecorator {
 
-    public TypeNodeExtentDecorator(INode node) {
+    public FieldExtentDecorator(Measurable node) {
         super(node);
     }
 
     @Override
     public NormalizationRange findRange(String metric) {
-        if (MeasuresTable.instance.hasMetric((AbstractNode) decorated, metric)) {
+        Measurable parent = decorated.getParent();
+        if (Measure.hasMetric(decorated, metric)) {
             return NormalizationRange.CLASS;
         } else {
             return NormalizationRange.FILE;
@@ -56,20 +56,29 @@ public class TypeNodeExtentDecorator extends AbstractNodeExtentDecorator {
 
     @Override
     public double findFileExtent(String metric) {
-        AbstractNode file = (AbstractNode) MeasuresTable.getInstance().getTree().getUtils().findParent(decorated);
-        return (double) MeasuresTable.instance.retrieve(file, metric);
+        Measurable type = decorated.getParent();
+        Measurable file = type.getParent();
+
+        if (file instanceof File) {
+            return Objects.requireNonNull(Measure.retrieve(file, metric)).getValue();
+        }
+
+        return 0.0;
     }
 
     @Override
     public double findMethodExtent(String metric) {
-        TypeNode t = (TypeNode) decorated;
-        return sumMetrics(metric, (List<MethodNode>) t.methods());
+        return 0.0;
     }
 
     @Override
     public double findClassExtent(String metric) {
-        return (double) MeasuresTable.instance.retrieve((AbstractNode) decorated, metric);
+        Measurable p = decorated.getParent();
+
+        if (p instanceof Type) {
+            return Objects.requireNonNull(Measure.retrieve(p, metric)).getValue();
+        }
+
+        return 0.0;
     }
-
-
 }

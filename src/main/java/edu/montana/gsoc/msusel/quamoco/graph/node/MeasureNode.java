@@ -29,7 +29,7 @@ package edu.montana.gsoc.msusel.quamoco.graph.node;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
-import edu.montana.gsoc.msusel.metrics.MeasuresTable;
+import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.RankedEdge;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
@@ -48,7 +48,7 @@ import java.util.Set;
  * MeasureNode -
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class MeasureNode extends Node {
 
@@ -169,7 +169,7 @@ public class MeasureNode extends Node {
                     } else if (n instanceof FindingNode) {
                         values.add(
                                 Extent.getInstance().findFindingExtent(
-                                        MeasuresTable.getInstance().getTree(), norm.getMetric(),
+                                        QuamocoContext.instance().getProject(), norm.getMetric(),
                                         norm.getRange(), (FindingNode) n));
                     }
                 }

@@ -35,7 +35,7 @@ import lombok.Getter;
  * type NUMBER. Thus, this edge does not pass findings.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class MeasureToFactorNumberEdge extends WeightedRankedEdge implements InfluenceEdge {
 

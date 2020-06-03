@@ -26,67 +26,40 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.extents;
 
-import edu.montana.gsoc.msusel.codetree.INode;
-import edu.montana.gsoc.msusel.codetree.node.AbstractNode;
-import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
-import edu.montana.gsoc.msusel.metrics.MeasuresTable;
+import edu.isu.isuese.datamodel.Measurable;
+import edu.isu.isuese.datamodel.Namespace;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
 /**
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
-public class MethodNodeExtentDecorator extends AbstractNodeExtentDecorator {
+public class NamespaceExtentDecorator extends AbstractExtentDecorator {
 
-    public MethodNodeExtentDecorator(INode node) {
+    public NamespaceExtentDecorator(Measurable node) {
         super(node);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NormalizationRange findRange(String metric) {
-        AbstractNode p = (AbstractNode) MeasuresTable.getInstance().getTree().getUtils().findParent(decorated);
-        if (MeasuresTable.instance.hasMetric(decorated, metric)) {
-            return NormalizationRange.METHOD;
-        } else if (MeasuresTable.instance.hasMetric(p, metric)) {
-            return NormalizationRange.CLASS;
-        } else {
-            return NormalizationRange.FILE;
-        }
+        return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public double findFileExtent(String metric) {
-        AbstractNode type = (AbstractNode) MeasuresTable.getInstance().getTree().getUtils().findParent(decorated);
-        AbstractNode file = (AbstractNode) MeasuresTable.getInstance().getTree().getUtils().findParent(type);
-
-        return (double) MeasuresTable.instance.retrieve(file, metric);
+        Namespace p = (Namespace) decorated;
+        return sumMetrics(metric, p.getFiles());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public double findMethodExtent(String metric) {
-        return (double) MeasuresTable.instance.retrieve((AbstractNode) decorated, metric);
+        Namespace p = (Namespace) decorated;
+        return sumMetrics(metric, p.getAllMethods());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public double findClassExtent(String metric) {
-        AbstractNode p = (AbstractNode) MeasuresTable.getInstance().getTree().getUtils().findParent(decorated);
-
-        if (p instanceof TypeNode) {
-            return (double) MeasuresTable.instance.retrieve(p, metric);
-        }
-
-        return 0.0;
+        Namespace p = (Namespace) decorated;
+        return sumMetrics(metric, p.getAllTypes());
     }
 }

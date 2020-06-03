@@ -32,7 +32,7 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
  * Edge connection two measure nodes which handles both Findings and Values.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class MeasureToMeasureFindingsNumberEdge extends WeightedRankedEdge {
 

@@ -26,45 +26,40 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.extents;
 
-import edu.montana.gsoc.msusel.codetree.INode;
-import edu.montana.gsoc.msusel.codetree.node.member.MethodNode;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
-import edu.montana.gsoc.msusel.codetree.node.structural.ProjectNode;
-import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
+import edu.isu.isuese.datamodel.Measurable;
+import edu.isu.isuese.datamodel.Project;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
-
-import java.util.List;
 
 /**
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
-public class ProjectNodeExtentDecorator extends AbstractNodeExtentDecorator {
+public class ProjectNodeExtentDecorator extends AbstractExtentDecorator {
 
-    public ProjectNodeExtentDecorator(INode node) {
+    public ProjectNodeExtentDecorator(Measurable node) {
         super(node);
     }
 
     @Override
     public NormalizationRange findRange(String metric) {
-        return null;
+        return NormalizationRange.NA;
     }
 
     @Override
     public double findFileExtent(String metric) {
-        ProjectNode p = (ProjectNode) decorated;
-        return sumMetrics(metric, (List<FileNode>) p.files());
+        Project p = (Project) decorated;
+        return sumMetrics(metric, p.getFiles());
     }
 
     @Override
     public double findMethodExtent(String metric) {
-        ProjectNode p = (ProjectNode) decorated;
-        return sumMetrics(metric, (List<MethodNode>) p.methods());
+        Project p = (Project) decorated;
+        return sumMetrics(metric, p.getAllMethods());
     }
 
     @Override
     public double findClassExtent(String metric) {
-        ProjectNode p = (ProjectNode) decorated;
-        return sumMetrics(metric, (List<TypeNode>) p.types());
+        Project p = (Project) decorated;
+        return sumMetrics(metric, p.getAllTypes());
     }
 }

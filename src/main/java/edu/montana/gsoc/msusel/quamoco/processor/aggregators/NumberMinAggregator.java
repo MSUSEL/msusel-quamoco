@@ -37,7 +37,7 @@ import java.util.List;
  * the incoming values and returns the minimum of the set.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class NumberMinAggregator extends Aggregator {
 

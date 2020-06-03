@@ -41,7 +41,7 @@ import java.util.List;
  * entity Product, which is also characterized by all ISO 25010 -ilities
  * 
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class ProductPart extends Entity {
 

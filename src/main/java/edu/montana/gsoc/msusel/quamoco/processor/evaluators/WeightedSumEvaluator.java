@@ -35,7 +35,7 @@ import java.util.List;
  * An evaluator for factors using a weighted sum of incoming factors
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class WeightedSumEvaluator extends Evaluator {
 

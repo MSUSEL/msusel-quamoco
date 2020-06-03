@@ -43,7 +43,7 @@ import java.util.List;
  * Metric Based Instrument. It is not supposed to be used.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public abstract class ToolBasedInstrument extends Instrument {
 

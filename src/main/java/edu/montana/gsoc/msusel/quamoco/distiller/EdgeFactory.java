@@ -36,6 +36,10 @@ import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
 import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
 import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class EdgeFactory {
 
     private EdgeFactory() {

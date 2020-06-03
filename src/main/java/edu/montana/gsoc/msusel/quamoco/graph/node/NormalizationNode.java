@@ -38,7 +38,7 @@ import lombok.Setter;
  * FIXME: Remove this class
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class NormalizationNode extends MeasureNode {
 

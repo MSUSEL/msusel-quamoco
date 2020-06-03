@@ -32,7 +32,7 @@ import edu.montana.gsoc.msusel.quamoco.processor.LinearDistribution;
  * Base implementation of a LinearDistribution
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public abstract class AbstractLinearDistribution implements LinearDistribution {
 

@@ -40,7 +40,7 @@ import java.util.Map;
  * Classification items are used to group related factors.
  * 
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public abstract class ClassificationItem extends Factor {
 

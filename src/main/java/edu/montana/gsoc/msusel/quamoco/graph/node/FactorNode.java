@@ -43,7 +43,7 @@ import java.util.Set;
  * but it is not a direct measure related to the product.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class FactorNode extends Node {
 

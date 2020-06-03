@@ -75,7 +75,7 @@ import java.util.Map.Entry;
  * Quality Model Editor
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class QMXMLReader extends AbstractQuamocoReader {
 

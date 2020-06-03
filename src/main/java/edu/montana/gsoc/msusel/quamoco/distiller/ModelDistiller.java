@@ -60,7 +60,7 @@ import java.util.*;
  * Distills a processing graph from a set of Quamoco Quality Models.
  *
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class ModelDistiller {
 

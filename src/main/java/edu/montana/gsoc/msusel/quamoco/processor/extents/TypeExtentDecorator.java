@@ -26,52 +26,46 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.extents;
 
-import com.google.common.collect.Sets;
-import edu.montana.gsoc.msusel.codetree.INode;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
-import edu.montana.gsoc.msusel.codetree.node.structural.NamespaceNode;
-import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
-import edu.montana.gsoc.msusel.metrics.MeasuresTable;
+import edu.isu.isuese.datamodel.Measurable;
+import edu.isu.isuese.datamodel.Measure;
+import edu.isu.isuese.datamodel.Type;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
-import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 
 /**
  * @author Isaac Griffith
- * @version 1.2.0
+ * @version 1.3.0
  */
-public class NamespaceNodeExtentDecorator extends AbstractNodeExtentDecorator {
+public class TypeExtentDecorator extends AbstractExtentDecorator {
 
-    public NamespaceNodeExtentDecorator(INode node) {
+    public TypeExtentDecorator(Measurable node) {
         super(node);
     }
 
     @Override
     public NormalizationRange findRange(String metric) {
-        return null;
+        if (Measure.hasMetric(decorated, metric)) {
+            return NormalizationRange.CLASS;
+        } else {
+            return NormalizationRange.FILE;
+        }
     }
 
     @Override
     public double findFileExtent(String metric) {
-        NamespaceNode p = (NamespaceNode) decorated;
-        Set<FileNode> files = Sets.newHashSet();
-        for (TypeNode tn : (List<TypeNode>) p.types()) {
-            files.add((FileNode) MeasuresTable.getInstance().getTree().getUtils().findParent(tn));
-        }
-
-        return sumMetrics(metric, files);
+        Measurable file = decorated.getParent();
+        return Objects.requireNonNull(Measure.retrieve(file, metric)).getValue();
     }
 
     @Override
     public double findMethodExtent(String metric) {
-        NamespaceNode p = (NamespaceNode) decorated;
-        return sumMetrics(metric, p.methods());
+        Type t = (Type) decorated;
+        return sumMetrics(metric, t.getAllMethods());
     }
 
     @Override
     public double findClassExtent(String metric) {
-        NamespaceNode p = (NamespaceNode) decorated;
-        return sumMetrics(metric, (List<TypeNode>) p.types());
+        return Objects.requireNonNull(Measure.retrieve(decorated, metric)).getValue();
     }
 }
