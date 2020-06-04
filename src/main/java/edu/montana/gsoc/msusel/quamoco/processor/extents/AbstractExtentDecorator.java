@@ -29,6 +29,7 @@ package edu.montana.gsoc.msusel.quamoco.processor.extents;
 import com.google.common.annotations.VisibleForTesting;
 import edu.isu.isuese.datamodel.Measurable;
 import edu.isu.isuese.datamodel.Measure;
+import edu.isu.isuese.datamodel.Project;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
 import java.util.Collection;
@@ -61,6 +62,9 @@ public abstract class AbstractExtentDecorator implements Measurable {
     public Measurable getParent() {
         return decorated.getParent();
     }
+
+    @Override
+    public Project getParentProject() { return decorated.getParentProject(); }
 
     /**
      * @return A key based on the id of this Measurable which will be used when constructing the reference held by a Measure
