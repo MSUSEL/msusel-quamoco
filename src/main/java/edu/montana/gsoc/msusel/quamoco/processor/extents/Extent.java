@@ -225,16 +225,16 @@ public class Extent {
         List<Double> values = null;
         switch (range) {
             case CLASS:
-                values = Measure.getAllClassValues(QuamocoContext.instance().getProject(), metric);
+                values = Measure.getAllClassValues(QuamocoContext.instance().getProject(), QuamocoContext.instance().getMetricRepoKey(), metric);
                 break;
             case FILE:
-                values = Measure.getAllFileValues(QuamocoContext.instance().getProject(), metric);
+                values = Measure.getAllFileValues(QuamocoContext.instance().getProject(), QuamocoContext.instance().getMetricRepoKey(), metric);
                 break;
             case METHOD:
-                values = Measure.getAllMethodValues(QuamocoContext.instance().getProject(), metric);
+                values = Measure.getAllMethodValues(QuamocoContext.instance().getProject(), QuamocoContext.instance().getMetricRepoKey(), metric);
                 break;
             case NA:
-                return Measure.getProjectMetric(QuamocoContext.instance().getProject(), metric);
+                return Measure.getProjectMetric(QuamocoContext.instance().getProject(), QuamocoContext.instance().getMetricRepoKey(), metric);
         }
 
         for (Double value : values) {

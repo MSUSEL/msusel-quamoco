@@ -36,6 +36,10 @@ public class QuamocoContext {
     @Setter
     private Project project;
 
+    @Getter
+    @Setter
+    private String metricRepoKey;
+
     private QuamocoContext() {}
 
     private static final class Holder {

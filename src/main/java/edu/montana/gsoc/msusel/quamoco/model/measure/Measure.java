@@ -181,15 +181,18 @@ public class Measure extends QMElement {
      */
     @Override
     public String xmlTag() {
-        String temp = MeasuresType.UNKNOWN_MEASURE.type();
+        String temp;
 
         switch (type) {
             case FINDINGS:
                 temp = MeasuresType.FINDING_MEASURE.type();
+                break;
             case NUMBER:
                 temp = MeasuresType.NUMBER_MEASURE.type();
+                break;
             case NONE:
                 temp = MeasuresType.UNKNOWN_MEASURE.type();
+                break;
             default:
                 temp = MeasuresType.FINDING_MEASURE.type();
         }
