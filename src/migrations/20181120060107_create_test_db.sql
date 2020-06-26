@@ -271,6 +271,9 @@ create table projects
     name       VARCHAR,
     version    VARCHAR,
     relPath    VARCHAR,
+    srcPath    VARCHAR,
+    binPath    VARCHAR,
+    testPath   VARCHAR,
     system_id  INTEGER REFERENCES systems (id),
     created_at NUMERIC,
     updated_at NUMERIC
@@ -299,10 +302,6 @@ create table modules
     moduleKey  VARCHAR,
     name       VARCHAR,
     relPath    VARCHAR,
-    srcPath    VARCHAR,
-    binPath    VARCHAR,
-    testPath   VARCHAR,
-    buildFiles VARCHAR,
     project_id INTEGER REFERENCES projects (id),
     created_at NUMERIC,
     updated_at NUMERIC
@@ -324,14 +323,15 @@ create table scms
 
 create table namespaces
 (
-    id           INTEGER NOT NULL PRIMARY KEY Autoincrement,
-    nsKey        VARCHAR,
-    name         VARCHAR,
-    namespace_id INTEGER REFERENCES namespaces (id),
-    relPath      VARCHAR,
-    module_id    INTEGER REFERENCES modules (id),
-    created_at   NUMERIC,
-    updated_at   NUMERIC
+    id            INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    nsKey         VARCHAR,
+    name          VARCHAR,
+    project_id    INTEGER REFERENCES projects (id),
+    relPath       VARCHAR,
+    parent_ns_id  INTEGER,
+    parent_mod_id INTEGER,
+    created_at    NUMERIC,
+    updated_at    NUMERIC
 );
 
 create table files
@@ -344,7 +344,8 @@ create table files
     relPath      VARCHAR,
     start        INTEGER,
     end          INTEGER,
-    namespace_id INTEGER REFERENCES namespaces (id),
+    project_id   INTEGER REFERENCES projects (id),
+    parent_ns_id INTEGER,
     created_at   NUMERIC,
     updated_at   NUMERIC
 );
@@ -362,61 +363,64 @@ create table imports
 
 create table unknown_types
 (
-    id            INTEGER NOT NULL PRIMARY KEY Autoincrement,
-    start         INTEGER,
-    end           INTEGER,
-    compKey       VARCHAR,
-    name          VARCHAR,
-    accessibility INTEGER,
-    file_id       INTEGER REFERENCES files (id),
-    created_at    NUMERIC,
-    updated_at    NUMERIC
+    id               INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    start            INTEGER,
+    end              INTEGER,
+    compKey          VARCHAR,
+    name             VARCHAR,
+    accessibility    INTEGER,
+    project_id       INTEGER REFERENCES projects (id),
+    created_at       NUMERIC,
+    updated_at       NUMERIC
 );
 
 create table classes
 (
-    id            INTEGER NOT NULL PRIMARY KEY Autoincrement,
-    start         INTEGER,
-    end           INTEGER,
-    compKey       VARCHAR,
-    name          VARCHAR,
-    abstract      INTEGER,
-    accessibility INTEGER,
-    file_id       INTEGER REFERENCES files (id),
-    parent_id     INTEGER,
-    parent_type   VARCHAR,
-    created_at    NUMERIC,
-    updated_at    NUMERIC
+    id               INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    start            INTEGER,
+    end              INTEGER,
+    compKey          VARCHAR,
+    name             VARCHAR,
+    abstract         INTEGER,
+    accessibility    INTEGER,
+    namespace_id     INTEGER REFERENCES namespaces (id),
+    parent_type_id   INTEGER,
+    parent_type_type VARCHAR,
+    parent_file_id   INTEGER,
+    created_at       NUMERIC,
+    updated_at       NUMERIC
 );
 
 create table enums
 (
-    id            INTEGER NOT NULL PRIMARY KEY Autoincrement,
-    start         INTEGER,
-    end           INTEGER,
-    compKey       VARCHAR,
-    name          VARCHAR,
-    accessibility INTEGER,
-    file_id       INTEGER REFERENCES files (id),
-    parent_id     INTEGER,
-    parent_type   VARCHAR,
-    created_at    NUMERIC,
-    updated_at    NUMERIC
+    id               INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    start            INTEGER,
+    end              INTEGER,
+    compKey          VARCHAR,
+    name             VARCHAR,
+    accessibility    INTEGER,
+    namespace_id     INTEGER REFERENCES namespaces (id),
+    parent_type_id   INTEGER,
+    parent_type_type VARCHAR,
+    parent_file_id   INTEGER,
+    created_at       NUMERIC,
+    updated_at       NUMERIC
 );
 
 create table interfaces
 (
-    id            INTEGER NOT NULL PRIMARY KEY Autoincrement,
-    start         INTEGER,
-    end           INTEGER,
-    compKey       VARCHAR,
-    name          VARCHAR,
-    accessibility INTEGER,
-    file_id       INTEGER REFERENCES files (id),
-    parent_id     INTEGER,
-    parent_type   VARCHAR,
-    created_at    NUMERIC,
-    updated_at    NUMERIC
+    id               INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    start            INTEGER,
+    end              INTEGER,
+    compKey          VARCHAR,
+    name             VARCHAR,
+    accessibility    INTEGER,
+    namespace_id     INTEGER REFERENCES namespaces (id),
+    parent_type_id   INTEGER,
+    parent_type_type VARCHAR,
+    parent_file_id   INTEGER,
+    created_at       NUMERIC,
+    updated_at       NUMERIC
 );
 
 create table literals
