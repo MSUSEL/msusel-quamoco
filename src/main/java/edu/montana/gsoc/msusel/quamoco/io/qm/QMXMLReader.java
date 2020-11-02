@@ -568,6 +568,7 @@ public class QMXMLReader extends AbstractQuamocoReader {
      */
     @VisibleForTesting
     private InputStream getInputStream(final String qm) {
+        System.out.println("QM File: " + qm);
         final Path file = Paths.get(qm);
         if (Files.exists(file)) {
             try {
