@@ -85,6 +85,7 @@ public class MethodExtentDecorator extends AbstractExtentDecorator {
         Measurable p = decorated.getParent();
 
         System.out.println("MethodExtentDecorator.findClassExtent Metric: " + metric);
+        System.out.println("P: " + p.getRefKey());
 
         if (p instanceof Type) {
             return Objects.requireNonNull(Measure.retrieve(p, metric)).getValue();

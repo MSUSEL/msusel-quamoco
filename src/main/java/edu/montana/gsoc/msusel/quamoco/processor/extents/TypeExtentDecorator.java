@@ -54,18 +54,21 @@ public class TypeExtentDecorator extends AbstractExtentDecorator {
 
     @Override
     public double findFileExtent(String metric) {
+        System.out.println("TypeExtentDecorator.findFileExtent Metric: " + metric);
         Measurable file = decorated.getParent();
         return Objects.requireNonNull(Measure.retrieve(file, metric)).getValue();
     }
 
     @Override
     public double findMethodExtent(String metric) {
+        System.out.println("TpyeExtentDecorator.findMethodExtent Metric: " + metric);
         Type t = (Type) decorated;
         return sumMetrics(metric, t.getAllMethods());
     }
 
     @Override
     public double findClassExtent(String metric) {
+        System.out.println("TypeExtentDecorator.findClassExtent Metric: " + metric);
         return Objects.requireNonNull(Measure.retrieve(decorated, metric)).getValue();
     }
 }
