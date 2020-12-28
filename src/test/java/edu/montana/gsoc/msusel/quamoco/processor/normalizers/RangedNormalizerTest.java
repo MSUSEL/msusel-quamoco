@@ -29,25 +29,19 @@ package edu.montana.gsoc.msusel.quamoco.processor.normalizers;
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.montana.gsoc.msusel.codetree.CodeTree;
-import edu.montana.gsoc.msusel.codetree.DefaultCodeTree;
-import edu.montana.gsoc.msusel.codetree.node.member.MethodNode;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
-import edu.montana.gsoc.msusel.codetree.node.structural.ProjectNode;
-import edu.montana.gsoc.msusel.codetree.node.type.ClassNode;
-import edu.montana.gsoc.msusel.metrics.Measurement;
-import edu.montana.gsoc.msusel.metrics.MeasuresTable;
+import edu.isu.isuese.datamodel.*;
+import edu.isu.isuese.datamodel.Class;
+import edu.isu.isuese.datamodel.System;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureNumberEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.ValueToMeasureEdge;
+import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMeanAggregator;
 import edu.montana.gsoc.msusel.quamoco.processor.extents.Extent;
 import org.easymock.EasyMock;
+import org.javalite.activejdbc.test.DBSpec;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -63,13 +57,13 @@ import java.util.Set;
  * @author fate
  * @version $Revision: 1.0 $
  */
-public class RangedNormalizerTest {
+public class RangedNormalizerTest extends DBSpec {
 
     private RangedNormalizer fixture;
     private Set<Finding> findings;
-    private FileNode file;
-    private FileNode file2;
-    private FileNode file3;
+    private File file;
+    private File file2;
+    private File file3;
 
     /**
      * Run the RangedNormalizer(Edge,String,NormalizationRange) constructor
@@ -98,8 +92,8 @@ public class RangedNormalizerTest {
     @Test
     public void testNormalize_Set_Finding_1() throws Exception {
         findings = Sets.newHashSet();
-        Finding f1 = new Finding(file, "issue", "issue");
-        Finding f2 = new Finding(file2, "issue", "issue");
+        Finding f1 = new FileFinding(file, "issue", "issue");
+        Finding f2 = new FileFinding(file2, "issue", "issue");
         findings.add(f1);
         findings.add(f2);
 
@@ -125,8 +119,8 @@ public class RangedNormalizerTest {
 
     public void testNormalize_Set_Finding_4() throws Exception {
         findings = Sets.newHashSet();
-        Finding f1 = new Finding(file, "issue", "issue");
-        Finding f2 = new Finding(file2, "issue", "issue");
+        Finding f1 = new FileFinding(file, "issue", "issue");
+        Finding f2 = new FileFinding(file2, "issue", "issue");
         findings.add(f1);
         findings.add(f2);
 
@@ -166,45 +160,44 @@ public class RangedNormalizerTest {
         graph.addEdge(vn, src, new ValueToMeasureEdge("v2m", vn, src));
 
         // setup metrics
-        CodeTree tree = new DefaultCodeTree();
+        System sys = System.builder().key("system").name("System").create();
         file = null;
         file2 = null;
-        ProjectNode proj = ProjectNode.builder().key("Test").create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(proj).withValue(1000.0));
-        MeasuresTable.getInstance().store(Measurement.of("NOM").on(proj).withValue(2.0));
-        MeasuresTable.getInstance().store(Measurement.of("NIV").on(proj).withValue(10.0));
-        MeasuresTable.getInstance().store(Measurement.of("NOC").on(proj).withValue(2.0));
+        Project proj = Project.builder().projKey("Test").create();
+        proj.addMeasure(Measure.of("LOC").on(proj).withValue(1000.0));
+        proj.addMeasure(Measure.of("NOM").on(proj).withValue(2.0));
+        proj.addMeasure(Measure.of("NIV").on(proj).withValue(10.0));
+        proj.addMeasure(Measure.of("NOC").on(proj).withValue(2.0));
 
-        file = FileNode.builder().key("path").create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(file).withValue(200.0));
+        file = File.builder().fileKey("path").create();
+        proj.addMeasure(Measure.of("LOC").on(file).withValue(200.0));
 
-        ClassNode type = ClassNode.builder().key("namespace.Type").start(1).end(100).create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(type).withValue(100.0));
-        file.addChild(type);
+        Class type = Class.builder().compKey("namespace.Type").start(1).end(100).create();
+        proj.addMeasure(Measure.of("LOC").on(type).withValue(100.0));
+        file.addType(type);
 
-        MethodNode method1 = MethodNode.builder().key("namespace.Type#method").start(20).end(100).create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(method1).withValue(80.0));
+        Method method1 = Method.builder().compKey("namespace.Type#method").start(20).end(100).create();
+        proj.addMeasure(Measure.of("LOC").on(method1).withValue(80.0));
 //        type.addChild(method1);
 
-        file2 = FileNode.builder().key("path2").create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(file2).withValue(200.0));
+        file2 = File.builder().fileKey("path2").create();
+        proj.addMeasure(Measure.of("LOC").on(file2).withValue(200.0));
 
-        file3 = FileNode.builder().key("path3").create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(file3).withValue(200.0));
+        file3 = File.builder().fileKey("path3").create();
+        proj.addMeasure(Measure.of("LOC").on(file3).withValue(200.0));
 
-        proj.addChild(file);
-        proj.addChild(file2);
-        proj.addChild(file3);
+        proj.addFile(file);
+        proj.addFile(file2);
+        proj.addFile(file3);
 
-        tree.setProject(proj);
+        sys.addProject(proj);
 
         findings = Sets.newHashSet();
-        Finding f1 = new Finding(file, "issue", "issue");
-        Finding f2 = new Finding(file2, "issue", "issue");
+        Finding f1 = new FileFinding(file, "issue", "issue");
+        Finding f2 = new FileFinding(file2, "issue", "issue");
         findings.add(f1);
         findings.add(f2);
 
-        MeasuresTable.getInstance().merge(tree);
         Extent.getInstance().clearExtents();
     }
 

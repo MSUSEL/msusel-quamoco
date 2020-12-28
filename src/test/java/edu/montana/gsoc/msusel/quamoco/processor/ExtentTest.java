@@ -28,26 +28,19 @@ package edu.montana.gsoc.msusel.quamoco.processor;
 
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.montana.gsoc.msusel.codetree.CodeTree;
-import edu.montana.gsoc.msusel.codetree.DefaultCodeTree;
-import edu.montana.gsoc.msusel.codetree.node.member.MethodNode;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
-import edu.montana.gsoc.msusel.codetree.node.structural.ProjectNode;
-import edu.montana.gsoc.msusel.codetree.node.type.ClassNode;
-import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
-import edu.montana.gsoc.msusel.metrics.Measurement;
-import edu.montana.gsoc.msusel.metrics.MeasuresTable;
+import edu.isu.isuese.datamodel.*;
+import edu.isu.isuese.datamodel.Class;
+import edu.isu.isuese.datamodel.System;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureFindingsEdge;
+import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggregator;
 import edu.montana.gsoc.msusel.quamoco.processor.extents.Extent;
+import org.javalite.activejdbc.test.DBSpec;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -62,12 +55,12 @@ import static org.junit.Assert.*;
  * @author fate
  * @version $Revision: 1.0 $
  */
-public class ExtentTest {
+public class ExtentTest extends DBSpec {
 
     private Extent fixture;
-    private FileNode file;
-    private FileNode file2;
-    private FileNode file3;
+    private File file;
+    private File file2;
+    private File file3;
 
     private Finding fileFinding;
     private Finding methodFinding;
@@ -299,42 +292,40 @@ public class ExtentTest {
         fixture = Extent.getInstance();
         fixture.clearExtents();
 
-        CodeTree tree = new DefaultCodeTree();
+        System tree = new System();
 
-        ProjectNode proj = ProjectNode.builder().key("Test").create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(proj).withValue(1000.0));
-        MeasuresTable.getInstance().store(Measurement.of("NOM").on(proj).withValue(2.0));
-        MeasuresTable.getInstance().store(Measurement.of("NIV").on(proj).withValue(10.0));
-        MeasuresTable.getInstance().store(Measurement.of("NOC").on(proj).withValue(2.0));
+        Project proj = Project.builder().projKey("Test").create();
+        proj.addMeasure(Measure.of("LOC").on(proj).withValue(1000.0));
+        proj.addMeasure(Measure.of("NOM").on(proj).withValue(2.0));
+        proj.addMeasure(Measure.of("NIV").on(proj).withValue(10.0));
+        proj.addMeasure(Measure.of("NOC").on(proj).withValue(2.0));
 
-        file = FileNode.builder().key("path").create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(file).withValue(200.0));
+        file = File.builder().fileKey("path").create();
+        proj.addMeasure(Measure.of("LOC").on(file).withValue(200.0));
 
-        TypeNode type = ClassNode.builder().key("namespace.Type").start(1).end(100).create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(type).withValue(100.0));
-        file.addChild(type);
+        Type type = Class.builder().compKey("namespace.Type").start(1).end(100).create();
+        proj.addMeasure(Measure.of("LOC").on(type).withValue(100.0));
+        file.addType(type);
 
-        MethodNode method1 = MethodNode.builder().key("namespace.Type#method").start(20).end(100).create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(method1).withValue(80.0));
-        type.addChild(method1);
+        Method method1 = Method.builder().compKey("namespace.Type#method").start(20).end(100).create();
+        proj.addMeasure(Measure.of("LOC").on(method1).withValue(80.0));
+        type.addMember(method1);
 
-        file2 = FileNode.builder().key("path2").create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(file2).withValue(200.0));
+        file2 = File.builder().fileKey("path2").create();
+        proj.addMeasure(Measure.of("LOC").on(file2).withValue(200.0));
 
-        file3 = FileNode.builder().key("path3").create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(file3).withValue(200.0));
+        file3 = File.builder().fileKey("path3").create();
+        proj.addMeasure(Measure.of("LOC").on(file3).withValue(200.0));
 
-        proj.addChild(file);
-        proj.addChild(file2);
-        proj.addChild(file3);
+        proj.addFile(file);
+        proj.addFile(file2);
+        proj.addFile(file3);
 
-        tree.setProject(proj);
+        tree.addProject(proj);
 
-        fileFinding = new Finding(file, "issue", "issue");
-        methodFinding = new Finding(method1, "issue", "issue");
-        typeFinding = new Finding(type, "issue", "issue");
-
-        MeasuresTable.getInstance().merge(tree);
+        fileFinding = new FileFinding(file, "issue", "issue");
+        methodFinding = new ComponentFinding(method1, "issue", "issue");
+        typeFinding = new ComponentFinding(type, "issue", "issue");
     }
 
     /**
@@ -378,9 +369,9 @@ public class ExtentTest {
         src.setProcessor(new FindingsUnionAggregator(src));
         measure.setProcessor(new FindingsUnionAggregator(src));
 
-        srcsrc.addFinding(new Finding(file, "issue", "issue"));
-        srcsrc.addFinding(new Finding(file2, "issue", "issue"));
-        srcsrc.addFinding(new Finding(file3, "issue", "issue"));
+        srcsrc.addFinding(new FileFinding(file, "issue", "issue"));
+        srcsrc.addFinding(new FileFinding(file2, "issue", "issue"));
+        srcsrc.addFinding(new FileFinding(file3, "issue", "issue"));
 
         graph.addEdge(src, measure, edge);
         graph.addEdge(srcsrc, src, f2m);

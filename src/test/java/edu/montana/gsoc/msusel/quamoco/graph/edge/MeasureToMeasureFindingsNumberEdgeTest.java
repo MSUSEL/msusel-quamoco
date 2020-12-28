@@ -28,15 +28,13 @@ package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.isu.isuese.datamodel.File;
+import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggregator;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.NegativeLinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
+import org.javalite.activejdbc.test.DBSpec;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -53,7 +51,7 @@ import static edu.montana.gsoc.msusel.quamoco.model.MeasureType.NUMBER;
  * @author fate
  * @version $Revision: 1.0 $
  */
-public class MeasureToMeasureFindingsNumberEdgeTest {
+public class MeasureToMeasureFindingsNumberEdgeTest extends DBSpec {
 
     private MeasureToMeasureFindingsNumberEdge fixture;
 
@@ -136,7 +134,7 @@ public class MeasureToMeasureFindingsNumberEdgeTest {
         src.setType(FINDINGS);
         final FindingNode srcsrc = new FindingNode(graph, "key", "owner", "rule", "tool");
         final FindingToMeasureEdge f2m = new FindingToMeasureEdge("preedge", srcsrc, src);
-        srcsrc.addFinding(new Finding(FileNode.builder().key("path").create(), "issue", "issue"));
+        srcsrc.addFinding(new FileFinding(File.builder().fileKey("path").create(), "issue", "issue"));
         fixture = new MeasureToMeasureFindingsNumberEdge("edge", src, dest);
         fixture.dist = new NegativeLinearDistribution();
         src.setProcessor(new FindingsUnionAggregator(src));

@@ -28,9 +28,10 @@ package edu.montana.gsoc.msusel.quamoco.graph.node;
 
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
+import edu.isu.isuese.datamodel.File;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.processor.NullProcessor;
+import org.javalite.activejdbc.test.DBSpec;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -46,7 +47,7 @@ import java.util.Set;
  * @author fate
  * @version $Revision: 1.0 $
  */
-public class FindingNodeTest {
+public class FindingNodeTest extends DBSpec {
 
     private FindingNode fixture;
 
@@ -76,12 +77,12 @@ public class FindingNodeTest {
         // add additional test code here
         Assert.assertNotNull(result);
         Assert.assertEquals("rule", result.getRuleName());
-        Assert.assertEquals(null, result.getXMLTag());
+        Assert.assertNull(result.getXMLTag());
         Assert.assertEquals("tool", result.getToolName());
         Assert.assertEquals(0.0, result.getValue(), 0.001);
         Assert.assertEquals("owner", result.getOwnedBy());
         Assert.assertEquals("", result.getDescription());
-        Assert.assertEquals(null, result.getProcessor());
+        Assert.assertNull(result.getProcessor());
         Assert.assertEquals("node", result.getName());
     }
 
@@ -95,7 +96,7 @@ public class FindingNodeTest {
     public void testAddFinding_1() throws Exception
     {
         Assert.assertTrue(fixture.getFindings().isEmpty());
-        final Finding finding = new Finding(FileNode.builder().key("path").create(), "issueKey", "issueName");
+        final Finding finding = new FileFinding(File.builder().fileKey("path").create(), "issueKey", "issueName");
 
         fixture.addFinding(finding);
 
@@ -113,7 +114,7 @@ public class FindingNodeTest {
     @Test
     public void testGetFindings_1() throws Exception
     {
-        fixture.addFinding(new Finding(FileNode.builder().key("path").create(), "issueKey", "issueName"));
+        fixture.addFinding(new FileFinding(File.builder().fileKey("path").create(), "issueKey", "issueName"));
         final Set<Finding> result = fixture.getFindings();
 
         // add additional test code here

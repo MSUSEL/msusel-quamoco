@@ -26,8 +26,8 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
-import edu.montana.gsoc.msusel.codetree.node.AbstractNode;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
+import edu.isu.isuese.datamodel.File;
+import org.javalite.activejdbc.test.DBSpec;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -41,7 +41,7 @@ import org.junit.Test;
  * @author fate
  * @version $Revision: 1.0 $
  */
-public class FindingTest {
+public class FindingTest extends DBSpec {
 
     /**
      * Run the Finding(CodeNode,String,String) constructor test.
@@ -52,11 +52,11 @@ public class FindingTest {
     @Test
     public void testFinding_1() throws Exception
     {
-        final AbstractNode location = FileNode.builder().key("/some/path").create();
+        final File location = File.builder().fileKey("/some/path").create();
         final String issueKey = "issueKey";
         final String issueName = "issueName";
 
-        final Finding result = new Finding(location, issueKey, issueName);
+        final Finding result = new FileFinding(location, issueKey, issueName);
 
         // add additional test code here
         Assert.assertNotNull(result);
@@ -73,13 +73,13 @@ public class FindingTest {
     @Test
     public void testFinding_2() throws Exception
     {
-        final AbstractNode location = FileNode.builder().key("/some/path").create();
+        final File location = File.builder().fileKey("/some/path").create();
         final String issueKey = "";
         final String issueName = "issueName";
 
         try
         {
-            new Finding(location, issueKey, issueName);
+            new FileFinding(location, issueKey, issueName);
             Assert.fail();
         }
         catch (final IllegalArgumentException e)
@@ -97,13 +97,13 @@ public class FindingTest {
     @Test
     public void testFinding_3() throws Exception
     {
-        final AbstractNode location = FileNode.builder().key("/some/path").create();
+        final File location = File.builder().fileKey("/some/path").create();
         final String issueKey = "issueKey";
         final String issueName = "";
 
         try
         {
-            new Finding(location, issueKey, issueName);
+            new FileFinding(location, issueKey, issueName);
             Assert.fail();
         }
         catch (final IllegalArgumentException e)
@@ -121,13 +121,13 @@ public class FindingTest {
     @Test
     public void testFinding_4() throws Exception
     {
-        final AbstractNode location = FileNode.builder().key("/some/path").create();
+        final File location = File.builder().fileKey("/some/path").create();
         final String issueKey = null;
         final String issueName = "issueName";
 
         try
         {
-            new Finding(location, issueKey, issueName);
+            new FileFinding(location, issueKey, issueName);
             Assert.fail();
         }
         catch (final IllegalArgumentException e)
@@ -145,13 +145,13 @@ public class FindingTest {
     @Test
     public void testFinding_5() throws Exception
     {
-        final AbstractNode location = FileNode.builder().key("/some/path").create();
+        final File location = File.builder().fileKey("/some/path").create();
         final String issueKey = "issueKey";
         final String issueName = null;
 
         try
         {
-            new Finding(location, issueKey, issueName);
+            new FileFinding(location, issueKey, issueName);
             Assert.fail();
         }
         catch (final IllegalArgumentException e)
@@ -169,13 +169,13 @@ public class FindingTest {
     @Test
     public void testFinding_6() throws Exception
     {
-        final AbstractNode location = null;
+        final File location = null;
         final String issueKey = "issueKey";
         final String issueName = "issueName";
 
         try
         {
-            new Finding(location, issueKey, issueName);
+            new FileFinding(location, issueKey, issueName);
             Assert.fail();
         }
         catch (final IllegalArgumentException e)
@@ -193,7 +193,7 @@ public class FindingTest {
     @Test
     public void testGetIssueKey_1() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
+        final Finding fixture = new FileFinding(File.builder().fileKey("/some/path").create(), "issueKey", "issueName");
 
         final String result = fixture.getIssueKey();
 
@@ -210,7 +210,7 @@ public class FindingTest {
     @Test
     public void testGetIssueName_1() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
+        final Finding fixture = new FileFinding(File.builder().fileKey("/some/path").create(), "issueKey", "issueName");
 
         final String result = fixture.getIssueName();
 
@@ -227,13 +227,13 @@ public class FindingTest {
     @Test
     public void testGetLocation_1() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
+        final FileFinding fixture = new FileFinding(File.builder().fileKey("/some/path").create(), "issueKey", "issueName");
 
-        final AbstractNode result = (AbstractNode) fixture.getLocation();
+        final File result = fixture.getLocation();
 
         // add additional test code here
         Assert.assertNotNull(result);
-        Assert.assertEquals("/some/path", result.getKey());
+        Assert.assertEquals("/some/path", result.getFileKey());
 //        Assert.assertEquals("FILE", result.type());
     }
 
@@ -246,7 +246,7 @@ public class FindingTest {
     @Test
     public void testSetIssueKey_1() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
+        final Finding fixture = new FileFinding(File.builder().fileKey("/some/path").create(), "issueKey", "issueName");
         final String issueKey = "";
 
         fixture.setIssueKey(issueKey);
@@ -270,7 +270,7 @@ public class FindingTest {
     @Test
     public void testSetIssueName_1() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
+        final Finding fixture = new FileFinding(File.builder().fileKey("/some/path").create(), "issueKey", "issueName");
         String issueName = "";
 
         fixture.setIssueName(issueName);
@@ -295,8 +295,8 @@ public class FindingTest {
     @Test
     public void testSetLocation_1() throws Exception
     {
-        final Finding fixture = new Finding(FileNode.builder().key("/some/path").create(), "issueKey", "issueName");
-        final AbstractNode location = FileNode.builder().key("/some/other/path").create();
+        final FileFinding fixture = new FileFinding(File.builder().fileKey("/some/path").create(), "issueKey", "issueName");
+        final File location = File.builder().fileKey("/some/other/path").create();
 
         fixture.setLocation(location);
 

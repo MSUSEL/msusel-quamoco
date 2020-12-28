@@ -28,7 +28,7 @@ package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
+import edu.isu.isuese.datamodel.File;
 import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
@@ -37,6 +37,7 @@ import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggreg
 import edu.montana.gsoc.msusel.quamoco.processor.evaluators.MeanEvaluator;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.PositiveLinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
+import org.javalite.activejdbc.test.DBSpec;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -48,20 +49,16 @@ import static org.junit.Assert.assertNotNull;
  * The class <code>MeasureToFactorFindingsEdgeTest</code> contains tests for the
  * class <code>{@link MeasureToFactorFindingsEdge}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:38 PM
- * @author fate
+ * @author Isaac Griffith
  * @version $Revision: 1.0 $
  */
-public class MeasureToFactorFindingsEdgeTest {
+public class MeasureToFactorFindingsEdgeTest extends DBSpec {
 
     private MeasureToFactorFindingsEdge fixture;
 
     /**
      * Run the MeasureToFactorFindingsEdge(String,InfluenceEffect) constructor
      * test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
     public void testMeasureToFactorFindingsEdge_1() throws Exception {
@@ -74,10 +71,10 @@ public class MeasureToFactorFindingsEdgeTest {
         assertNotNull(result);
         Assert.assertEquals("NEGATIVE", result.getInf());
         Assert.assertEquals(1.0, result.getValue(), 0.001);
-        Assert.assertEquals(null, result.getDist());
+        Assert.assertNull(result.getDist());
         Assert.assertEquals(100.0, result.getMaxPoints(), 0.001);
-        Assert.assertEquals(false, result.isUsesLinearDist());
-        Assert.assertEquals(null, result.getNormalizer());
+        Assert.assertFalse(result.isUsesLinearDist());
+        Assert.assertNull(result.getNormalizer());
         Assert.assertEquals(1.0, result.getWeight(), 0.001);
         Assert.assertEquals(1.0, result.getUpperBound(), 0.001);
         Assert.assertEquals(0.0, result.getLowerBound(), 0.001);
@@ -87,9 +84,6 @@ public class MeasureToFactorFindingsEdgeTest {
     /**
      * Run the MeasureToFactorFindingsEdge(String,InfluenceEffect) constructor
      * test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
     public void testMeasureToFactorFindingsEdge_2() throws Exception {
@@ -102,10 +96,10 @@ public class MeasureToFactorFindingsEdgeTest {
         assertNotNull(result);
         Assert.assertEquals("POSITIVE", result.getInf());
         Assert.assertEquals(0.0, result.getValue(), 0.001);
-        Assert.assertEquals(null, result.getDist());
+        Assert.assertNull(result.getDist());
         Assert.assertEquals(100.0, result.getMaxPoints(), 0.001);
-        Assert.assertEquals(false, result.isUsesLinearDist());
-        Assert.assertEquals(null, result.getNormalizer());
+        Assert.assertFalse(result.isUsesLinearDist());
+        Assert.assertNull(result.getNormalizer());
         Assert.assertEquals(1.0, result.getWeight(), 0.001);
         Assert.assertEquals(1.0, result.getUpperBound(), 0.001);
         Assert.assertEquals(0.0, result.getLowerBound(), 0.001);
@@ -114,9 +108,6 @@ public class MeasureToFactorFindingsEdgeTest {
 
     /**
      * Run the String getInf() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
     public void testGetInf_1() throws Exception {
@@ -128,9 +119,6 @@ public class MeasureToFactorFindingsEdgeTest {
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
     public void testGetValue_1() throws Exception {
@@ -144,9 +132,6 @@ public class MeasureToFactorFindingsEdgeTest {
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
     public void testGetValue_2() throws Exception {
@@ -160,9 +145,6 @@ public class MeasureToFactorFindingsEdgeTest {
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
     public void testGetValue_3() throws Exception {
@@ -176,9 +158,6 @@ public class MeasureToFactorFindingsEdgeTest {
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
     public void testGetValue_4() throws Exception {
@@ -192,9 +171,6 @@ public class MeasureToFactorFindingsEdgeTest {
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
     public void testGetValue_5() throws Exception {
@@ -209,9 +185,6 @@ public class MeasureToFactorFindingsEdgeTest {
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
     public void testGetValue_6() throws Exception {
@@ -258,9 +231,6 @@ public class MeasureToFactorFindingsEdgeTest {
 
     /**
      * Run the void setInf(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
     public void testSetInf_1() throws Exception {
@@ -276,7 +246,6 @@ public class MeasureToFactorFindingsEdgeTest {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Before
     public void setUp() throws Exception {
@@ -291,7 +260,7 @@ public class MeasureToFactorFindingsEdgeTest {
         src.setProcessor(new FindingsUnionAggregator(src));
         final FactorNode dest = new FactorNode(graph, "factor", "owner");
         final FindingNode srcsrc = new FindingNode(graph, "key", "owner", "finding", "tool");
-        srcsrc.addFinding(new Finding(FileNode.builder().key("path").create(), "finding", "finding"));
+        srcsrc.addFinding(new FileFinding(File.builder().fileKey("path").create(), "finding", "finding"));
 
         fixture = new MeasureToFactorFindingsEdge("", src, dest, InfluenceEffect.NEGATIVE);
         graph.addEdge(srcsrc, src, new FindingToMeasureEdge("f2m", srcsrc, src));
@@ -312,7 +281,6 @@ public class MeasureToFactorFindingsEdgeTest {
      *
      * @throws Exception
      *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @After
     public void tearDown() throws Exception {

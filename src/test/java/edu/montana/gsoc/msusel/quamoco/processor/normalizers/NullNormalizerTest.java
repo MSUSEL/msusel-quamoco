@@ -27,10 +27,12 @@
 package edu.montana.gsoc.msusel.quamoco.processor.normalizers;
 
 import com.google.common.collect.Sets;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
+import edu.isu.isuese.datamodel.File;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureNumberEdge;
+import edu.montana.gsoc.msusel.quamoco.graph.node.FileFinding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
+import org.javalite.activejdbc.test.DBSpec;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -45,7 +47,7 @@ import java.util.Set;
  * @author fate
  * @version $Revision: BigDecimal.ONE $
  */
-public class NullNormalizerTest {
+public class NullNormalizerTest extends DBSpec {
 
     private NullNormalizer fixture;
 
@@ -70,7 +72,7 @@ public class NullNormalizerTest {
     @Test
     public void testNormalize_2() throws Exception {
         final Set<Finding> findings = Sets.newHashSet();
-        findings.add(new Finding(FileNode.builder().key("path").create(), "issue", "issue"));
+        findings.add(new FileFinding(File.builder().fileKey("path").create(), "issue", "issue"));
         final double result = fixture.normalize(findings);
 
         // add additional test code here

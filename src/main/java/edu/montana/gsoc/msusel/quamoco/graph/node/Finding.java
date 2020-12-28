@@ -27,6 +27,7 @@
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
 import edu.isu.isuese.datamodel.Component;
+import edu.isu.isuese.datamodel.Measurable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -42,16 +43,12 @@ import lombok.ToString;
  */
 @EqualsAndHashCode
 @ToString
-public class Finding {
+public abstract class Finding {
 
     static long idnum = 0;
 
     private long identifier;
-    /**
-     * Location in the CodeTree where the Finding was found
-     */
-    @Getter
-    private Component location;
+
     /**
      * Associated Issue Key (Rule Key) to which this finding belongs
      */
@@ -67,30 +64,17 @@ public class Finding {
      * Constructs a new Finding for the given issue key and name at the given
      * location in the CodeTree
      *
-     * @param location  Location
      * @param issueKey  Issue Key
      * @param issueName Issue Name
      */
-    public Finding(final Component location, final String issueKey, final String issueName) {
-        if (location == null || issueKey == null || issueKey.isEmpty() || issueName == null || issueName.isEmpty()) {
+    public Finding(final String issueKey, final String issueName) {
+        if (issueKey == null || issueKey.isEmpty() || issueName == null || issueName.isEmpty()) {
             throw new IllegalArgumentException();
         }
 
         this.identifier = ++idnum;
-        this.location = location;
         this.issueKey = issueKey;
         this.issueName = issueName;
-    }
-
-    /**
-     * @param location the new location of the activated issue
-     */
-    public void setLocation(final Component location) {
-        if (location == null) {
-            return;
-        }
-
-        this.location = location;
     }
 
     /**
@@ -114,4 +98,6 @@ public class Finding {
 
         this.issueName = issueName;
     }
+
+    public abstract Measurable getLocation();
 }

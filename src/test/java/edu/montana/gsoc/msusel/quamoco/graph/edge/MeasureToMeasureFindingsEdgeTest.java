@@ -28,13 +28,11 @@ package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.isu.isuese.datamodel.File;
+import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggregator;
+import org.javalite.activejdbc.test.DBSpec;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -50,7 +48,7 @@ import java.util.Set;
  * @author fate
  * @version $Revision: 1.0 $
  */
-public class MeasureToMeasureFindingsEdgeTest {
+public class MeasureToMeasureFindingsEdgeTest extends DBSpec {
 
     private MeasureToMeasureFindingsEdge fixture;
 
@@ -131,9 +129,9 @@ public class MeasureToMeasureFindingsEdgeTest {
         fixture = new MeasureToMeasureFindingsEdge("fixture", src, dest);
         src.setProcessor(new FindingsUnionAggregator(src));
 
-        srcsrc.addFinding(new Finding(FileNode.builder().key("path0").create(), "issue", "issue"));
-        srcsrc.addFinding(new Finding(FileNode.builder().key("path1").create(), "issue", "issue"));
-        srcsrc.addFinding(new Finding(FileNode.builder().key("path2").create(), "issue", "issue"));
+        srcsrc.addFinding(new FileFinding(File.builder().fileKey("path0").create(), "issue", "issue"));
+        srcsrc.addFinding(new FileFinding(File.builder().fileKey("path1").create(), "issue", "issue"));
+        srcsrc.addFinding(new FileFinding(File.builder().fileKey("path2").create(), "issue", "issue"));
 
         graph.addEdge(src, dest, fixture);
         graph.addEdge(srcsrc, src, f2m);

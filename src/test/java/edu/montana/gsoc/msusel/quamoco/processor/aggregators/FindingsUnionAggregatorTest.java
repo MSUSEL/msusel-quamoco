@@ -28,15 +28,13 @@ package edu.montana.gsoc.msusel.quamoco.processor.aggregators;
 
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
+import edu.isu.isuese.datamodel.File;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureFindingsEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
+import org.javalite.activejdbc.test.DBSpec;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -52,7 +50,7 @@ import java.util.Set;
  * @author fate
  * @version $Revision: 1.0 $
  */
-public class FindingsUnionAggregatorTest {
+public class FindingsUnionAggregatorTest extends DBSpec {
 
     private FindingsUnionAggregator fixture;
 
@@ -114,10 +112,10 @@ public class FindingsUnionAggregatorTest {
         final FindingNode fn1 = new FindingNode(graph, "key1", "owner", "rule", "tool");
         final FindingNode fn2 = new FindingNode(graph, "key2", "owner", "rule", "tool");
 
-        fn1.addFinding(new Finding(FileNode.builder().key("path1").create(), "issue1", "issue"));
-        fn1.addFinding(new Finding(FileNode.builder().key("path2").create(), "issue1", "issue"));
-        fn2.addFinding(new Finding(FileNode.builder().key("path1").create(), "issue2", "issue"));
-        fn2.addFinding(new Finding(FileNode.builder().key("path2").create(), "issue2", "issue"));
+        fn1.addFinding(new FileFinding(File.builder().fileKey("path1").create(), "issue1", "issue"));
+        fn1.addFinding(new FileFinding(File.builder().fileKey("path2").create(), "issue1", "issue"));
+        fn2.addFinding(new FileFinding(File.builder().fileKey("path1").create(), "issue2", "issue"));
+        fn2.addFinding(new FileFinding(File.builder().fileKey("path2").create(), "issue2", "issue"));
 
         final MeasureNode owner = new MeasureNode(graph, "measure", "owner");
         owner.setType(MeasureType.FINDINGS);

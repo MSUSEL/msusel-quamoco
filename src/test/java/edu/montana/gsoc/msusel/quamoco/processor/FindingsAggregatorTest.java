@@ -29,16 +29,14 @@ package edu.montana.gsoc.msusel.quamoco.processor;
 import com.google.common.collect.Lists;
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
+import edu.isu.isuese.datamodel.File;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureFindingsEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
+import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggregator;
+import org.javalite.activejdbc.test.DBSpec;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -55,7 +53,7 @@ import java.util.Set;
  * @author fate
  * @version $Revision: 1.0 $
  */
-public class FindingsAggregatorTest {
+public class FindingsAggregatorTest extends DBSpec {
 
     private FindingsAggregator fixture;
 
@@ -111,13 +109,13 @@ public class FindingsAggregatorTest {
                 .build();
 
         final FindingNode fn = new FindingNode(graph, "fn1", "owner", "rule1", "tool");
-        fn.addFinding(new Finding(FileNode.builder().key("path2").create(), "issue1", "issue"));
+        fn.addFinding(new FileFinding(File.builder().fileKey("path2").create(), "issue1", "issue"));
         final MeasureNode mn = new MeasureNode(graph, "measure1", "owner");
         mn.setType(MeasureType.FINDINGS);
         final MeasureNode mn2 = new MeasureNode(graph, "measure2", "owner");
         mn2.setType(MeasureType.FINDINGS);
         final FindingNode fn2 = new FindingNode(graph, "fn2", "owner", "rule1", "tool");
-        fn2.addFinding(new Finding(FileNode.builder().key("path").create(), "issue1", "issue"));
+        fn2.addFinding(new FileFinding(File.builder().fileKey("path").create(), "issue1", "issue"));
 
         graph.addEdge(fn, mn, new FindingToMeasureEdge("edge1", fn, mn));
         graph.addEdge(mn2, mn, new MeasureToMeasureFindingsEdge("edge2", mn2, mn));

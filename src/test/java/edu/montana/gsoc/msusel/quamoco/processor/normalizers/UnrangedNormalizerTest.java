@@ -29,25 +29,18 @@ package edu.montana.gsoc.msusel.quamoco.processor.normalizers;
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.montana.gsoc.msusel.codetree.CodeTree;
-import edu.montana.gsoc.msusel.codetree.DefaultCodeTree;
-import edu.montana.gsoc.msusel.codetree.node.member.MethodNode;
-import edu.montana.gsoc.msusel.codetree.node.structural.FileNode;
-import edu.montana.gsoc.msusel.codetree.node.structural.ProjectNode;
-import edu.montana.gsoc.msusel.codetree.node.type.ClassNode;
-import edu.montana.gsoc.msusel.codetree.node.type.TypeNode;
-import edu.montana.gsoc.msusel.metrics.Measurement;
-import edu.montana.gsoc.msusel.metrics.MeasuresTable;
+import edu.isu.isuese.datamodel.*;
+import edu.isu.isuese.datamodel.Class;
+import edu.isu.isuese.datamodel.System;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureNumberEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.ValueToMeasureEdge;
+import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
-import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
-import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMeanAggregator;
 import org.easymock.EasyMock;
+import org.javalite.activejdbc.test.DBSpec;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -63,12 +56,12 @@ import java.util.Set;
  * @version $Revision: 1.0 $
  * @generatedBy CodePro at 1/26/16 6:34 PM
  */
-public class UnrangedNormalizerTest {
+public class UnrangedNormalizerTest extends DBSpec {
 
     private UnrangedNormalizer fixture;
     private Set<Finding> findings;
-    private FileNode file;
-    private FileNode file2;
+    private File file;
+    private File file2;
 
     /**
      * Run the UnrangedNormalizer(Edge,String,NormalizationRange) constructor
@@ -97,8 +90,8 @@ public class UnrangedNormalizerTest {
     @Test
     public void testNormalize_Set_Finding_1() throws Exception {
         findings = Sets.newHashSet();
-        Finding f1 = new Finding(file, "issue", "issue");
-        Finding f2 = new Finding(file2, "issue", "issue");
+        Finding f1 = new FileFinding(file, "issue", "issue");
+        Finding f2 = new FileFinding(file2, "issue", "issue");
         findings.add(f1);
         findings.add(f2);
 
@@ -125,8 +118,8 @@ public class UnrangedNormalizerTest {
     @Test
     public void testNormalize_Set_Finding_4() throws Exception {
         findings = Sets.newHashSet();
-        Finding f1 = new Finding(file, "issue", "issue");
-        Finding f2 = new Finding(file2, "issue", "issue");
+        Finding f1 = new FileFinding(file, "issue", "issue");
+        Finding f2 = new FileFinding(file2, "issue", "issue");
         findings.add(f1);
         findings.add(f2);
 
@@ -144,7 +137,6 @@ public class UnrangedNormalizerTest {
      */
     @Before
     public void setUp() throws Exception {
-        MeasuresTable.getInstance().clean();
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -168,32 +160,30 @@ public class UnrangedNormalizerTest {
         graph.addEdge(vn, src, new ValueToMeasureEdge("v2m", vn, src));
 
         // setup metrics
-        CodeTree tree = new DefaultCodeTree();
-        ProjectNode proj = ProjectNode.builder().key("Test").create();
+        System sys = System.builder().name("System").key("system").create();
+        Project proj = Project.builder().projKey("Test").create();
 
-        file = FileNode.builder().key("path").create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(file).withValue(200.0));
-        proj.addChild(file);
+        file = File.builder().fileKey("path").create();
+        proj.addMeasure(Measure.of("LOC").on(file).withValue(200.0));
+        proj.addFile(file);
 
-        TypeNode type = ClassNode.builder().key("namespace.Type").start(1).end(100).create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(type).withValue(100.0));
+        Type type = Class.builder().compKey("namespace.Type").start(1).end(100).create();
+        proj.addMeasure(Measure.of("LOC").on(type).withValue(100.0));
 
-        MethodNode method = MethodNode.builder().key("namespace.Type#method").start(20).end(100).create();
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(method).withValue(80.0));
-        type.addChild(method);
+        Method method = Method.builder().compKey("namespace.Type#method").start(20).end(100).create();
+        proj.addMeasure(Measure.of("LOC").on(method).withValue(80.0));
+        type.addMember(method);
 
-        file2 = FileNode.builder().key("path2").create();
+        file2 = File.builder().fileKey("path2").create();
 
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(file2).withValue(200.0));
-        MeasuresTable.getInstance().store(Measurement.of("LOC").on(proj).withValue(1000.0));
-        MeasuresTable.getInstance().store(Measurement.of("NOM").on(proj).withValue(2.0));
-        MeasuresTable.getInstance().store(Measurement.of("NIV").on(proj).withValue(10.0));
-        MeasuresTable.getInstance().store(Measurement.of("NOC").on(proj).withValue(2.0));
+        proj.addMeasure(Measure.of("LOC").on(file2).withValue(200.0));
+        proj.addMeasure(Measure.of("LOC").on(proj).withValue(1000.0));
+        proj.addMeasure(Measure.of("NOM").on(proj).withValue(2.0));
+        proj.addMeasure(Measure.of("NIV").on(proj).withValue(10.0));
+        proj.addMeasure(Measure.of("NOC").on(proj).withValue(2.0));
 
 
-        tree.setProject(proj);
-
-        MeasuresTable.getInstance().merge(tree);
+        sys.addProject(proj);
     }
 
     /**
