@@ -31,6 +31,7 @@ import com.google.common.graph.NetworkBuilder;
 import edu.isu.isuese.datamodel.*;
 import edu.isu.isuese.datamodel.Class;
 import edu.isu.isuese.datamodel.System;
+import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureFindingsEdge;
@@ -93,7 +94,7 @@ public class ExtentTest extends DBSpec {
      */
     @Test
     public void testFindExtent_2() throws Exception {
-        final String metric = "LOC";
+        final String metric = "repo:LOC";
         final NormalizationRange range = NormalizationRange.CLASS;
 
         final double result = fixture.findExtent(metric, range);
@@ -110,7 +111,7 @@ public class ExtentTest extends DBSpec {
      */
     @Test
     public void testFindExtent_3() throws Exception {
-        final String metric = "LOC";
+        final String metric = "repo:LOC";
         final NormalizationRange range = NormalizationRange.METHOD;
 
         final double result = fixture.findExtent(metric, range);
@@ -187,7 +188,7 @@ public class ExtentTest extends DBSpec {
      */
     @Test
     public void testFindMeasureExtent_1() throws Exception {
-        final String metric = "LOC";
+        final String metric = "repo:LOC";
         final NormalizationRange range = NormalizationRange.FILE;
 
         buildGraph();
@@ -292,34 +293,41 @@ public class ExtentTest extends DBSpec {
         fixture = Extent.getInstance();
         fixture.clearExtents();
 
-        System tree = new System();
+        System tree = System.builder().name("System").key("System").create();
 
         Project proj = Project.builder().projKey("Test").create();
-        proj.addMeasure(Measure.of("LOC").on(proj).withValue(1000.0));
-        proj.addMeasure(Measure.of("NOM").on(proj).withValue(2.0));
-        proj.addMeasure(Measure.of("NIV").on(proj).withValue(10.0));
-        proj.addMeasure(Measure.of("NOC").on(proj).withValue(2.0));
+        MetricRepository repo = MetricRepository.builder().key("repo").name("repo").create();
+        repo.addMetric(Metric.builder().handle("LOC").key("repo:LOC").name("LOC").create());
+        repo.addMetric(Metric.builder().handle("NOM").key("repo:NOM").name("NOM").create());
+        repo.addMetric(Metric.builder().handle("NIV").key("repo:NIV").name("NIV").create());
+        repo.addMetric(Metric.builder().handle("NOC").key("repo:NOC").name("NOC").create());
+        QuamocoContext.instance().setMetricRepoKey("repo");
+        QuamocoContext.instance().setProject(proj);
+
+        proj.addMeasure(Measure.of("repo:LOC").on(proj).withValue(1000.0));
+        proj.addMeasure(Measure.of("repo:NOM").on(proj).withValue(2.0));
+        proj.addMeasure(Measure.of("repo:NIV").on(proj).withValue(10.0));
+        proj.addMeasure(Measure.of("repo:NOC").on(proj).withValue(2.0));
 
         file = File.builder().fileKey("path").create();
-        proj.addMeasure(Measure.of("LOC").on(file).withValue(200.0));
+        proj.addFile(file);
+        proj.addMeasure(Measure.of("repo:LOC").on(file).withValue(200.0));
 
         Type type = Class.builder().compKey("namespace.Type").start(1).end(100).create();
-        proj.addMeasure(Measure.of("LOC").on(type).withValue(100.0));
         file.addType(type);
+        proj.addMeasure(Measure.of("repo:LOC").on(type).withValue(100.0));
 
         Method method1 = Method.builder().compKey("namespace.Type#method").start(20).end(100).create();
-        proj.addMeasure(Measure.of("LOC").on(method1).withValue(80.0));
         type.addMember(method1);
+        proj.addMeasure(Measure.of("repo:LOC").on(method1).withValue(80.0));
 
         file2 = File.builder().fileKey("path2").create();
-        proj.addMeasure(Measure.of("LOC").on(file2).withValue(200.0));
+        proj.addFile(file2);
+        proj.addMeasure(Measure.of("repo:LOC").on(file2).withValue(200.0));
 
         file3 = File.builder().fileKey("path3").create();
-        proj.addMeasure(Measure.of("LOC").on(file3).withValue(200.0));
-
-        proj.addFile(file);
-        proj.addFile(file2);
         proj.addFile(file3);
+        proj.addMeasure(Measure.of("repo:LOC").on(file3).withValue(200.0));
 
         tree.addProject(proj);
 

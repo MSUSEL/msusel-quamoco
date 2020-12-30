@@ -36,18 +36,15 @@ import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMeanAggregator;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.PositiveLinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * The class <code>MeasureToMeasureNumberEdgeTest</code> contains tests for the
  * class <code>{@link MeasureToMeasureNumberEdge}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:38 PM
  * @author fate
  * @version $Revision: 1.0 $
  */
@@ -57,23 +54,19 @@ public class MeasureToMeasureNumberEdgeTest {
 
     /**
      * Run the MeasureToMeasureNumberEdge(String) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testMeasureToMeasureNumberEdge_1() throws Exception
-    {
+    public void testMeasureToMeasureNumberEdge_1() {
         final String name = "";
 
         final MeasureToMeasureNumberEdge result = new MeasureToMeasureNumberEdge(name, null, null);
 
         // add additional test code here
         assertNotNull(result);
-        assertEquals(null, result.getDist());
+        assertNull(result.getDist());
         assertEquals(100.0, result.getMaxPoints(), 0.001);
-        assertEquals(false, result.isUsesLinearDist());
-        assertEquals(null, result.getNormalizer());
+        assertFalse(result.isUsesLinearDist());
+        assertNull(result.getNormalizer());
         assertEquals(1.0, result.getWeight(), 0.001);
         assertEquals(1.0, result.getUpperBound(), 0.001);
         assertEquals(0.0, result.getLowerBound(), 0.001);
@@ -82,13 +75,9 @@ public class MeasureToMeasureNumberEdgeTest {
 
     /**
      * Run the BigDecimal getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_1() throws Exception
-    {
+    public void testGetValue_1() {
         fixture.usesLinearDist = false;
         fixture.setWeight(0.5);
         final double result = fixture.getValue();
@@ -99,13 +88,9 @@ public class MeasureToMeasureNumberEdgeTest {
 
     /**
      * Run the BigDecimal getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_2() throws Exception
-    {
+    public void testGetValue_2() {
         fixture.usesLinearDist = false;
         fixture.setWeight(0.5);
         fixture.setNormalizer(null);
@@ -117,13 +102,9 @@ public class MeasureToMeasureNumberEdgeTest {
 
     /**
      * Run the BigDecimal getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_3() throws Exception
-    {
+    public void testGetValue_3() {
         fixture.usesLinearDist = true;
         fixture.setWeight(1.0);
         fixture.setMaxPoints(50.0);
@@ -135,13 +116,9 @@ public class MeasureToMeasureNumberEdgeTest {
 
     /**
      * Run the BigDecimal getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_4() throws Exception
-    {
+    public void testGetValue_4() {
         fixture.usesLinearDist = true;
         fixture.setWeight(1.0);
         fixture.setNormalizer(null);
@@ -153,13 +130,9 @@ public class MeasureToMeasureNumberEdgeTest {
 
     /**
      * Run the BigDecimal getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_5() throws Exception
-    {
+    public void testGetValue_5() {
         fixture.usesLinearDist = true;
         fixture.setWeight(1.0);
         final double result = fixture.getValue();
@@ -170,13 +143,9 @@ public class MeasureToMeasureNumberEdgeTest {
 
     /**
      * Run the BigDecimal getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_6() throws Exception
-    {
+    public void testGetValue_6() {
         fixture.usesLinearDist = false;
         fixture.setWeight(1.0);
         fixture.setNormalizer(null);
@@ -191,7 +160,6 @@ public class MeasureToMeasureNumberEdgeTest {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Before
     public void setUp() throws Exception
@@ -226,18 +194,5 @@ public class MeasureToMeasureNumberEdgeTest {
         fixture.upperBound = 1.0;
 
         src.getValue();
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // Add additional tear down code here
     }
 }

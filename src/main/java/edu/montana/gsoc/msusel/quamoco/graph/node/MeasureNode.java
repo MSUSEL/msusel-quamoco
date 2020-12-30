@@ -95,6 +95,8 @@ public class MeasureNode extends Node {
     public double getValue() {
         if (type == MeasureType.NUMBER) {
             return processor.process();
+        } else if (type == MeasureType.FINDINGS) {
+            return 0.0;
         }
 
         return 1.0;

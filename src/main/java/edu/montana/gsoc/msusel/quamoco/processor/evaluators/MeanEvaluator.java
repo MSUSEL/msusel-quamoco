@@ -61,7 +61,7 @@ public class MeanEvaluator extends Evaluator {
 
         if (values == null || values.isEmpty())
         {
-            return 0.0;
+            return 1.0;
         }
 
         for (final double x : values)

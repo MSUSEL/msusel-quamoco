@@ -41,19 +41,19 @@ public class SingleMeasureEvaluationTest {
         element = SingleMeasureEvaluation.builder().identifier("ID").create();
     }
 
-    @Test
-    public void evaluate() throws Exception {
-        fail();
-    }
+//    @Test
+//    public void evaluate() throws Exception {
+//        fail();
+//    }
 
     @Test
     public void xmlTag() throws Exception {
-        String value = "<evaluations xmi:id=\"ID\" xsi:type=\"qm:SingleMeasureEvaluation\"</evaluations>";
+        String value = "<evaluations xmi:id=\"ID\" xsi:type=\"qm:SingleMeasureEvaluation\" />\n";
         assertEquals(value, element.xmlTag());
     }
 
-    @Test
-    public void toScript() throws Exception {
-        fail();
-    }
+//    @Test
+//    public void toScript() throws Exception {
+//        fail();
+//    }
 }

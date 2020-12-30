@@ -45,7 +45,6 @@ import static org.mockito.Mockito.when;
  * The class <code>InfluenceEdgeTest</code> contains tests for the class
  * <code>{@link FactorToFactorEdge}</code>.
  *
- * @generatedBy CodePro at 5/30/15 3:38 PM
  * @author isaac
  * @version $Revision: 1.0 $
  */
@@ -55,12 +54,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the InfluenceEdge(String) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testFactorToFactorEdge_1() throws Exception {
+    public void testFactorToFactorEdge_1() {
         final String name = "TestEdge";
 
         final FactorToFactorEdge result = new FactorToFactorEdge(name, null, null, InfluenceEffect.POSITIVE);
@@ -76,12 +72,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the String getInf() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetInf_1() throws Exception {
+    public void testGetInf_1() {
         final String result = fixture.getInf();
 
         // TODO: add additional test code here
@@ -90,12 +83,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the double getLowerBound() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetLowerBound_1() throws Exception {
+    public void testGetLowerBound_1() {
         final double result = fixture.getLowerBound();
 
         // TODO: add additional test code here
@@ -104,12 +94,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the double getUpperBound() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetUpperBound_1() throws Exception {
+    public void testGetUpperBound_1() {
         final double result = fixture.getUpperBound();
 
         // TODO: add additional test code here
@@ -118,12 +105,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the double getValue(DirectedSparseGraph<Node,Edge>,Node) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_1() throws Exception {
+    public void testGetValue_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -150,12 +134,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the double getValue(DirectedSparseGraph<Node,Edge>,Node) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_2() throws Exception {
+    public void testGetValue_2() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -182,12 +163,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the double getValue(DirectedSparseGraph<Node,Edge>,Node) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_3() throws Exception {
+    public void testGetValue_3() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -213,12 +191,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the double getValue(DirectedSparseGraph<Node,Edge>,Node) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_4() throws Exception {
+    public void testGetValue_4() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -244,12 +219,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the double getValue(DirectedSparseGraph<Node,Edge>,Node) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_5() throws Exception {
+    public void testGetValue_5() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -275,12 +247,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the double getValue(DirectedSparseGraph<Node,Edge>,Node) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_6() throws Exception {
+    public void testGetValue_6() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -307,12 +276,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the double getWeight() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetWeight_1() throws Exception {
+    public void testGetWeight_1() {
         final double result = fixture.getWeight();
 
         // TODO: add additional test code here
@@ -321,12 +287,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the void setInf(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetInf_1() throws Exception {
+    public void testSetInf_1() {
         final String inf = "";
 
         fixture.setInf(inf);
@@ -335,12 +298,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the void setInf(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetInf_2() throws Exception {
+    public void testSetInf_2() {
         final String inf = null;
 
         fixture.setInf(inf);
@@ -349,12 +309,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the void setInf(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetInf_3() throws Exception {
+    public void testSetInf_3() {
         final String inf = InfluenceType.POS;
 
         fixture.setInf(inf);
@@ -363,12 +320,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the void setInf(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetInf_4() throws Exception {
+    public void testSetInf_4() {
         final String inf = InfluenceType.NEG;
 
         fixture.setInf(inf);
@@ -377,12 +331,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the void setInf(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetInf_5() throws Exception {
+    public void testSetInf_5() {
         final String inf = "test";
 
         fixture.setInf(inf);
@@ -390,12 +341,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the void setLowerBound(double) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetLowerBound_1() throws Exception {
+    public void testSetLowerBound_1() {
         final double lowerBound = 0.0;
 
         fixture.setLowerBound(lowerBound);
@@ -404,12 +352,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the void setLowerBound(double) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetLowerBound_2() throws Exception {
+    public void testSetLowerBound_2() {
         final double lowerBound = 2.0;
 
         fixture.setLowerBound(lowerBound);
@@ -417,12 +362,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the void setUpperBound(double) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetUpperBound_1() throws Exception {
+    public void testSetUpperBound_1() {
         final double upperBound = 0.0;
         fixture.setLowerBound(1.0);
         fixture.setUpperBound(upperBound);
@@ -430,12 +372,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the void setUpperBound(double) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetUpperBound_2() throws Exception {
+    public void testSetUpperBound_2() {
         final double upperBound = 2.0;
 
         fixture.setUpperBound(upperBound);
@@ -444,12 +383,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the void setWeight(double) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetWeight_1() throws Exception {
+    public void testSetWeight_1() {
         final double weight = 0.0;
 
         fixture.setWeight(weight);
@@ -458,12 +394,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the void setWeight(double) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetWeight_2() throws Exception {
+    public void testSetWeight_2() {
         final double weight = -1.0;
 
         fixture.setWeight(weight);
@@ -472,12 +405,9 @@ public class FactorToFactorEdgeTest {
 
     /**
      * Run the void setWeight(double) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetWeight_3() throws Exception {
+    public void testSetWeight_3() {
         final double weight = 1.5;
 
         fixture.setWeight(weight);

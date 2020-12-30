@@ -50,12 +50,12 @@ public class FactorTest {
     }
 
     @Test
-    public void getCharacterizes() throws Exception {
+    public void getCharacterizes() {
         assertNotNull(element.getCharacterizes());
     }
 
     @Test
-    public void setCharacterizes() throws Exception {
+    public void setCharacterizes() {
         element.setCharacterizes(null);
         assertNull(element.getCharacterizes());
         element.setCharacterizes(mock(Entity.class));
@@ -63,7 +63,7 @@ public class FactorTest {
     }
 
     @Test
-    public void addInfluence() throws Exception {
+    public void addInfluence() {
         assertNotNull(element.getInfluences());
         assertTrue(element.getInfluences().isEmpty());
         element.addInfluence(mock(Impact.class));
@@ -71,7 +71,7 @@ public class FactorTest {
     }
 
     @Test
-    public void removeInfluence() throws Exception {
+    public void removeInfluence() {
         Impact inf = mock(Impact.class);
         element.addInfluence(inf);
         assertFalse(element.getInfluences().isEmpty());
@@ -80,12 +80,12 @@ public class FactorTest {
     }
 
     @Test
-    public void setRefines() throws Exception {
+    public void setRefines() {
         assertNotNull(element.getRefines());
     }
 
     @Test
-    public void getRefines() throws Exception {
+    public void getRefines() {
         element.setRefines(null);
         assertNull(element.getRefines());
         element.setRefines(mock(Factor.class));
@@ -93,58 +93,58 @@ public class FactorTest {
     }
 
     @Test
-    public void getInfluences() throws Exception {
+    public void getInfluences() {
         Impact inf = mock(Impact.class);
         element.addInfluence(inf);
-        assertTrue(element.getInfluences().values().contains(inf));
+        assertTrue(element.getInfluences().containsValue(inf));
     }
 
     @Test
-    public void getDescription() throws Exception {
+    public void getDescription() {
         assertEquals("description", element.getDescription());
     }
 
     @Test
-    public void setDescription() throws Exception {
+    public void setDescription() {
         element.setDescription("newDescription");
         assertEquals("newDescription", element.getDescription());
     }
 
     @Test
-    public void getName() throws Exception {
+    public void getName() {
         assertEquals("factor", element.getName());
     }
 
     @Test
-    public void setName() throws Exception {
+    public void setName() {
         element.setName("NewName");
         assertEquals("NewName", element.getName());
     }
 
     @Test
-    public void getTitle() throws Exception {
+    public void getTitle() {
         assertEquals("title", element.getTitle());
     }
 
     @Test
-    public void setTitle() throws Exception {
+    public void setTitle() {
         element.setTitle("new_title");
         assertEquals("new_title", element.getTitle());
     }
 
     @Test
-    public void generateXMLTag() throws Exception {
+    public void generateXMLTag() {
         System.out.println(element.xmlTag());
     }
 
-    @Test
-    public void hasAggregationAnnotation() throws Exception {
-        fail();
-    }
+//    @Test
+//    public void hasAggregationAnnotation() {
+//        fail();
+//    }
 
-    @Test
-    public void getAggregationAnnotationValue() throws Exception {
-        fail();
-    }
+//    @Test
+//    public void getAggregationAnnotationValue() {
+//        fail();
+//    }
 
 }

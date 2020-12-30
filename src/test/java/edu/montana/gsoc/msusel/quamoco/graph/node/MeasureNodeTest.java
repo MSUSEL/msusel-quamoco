@@ -36,14 +36,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * The class <code>MeasureNodeTest</code> contains tests for the class
  * <code>{@link MeasureNode}</code>.
  *
- * @generatedBy CodePro at 5/30/15 3:38 PM
  * @author isaac
  * @version $Revision: 1.0 $
  */
@@ -52,13 +50,9 @@ public class MeasureNodeTest {
     /**
      * Run the MeasureNode(DirectedSparseGraph<Node,Edge>,String,String)
      * constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testMeasureNode_1() throws Exception
-    {
+    public void testMeasureNode_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -72,7 +66,7 @@ public class MeasureNodeTest {
 
         // TODO: add additional test code here
         assertNotNull(result);
-        assertEquals(null, result.getMethod());
+        assertNull(result.getMethod());
         assertEquals(MeasureType.FINDINGS, result.getType());
         assertEquals("owner", result.getOwnedBy());
         assertEquals("", result.getDescription());
@@ -83,13 +77,9 @@ public class MeasureNodeTest {
     /**
      * Run the MeasureNode(DirectedSparseGraph<Node,Edge>,String,String,long)
      * constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testMeasureNode_2() throws Exception
-    {
+    public void testMeasureNode_2() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -103,7 +93,7 @@ public class MeasureNodeTest {
 
         // TODO: add additional test code here
         assertNotNull(result);
-        assertEquals(null, result.getMethod());
+        assertNull(result.getMethod());
         assertEquals(MeasureType.FINDINGS, result.getType());
         assertEquals("owner", result.getOwnedBy());
         assertEquals("", result.getDescription());
@@ -113,13 +103,9 @@ public class MeasureNodeTest {
 
     /**
      * Run the String getMethod() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetMethod_1() throws Exception
-    {
+    public void testGetMethod_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -143,13 +129,9 @@ public class MeasureNodeTest {
 
     /**
      * Run the String getType() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetType_1() throws Exception
-    {
+    public void testGetType_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -173,13 +155,9 @@ public class MeasureNodeTest {
 
     /**
      * Run the BigDecimal getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_1() throws Exception
-    {
+    public void testGetValue_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -198,19 +176,15 @@ public class MeasureNodeTest {
         final double result = fixture.getValue();
 
         assertEquals(0.0, result, 0.001);
-        fixture.value = 1.0;
-        assertEquals(1.0, fixture.getValue(), 0.001);
+        fixture.setValue(1.0);
+        assertEquals(1.0, fixture.value, 0.001);
     }
 
     /**
      * Run the BigDecimal getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_2() throws Exception
-    {
+    public void testGetValue_2() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -231,13 +205,9 @@ public class MeasureNodeTest {
 
     /**
      * Run the BigDecimal getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_3() throws Exception
-    {
+    public void testGetValue_3() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -259,13 +229,9 @@ public class MeasureNodeTest {
 
     /**
      * Run the String getXMLTag() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetXMLTag_1() throws Exception
-    {
+    public void testGetXMLTag_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -290,13 +256,9 @@ public class MeasureNodeTest {
 
     /**
      * Run the void setMethod(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetMethod_1() throws Exception
-    {
+    public void testSetMethod_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -321,13 +283,9 @@ public class MeasureNodeTest {
 
     /**
      * Run the void setType(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetType_1() throws Exception
-    {
+    public void testSetType_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -347,31 +305,5 @@ public class MeasureNodeTest {
         fixture.setType(type);
 
         assertEquals(type, fixture.getType());
-    }
-
-    /**
-     * Perform pre-test initialization.
-     *
-     * @throws Exception
-     *             if the initialization fails for some reason
-     * @generatedBy CodePro at 5/30/15 3:38 PM
-     */
-    @Before
-    public void setUp() throws Exception
-    {
-        // TODO: add additional set up code here
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 5/30/15 3:38 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // TODO: add additional tear down code here
     }
 }

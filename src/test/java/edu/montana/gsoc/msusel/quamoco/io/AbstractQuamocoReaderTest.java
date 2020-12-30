@@ -27,6 +27,7 @@
 package edu.montana.gsoc.msusel.quamoco.io;
 
 import edu.montana.gsoc.msusel.quamoco.distiller.ModelManager;
+import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
 import edu.montana.gsoc.msusel.quamoco.io.qmr.QMRXMLReader;
 import org.easymock.EasyMock;
 import org.junit.After;
@@ -34,14 +35,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamReader;
 import java.util.Map;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * The class <code>AbstractQuamocoReaderTest</code> contains tests for the class
  * <code>{@link AbstractQuamocoReader}</code>.
  *
- * @generatedBy CodePro at 5/30/15 3:42 PM
  * @author isaac
  * @version $Revision: 1.0 $
  */
@@ -49,30 +53,23 @@ public class AbstractQuamocoReaderTest {
 
 	/**
 	 * Run the Map<String, String> getAttributes(XMLStreamReader) method test.
-	 *
-	 * @throws Exception
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
 	 */
 	@Test
-	public void testGetAttributes_1() throws Exception {
+	public void testGetAttributes_1() {
 		final AbstractQuamocoReader fixture = new QMRXMLReader(new ModelManager());
-		final XMLStreamReader reader = EasyMock.createMock(XMLStreamReader.class);
+		XMLStreamReader reader = mock(XMLStreamReader.class);
 		// TODO: add mock object expectations here
 
-		EasyMock.expect(reader.getAttributeCount()).andReturn(2).atLeastOnce();
-		EasyMock.expect(reader.getAttributeLocalName(0)).andReturn("id");
-		EasyMock.expect(reader.getAttributeValue(0)).andReturn("test-id");
-		EasyMock.expect(reader.getAttributeLocalName(1)).andReturn("name");
-		EasyMock.expect(reader.getAttributeValue(1)).andReturn("Test Name");
-		// EasyMock.expect(reader.getAttributeLocalName(2)).andReturn("");
-		// EasyMock.expect(reader.getAttributeValue(2)).andReturn("");
-
-		EasyMock.replay(reader);
+		when(reader.getAttributeCount()).thenReturn(2);
+		when(reader.getAttributeValue(0)).thenReturn("test-id");
+		when(reader.getAttributeValue(1)).thenReturn("Test Name");
+		when(reader.getAttributeName(0)).thenReturn(QName.valueOf("id"));
+		when(reader.getAttributeName(1)).thenReturn(QName.valueOf("name"));
 
 		final Map<String, String> result = fixture.getAttributes(reader);
 
 		// TODO: add additional test code here
-		EasyMock.verify(reader);
+		Assert.assertNotNull(reader);
 		Assert.assertNotNull(result);
 		Assert.assertEquals(2, result.size());
 		Assert.assertTrue(result.containsKey("id"));
@@ -83,12 +80,9 @@ public class AbstractQuamocoReaderTest {
 
 	/**
 	 * Run the Map<String, String> getAttributes(XMLStreamReader) method test.
-	 *
-	 * @throws Exception
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
 	 */
 	@Test
-	public void testGetAttributes_2() throws Exception {
+	public void testGetAttributes_2() {
 		final AbstractQuamocoReader fixture = new QMRXMLReader(new ModelManager());
 		final XMLStreamReader reader = null;
 
@@ -99,35 +93,10 @@ public class AbstractQuamocoReaderTest {
 	}
 
 	/**
-	 * Perform pre-test initialization.
-	 *
-	 * @throws Exception
-	 *             if the initialization fails for some reason
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
-	 */
-	@Before
-	public void setUp() throws Exception {
-		// TODO: add additional set up code here
-	}
-
-	/**
-	 * Perform post-test clean-up.
-	 *
-	 * @throws Exception
-	 *             if the clean-up fails for some reason
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
-	 */
-	@After
-	public void tearDown() throws Exception {
-		// TODO: add additional tear down code here
-	}
-
-	/**
 	 * Launch the test.
 	 *
 	 * @param args
 	 *            the command line arguments
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
 	 */
 	public static void main(final String[] args) {
 		new org.junit.runner.JUnitCore().run(AbstractQuamocoReaderTest.class);

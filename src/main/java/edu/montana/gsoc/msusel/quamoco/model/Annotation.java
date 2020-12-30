@@ -47,7 +47,6 @@ import java.util.UUID;
  */
 @EqualsAndHashCode
 @ToString
-@Builder(buildMethodName = "create")
 public class Annotation implements XMLSerializable {
 
     /**
@@ -83,6 +82,7 @@ public class Annotation implements XMLSerializable {
         this.value = value;
     }
 
+    @Builder(buildMethodName = "create")
     public Annotation(String identifier, String key, String value) {
         this.identifier = identifier;
         this.key = key;

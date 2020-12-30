@@ -142,6 +142,10 @@ public abstract class Node implements INode {
      */
     public abstract double getValue();
 
+    protected void setValue(double value) {
+        this.value = value;
+    }
+
     /**
      * @return The xml tag associated with node
      */

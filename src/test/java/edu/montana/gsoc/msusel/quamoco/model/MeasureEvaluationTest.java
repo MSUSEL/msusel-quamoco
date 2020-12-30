@@ -53,23 +53,23 @@ public class MeasureEvaluationTest {
     }
 
     @Test
-    public void getRange() throws Exception {
+    public void getRange() {
         assertEquals(NormalizationRange.CLASS, element.getRange());
     }
 
     @Test
-    public void setRange() throws Exception {
+    public void setRange() {
         element.setRange(NormalizationRange.FILE);
         assertEquals(NormalizationRange.FILE, element.getRange());
     }
 
     @Test
-    public void getNormalization() throws Exception {
+    public void getNormalization() {
         assertNotNull(element.getNormalization());
     }
 
     @Test
-    public void setNormalization() throws Exception {
+    public void setNormalization() {
         element.setNormalization(null);
         assertNull(element.getNormalization());
         element.setNormalization(mock(NormalizationMeasure.class));
@@ -77,12 +77,12 @@ public class MeasureEvaluationTest {
     }
 
     @Test
-    public void getFunction() throws Exception {
+    public void getFunction() {
         assertNotNull(element.getFunction());
     }
 
     @Test
-    public void setFunction() throws Exception {
+    public void setFunction() {
         element.setFunction(null);
         assertNull(element.getFunction());
         element.setFunction(mock(Function.class));
@@ -90,12 +90,12 @@ public class MeasureEvaluationTest {
     }
 
     @Test
-    public void getBasedOn() throws Exception {
+    public void getBasedOn() {
         assertNotNull(element.getBasedOn());
     }
 
     @Test
-    public void setBasedOn() throws Exception {
+    public void setBasedOn() {
         element.setBasedOn(null);
         assertNull(element.getBasedOn());
         element.setBasedOn(mock(Measure.class));
@@ -103,10 +103,10 @@ public class MeasureEvaluationTest {
     }
 
     @Test
-    public void generateXMLTag() throws Exception {
-        String value = "<evaluations xmi:id=\"ID\" xsi:type=\"qm:SingleMeasureEvaluation\" basedOn=\"null\" range=\"CLASS\">\n" +
+    public void generateXMLTag() {
+        String value = "<evaluations xmi:id=\"ID\" xsi:type=\"qm:SingleMeasureEvaluation\" range=\"CLASS\">\n" +
                 "<normlizationMeasure href=\"null\" />\n" +
-                "null</evaluations>";
+                "\nnull\n</evaluations>\n";
 
         assertEquals(value, element.generateXMLTag(EvaluationType.SINGLE_MEASURE_EVALUATION.type()));
     }

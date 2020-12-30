@@ -86,7 +86,7 @@ public class FactorToFactorEdge extends WeightedRankedEdge implements InfluenceE
 //            }
         }
 
-//        value = thresholdValue(value, lowerBound, upperBound);
+        value = thresholdValue(value, lowerBound, upperBound);
 //        System.out.println(value);
         value = value * weight;
 

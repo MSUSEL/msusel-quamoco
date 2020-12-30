@@ -47,9 +47,9 @@ public class StakeholderSatisfactionTest {
         assertEquals(data, element.xmlTag());
     }
 
-    @Test
-    public void toScript() throws Exception {
-        fail();
-    }
+//    @Test
+//    public void toScript() throws Exception {
+//        fail();
+//    }
 
 }

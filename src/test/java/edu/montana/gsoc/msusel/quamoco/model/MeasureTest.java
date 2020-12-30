@@ -59,12 +59,12 @@ public class MeasureTest {
     }
 
     @Test
-    public void getCharacterizes() throws Exception {
+    public void getCharacterizes() {
         assertNotNull(element.getCharacterizes());
     }
 
     @Test
-    public void setCharacterizes() throws Exception {
+    public void setCharacterizes() {
         element.setCharacterizes(null);
         assertNull(element.getCharacterizes());
         element.setCharacterizes(mock(Entity.class));
@@ -72,12 +72,12 @@ public class MeasureTest {
     }
 
     @Test
-    public void getRefines() throws Exception {
+    public void getRefines() {
         assertNotNull(element.getRefines());
     }
 
     @Test
-    public void setRefines() throws Exception {
+    public void setRefines() {
         element.setRefines(null);
         assertNull(element.getRefines());
         element.setRefines(mock(Measure.class));
@@ -85,7 +85,7 @@ public class MeasureTest {
     }
 
     @Test
-    public void addMeasures() throws Exception {
+    public void addMeasures() {
         assertNotNull(element.getMeasures());
         assertTrue(element.getMeasures().isEmpty());
         element.addMeasures(mock(Factor.class));
@@ -93,7 +93,7 @@ public class MeasureTest {
     }
 
     @Test
-    public void removeMeasures() throws Exception {
+    public void removeMeasures() {
         Factor fac = mock(Factor.class);
         element.addMeasures(fac);
         assertFalse(element.getMeasures().isEmpty());
@@ -102,64 +102,65 @@ public class MeasureTest {
     }
 
     @Test
-    public void getMeasures() throws Exception {
+    public void getMeasures() {
         Factor fac = mock(Factor.class);
         element.addMeasures(fac);
         assertTrue(element.getMeasures().contains(fac));
     }
 
     @Test
-    public void getTitle() throws Exception {
+    public void getTitle() {
         assertEquals("title", element.getTitle());
     }
 
     @Test
-    public void setTitle() throws Exception {
+    public void setTitle() {
         element.setTitle("new_title");
         assertEquals("new_title", element.getTitle());
     }
 
     @Test
-    public void getType() throws Exception {
+    public void getType() {
         assertEquals(MeasureType.FINDINGS, element.getType());
     }
 
     @Test
-    public void setType() throws Exception {
+    public void setType() {
         element.setType(MeasureType.NUMBER);
         assertEquals(MeasureType.NUMBER, element.getType());
     }
 
     @Test
-    public void isNormalizer() throws Exception {
+    public void isNormalizer() {
         assertFalse(element.isNormalizer());
     }
 
     @Test
-    public void getName() throws Exception {
+    public void getName() {
         assertEquals("measure", element.getName());
     }
 
     @Test
-    public void setName() throws Exception {
+    public void setName() {
         element.setName("NewName");
         assertEquals("NewName", element.getName());
     }
 
     @Test
-    public void getDescription() throws Exception {
+    public void getDescription() {
         assertEquals("description", element.getDescription());
     }
 
     @Test
-    public void setDescription() throws Exception {
+    public void setDescription() {
         element.setDescription("newDescription");
         assertEquals("newDescription", element.getDescription());
     }
 
     @Test
-    public void generateXMLTag() throws Exception {
-        String exp = "<measures xmi:id=\"id\" xsi:type=\"qm:FindingMeasure\" />\n";
+    public void generateXMLTag() {
+        // String exp = "<measures xmi:id=\"id\" xsi:type=\"qm:FindingMeasure\" />\n";
+        String exp = "<measures xmi:id=\"id\" xsi:type=\"FINDINGS\" />\n";
         element = Measure.builder()
                 .name("measure")
                 .identifier("id")
@@ -182,7 +183,8 @@ public class MeasureTest {
                 .description("description")
                 .create();
 
-        String value = "<measures xmi:id=\"id\" xsi:type=\"qm:FindingMeasure\" name=\"measure\" description=\"description\" title=\"title\" />\n";
+//        String value = "<measures xmi:id=\"id\" xsi:type=\"qm:FindingMeasure\" name=\"measure\" description=\"description\" title=\"title\" />\n";
+        String value = "<measures xmi:id=\"id\" xsi:type=\"FINDINGS\" name=\"measure\" description=\"description\" title=\"title\" />\n";
         assertEquals(value, element.xmlTag());
     }
 

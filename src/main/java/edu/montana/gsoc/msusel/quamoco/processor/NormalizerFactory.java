@@ -119,7 +119,7 @@ public class NormalizerFactory {
     }
 
     boolean isFindingsOrNormalizable(Edge edge) {
-        return ((edge instanceof FindingsEdge) || (edge instanceof Normalizable));
+        return edge instanceof FindingsEdge || edge instanceof Normalizable;
     }
 
     boolean isBadRange(NormalizationRange range) {

@@ -51,7 +51,7 @@ public class NormalizationMeasureTest {
 
     @Test
     public void xmlTag() throws Exception {
-        String value = "<measures xmi:id=\"ID\" xsi:type=\"qm:NormlizationMeasure\" name=\"Name\" />\n";
+        String value = "<measures xmi:id=\"ID\" xsi:type=\"qm:NormlizationMeasure\" name=\"Name\" />";
         assertEquals(value, element.xmlTag());
     }
 

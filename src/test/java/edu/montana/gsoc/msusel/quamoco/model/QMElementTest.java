@@ -55,12 +55,12 @@ public class QMElementTest {
     }
 
     @Test
-    public void getOriginatesFrom() throws Exception {
+    public void getOriginatesFrom() {
         assertNotNull(element.getOriginatesFrom());
     }
 
     @Test
-    public void setOriginatesFrom() throws Exception {
+    public void setOriginatesFrom() {
         Source src2 = mock(Source.class);
         element.setOriginatesFrom(null);
         assertNull(element.getOriginatesFrom());
@@ -69,50 +69,50 @@ public class QMElementTest {
     }
 
     @Test
-    public void getTaggedBy() throws Exception {
+    public void getTaggedBy() {
         assertNotNull(element.getTaggedBy());
         assertEquals(1, element.getTaggedBy().size());
     }
 
     @Test
-    public void addTaggedBy() throws Exception {
+    public void addTaggedBy() {
         Tag tag2 = mock(Tag.class);
         element.addTaggedBy(tag2);
         assertEquals(2, element.getTaggedBy().size());
     }
 
     @Test
-    public void removeTaggedBy() throws Exception {
+    public void removeTaggedBy() {
         Tag tag = element.getTaggedBy().get(0);
         element.removeTaggedBy(tag);
         assertTrue(element.getTaggedBy().isEmpty());
     }
 
     @Test
-    public void addAnnotation() throws Exception {
+    public void addAnnotation() {
         Annotation ann2 = mock(Annotation.class);
         element.addAnnotation(ann2);
         assertEquals(2, element.getAnnotations().size());
     }
 
     @Test
-    public void hasAnnotations() throws Exception {
+    public void hasAnnotations() {
         assertTrue(element.hasAnnotations());
     }
 
     @Test
-    public void getAnnotations() throws Exception {
+    public void getAnnotations() {
         assertNotNull(element.getAnnotations());
         assertEquals(1, element.getAnnotations().size());
     }
 
     @Test
-    public void getIdentifier() throws Exception {
+    public void getIdentifier() {
         assertEquals("ID", element.getIdentifier());
     }
 
     @Test
-    public void getQualifiedIdentifier() throws Exception {
+    public void getQualifiedIdentifier() {
         assertNull(element.getQualifiedIdentifier());
         QualityModel qm = mock(QualityModel.class);
         when(qm.getFileName()).thenReturn("file");
@@ -121,8 +121,8 @@ public class QMElementTest {
     }
 
     @Test
-    public void toJson() throws Exception {
-        element = (ProductFactor) ProductFactor.builder().name("Test").identifier("ID")
+    public void toJson() {
+        element = ProductFactor.builder().name("Test").identifier("ID")
                 .description("description")
                 .create();
 
@@ -136,8 +136,9 @@ public class QMElementTest {
                 "  \"description\" : \"description\",\n" +
                 "  \"characterizes\" : null,\n" +
                 "  \"title\" : null,\n" +
-                "  \"influences\" : [ ],\n" +
+                "  \"influences\" : { },\n" +
                 "  \"refines\" : null,\n" +
+                "  \"fullName\" : \"Test\",\n" +
                 "  \"aggregationAnnotationValue\" : \"\"\n" +
                 "}";
 
@@ -145,8 +146,8 @@ public class QMElementTest {
     }
 
     @Test
-    public void toYaml() throws Exception {
-        element = (ProductFactor) ProductFactor.builder().name("Test").identifier("ID")
+    public void toYaml() {
+        element = ProductFactor.builder().name("Test").identifier("ID")
                 .description("description")
                 .create();
 
@@ -160,8 +161,9 @@ public class QMElementTest {
                 "description: \"description\"\n" +
                 "characterizes: null\n" +
                 "title: null\n" +
-                "influences: []\n" +
+                "influences: {}\n" +
                 "refines: null\n" +
+                "fullName: \"Test\"\n" +
                 "aggregationAnnotationValue: \"\"\n";
 
         assertEquals(value, element.toYaml());

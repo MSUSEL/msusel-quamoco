@@ -40,7 +40,6 @@ import org.junit.Test;
  * The class <code>FactorNodeTest</code> contains tests for the class
  * <code>{@link FactorNode}</code>.
  *
- * @generatedBy CodePro at 5/30/15 3:38 PM
  * @author isaac
  * @version $Revision: 1.0 $
  */
@@ -51,13 +50,9 @@ public class FactorNodeTest {
     /**
      * Run the FactorNode(DirectedSparseGraph<Node,Edge>,String,String)
      * constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testFactorNode_1() throws Exception
-    {
+    public void testFactorNode_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -81,13 +76,9 @@ public class FactorNodeTest {
     /**
      * Run the FactorNode(DirectedSparseGraph<Node,Edge>,String,String,long)
      * constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testFactorNode_2() throws Exception
-    {
+    public void testFactorNode_2() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -110,13 +101,9 @@ public class FactorNodeTest {
 
     /**
      * Run the String getMethod() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetMethod_1() throws Exception
-    {
+    public void testGetMethod_1() {
         final String result = fixture.getMethod();
 
         // TODO: add additional test code here
@@ -125,13 +112,9 @@ public class FactorNodeTest {
 
     /**
      * Run the BigDecimal getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_1() throws Exception
-    {
+    public void testGetValue_1() {
         fixture.setProcessor(new NullProcessor(fixture));
 
         final double result = fixture.getValue();
@@ -141,13 +124,9 @@ public class FactorNodeTest {
 
     /**
      * Run the BigDecimal getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetValue_2() throws Exception
-    {
+    public void testGetValue_2() {
         fixture.setProcessor(new NullProcessor(fixture));
         fixture.value = 1.0;
         fixture.calculated = true;
@@ -159,13 +138,9 @@ public class FactorNodeTest {
 
     /**
      * Run the void setMethod(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetMethod_1() throws Exception
-    {
+    public void testSetMethod_1() {
         try
         {
             fixture.setMethod("");
@@ -203,8 +178,7 @@ public class FactorNodeTest {
     }
 
     @Test
-    public void testGetUpperResult_1() throws Exception
-    {
+    public void testGetUpperResult_1() {
         final ValueNode vn1 = new ValueNode(fixture.getGraph(), "vn1", "owner", "tool");
         vn1.addValue(100.0);
         final ValueNode vn2 = new ValueNode(fixture.getGraph(), "vn2", "owner", "tool");
@@ -213,8 +187,8 @@ public class FactorNodeTest {
         vn3.addValue(200.0);
 
         fixture.getGraph().addEdge(vn1, fixture, new ValueToMeasureEdge("edge1", vn1, fixture));
-        fixture.getGraph().addEdge(vn2, fixture, new ValueToMeasureEdge("edge1", vn2, fixture));
-        fixture.getGraph().addEdge(vn3, fixture, new ValueToMeasureEdge("edge1", vn3, fixture));
+        fixture.getGraph().addEdge(vn2, fixture, new ValueToMeasureEdge("edge2", vn2, fixture));
+        fixture.getGraph().addEdge(vn3, fixture, new ValueToMeasureEdge("edge3", vn3, fixture));
 
         final double result = fixture.getUpperResult();
 
@@ -222,8 +196,7 @@ public class FactorNodeTest {
     }
 
     @Test
-    public void testGetLowerResult_1() throws Exception
-    {
+    public void testGetLowerResult_1() {
         final ValueNode vn1 = new ValueNode(fixture.getGraph(), "vn1", "owner", "tool");
         vn1.addValue(100.0);
         final ValueNode vn2 = new ValueNode(fixture.getGraph(), "vn2", "owner", "tool");
@@ -232,8 +205,8 @@ public class FactorNodeTest {
         vn3.addValue(200.0);
 
         fixture.getGraph().addEdge(vn1, fixture, new ValueToMeasureEdge("edge1", vn1, fixture));
-        fixture.getGraph().addEdge(vn2, fixture, new ValueToMeasureEdge("edge1", vn2, fixture));
-        fixture.getGraph().addEdge(vn3, fixture, new ValueToMeasureEdge("edge1", vn3, fixture));
+        fixture.getGraph().addEdge(vn2, fixture, new ValueToMeasureEdge("edge2", vn2, fixture));
+        fixture.getGraph().addEdge(vn3, fixture, new ValueToMeasureEdge("edge3", vn3, fixture));
 
         final double result = fixture.getLowerResult();
 
@@ -245,7 +218,6 @@ public class FactorNodeTest {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Before
     public void setUp() throws Exception
@@ -257,18 +229,5 @@ public class FactorNodeTest {
                 .expectedEdgeCount(10000)
                 .build();
         fixture = new FactorNode(graph, "factor", "owner");
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 5/30/15 3:38 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // TODO: add additional tear down code here
     }
 }

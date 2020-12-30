@@ -61,7 +61,7 @@ public class MeasureToFactorFindingsEdgeTest extends DBSpec {
      * test.
      */
     @Test
-    public void testMeasureToFactorFindingsEdge_1() throws Exception {
+    public void testMeasureToFactorFindingsEdge_1() {
         final String name = "";
         final InfluenceEffect effect = InfluenceEffect.NEGATIVE;
 
@@ -86,7 +86,7 @@ public class MeasureToFactorFindingsEdgeTest extends DBSpec {
      * test.
      */
     @Test
-    public void testMeasureToFactorFindingsEdge_2() throws Exception {
+    public void testMeasureToFactorFindingsEdge_2() {
         final String name = "";
         final InfluenceEffect effect = null;
 
@@ -110,7 +110,7 @@ public class MeasureToFactorFindingsEdgeTest extends DBSpec {
      * Run the String getInf() method test.
      */
     @Test
-    public void testGetInf_1() throws Exception {
+    public void testGetInf_1() {
         final String result = fixture.getInf();
 
         // add additional test code here
@@ -121,7 +121,7 @@ public class MeasureToFactorFindingsEdgeTest extends DBSpec {
      * Run the double getValue() method test.
      */
     @Test
-    public void testGetValue_1() throws Exception {
+    public void testGetValue_1() {
         fixture.setUsesLinearDist(false);
         fixture.setInf(InfluenceType.POS);
         final double result = fixture.getValue();
@@ -134,7 +134,7 @@ public class MeasureToFactorFindingsEdgeTest extends DBSpec {
      * Run the double getValue() method test.
      */
     @Test
-    public void testGetValue_2() throws Exception {
+    public void testGetValue_2() {
         fixture.setUsesLinearDist(false);
         fixture.setInf(InfluenceType.NEG);
         final double result = fixture.getValue();
@@ -147,7 +147,7 @@ public class MeasureToFactorFindingsEdgeTest extends DBSpec {
      * Run the double getValue() method test.
      */
     @Test
-    public void testGetValue_3() throws Exception {
+    public void testGetValue_3() {
         fixture.setUsesLinearDist(true);
         fixture.setInf(InfluenceType.POS);
         final double result = fixture.getValue();
@@ -160,7 +160,7 @@ public class MeasureToFactorFindingsEdgeTest extends DBSpec {
      * Run the double getValue() method test.
      */
     @Test
-    public void testGetValue_4() throws Exception {
+    public void testGetValue_4() {
         fixture.setUsesLinearDist(true);
         fixture.setInf(InfluenceType.NEG);
         final double result = fixture.getValue();
@@ -173,7 +173,7 @@ public class MeasureToFactorFindingsEdgeTest extends DBSpec {
      * Run the double getValue() method test.
      */
     @Test
-    public void testGetValue_5() throws Exception {
+    public void testGetValue_5() {
         fixture.setUsesLinearDist(false);
         fixture.setInf(InfluenceType.NEG);
         fixture.setWeight(0.5);
@@ -187,7 +187,7 @@ public class MeasureToFactorFindingsEdgeTest extends DBSpec {
      * Run the double getValue() method test.
      */
     @Test
-    public void testGetValue_6() throws Exception {
+    public void testGetValue_6() {
         fixture.setUsesLinearDist(true);
         fixture.setInf(InfluenceType.NEG);
         fixture.setWeight(0.5);
@@ -198,7 +198,7 @@ public class MeasureToFactorFindingsEdgeTest extends DBSpec {
     }
 
     @Test
-    public void testGetValue_7() throws Exception {
+    public void testGetValue_7() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -233,7 +233,7 @@ public class MeasureToFactorFindingsEdgeTest extends DBSpec {
      * Run the void setInf(String) method test.
      */
     @Test
-    public void testSetInf_1() throws Exception {
+    public void testSetInf_1() {
         final InfluenceEffect inf = InfluenceEffect.POSITIVE;
         fixture.setInf(inf.toString());
 
@@ -274,16 +274,5 @@ public class MeasureToFactorFindingsEdgeTest extends DBSpec {
         fixture.maxPoints = 100.0;
         fixture.dist = new PositiveLinearDistribution();
         fixture.norm = new NullNormalizer(fixture, "norm", NormalizationRange.CLASS);
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     */
-    @After
-    public void tearDown() throws Exception {
-        // Add additional tear down code here
     }
 }

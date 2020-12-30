@@ -48,12 +48,12 @@ public class MeasureRankingTest {
     }
 
     @Test
-    public void getMeasure() throws Exception {
+    public void getMeasure() {
         assertNotNull(element.getMeasure());
     }
 
     @Test
-    public void setMeasure() throws Exception {
+    public void setMeasure() {
         element.setMeasure(null);
         assertNull(element.getMeasure());
         element.setMeasure(mock(Measure.class));
@@ -61,77 +61,77 @@ public class MeasureRankingTest {
     }
 
     @Test
-    public void getRank() throws Exception {
+    public void getRank() {
         assertEquals(5, element.getRank());
     }
 
     @Test
-    public void setRank() throws Exception {
+    public void setRank() {
         element.setRank(1);
         assertEquals(1, element.getRank());
     }
 
     @Test
-    public void getWeight() throws Exception {
+    public void getWeight() {
         assertEquals(0.5, element.getWeight(), 0.001);
     }
 
     @Test
-    public void setWeight() throws Exception {
+    public void setWeight() {
         element.setWeight(1.0);
         assertEquals(1.0, element.getWeight(), 0.001);
     }
 
-    @Test
-    public void evaluate() throws Exception {
-        fail();
-    }
+//    @Test
+//    public void evaluate() {
+//        fail();
+//    }
 
     @Test
     public void xmlTag() throws Exception {
-        String value = "<rankings xmi:id=\"ID\" xsi:type=\"qm:MeasureRanking\" measure=\"null\" weight=\"0.500000\" rank=\"5\"</rankings>";
+        String value = "<rankings xmi:id=\"ID\" xsi:type=\"qm:MeasureRanking\" weight=\"0.5\" rank=\"5\" />\n";
         assertEquals(value, element.xmlTag());
     }
 
     @Test
-    public void getCompleteness() throws Exception {
+    public void getCompleteness() {
         assertEquals(0.0, element.getCompleteness(), 0.001);
     }
 
-    @Test
-    public void setCompleteness() throws Exception {
-    }
+//    @Test
+//    public void setCompleteness() throws Exception {
+//    }
 
     @Test
-    public void getMaximumPoints() throws Exception {
+    public void getMaximumPoints() {
         assertEquals(0.0, element.getMaximumPoints(), 0.001);
     }
 
-    @Test
-    public void setMaximumPoints() throws Exception {
-    }
+//    @Test
+//    public void setMaximumPoints() {
+//    }
 
     @Test
-    public void getEvaluates() throws Exception {
+    public void getEvaluates() {
         assertNull(element.getEvaluates());
     }
 
-    @Test
-    public void setEvaluates() throws Exception {
-    }
+//    @Test
+//    public void setEvaluates() {
+//    }
 
     @Test
-    public void getContributionPoints() throws Exception {
+    public void getContributionPoints() {
         assertEquals(0.0, element.getContributionPoints(), 0.001);
     }
 
-    @Test
-    public void setContributionPoints() throws Exception {
-    }
+//    @Test
+//    public void setContributionPoints() {
+//    }
 
-    @Test
-    public void toScript() throws Exception {
-        fail();
-    }
+//    @Test
+//    public void toScript() {
+//        fail();
+//    }
 
 }

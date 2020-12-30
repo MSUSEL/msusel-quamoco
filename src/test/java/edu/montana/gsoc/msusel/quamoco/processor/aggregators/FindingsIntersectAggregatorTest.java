@@ -57,13 +57,9 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
 
     /**
      * Run the FindingsIntersectAggregator(Node) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testFindingsIntersectAggregator_1() throws Exception
-    {
+    public void testFindingsIntersectAggregator_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -80,13 +76,9 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
 
     /**
      * Run the Set<Finding> aggregate() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testAggregate_1() throws Exception
-    {
+    public void testAggregate_1() {
         fn1.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue"));
         fn1.addFinding(new FileFinding(File.builder().fileKey("file2").create(), "issue2", "issue"));
 
@@ -102,13 +94,9 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
 
     /**
      * Run the Set<Finding> aggregate() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testAggregate_2() throws Exception
-    {
+    public void testAggregate_2() {
         fn1.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue"));
         fn1.addFinding(new FileFinding(File.builder().fileKey("file2").create(), "issue2", "issue"));
 
@@ -124,13 +112,9 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
 
     /**
      * Run the Set<Finding> aggregate() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testAggregate_3() throws Exception
-    {
+    public void testAggregate_3() {
         fn1.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue"));
         fn1.addFinding(new FileFinding(File.builder().fileKey("file2").create(), "issue2", "issue"));
 
@@ -143,13 +127,9 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
 
     /**
      * Run the Set<Finding> aggregate() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testAggregate_4() throws Exception
-    {
+    public void testAggregate_4() {
         fn1.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue"));
         fn2.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue"));
 
@@ -165,7 +145,6 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
     public void setUp() throws Exception
@@ -189,19 +168,6 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
         graph.addEdge(fn1, src, new FindingToMeasureEdge("edge1", fn1, src));
         graph.addEdge(fn2, dest, new FindingToMeasureEdge("edge2", fn2, dest));
         graph.addEdge(src, dest, new MeasureToMeasureFindingsEdge("edge3", src, dest));
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // Add additional tear down code here
     }
 
     /**

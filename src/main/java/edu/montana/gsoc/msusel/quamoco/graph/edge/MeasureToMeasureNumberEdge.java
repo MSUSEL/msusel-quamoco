@@ -60,12 +60,15 @@ public class MeasureToMeasureNumberEdge extends WeightedRankedEdge {
         double value = 0.0;
 
         value = source.getValue();
+        System.out.println("Initial Value: " + value);
 
         if (usesLinearDist) {
             value = dist.calculate(getMaxPoints(), value);
+            System.out.println("Dist Value: " + value);
         }
 
         value = value * weight;
+        System.out.println("Weighted Value: " + value);
 
         return value;
     }

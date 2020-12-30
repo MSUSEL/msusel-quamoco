@@ -2,25 +2,104 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a738a267-9a20-4b8c-88fe-147b5320e1a2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/node/ComponentFinding.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/node/FileFinding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/node/Finding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/node/Finding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/FindingToMeasureEdgeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/FindingToMeasureEdgeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_7_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_10_15.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_7_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_10_15.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_2_11_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_3_6_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_3_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/edge/FactorToFactorEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/edge/FactorToFactorEdge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToFactorFindingsEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToFactorFindingsEdge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToFactorNumberEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToFactorNumberEdge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToMeasureNumberEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToMeasureNumberEdge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/node/MeasureNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/node/MeasureNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/node/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/node/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/model/Annotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/model/Annotation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/model/measure/NormalizationMeasure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/model/measure/NormalizationMeasure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/NormalizerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/NormalizerFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/evaluators/MeanEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/evaluators/MeanEvaluator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/evaluators/SingleMeasureEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/evaluators/SingleMeasureEvaluator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/evaluators/WeightedSumEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/evaluators/WeightedSumEvaluator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/Extent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/Extent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/AbstractEdgeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/AbstractEdgeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/FactorToFactorEdgeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/FactorToFactorEdgeTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToFactorFindingsEdgeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToFactorFindingsEdgeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToMeasureFindingsEdgeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToMeasureFindingsEdgeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToMeasureFindingsNumberEdgeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToMeasureFindingsNumberEdgeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/node/FindingNodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/node/FindingNodeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/node/FindingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/node/FindingTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/node/FindingsUnionNodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/node/FindingsUnionNodeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/it/single/BaseTestClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/it/single/BaseTestClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/it/single/GraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/it/single/GraphTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToFactorNumberEdgeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToFactorNumberEdgeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToMeasureNumberEdgeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToMeasureNumberEdgeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/node/FactorNodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/node/FactorNodeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/node/MeasureNodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/node/MeasureNodeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/io/AbstractQuamocoReaderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/io/AbstractQuamocoReaderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/io/QMRYamlReaderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/io/QMRYamlReaderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/AnnotationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/AnnotationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/EvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/EvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/FactorRankingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/FactorRankingTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/FactorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/FactorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/FindingsIntersectionMeasureAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/FindingsIntersectionMeasureAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/FindingsUnionMeasureAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/FindingsUnionMeasureAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/GoalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/GoalTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/HistCompMultiMeasureEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/HistCompMultiMeasureEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/HistogramCompFactorAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/HistogramCompFactorAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/LinearDecreasingFunctionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/LinearDecreasingFunctionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/LinearIncreasingFunctionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/LinearIncreasingFunctionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/ManualEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/ManualEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MaxFactorAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MaxFactorAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MaxMultiMeasureEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MaxMultiMeasureEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MeanFactorAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MeanFactorAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MeanMultiMeasureEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MeanMultiMeasureEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MeasureEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MeasureEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MeasureRankingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MeasureRankingTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MeasureTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MeasureTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MedianFactorAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MedianFactorAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MedianMultiMeasureEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MedianMultiMeasureEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MetricBasedInstrumentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MetricBasedInstrumentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MinFactorAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MinFactorAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MinMultiMeasureEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/MinMultiMeasureEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/ModeFactorAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/ModeFactorAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/ModeMultiMeasureEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/ModeMultiMeasureEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NormalizationMeasureTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NormalizationMeasureTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberHistogramCompMeasureAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberHistogramCompMeasureAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberMaxMeasureAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberMaxMeasureAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberMeanMeasureAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberMeanMeasureAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberMedianMeasureAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberMedianMeasureAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberMinMeasureAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberMinMeasureAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberModeMeasureAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberModeMeasureAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberRangeMeasureAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberRangeMeasureAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberStdDevMeasureAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberStdDevMeasureAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberSummationMeasureAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberSummationMeasureAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberVarianceMeasureAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/NumberVarianceMeasureAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/ProductFactorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/ProductFactorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/ProductPartTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/ProductPartTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/ProductQualityAttributeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/ProductQualityAttributeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/QIESLEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/QIESLEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/QMElementTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/QMElementTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/QualityInUseAttributeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/QualityInUseAttributeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/RangeFactorAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/RangeFactorAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/RangeMultiMeasureEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/RangeMultiMeasureEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/RequirementTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/RequirementTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/SingleMeasureEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/SingleMeasureEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/SourceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/SourceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/StakeholderSatisfactionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/StakeholderSatisfactionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/StakeholderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/StakeholderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/StdDevFactorAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/StdDevFactorAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/StdDevMultiMeasureEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/StdDevMultiMeasureEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/SummationFactorAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/SummationFactorAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/SummationMultiMeasureEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/SummationMultiMeasureEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/TagTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/TagTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/TechnicalIssueTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/TechnicalIssueTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/TextAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/TextAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/TextEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/TextEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/ToolTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/ToolTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/UseCaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/UseCaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/VarianceFactorAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/VarianceFactorAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/VarianceMultiMeasureEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/VarianceMultiMeasureEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/WeightedSumFactorAggregationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/WeightedSumFactorAggregationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/WeightedSumMultiMeasureEvaluationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/WeightedSumMultiMeasureEvaluationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/EvaluatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/EvaluatorTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/ExtentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/ExtentTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/FindingsAggregatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/FindingsAggregatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/NormalizerFactoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/NormalizerFactoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/aggregators/FindingsIntersectAggregatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/aggregators/FindingsIntersectAggregatorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/aggregators/FindingsUnionAggregatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/aggregators/FindingsUnionAggregatorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/normalizers/NullNormalizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/normalizers/NullNormalizerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/evaluators/MeanEvaluatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/evaluators/MeanEvaluatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/evaluators/SingleMeasureEvaluatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/evaluators/SingleMeasureEvaluatorTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/normalizers/RangedNormalizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/normalizers/RangedNormalizerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/normalizers/UnrangedNormalizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/normalizers/UnrangedNormalizerTest.java" afterDir="false" />
     </list>
@@ -31,6 +110,10 @@
   </component>
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="CLEAR_OUTPUT_DIRECTORY" value="false" />
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
@@ -45,6 +128,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="delegateBuildToMaven" value="true" />
+    <option name="jreName" value="13" />
+    <option name="skipTests" value="true" />
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
@@ -57,20 +152,88 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.ignored.files" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
-  <component name="RunManager" selected="JUnit.All in msusel-quamoco">
+  <component name="RunManager" selected="JUnit.UnrangedNormalizerTest">
     <configuration name="All in msusel-quamoco" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="msusel-quamoco" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BSP.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ExtentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="msusel-quamoco" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.montana.gsoc.msusel.quamoco.processor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.montana.gsoc.msusel.quamoco.processor" />
+      <option name="MAIN_CLASS_NAME" value="edu.montana.gsoc.msusel.quamoco.processor.ExtentTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BSP.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MeasureToFactorFindingsEdgeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="msusel-quamoco" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.montana.gsoc.msusel.quamoco.graph.edge.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.montana.gsoc.msusel.quamoco.graph.edge" />
+      <option name="MAIN_CLASS_NAME" value="edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToFactorFindingsEdgeTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BSP.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MeasureToMeasureNumberEdgeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="msusel-quamoco" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.montana.gsoc.msusel.quamoco.graph.edge.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.montana.gsoc.msusel.quamoco.graph.edge" />
+      <option name="MAIN_CLASS_NAME" value="edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureNumberEdgeTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BSP.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UnrangedNormalizerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="msusel-quamoco" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.montana.gsoc.msusel.quamoco.processor.normalizers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.montana.gsoc.msusel.quamoco.processor.normalizers" />
+      <option name="MAIN_CLASS_NAME" value="edu.montana.gsoc.msusel.quamoco.processor.normalizers.UnrangedNormalizerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BSP.BeforeRunTask" enabled="true" />
@@ -83,41 +246,13 @@
         <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="edu.montana.gsoc.msusel.quamoco.distiller in msusel-quamoco" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="msusel-quamoco" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.montana.gsoc.msusel.quamoco.distiller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="edu.montana.gsoc.msusel.quamoco.distiller" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-        <option name="BSP.BeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Unittests in test" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="msusel-quamoco" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/src/test&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UnrangedNormalizerTest" />
         <item itemvalue="JUnit.All in msusel-quamoco" />
-        <item itemvalue="Python tests.Unittests in test" />
-        <item itemvalue="JUnit.edu.montana.gsoc.msusel.quamoco.distiller in msusel-quamoco" />
+        <item itemvalue="JUnit.ExtentTest" />
+        <item itemvalue="JUnit.MeasureToFactorFindingsEdgeTest" />
+        <item itemvalue="JUnit.MeasureToMeasureNumberEdgeTest" />
       </list>
     </recent_temporary>
   </component>
@@ -132,7 +267,11 @@
       <option name="presentableId" value="Default" />
       <updated>1609124858465</updated>
       <workItem from="1609124865006" duration="85000" />
-      <workItem from="1609124967780" duration="7057000" />
+      <workItem from="1609124967780" duration="7820000" />
+      <workItem from="1609142535017" duration="462000" />
+      <workItem from="1609143010122" duration="11120000" />
+      <workItem from="1609196727278" duration="8415000" />
+      <workItem from="1609251108156" duration="5814000" />
     </task>
     <servers />
   </component>
@@ -140,9 +279,45 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="4445" y="98" width="699" height="890" key="#Unittests_in_test" timestamp="1609125015558">
+    <state x="4283" y="117" width="1024" height="852" key="#Project_Structure" timestamp="1609142956840">
       <screen x="3840" y="0" width="1920" height="1080" />
     </state>
-    <state x="4445" y="98" width="699" height="890" key="#Unittests_in_test/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609125015558" />
+    <state x="4283" y="117" width="1024" height="852" key="#Project_Structure/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609142956840" />
+    <state x="4445" y="98" width="699" height="890" key="#Unittests_in_test" timestamp="1609143099249">
+      <screen x="3840" y="0" width="1920" height="1080" />
+    </state>
+    <state x="4445" y="98" width="699" height="890" key="#Unittests_in_test/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609143099249" />
+    <state x="2073" y="101" width="1720" height="880" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1609160828018">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2073" y="101" width="1720" height="880" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609160828018" />
+    <state x="4541" y="286" width="506" height="521" key="FileChooserDialogImpl" timestamp="1609142591054">
+      <screen x="3840" y="0" width="1920" height="1080" />
+    </state>
+    <state x="4541" y="286" width="506" height="521" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609142591054" />
+    <state width="1872" height="325" key="GridCell.Tab.0.bottom" timestamp="1609323387517">
+      <screen x="3840" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="325" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609323387517" />
+    <state width="1872" height="325" key="GridCell.Tab.0.center" timestamp="1609323387516">
+      <screen x="3840" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="325" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609323387516" />
+    <state width="1872" height="325" key="GridCell.Tab.0.left" timestamp="1609323387516">
+      <screen x="3840" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="325" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609323387516" />
+    <state width="1872" height="325" key="GridCell.Tab.0.right" timestamp="1609323387517">
+      <screen x="3840" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="325" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609323387517" />
+    <state x="4281" y="175" width="1037" height="737" key="SettingsEditor" timestamp="1609143060446">
+      <screen x="3840" y="0" width="1920" height="1080" />
+    </state>
+    <state x="4281" y="175" width="1037" height="737" key="SettingsEditor/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609143060446" />
+    <state x="4486" y="251" width="711" height="578" key="find.popup" timestamp="1609154545487">
+      <screen x="3840" y="0" width="1920" height="1080" />
+    </state>
+    <state x="4486" y="251" width="711" height="578" key="find.popup/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609154545487" />
   </component>
 </project>

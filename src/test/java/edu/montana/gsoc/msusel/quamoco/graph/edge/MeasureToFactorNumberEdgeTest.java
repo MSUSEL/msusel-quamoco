@@ -38,7 +38,6 @@ import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.evaluators.WeightedSumEvaluator;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.PositiveLinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,7 +47,6 @@ import static org.junit.Assert.*;
  * The class <code>MeasureToFactorNumberEdgeTest</code> contains tests for the
  * class <code>{@link MeasureToFactorNumberEdge}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:38 PM
  * @author fate
  * @version $Revision: 1.0 $
  */
@@ -59,13 +57,9 @@ public class MeasureToFactorNumberEdgeTest {
     /**
      * Run the MeasureToFactorNumberEdge(String,InfluenceEffect) constructor
      * test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testMeasureToFactorNumberEdge_1() throws Exception
-    {
+    public void testMeasureToFactorNumberEdge_1() {
         final String name = "";
         final InfluenceEffect effect = InfluenceEffect.NEGATIVE;
 
@@ -74,10 +68,10 @@ public class MeasureToFactorNumberEdgeTest {
         // add additional test code here
         assertNotNull(result);
         assertEquals("NEGATIVE", result.getInf());
-        assertEquals(null, result.getDist());
+        assertNull(result.getDist());
         assertEquals(100.0, result.getMaxPoints(), 0.001);
-        assertEquals(false, result.isUsesLinearDist());
-        assertEquals(null, result.getNormalizer());
+        assertFalse(result.isUsesLinearDist());
+        assertNull(result.getNormalizer());
         assertEquals(1.0, result.getWeight(), 0.001);
         assertEquals(1.0, result.getUpperBound(), 0.001);
         assertEquals(0.0, result.getLowerBound(), 0.001);
@@ -87,13 +81,9 @@ public class MeasureToFactorNumberEdgeTest {
     /**
      * Run the MeasureToFactorNumberEdge(String,InfluenceEffect) constructor
      * test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testMeasureToFactorNumberEdge_2() throws Exception
-    {
+    public void testMeasureToFactorNumberEdge_2() {
         final String name = "";
         final InfluenceEffect effect = null;
 
@@ -102,10 +92,10 @@ public class MeasureToFactorNumberEdgeTest {
         // add additional test code here
         assertNotNull(result);
         assertEquals("POSITIVE", result.getInf());
-        assertEquals(null, result.getDist());
+        assertNull(result.getDist());
         assertEquals(100.0, result.getMaxPoints(), 0.001);
-        assertEquals(false, result.isUsesLinearDist());
-        assertEquals(null, result.getNormalizer());
+        assertFalse(result.isUsesLinearDist());
+        assertNull(result.getNormalizer());
         assertEquals(1.0, result.getWeight(), 0.001);
         assertEquals(1.0, result.getUpperBound(), 0.001);
         assertEquals(0.0, result.getLowerBound(), 0.001);
@@ -114,13 +104,9 @@ public class MeasureToFactorNumberEdgeTest {
 
     /**
      * Run the String getInf() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetInf_1() throws Exception
-    {
+    public void testGetInf_1() {
         final String result = fixture.getInf();
 
         // add additional test code here
@@ -129,13 +115,9 @@ public class MeasureToFactorNumberEdgeTest {
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_1() throws Exception
-    {
+    public void testGetValue_1() {
         fixture.setRank(1);
         fixture.weight = 1.0;
         fixture.lowerBound = 0.0;
@@ -152,13 +134,9 @@ public class MeasureToFactorNumberEdgeTest {
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_2() throws Exception
-    {
+    public void testGetValue_2() {
         fixture.weight = 0.5;
         fixture.lowerBound = 0.0;
         fixture.upperBound = 1.0;
@@ -172,23 +150,19 @@ public class MeasureToFactorNumberEdgeTest {
         final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(0.5, result, 0.001);
+        assertEquals(0.55, result, 0.001);
     }
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_3() throws Exception
-    {
+    public void testGetValue_3() {
         fixture.weight = 1.0;
         fixture.lowerBound = 0.0;
         fixture.upperBound = 1.0;
         fixture.usesLinearDist = false;
-        fixture.maxPoints = 1.0;
+        fixture.maxPoints = 100.0;
         fixture.setInf(InfluenceType.POS);
         fixture.dist = null;
         fixture.norm = new NullNormalizer(fixture, "norm", NormalizationRange.CLASS);
@@ -201,16 +175,12 @@ public class MeasureToFactorNumberEdgeTest {
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_4() throws Exception
-    {
+    public void testGetValue_4() {
         fixture.weight = 0.5;
-        fixture.lowerBound = 1.0;
-        fixture.upperBound = 0.0;
+        fixture.lowerBound = 0.0;
+        fixture.upperBound = 1.0;
         fixture.usesLinearDist = true;
         fixture.setRank(1);
         fixture.maxPoints = 100.0;
@@ -226,13 +196,9 @@ public class MeasureToFactorNumberEdgeTest {
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_5() throws Exception
-    {
+    public void testGetValue_5() {
         fixture.weight = 1.0;
         fixture.lowerBound = 0.0;
         fixture.upperBound = 1.0;
@@ -249,13 +215,9 @@ public class MeasureToFactorNumberEdgeTest {
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_6() throws Exception
-    {
+    public void testGetValue_6() {
         fixture.weight = 1.0;
         fixture.lowerBound = 0.0;
         fixture.upperBound = 1.0;
@@ -272,13 +234,9 @@ public class MeasureToFactorNumberEdgeTest {
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_7() throws Exception
-    {
+    public void testGetValue_7() {
         fixture.weight = 1.0;
         fixture.lowerBound = 0.0;
         fixture.upperBound = 1.0;
@@ -295,13 +253,9 @@ public class MeasureToFactorNumberEdgeTest {
 
     /**
      * Run the void setInf(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetInf_1() throws Exception
-    {
+    public void testSetInf_1() {
         final String inf = "";
 
         try
@@ -317,13 +271,9 @@ public class MeasureToFactorNumberEdgeTest {
 
     /**
      * Run the void setInf(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetInf_2() throws Exception
-    {
+    public void testSetInf_2() {
         final String inf = null;
 
         fixture.setInf(inf);
@@ -332,13 +282,9 @@ public class MeasureToFactorNumberEdgeTest {
 
     /**
      * Run the void setInf(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetInf_3() throws Exception
-    {
+    public void testSetInf_3() {
         final String inf = "Test";
 
         try
@@ -354,13 +300,9 @@ public class MeasureToFactorNumberEdgeTest {
 
     /**
      * Run the void setInf(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetInf_4() throws Exception
-    {
+    public void testSetInf_4() {
         final String inf = InfluenceType.POS;
 
         try
@@ -376,13 +318,9 @@ public class MeasureToFactorNumberEdgeTest {
 
     /**
      * Run the void setInf(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetInf_5() throws Exception
-    {
+    public void testSetInf_5() {
         final String inf = InfluenceType.NEG;
 
         try
@@ -401,7 +339,6 @@ public class MeasureToFactorNumberEdgeTest {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Before
     public void setUp() throws Exception
@@ -432,18 +369,5 @@ public class MeasureToFactorNumberEdgeTest {
         fixture.maxPoints = 100.0;
         fixture.dist = new PositiveLinearDistribution();
         fixture.norm = new NullNormalizer(fixture, "norm", NormalizationRange.CLASS);
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // Add additional tear down code here
     }
 }

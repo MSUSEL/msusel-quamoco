@@ -50,7 +50,6 @@ import org.junit.Test;
  * The class <code>EvaluatorTest</code> contains tests for the class
  * <code>{@link Evaluator}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:35 PM
  * @author fate
  * @version $Revision: 1.0 $
  */
@@ -60,12 +59,9 @@ public class EvaluatorTest {
 
     /**
      * Run the double process() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testProcess_1() throws Exception
+    public void testProcess_1()
     {
         final double result = fixture.process();
 
@@ -75,13 +71,9 @@ public class EvaluatorTest {
 
     /**
      * Run the double process() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testProcess_2() throws Exception
-    {
+    public void testProcess_2() {
         final ValueNode vn = new ValueNode(fixture.owner.getGraph(), "key", "owner", "tool");
         final MeasureNode mn = new MeasureNode(fixture.owner.getGraph(), "measure", "owner");
         mn.setProcessor(new NumberMeanAggregator(mn));
@@ -105,7 +97,6 @@ public class EvaluatorTest {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
     public void setUp() throws Exception
@@ -120,18 +111,5 @@ public class EvaluatorTest {
         fixture = new MeanEvaluator(node);
         node.setProcessor(fixture);
         graph.addNode(node);
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // Add additional tear down code here
     }
 }

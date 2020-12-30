@@ -75,19 +75,17 @@ public class MeasureToFactorFindingsEdge extends WeightedRankedEdge implements I
             value = norm.normalize(source.getFindings());
         }
 
-        if (inf != null && inf.equals(InfluenceType.NEG)) {
-            value = (getMaxPoints() - (value * getMaxPoints())) / getMaxPoints();
+        if (inf != null) {
+            if (inf.equals(InfluenceType.NEG)) {
+                value = (getMaxPoints() - (value * getMaxPoints())) / getMaxPoints();
+            }
+            else if (inf.equals(InfluenceType.POS)) {
+                value = value / getMaxPoints();
+            }
         }
 
-//        if (inf != null && inf.equals(InfluenceType.POS)) {
-//            //System.out.println("Value: " + value);
-//            if (Double.compare(0.0, value) <= 0)
-//                value = 1.0;
-//        }
-
-
         if (usesLinearDist) {
-            value = dist.calculate(getMaxPoints(), value) / getMaxPoints();
+            value = dist.calculate(getMaxPoints(), value / getMaxPoints());
         }
 
 //        value = thresholdValue(value, lowerBound, upperBound);

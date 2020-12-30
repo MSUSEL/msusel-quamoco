@@ -234,6 +234,9 @@ public class Extent {
                 values = Measure.getAllMethodValues(QuamocoContext.instance().getProject(), QuamocoContext.instance().getMetricRepoKey(), metric);
                 break;
             case NA:
+                System.out.println("Proj: " + QuamocoContext.instance().getProject());
+                System.out.println("Repo Key: " + QuamocoContext.instance().getMetricRepoKey());
+                System.out.println("Metric: " + metric);
                 return Measure.getProjectMetric(QuamocoContext.instance().getProject(), QuamocoContext.instance().getMetricRepoKey(), metric);
         }
 

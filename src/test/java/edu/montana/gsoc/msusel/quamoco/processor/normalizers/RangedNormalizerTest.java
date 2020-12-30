@@ -29,20 +29,19 @@ package edu.montana.gsoc.msusel.quamoco.processor.normalizers;
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.isu.isuese.datamodel.*;
 import edu.isu.isuese.datamodel.Class;
 import edu.isu.isuese.datamodel.System;
+import edu.isu.isuese.datamodel.*;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureNumberEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.ValueToMeasureEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
+import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMeanAggregator;
 import edu.montana.gsoc.msusel.quamoco.processor.extents.Extent;
 import org.easymock.EasyMock;
 import org.javalite.activejdbc.test.DBSpec;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,7 +52,6 @@ import java.util.Set;
  * The class <code>RangedNormalizerTest</code> contains tests for the class
  * <code>{@link RangedNormalizer}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:35 PM
  * @author fate
  * @version $Revision: 1.0 $
  */
@@ -68,12 +66,9 @@ public class RangedNormalizerTest extends DBSpec {
     /**
      * Run the RangedNormalizer(Edge,String,NormalizationRange) constructor
      * test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testRangedNormalizer_1() throws Exception {
+    public void testRangedNormalizer_1() {
         final Edge owner = EasyMock.createMock(Edge.class);
         final String normMetric = "LOC";
         final NormalizationRange range = NormalizationRange.CLASS;
@@ -90,7 +85,7 @@ public class RangedNormalizerTest extends DBSpec {
     }
 
     @Test
-    public void testNormalize_Set_Finding_1() throws Exception {
+    public void testNormalize_Set_Finding_1() {
         findings = Sets.newHashSet();
         Finding f1 = new FileFinding(file, "issue", "issue");
         Finding f2 = new FileFinding(file2, "issue", "issue");
@@ -104,20 +99,21 @@ public class RangedNormalizerTest extends DBSpec {
     }
 
     @Test
-    public void testNormalize_Set_Finding_2() throws Exception {
+    public void testNormalize_Set_Finding_2() {
         double result = fixture.normalize((Set<Finding>) null);
 
         Assert.assertEquals(0.0, result, 0.001);
     }
 
     @Test
-    public void testNormalize_Set_Finding_3() throws Exception {
+    public void testNormalize_Set_Finding_3() {
         double result = fixture.normalize(Sets.newHashSet());
 
         Assert.assertEquals(0.0, result, 0.001);
     }
 
-    public void testNormalize_Set_Finding_4() throws Exception {
+    @Test
+    public void testNormalize_Set_Finding_4() {
         findings = Sets.newHashSet();
         Finding f1 = new FileFinding(file, "issue", "issue");
         Finding f2 = new FileFinding(file2, "issue", "issue");
@@ -133,7 +129,6 @@ public class RangedNormalizerTest extends DBSpec {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
     public void setUp() throws Exception {
@@ -143,6 +138,11 @@ public class RangedNormalizerTest extends DBSpec {
                 .expectedNodeCount(10000)
                 .expectedEdgeCount(10000)
                 .build();
+
+        Metric.builder().handle("LOC").key("LOC").name("LOC").create();
+        Metric.builder().handle("NOM").key("NOM").name("NOM").create();
+        Metric.builder().handle("NIV").key("NIV").name("NIV").create();
+        Metric.builder().handle("NOC").key("NOC").name("NOC").create();
 
         final ValueNode vn = new ValueNode(graph, "LOC", "owner", "tool");
         vn.addValue(100.0);
@@ -170,25 +170,24 @@ public class RangedNormalizerTest extends DBSpec {
         proj.addMeasure(Measure.of("NOC").on(proj).withValue(2.0));
 
         file = File.builder().fileKey("path").create();
+        proj.addFile(file);
         proj.addMeasure(Measure.of("LOC").on(file).withValue(200.0));
 
         Class type = Class.builder().compKey("namespace.Type").start(1).end(100).create();
-        proj.addMeasure(Measure.of("LOC").on(type).withValue(100.0));
         file.addType(type);
+        proj.addMeasure(Measure.of("LOC").on(type).withValue(100.0));
 
         Method method1 = Method.builder().compKey("namespace.Type#method").start(20).end(100).create();
+        type.addMember(method1);
         proj.addMeasure(Measure.of("LOC").on(method1).withValue(80.0));
-//        type.addChild(method1);
 
         file2 = File.builder().fileKey("path2").create();
+        proj.addFile(file2);
         proj.addMeasure(Measure.of("LOC").on(file2).withValue(200.0));
 
         file3 = File.builder().fileKey("path3").create();
-        proj.addMeasure(Measure.of("LOC").on(file3).withValue(200.0));
-
-        proj.addFile(file);
-        proj.addFile(file2);
         proj.addFile(file3);
+        proj.addMeasure(Measure.of("LOC").on(file3).withValue(200.0));
 
         sys.addProject(proj);
 
@@ -199,17 +198,5 @@ public class RangedNormalizerTest extends DBSpec {
         findings.add(f2);
 
         Extent.getInstance().clearExtents();
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    @After
-    public void tearDown() throws Exception {
-        // Add additional tear down code here
     }
 }

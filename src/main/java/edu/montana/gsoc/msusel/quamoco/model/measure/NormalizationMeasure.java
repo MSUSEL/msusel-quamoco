@@ -95,7 +95,6 @@ public class NormalizationMeasure extends Measure {
     @Override
     public String xmlTag()
     {
-        // TODO Fix this
-        return "";
+        return String.format("<measures xmi:id=\"%s\" xsi:type=\"qm:NormlizationMeasure\" name=\"%s\" />", identifier, name);
     }
 }

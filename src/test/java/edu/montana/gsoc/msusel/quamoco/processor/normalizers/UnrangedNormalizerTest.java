@@ -32,6 +32,7 @@ import com.google.common.graph.NetworkBuilder;
 import edu.isu.isuese.datamodel.*;
 import edu.isu.isuese.datamodel.Class;
 import edu.isu.isuese.datamodel.System;
+import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureNumberEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.ValueToMeasureEdge;
@@ -54,7 +55,6 @@ import java.util.Set;
  *
  * @author fate
  * @version $Revision: 1.0 $
- * @generatedBy CodePro at 1/26/16 6:34 PM
  */
 public class UnrangedNormalizerTest extends DBSpec {
 
@@ -66,14 +66,11 @@ public class UnrangedNormalizerTest extends DBSpec {
     /**
      * Run the UnrangedNormalizer(Edge,String,NormalizationRange) constructor
      * test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:34 PM
      */
     @Test
-    public void testUnrangedNormalizer_1() throws Exception {
+    public void testUnrangedNormalizer_1() {
         final Edge owner = EasyMock.createMock(Edge.class);
-        final String normMetric = "LOC";
+        final String normMetric = "repo:LOC";
         // add mock object expectations here
 
         EasyMock.replay(owner);
@@ -83,12 +80,12 @@ public class UnrangedNormalizerTest extends DBSpec {
         // add additional test code here
         EasyMock.verify(owner);
         Assert.assertNotNull(result);
-        Assert.assertEquals("LOC", result.getMetric());
+        Assert.assertEquals("repo:LOC", result.getMetric());
         Assert.assertEquals(NormalizationRange.NA, result.getRange());
     }
 
     @Test
-    public void testNormalize_Set_Finding_1() throws Exception {
+    public void testNormalize_Set_Finding_1() {
         findings = Sets.newHashSet();
         Finding f1 = new FileFinding(file, "issue", "issue");
         Finding f2 = new FileFinding(file2, "issue", "issue");
@@ -96,27 +93,26 @@ public class UnrangedNormalizerTest extends DBSpec {
         findings.add(f2);
 
         double result = fixture.normalize(findings);
-        double res = result;
         double exp = 0.4;
-        Assert.assertEquals(exp, res, 0.001);
+        Assert.assertEquals(exp, result, 0.001);
     }
 
     @Test
-    public void testNormalize_Set_Finding_2() throws Exception {
+    public void testNormalize_Set_Finding_2() {
         double result = fixture.normalize((Set<Finding>) null);
 
         Assert.assertEquals(0.0, result, 0.001);
     }
 
     @Test
-    public void testNormalize_Set_Finding_3() throws Exception {
+    public void testNormalize_Set_Finding_3() {
         double result = fixture.normalize(Sets.newHashSet());
 
         Assert.assertEquals(0.0, result, 0.001);
     }
 
     @Test
-    public void testNormalize_Set_Finding_4() throws Exception {
+    public void testNormalize_Set_Finding_4() {
         findings = Sets.newHashSet();
         Finding f1 = new FileFinding(file, "issue", "issue");
         Finding f2 = new FileFinding(file2, "issue", "issue");
@@ -133,7 +129,6 @@ public class UnrangedNormalizerTest extends DBSpec {
      * Perform pre-test initialization.
      *
      * @throws Exception if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:34 PM
      */
     @Before
     public void setUp() throws Exception {
@@ -144,7 +139,14 @@ public class UnrangedNormalizerTest extends DBSpec {
                 .expectedEdgeCount(10000)
                 .build();
 
-        final ValueNode vn = new ValueNode(graph, "LOC", "owner", "tool");
+        MetricRepository repo = MetricRepository.builder().key("repo").name("repo").create();
+        repo.addMetric(Metric.builder().handle("LOC").key("repo:LOC").name("LOC").create());
+        repo.addMetric(Metric.builder().handle("NOM").key("repo:NOM").name("NOM").create());
+        repo.addMetric(Metric.builder().handle("NIV").key("repo:NIV").name("NIV").create());
+        repo.addMetric(Metric.builder().handle("NOC").key("repo:NOC").name("NOC").create());
+        QuamocoContext.instance().setMetricRepoKey("repo");
+
+        final ValueNode vn = new ValueNode(graph, "LOC", "owner", "repo");
         vn.addValue(100.0);
 
         final MeasureNode src = new MeasureNode(graph, "src", "owner");
@@ -154,7 +156,7 @@ public class UnrangedNormalizerTest extends DBSpec {
         dest.setProcessor(new NumberMeanAggregator(dest));
 
         final Edge e = new MeasureToMeasureNumberEdge("edge", src, dest);
-        fixture = new UnrangedNormalizer(e, "LOC");
+        fixture = new UnrangedNormalizer(e, "repo:LOC");
 
         graph.addEdge(src, dest, e);
         graph.addEdge(vn, src, new ValueToMeasureEdge("v2m", vn, src));
@@ -162,38 +164,29 @@ public class UnrangedNormalizerTest extends DBSpec {
         // setup metrics
         System sys = System.builder().name("System").key("system").create();
         Project proj = Project.builder().projKey("Test").create();
+        QuamocoContext.instance().setProject(proj);
 
         file = File.builder().fileKey("path").create();
-        proj.addMeasure(Measure.of("LOC").on(file).withValue(200.0));
         proj.addFile(file);
+        proj.addMeasure(Measure.of("repo:LOC").on(file).withValue(200.0));
 
         Type type = Class.builder().compKey("namespace.Type").start(1).end(100).create();
-        proj.addMeasure(Measure.of("LOC").on(type).withValue(100.0));
+        file.addType(type);
+        proj.addMeasure(Measure.of("repo:LOC").on(type).withValue(100.0));
 
         Method method = Method.builder().compKey("namespace.Type#method").start(20).end(100).create();
-        proj.addMeasure(Measure.of("LOC").on(method).withValue(80.0));
         type.addMember(method);
+        proj.addMeasure(Measure.of("repo:LOC").on(method).withValue(80.0));
 
         file2 = File.builder().fileKey("path2").create();
+        proj.addFile(file2);
 
-        proj.addMeasure(Measure.of("LOC").on(file2).withValue(200.0));
-        proj.addMeasure(Measure.of("LOC").on(proj).withValue(1000.0));
-        proj.addMeasure(Measure.of("NOM").on(proj).withValue(2.0));
-        proj.addMeasure(Measure.of("NIV").on(proj).withValue(10.0));
-        proj.addMeasure(Measure.of("NOC").on(proj).withValue(2.0));
-
+        proj.addMeasure(Measure.of("repo:LOC").on(file2).withValue(200.0));
+        proj.addMeasure(Measure.of("repo:LOC").on(proj).withValue(1000.0));
+        proj.addMeasure(Measure.of("repo:NOM").on(proj).withValue(2.0));
+        proj.addMeasure(Measure.of("repo:NIV").on(proj).withValue(10.0));
+        proj.addMeasure(Measure.of("repo:NOC").on(proj).withValue(2.0));
 
         sys.addProject(proj);
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:34 PM
-     */
-    @After
-    public void tearDown() throws Exception {
-        // Add additional tear down code here
     }
 }

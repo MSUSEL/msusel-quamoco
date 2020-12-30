@@ -58,10 +58,10 @@ public class QMRYamlReaderTest {
     /**
      * Test method for {@link QMRYamlReader#QMRYamlReader()}.
      */
-    @Test
-    public final void testQMRYamlReader()
-    {
-        fail("Not yet implemented"); // TODO
-    }
+//    @Test
+//    public final void testQMRYamlReader()
+//    {
+//        fail("Not yet implemented"); // TODO
+//    }
 
 }

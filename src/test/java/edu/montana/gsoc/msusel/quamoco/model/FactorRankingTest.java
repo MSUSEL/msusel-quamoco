@@ -106,10 +106,10 @@ public class FactorRankingTest {
         assertEquals(10, element.getContributionPoints(), 0.001);
     }
 
-    @Test
-    public void toScript() throws Exception {
-        fail();
-    }
+//    @Test
+//    public void toScript() throws Exception {
+//        fail();
+//    }
 
     @Test
     public void xmlTag() throws Exception {
