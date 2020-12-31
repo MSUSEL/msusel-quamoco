@@ -128,7 +128,7 @@ public class FactorNodeTest {
     @Test
     public void testGetValue_2() {
         fixture.setProcessor(new NullProcessor(fixture));
-        fixture.value = 1.0;
+        fixture.setValue(1.0);
         fixture.calculated = true;
 
         final double result = fixture.getValue();

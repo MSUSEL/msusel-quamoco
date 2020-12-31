@@ -29,6 +29,7 @@ package edu.montana.gsoc.msusel.quamoco.processor.extents;
 import edu.isu.isuese.datamodel.Measurable;
 import edu.isu.isuese.datamodel.Measure;
 import edu.isu.isuese.datamodel.Type;
+import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
 import java.util.Objects;
@@ -45,7 +46,7 @@ public class TypeExtentDecorator extends AbstractExtentDecorator {
 
     @Override
     public NormalizationRange findRange(String metric) {
-        if (Measure.hasMetric(decorated, metric)) {
+        if (Measure.hasMetric(decorated, metric) || Measure.hasMetric(decorated, QuamocoContext.instance().getMetricRepoKey() + ":" + metric)) {
             return NormalizationRange.CLASS;
         } else {
             return NormalizationRange.FILE;
@@ -56,7 +57,10 @@ public class TypeExtentDecorator extends AbstractExtentDecorator {
     public double findFileExtent(String metric) {
         System.out.println("TypeExtentDecorator.findFileExtent Metric: " + metric);
         Measurable file = decorated.getParent();
-        return Objects.requireNonNull(Measure.retrieve(file, metric)).getValue();
+        Measure meas = Measure.retrieve(file, metric);
+        if (meas == null)
+            meas = Measure.retrieve(file, QuamocoContext.instance().getMetricRepoKey() + ":" + metric);
+        return Objects.requireNonNull(meas).getValue();
     }
 
     @Override
@@ -69,6 +73,9 @@ public class TypeExtentDecorator extends AbstractExtentDecorator {
     @Override
     public double findClassExtent(String metric) {
         System.out.println("TypeExtentDecorator.findClassExtent Metric: " + metric);
-        return Objects.requireNonNull(Measure.retrieve(decorated, metric)).getValue();
+        Measure meas = Measure.retrieve(decorated, metric);
+        if (meas == null)
+            meas = Measure.retrieve(decorated, QuamocoContext.instance().getMetricRepoKey() + ":" + metric);
+        return Objects.requireNonNull(meas).getValue();
     }
 }

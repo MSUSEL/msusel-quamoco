@@ -73,7 +73,7 @@ public class UnrangedNormalizer extends Normalizer {
         Extent ext = Extent.getInstance();
         for (final Finding f : findings)
         {
-            totalAffected += ext.findExtent(f, metric, newRange);
+            totalAffected += ext.findExtent(f, QuamocoContext.instance().getMetricRepoKey() + ":" + metric, newRange);
         }
 
         double extent = ext.findExtent(metric, range);

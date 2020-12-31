@@ -33,6 +33,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
 public class FactorTest {
@@ -66,13 +67,20 @@ public class FactorTest {
     public void addInfluence() {
         assertNotNull(element.getInfluences());
         assertTrue(element.getInfluences().isEmpty());
-        element.addInfluence(mock(Impact.class));
+        Impact imp = mock(Impact.class);
+        Factor ele = mock(Factor.class);
+        doReturn(ele).when(imp).getTarget();
+        doReturn("Test").when(ele).getQualifiedIdentifier();
+        element.addInfluence(imp);
         assertFalse(element.getInfluences().isEmpty());
     }
 
     @Test
     public void removeInfluence() {
         Impact inf = mock(Impact.class);
+        Factor ele = mock(Factor.class);
+        doReturn(ele).when(inf).getTarget();
+        doReturn("Test").when(ele).getQualifiedIdentifier();
         element.addInfluence(inf);
         assertFalse(element.getInfluences().isEmpty());
         element.removeInfluence(inf);
@@ -95,6 +103,9 @@ public class FactorTest {
     @Test
     public void getInfluences() {
         Impact inf = mock(Impact.class);
+        Factor ele = mock(Factor.class);
+        doReturn(ele).when(inf).getTarget();
+        doReturn("Test").when(ele).getQualifiedIdentifier();
         element.addInfluence(inf);
         assertTrue(element.getInfluences().containsValue(inf));
     }

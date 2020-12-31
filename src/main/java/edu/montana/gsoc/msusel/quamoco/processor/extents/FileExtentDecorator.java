@@ -29,6 +29,8 @@ package edu.montana.gsoc.msusel.quamoco.processor.extents;
 import edu.isu.isuese.datamodel.File;
 import edu.isu.isuese.datamodel.Measurable;
 import edu.isu.isuese.datamodel.Measure;
+import edu.isu.isuese.datamodel.Metric;
+import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
 import java.util.Objects;
@@ -50,7 +52,10 @@ public class FileExtentDecorator extends AbstractExtentDecorator {
 
     @Override
     public double findFileExtent(String metric) {
-        return Objects.requireNonNull(Measure.retrieve(decorated, metric)).getValue();
+        Measure meas = Measure.retrieve(decorated, metric);
+        if (meas == null)
+            meas = Measure.retrieve(decorated, QuamocoContext.instance().getMetricRepoKey() + ":" + metric);
+        return Objects.requireNonNull(meas).getValue();
     }
 
     @Override

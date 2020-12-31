@@ -93,13 +93,17 @@ public class MeasureNode extends Node {
      */
     @Override
     public double getValue() {
-        if (type == MeasureType.NUMBER) {
-            return processor.process();
-        } else if (type == MeasureType.FINDINGS) {
-            return 0.0;
-        }
+        if (!calculated) {
+            if (type == MeasureType.NUMBER) {
+                return processor.process();
+            } else if (type == MeasureType.FINDINGS) {
+                return 0.0;
+            }
 
-        return 1.0;
+            return 1.0;
+        } else {
+            return value;
+        }
     }
 
     public double normalize(double value) {

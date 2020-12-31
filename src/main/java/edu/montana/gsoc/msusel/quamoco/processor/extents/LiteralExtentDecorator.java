@@ -30,6 +30,7 @@ import edu.isu.isuese.datamodel.File;
 import edu.isu.isuese.datamodel.Measurable;
 import edu.isu.isuese.datamodel.Measure;
 import edu.isu.isuese.datamodel.Type;
+import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
 import java.util.Objects;
@@ -43,7 +44,7 @@ public class LiteralExtentDecorator extends AbstractExtentDecorator {
     @Override
     public NormalizationRange findRange(String metric) {
         Measurable parent = decorated.getParent();
-        if (Measure.hasMetric(decorated, metric)) {
+        if (Measure.hasMetric(decorated, metric) || Measure.hasMetric(decorated, QuamocoContext.instance().getMetricRepoKey() + ":" + metric)) {
             return NormalizationRange.CLASS;
         } else {
             return NormalizationRange.FILE;
@@ -56,7 +57,10 @@ public class LiteralExtentDecorator extends AbstractExtentDecorator {
         Measurable file = type.getParent();
 
         if (file instanceof File) {
-            return Objects.requireNonNull(Measure.retrieve(file, metric)).getValue();
+            Measure meas = Measure.retrieve(file, metric);
+            if (meas == null)
+                meas = Measure.retrieve(file, QuamocoContext.instance().getMetricRepoKey() + ":" + metric);
+            return Objects.requireNonNull(meas).getValue();
         }
 
         return 0.0;
@@ -72,7 +76,10 @@ public class LiteralExtentDecorator extends AbstractExtentDecorator {
         Measurable p = decorated.getParent();
 
         if (p instanceof Type) {
-            return Objects.requireNonNull(Measure.retrieve(p, metric)).getValue();
+            Measure meas = Measure.retrieve(p, metric);
+            if (meas == null)
+                meas = Measure.retrieve(p, QuamocoContext.instance().getMetricRepoKey() + ":" + metric);
+            return Objects.requireNonNull(meas).getValue();
         }
 
         return 0.0;

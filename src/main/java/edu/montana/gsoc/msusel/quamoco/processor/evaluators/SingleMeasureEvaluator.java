@@ -60,7 +60,7 @@ public class SingleMeasureEvaluator extends Evaluator {
 
         if (values == null || values.isEmpty())
         {
-            return 1.0;
+            return 0.0;
         }
 
         for (final double x : values)

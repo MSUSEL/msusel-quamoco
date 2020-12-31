@@ -26,15 +26,15 @@
  */
 package edu.montana.gsoc.msusel.quamoco.it.single;
 
-import edu.isu.isuese.datamodel.File;
-import edu.isu.isuese.datamodel.Measure;
-import edu.isu.isuese.datamodel.Project;
+import edu.isu.isuese.datamodel.*;
 import edu.isu.isuese.datamodel.System;
+import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToFactorFindingsEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToFactorNumberEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.*;
+import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import org.junit.After;
@@ -65,15 +65,28 @@ public class GraphTest extends BaseTestClass {
 
         System sys = System.builder().name("System").key("system").create();
         Project proj = Project.builder().projKey("project").create();
+        sys.addProject(proj);
         File fn = File.builder().fileKey("file1").create();
         File fn2 = File.builder().fileKey("file2").create();
-        proj.addMeasure(Measure.of("Test Normalization @Source Code Part").on(fn).withValue(10.0));
-        proj.addMeasure(Measure.of("Test Normalization @Source Code Part").on(fn2).withValue(90.0));
-        proj.addMeasure(Measure.of("NormMeas").on(fn).withValue(10.0));
-        proj.addMeasure(Measure.of("NormMeas").on(fn2).withValue(90.0));
-        sys.addProject(proj);
         proj.addFile(fn);
         proj.addFile(fn2);
+        MetricRepository repo = MetricRepository.builder().key("repo").name("repo").create();
+        repo.addMetric(Metric.builder()
+                .name("Test Normalization @Source Code Part")
+                .handle("Test Normalization @Source Code Part")
+                .key("repo:Test Normalization @Source Code Part")
+                .create());
+        repo.addMetric(Metric.builder()
+                .name("NormMeas")
+                .handle("NormMeas")
+                .key("repo:NormMeas")
+                .create());
+        QuamocoContext.instance().setProject(proj);
+        QuamocoContext.instance().setMetricRepoKey("repo");
+        proj.addMeasure(Measure.of("repo:Test Normalization @Source Code Part").on(fn).withValue(10.0));
+        proj.addMeasure(Measure.of("repo:Test Normalization @Source Code Part").on(fn2).withValue(90.0));
+        proj.addMeasure(Measure.of("repo:NormMeas").on(fn).withValue(10.0));
+        proj.addMeasure(Measure.of("repo:NormMeas").on(fn2).withValue(90.0));
 
         FindingNode[] nodes = new FindingNode[4];
         for (int i = 1; i < 5; i++) {
@@ -106,11 +119,19 @@ public class GraphTest extends BaseTestClass {
         Project proj = Project.builder().projKey("project").create();
         File fn = File.builder().fileKey("file1").create();
         File fn2 = File.builder().fileKey("file2").create();
-        proj.addMeasure(Measure.of("Test Normalization @Source Code Part").on(fn).withValue(10.0));
-        proj.addMeasure(Measure.of("Test Normalization @Source Code Part").on(fn2).withValue(90.0));
         sys.addProject(proj);
         proj.addFile(fn);
         proj.addFile(fn2);
+        MetricRepository repo = MetricRepository.builder().key("repo").name("repo").create();
+        repo.addMetric(Metric.builder()
+                .name("Test Normalization @Source Code Part")
+                .handle("Test Normalization @Source Code Part")
+                .key("repo:Test Normalization @Source Code Part")
+                .create());
+        QuamocoContext.instance().setProject(proj);
+        QuamocoContext.instance().setMetricRepoKey("repo");
+        proj.addMeasure(Measure.of("repo:Test Normalization @Source Code Part").on(fn).withValue(10.0));
+        proj.addMeasure(Measure.of("repo:Test Normalization @Source Code Part").on(fn2).withValue(90.0));
 
         FindingNode n = (FindingNode) findNodeByName("TestOther");
         Finding f1 = new FileFinding(fn, "key", "name");
@@ -140,13 +161,21 @@ public class GraphTest extends BaseTestClass {
 
         System sys = System.builder().name("System").key("system").create();
         Project proj = Project.builder().projKey("project").create();
+        sys.addProject(proj);
         File fn = File.builder().fileKey("file1").create();
         File fn2 = File.builder().fileKey("file2").create();
-        proj.addMeasure(Measure.of("Test Normalization @Source Code Part").on(fn).withValue(10.0));
-        proj.addMeasure(Measure.of("Test Normalization @Source Code Part").on(fn2).withValue(90.0));
-        sys.addProject(proj);
         proj.addFile(fn);
         proj.addFile(fn2);
+        MetricRepository repo = MetricRepository.builder().key("repo").name("repo").create();
+        repo.addMetric(Metric.builder()
+                .name("Test Normalization @Source Code Part")
+                .handle("Test Normalization @Source Code Part")
+                .key("repo:Test Normalization @Source Code Part")
+                .create());
+        QuamocoContext.instance().setProject(proj);
+        QuamocoContext.instance().setMetricRepoKey("repo");
+        proj.addMeasure(Measure.of("repo:Test Normalization @Source Code Part").on(fn).withValue(10.0));
+        proj.addMeasure(Measure.of("repo:Test Normalization @Source Code Part").on(fn2).withValue(90.0));
 
         FindingNode n = (FindingNode) findNodeByName("TestOther");
         Finding f1 = new FileFinding(fn, "key", "name");
@@ -188,8 +217,16 @@ public class GraphTest extends BaseTestClass {
         sys.addProject(proj);
         proj.addFile(fn);
         proj.addFile(fn2);
-        proj.addMeasure(Measure.of("NormMeas").on(fn).withValue(10.0));
-        proj.addMeasure(Measure.of("NormMeas").on(fn2).withValue(90.0));
+        MetricRepository repo = MetricRepository.builder().key("repo").name("repo").create();
+        repo.addMetric(Metric.builder()
+                .name("NormMeas")
+                .handle("NormMeas")
+                .key("repo:NormMeas")
+                .create());
+        QuamocoContext.instance().setProject(proj);
+        QuamocoContext.instance().setMetricRepoKey("repo");
+        proj.addMeasure(Measure.of("repo:NormMeas").on(fn).withValue(10.0));
+        proj.addMeasure(Measure.of("repo:NormMeas").on(fn2).withValue(90.0));
 
         for (FindingNode n : nodes) {
             Finding f1 = new FileFinding(fn, "key", "name" + i);
@@ -273,8 +310,16 @@ public class GraphTest extends BaseTestClass {
         sys.addProject(proj);
         proj.addFile(fn);
         proj.addFile(fn2);
-        proj.addMeasure(Measure.of("NormMeas").on(fn).withValue(10.0));
-        proj.addMeasure(Measure.of("NormMeas").on(fn2).withValue(90.0));
+        MetricRepository repo = MetricRepository.builder().key("repo").name("repo").create();
+        repo.addMetric(Metric.builder()
+                .name("NormMeas")
+                .handle("NormMeas")
+                .key("repo:NormMeas")
+                .create());
+        QuamocoContext.instance().setProject(proj);
+        QuamocoContext.instance().setMetricRepoKey("repo");
+        proj.addMeasure(Measure.of("repo:NormMeas").on(fn).withValue(10.0));
+        proj.addMeasure(Measure.of("repo:NormMeas").on(fn2).withValue(90.0));
 
         for (FindingNode n : nodes) {
             Finding f1 = new FileFinding(fn, "key", "name" + i);

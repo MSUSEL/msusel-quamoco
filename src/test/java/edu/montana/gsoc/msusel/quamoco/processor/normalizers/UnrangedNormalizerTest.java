@@ -156,7 +156,7 @@ public class UnrangedNormalizerTest extends DBSpec {
         dest.setProcessor(new NumberMeanAggregator(dest));
 
         final Edge e = new MeasureToMeasureNumberEdge("edge", src, dest);
-        fixture = new UnrangedNormalizer(e, "repo:LOC");
+        fixture = new UnrangedNormalizer(e, "LOC");
 
         graph.addEdge(src, dest, e);
         graph.addEdge(vn, src, new ValueToMeasureEdge("v2m", vn, src));

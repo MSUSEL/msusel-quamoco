@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a738a267-9a20-4b8c-88fe-147b5320e1a2" name="Default Changelist" comment="" />
+    <list default="true" id="a738a267-9a20-4b8c-88fe-147b5320e1a2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/edge/FactorToFactorEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/edge/FactorToFactorEdge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToFactorFindingsEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToFactorFindingsEdge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToFactorNumberEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/edge/MeasureToFactorNumberEdge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/node/FactorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/node/FactorNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/node/MeasureNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/graph/node/MeasureNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/evaluators/SingleMeasureEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/evaluators/SingleMeasureEvaluator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/evaluators/WeightedSumEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/evaluators/WeightedSumEvaluator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/FieldExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/FieldExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/FileExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/FileExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/InitializerExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/InitializerExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/LiteralExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/LiteralExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/MethodExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/MethodExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/TypeExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/TypeExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/normalizers/RangedNormalizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/normalizers/RangedNormalizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/normalizers/UnrangedNormalizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/normalizers/UnrangedNormalizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/node/FactorNodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/node/FactorNodeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/it/single/GraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/it/single/GraphTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/FactorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/model/FactorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/ExtentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/ExtentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/normalizers/RangedNormalizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/normalizers/RangedNormalizerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/normalizers/UnrangedNormalizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/normalizers/UnrangedNormalizerTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,7 +87,7 @@
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.ignored.files" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
-  <component name="RunManager" selected="JUnit.UnrangedNormalizerTest">
+  <component name="RunManager" selected="JUnit.ExtentTest">
     <configuration name="All in msusel-quamoco" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="msusel-quamoco" />
       <option name="PACKAGE_NAME" value="" />
@@ -90,39 +113,39 @@
         <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MeasureToFactorFindingsEdgeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FactorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="msusel-quamoco" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="edu.montana.gsoc.msusel.quamoco.graph.edge.*" />
+          <option name="PATTERN" value="edu.montana.gsoc.msusel.quamoco.model.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="edu.montana.gsoc.msusel.quamoco.graph.edge" />
-      <option name="MAIN_CLASS_NAME" value="edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToFactorFindingsEdgeTest" />
+      <option name="PACKAGE_NAME" value="edu.montana.gsoc.msusel.quamoco.model" />
+      <option name="MAIN_CLASS_NAME" value="edu.montana.gsoc.msusel.quamoco.model.FactorTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MeasureToMeasureNumberEdgeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GraphTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="msusel-quamoco" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="edu.montana.gsoc.msusel.quamoco.graph.edge.*" />
+          <option name="PATTERN" value="edu.montana.gsoc.msusel.quamoco.it.single.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="edu.montana.gsoc.msusel.quamoco.graph.edge" />
-      <option name="MAIN_CLASS_NAME" value="edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureNumberEdgeTest" />
+      <option name="PACKAGE_NAME" value="edu.montana.gsoc.msusel.quamoco.it.single" />
+      <option name="MAIN_CLASS_NAME" value="edu.montana.gsoc.msusel.quamoco.it.single.GraphTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UnrangedNormalizerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RangedNormalizerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="msusel-quamoco" />
       <extension name="coverage">
         <pattern>
@@ -131,7 +154,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="edu.montana.gsoc.msusel.quamoco.processor.normalizers" />
-      <option name="MAIN_CLASS_NAME" value="edu.montana.gsoc.msusel.quamoco.processor.normalizers.UnrangedNormalizerTest" />
+      <option name="MAIN_CLASS_NAME" value="edu.montana.gsoc.msusel.quamoco.processor.normalizers.RangedNormalizerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -147,11 +170,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.UnrangedNormalizerTest" />
-        <item itemvalue="JUnit.All in msusel-quamoco" />
         <item itemvalue="JUnit.ExtentTest" />
-        <item itemvalue="JUnit.MeasureToFactorFindingsEdgeTest" />
-        <item itemvalue="JUnit.MeasureToMeasureNumberEdgeTest" />
+        <item itemvalue="JUnit.All in msusel-quamoco" />
+        <item itemvalue="JUnit.FactorTest" />
+        <item itemvalue="JUnit.RangedNormalizerTest" />
+        <item itemvalue="JUnit.GraphTest" />
       </list>
     </recent_temporary>
   </component>
@@ -170,7 +193,7 @@
       <workItem from="1609142535017" duration="462000" />
       <workItem from="1609143010122" duration="11120000" />
       <workItem from="1609196727278" duration="8415000" />
-      <workItem from="1609251108156" duration="6453000" />
+      <workItem from="1609251108156" duration="20092000" />
     </task>
     <servers />
   </component>
@@ -194,22 +217,22 @@
       <screen x="3840" y="0" width="1920" height="1080" />
     </state>
     <state x="4541" y="286" width="506" height="521" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609142591054" />
-    <state width="1872" height="325" key="GridCell.Tab.0.bottom" timestamp="1609323607254">
+    <state width="1872" height="325" key="GridCell.Tab.0.bottom" timestamp="1609391850661">
       <screen x="3840" y="0" width="1920" height="1080" />
     </state>
-    <state width="1872" height="325" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609323607254" />
-    <state width="1872" height="325" key="GridCell.Tab.0.center" timestamp="1609323607254">
+    <state width="1872" height="325" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609391850661" />
+    <state width="1872" height="325" key="GridCell.Tab.0.center" timestamp="1609391850661">
       <screen x="3840" y="0" width="1920" height="1080" />
     </state>
-    <state width="1872" height="325" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609323607254" />
-    <state width="1872" height="325" key="GridCell.Tab.0.left" timestamp="1609323607254">
+    <state width="1872" height="325" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609391850661" />
+    <state width="1872" height="325" key="GridCell.Tab.0.left" timestamp="1609391850660">
       <screen x="3840" y="0" width="1920" height="1080" />
     </state>
-    <state width="1872" height="325" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609323607254" />
-    <state width="1872" height="325" key="GridCell.Tab.0.right" timestamp="1609323607254">
+    <state width="1872" height="325" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609391850660" />
+    <state width="1872" height="325" key="GridCell.Tab.0.right" timestamp="1609391850661">
       <screen x="3840" y="0" width="1920" height="1080" />
     </state>
-    <state width="1872" height="325" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609323607254" />
+    <state width="1872" height="325" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609391850661" />
     <state x="4281" y="175" width="1037" height="737" key="SettingsEditor" timestamp="1609143060446">
       <screen x="3840" y="0" width="1920" height="1080" />
     </state>

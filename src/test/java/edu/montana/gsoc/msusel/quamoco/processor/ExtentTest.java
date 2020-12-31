@@ -42,7 +42,6 @@ import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggregator;
 import edu.montana.gsoc.msusel.quamoco.processor.extents.Extent;
 import org.javalite.activejdbc.test.DBSpec;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -52,7 +51,6 @@ import static org.junit.Assert.*;
  * The class <code>ExtentTest</code> contains tests for the class
  * <code>{@link Extent}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:35 PM
  * @author fate
  * @version $Revision: 1.0 $
  */
@@ -71,9 +69,6 @@ public class ExtentTest extends DBSpec {
 
     /**
      * Run the double findExtent(String,NormalizationRange) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
     public void testFindExtent_1() throws Exception {
@@ -88,13 +83,10 @@ public class ExtentTest extends DBSpec {
 
     /**
      * Run the double findExtent(String,NormalizationRange) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
     public void testFindExtent_2() throws Exception {
-        final String metric = "repo:LOC";
+        final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.CLASS;
 
         final double result = fixture.findExtent(metric, range);
@@ -105,13 +97,10 @@ public class ExtentTest extends DBSpec {
 
     /**
      * Run the double findExtent(String,NormalizationRange) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
     public void testFindExtent_3() throws Exception {
-        final String metric = "repo:LOC";
+        final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.METHOD;
 
         final double result = fixture.findExtent(metric, range);
@@ -122,9 +111,6 @@ public class ExtentTest extends DBSpec {
 
     /**
      * Run the double findExtent(String,NormalizationRange) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
     public void testFindExtent_4() throws Exception {
@@ -139,9 +125,6 @@ public class ExtentTest extends DBSpec {
 
     /**
      * Run the double findExtent(String,NormalizationRange) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test(expected = IllegalArgumentException.class)
     public void testFindExtent_7() throws Exception {
@@ -153,9 +136,6 @@ public class ExtentTest extends DBSpec {
 
     /**
      * Run the double findExtent(String,NormalizationRange) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test(expected = IllegalArgumentException.class)
     public void testFindExtent_8() throws Exception {
@@ -167,9 +147,6 @@ public class ExtentTest extends DBSpec {
 
     /**
      * Run the double findExtent(String,NormalizationRange) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test(expected = IllegalArgumentException.class)
     public void testFindExtent_9() throws Exception {
@@ -182,13 +159,10 @@ public class ExtentTest extends DBSpec {
     /**
      * Run the double findMeasureExtent(String,NormalizationRange,MeasureNode)
      * method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
     public void testFindMeasureExtent_1() throws Exception {
-        final String metric = "repo:LOC";
+        final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.FILE;
 
         buildGraph();
@@ -201,9 +175,6 @@ public class ExtentTest extends DBSpec {
     /**
      * Run the double findMeasureExtent(String,NormalizationRange,MeasureNode)
      * method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test(expected = IllegalArgumentException.class)
     public void testFindMeasureExtent_2() throws Exception {
@@ -218,9 +189,6 @@ public class ExtentTest extends DBSpec {
     /**
      * Run the double findMeasureExtent(String,NormalizationRange,MeasureNode)
      * method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test(expected = IllegalArgumentException.class)
     public void testFindMeasureExtent_3() throws Exception {
@@ -234,9 +202,6 @@ public class ExtentTest extends DBSpec {
     /**
      * Run the double findMeasureExtent(String,NormalizationRange,MeasureNode)
      * method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test(expected = IllegalArgumentException.class)
     public void testFindMeasureExtent_4() throws Exception {
@@ -250,9 +215,6 @@ public class ExtentTest extends DBSpec {
     /**
      * Run the double findMeasureExtent(String,NormalizationRange,MeasureNode)
      * method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test(expected = IllegalArgumentException.class)
     public void testFindMeasureExtent_5() throws Exception {
@@ -265,9 +227,6 @@ public class ExtentTest extends DBSpec {
 
     /**
      * Run the Extent getInstance() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
     public void testGetInstance_1() throws Exception {
@@ -285,7 +244,6 @@ public class ExtentTest extends DBSpec {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
     public void setUp() throws Exception {
@@ -295,7 +253,7 @@ public class ExtentTest extends DBSpec {
 
         System tree = System.builder().name("System").key("System").create();
 
-        Project proj = Project.builder().projKey("Test").create();
+        Project proj = Project.builder().projKey("Test").name("Test").create();
         MetricRepository repo = MetricRepository.builder().key("repo").name("repo").create();
         repo.addMetric(Metric.builder().handle("LOC").key("repo:LOC").name("LOC").create());
         repo.addMetric(Metric.builder().handle("NOM").key("repo:NOM").name("NOM").create());
@@ -309,12 +267,16 @@ public class ExtentTest extends DBSpec {
         proj.addMeasure(Measure.of("repo:NIV").on(proj).withValue(10.0));
         proj.addMeasure(Measure.of("repo:NOC").on(proj).withValue(2.0));
 
+        Namespace ns = Namespace.builder().nsKey("ns").name("ns").create();
+        proj.addNamespace(ns);
+
         file = File.builder().fileKey("path").create();
         proj.addFile(file);
         proj.addMeasure(Measure.of("repo:LOC").on(file).withValue(200.0));
 
         Type type = Class.builder().compKey("namespace.Type").start(1).end(100).create();
         file.addType(type);
+        ns.addType(type);
         proj.addMeasure(Measure.of("repo:LOC").on(type).withValue(100.0));
 
         Method method1 = Method.builder().compKey("namespace.Type#method").start(20).end(100).create();
@@ -334,29 +296,6 @@ public class ExtentTest extends DBSpec {
         fileFinding = new FileFinding(file, "issue", "issue");
         methodFinding = new ComponentFinding(method1, "issue", "issue");
         typeFinding = new ComponentFinding(type, "issue", "issue");
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    @After
-    public void tearDown() throws Exception {
-        // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    public static void main(final String[] args) {
-        new org.junit.runner.JUnitCore().run(ExtentTest.class);
     }
 
     private void buildGraph() {

@@ -32,6 +32,7 @@ import com.google.common.graph.NetworkBuilder;
 import edu.isu.isuese.datamodel.Class;
 import edu.isu.isuese.datamodel.System;
 import edu.isu.isuese.datamodel.*;
+import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureNumberEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.ValueToMeasureEdge;
@@ -139,12 +140,13 @@ public class RangedNormalizerTest extends DBSpec {
                 .expectedEdgeCount(10000)
                 .build();
 
-        Metric.builder().handle("LOC").key("LOC").name("LOC").create();
-        Metric.builder().handle("NOM").key("NOM").name("NOM").create();
-        Metric.builder().handle("NIV").key("NIV").name("NIV").create();
-        Metric.builder().handle("NOC").key("NOC").name("NOC").create();
+        MetricRepository repo = MetricRepository.builder().key("repo").name("repo").create();
+        Metric.builder().handle("LOC").key("repo:LOC").name("LOC").create();
+        Metric.builder().handle("NOM").key("repo:NOM").name("NOM").create();
+        Metric.builder().handle("NIV").key("repo:NIV").name("NIV").create();
+        Metric.builder().handle("NOC").key("repo:NOC").name("NOC").create();
 
-        final ValueNode vn = new ValueNode(graph, "LOC", "owner", "tool");
+        final ValueNode vn = new ValueNode(graph, "LOC", "owner", "repo");
         vn.addValue(100.0);
 
         final MeasureNode src = new MeasureNode(graph, "src", "owner");
@@ -164,30 +166,33 @@ public class RangedNormalizerTest extends DBSpec {
         file = null;
         file2 = null;
         Project proj = Project.builder().projKey("Test").create();
-        proj.addMeasure(Measure.of("LOC").on(proj).withValue(1000.0));
-        proj.addMeasure(Measure.of("NOM").on(proj).withValue(2.0));
-        proj.addMeasure(Measure.of("NIV").on(proj).withValue(10.0));
-        proj.addMeasure(Measure.of("NOC").on(proj).withValue(2.0));
+        sys.addProject(proj);
+        QuamocoContext.instance().setMetricRepoKey("repo");
+        QuamocoContext.instance().setProject(proj);
+        proj.addMeasure(Measure.of("repo:LOC").on(proj).withValue(1000.0));
+        proj.addMeasure(Measure.of("repo:NOM").on(proj).withValue(2.0));
+        proj.addMeasure(Measure.of("repo:NIV").on(proj).withValue(10.0));
+        proj.addMeasure(Measure.of("repo:NOC").on(proj).withValue(2.0));
 
         file = File.builder().fileKey("path").create();
         proj.addFile(file);
-        proj.addMeasure(Measure.of("LOC").on(file).withValue(200.0));
+        proj.addMeasure(Measure.of("repo:LOC").on(file).withValue(200.0));
 
         Class type = Class.builder().compKey("namespace.Type").start(1).end(100).create();
         file.addType(type);
-        proj.addMeasure(Measure.of("LOC").on(type).withValue(100.0));
+        proj.addMeasure(Measure.of("repo:LOC").on(type).withValue(100.0));
 
         Method method1 = Method.builder().compKey("namespace.Type#method").start(20).end(100).create();
         type.addMember(method1);
-        proj.addMeasure(Measure.of("LOC").on(method1).withValue(80.0));
+        proj.addMeasure(Measure.of("repo:LOC").on(method1).withValue(80.0));
 
         file2 = File.builder().fileKey("path2").create();
         proj.addFile(file2);
-        proj.addMeasure(Measure.of("LOC").on(file2).withValue(200.0));
+        proj.addMeasure(Measure.of("repo:LOC").on(file2).withValue(200.0));
 
         file3 = File.builder().fileKey("path3").create();
         proj.addFile(file3);
-        proj.addMeasure(Measure.of("LOC").on(file3).withValue(200.0));
+        proj.addMeasure(Measure.of("repo:LOC").on(file3).withValue(200.0));
 
         sys.addProject(proj);
 

@@ -79,7 +79,10 @@ public class FactorNode extends Node {
      */
     @Override
     public double getValue() {
-        return processor.process();
+        if (!calculated)
+            return processor.process();
+        else
+            return value;
     }
 
     public double thresholdValue(double value) {

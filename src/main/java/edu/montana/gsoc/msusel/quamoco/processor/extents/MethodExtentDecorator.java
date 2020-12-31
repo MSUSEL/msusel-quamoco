@@ -29,6 +29,7 @@ package edu.montana.gsoc.msusel.quamoco.processor.extents;
 import edu.isu.isuese.datamodel.Measurable;
 import edu.isu.isuese.datamodel.Measure;
 import edu.isu.isuese.datamodel.Type;
+import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
 import java.util.Objects;
@@ -49,9 +50,9 @@ public class MethodExtentDecorator extends AbstractExtentDecorator {
     @Override
     public NormalizationRange findRange(String metric) {
         Measurable p = decorated.getParent();
-        if (Measure.hasMetric(decorated, metric)) {
+        if (Measure.hasMetric(decorated, metric) || Measure.hasMetric(decorated, QuamocoContext.instance().getMetricRepoKey() + ":" + metric)) {
             return NormalizationRange.METHOD;
-        } else if (Measure.hasMetric(p, metric)) {
+        } else if (Measure.hasMetric(p, metric) || Measure.hasMetric(p, QuamocoContext.instance().getMetricRepoKey() + ":" + metric)) {
             return NormalizationRange.CLASS;
         } else {
             return NormalizationRange.FILE;
@@ -66,7 +67,10 @@ public class MethodExtentDecorator extends AbstractExtentDecorator {
         Measurable type = decorated.getParent();
         Measurable file = type.getParent();
 
-        return Objects.requireNonNull(Measure.retrieve(file, metric)).getValue();
+        Measure meas = Measure.retrieve(file, metric);
+        if (meas == null)
+            meas = Measure.retrieve(file, QuamocoContext.instance().getMetricRepoKey() + ":" + metric);
+        return Objects.requireNonNull(meas).getValue();
     }
 
     /**
@@ -74,7 +78,10 @@ public class MethodExtentDecorator extends AbstractExtentDecorator {
      */
     @Override
     public double findMethodExtent(String metric) {
-        return Objects.requireNonNull(Measure.retrieve(decorated, metric)).getValue();
+        Measure meas = Measure.retrieve(decorated, metric);
+        if (meas == null)
+            meas = Measure.retrieve(decorated, QuamocoContext.instance().getMetricRepoKey() + ":" + metric);
+        return Objects.requireNonNull(meas).getValue();
     }
 
     /**
@@ -88,7 +95,10 @@ public class MethodExtentDecorator extends AbstractExtentDecorator {
         System.out.println("P: " + p.getRefKey());
 
         if (p instanceof Type) {
-            return Objects.requireNonNull(Measure.retrieve(p, metric)).getValue();
+            Measure meas = Measure.retrieve(p, metric);
+            if (meas == null)
+                meas = Measure.retrieve(p, QuamocoContext.instance().getMetricRepoKey() + ":" + metric);
+            return Objects.requireNonNull(meas).getValue();
         }
 
         return 0.0;

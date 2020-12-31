@@ -85,7 +85,7 @@ public class MeasureToFactorFindingsEdge extends WeightedRankedEdge implements I
         }
 
         if (usesLinearDist) {
-            value = dist.calculate(getMaxPoints(), value / getMaxPoints());
+            value = dist.calculate(getMaxPoints(), value) / getMaxPoints();
         }
 
 //        value = thresholdValue(value, lowerBound, upperBound);

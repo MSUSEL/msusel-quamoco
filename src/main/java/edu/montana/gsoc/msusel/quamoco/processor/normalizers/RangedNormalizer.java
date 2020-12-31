@@ -26,6 +26,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.normalizers;
 
+import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
@@ -72,7 +73,7 @@ public class RangedNormalizer extends Normalizer {
 
         for (final Finding f : findings)
         {
-            totalAffected += ext.findExtent(f, metric, range);
+            totalAffected += ext.findExtent(f, QuamocoContext.instance().getMetricRepoKey() + ":" + metric, range);
         }
 
         double extent = ext.findExtent(metric, range);
