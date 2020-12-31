@@ -59,6 +59,8 @@ public class TypeExtentDecorator extends AbstractExtentDecorator {
         Measure meas = Measure.retrieve(file, metric);
         if (meas == null)
             meas = Measure.retrieve(file, QuamocoContext.instance().getMetricRepoKey() + ":" + metric);
+        if (meas == null)
+            return 0.0;
         return Objects.requireNonNull(meas).getValue();
     }
 
@@ -73,6 +75,8 @@ public class TypeExtentDecorator extends AbstractExtentDecorator {
         Measure meas = Measure.retrieve(decorated, metric);
         if (meas == null)
             meas = Measure.retrieve(decorated, QuamocoContext.instance().getMetricRepoKey() + ":" + metric);
+        if (meas == null)
+            return 0.0;
         return Objects.requireNonNull(meas).getValue();
     }
 }
