@@ -39,6 +39,10 @@ import org.mockito.junit.MockitoRule;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class FormBasedMeasureAggregationTest {
 
     FormBasedMeasureAggregation element;
@@ -70,7 +74,7 @@ public class FormBasedMeasureAggregationTest {
     }
 
     @Test
-    public void addAggregate() throws Exception {
+    public void addAggregate() {
         Measure meas2 = mock(Measure.class);
         element.addAggregate(meas);
         assertEquals(1, element.getAggregates().size());
@@ -79,13 +83,13 @@ public class FormBasedMeasureAggregationTest {
     }
 
     @Test
-    public void removeAggregate() throws Exception {
+    public void removeAggregate() {
         element.removeAggregate(meas);
         assertTrue(element.getAggregates().isEmpty());
     }
 
     @Test
-    public void getAggregates() throws Exception {
+    public void getAggregates() {
         assertNotNull(element.getAggregates());
         assertEquals(1, element.getAggregates().size());
     }

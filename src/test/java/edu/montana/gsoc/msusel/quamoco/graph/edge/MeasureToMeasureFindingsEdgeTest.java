@@ -33,20 +33,19 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggregator;
 import org.javalite.activejdbc.test.DBSpec;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Set;
 
 /**
  * The class <code>MeasureToMeasureFindingsEdgeTest</code> contains tests for
  * the class <code>{@link MeasureToMeasureFindingsEdge}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:38 PM
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class MeasureToMeasureFindingsEdgeTest extends DBSpec {
 
@@ -54,13 +53,9 @@ public class MeasureToMeasureFindingsEdgeTest extends DBSpec {
 
     /**
      * Run the MeasureToMeasureFindingsEdge(String) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testMeasureToMeasureFindingsEdge_1() throws Exception
-    {
+    public void testMeasureToMeasureFindingsEdge_1() {
         final String name = "edge";
 
         final MeasureToMeasureFindingsEdge result = new MeasureToMeasureFindingsEdge(name, null, null);
@@ -73,14 +68,10 @@ public class MeasureToMeasureFindingsEdgeTest extends DBSpec {
 
     /**
      * Run the Set<Finding> getFindings() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetFindings_1() throws Exception
-    {
-        final Set<Finding> result = fixture.getFindings();
+    public void testGetFindings_1() {
+        final List<Finding> result = fixture.getFindings();
 
         // add additional test code here
         Assert.assertNotNull(result);
@@ -89,13 +80,9 @@ public class MeasureToMeasureFindingsEdgeTest extends DBSpec {
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_1() throws Exception
-    {
+    public void testGetValue_1() {
         final double result = fixture.getValue();
 
         // add additional test code here
@@ -107,7 +94,6 @@ public class MeasureToMeasureFindingsEdgeTest extends DBSpec {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Before
     public void setUp() throws Exception
@@ -135,18 +121,5 @@ public class MeasureToMeasureFindingsEdgeTest extends DBSpec {
 
         graph.addEdge(src, dest, fixture);
         graph.addEdge(srcsrc, src, f2m);
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // Add additional tear down code here
     }
 }

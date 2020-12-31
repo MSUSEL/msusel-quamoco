@@ -33,11 +33,9 @@ import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
 import edu.montana.gsoc.msusel.quamoco.processor.NullProcessor;
 import org.javalite.activejdbc.test.DBSpec;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Set;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -45,22 +43,17 @@ import static org.junit.Assert.*;
  * The class <code>FindingsUnionNodeTest</code> contains tests for the class
  * <code>{@link FindingsUnionNode}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:38 PM
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class FindingsUnionNodeTest extends DBSpec {
 
     /**
      * Run the FindingsUnionNode(DirectedSparseGraph<Node,Edge>,String,String)
      * constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testFindingsUnionNode_1() throws Exception
-    {
+    public void testFindingsUnionNode_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -74,26 +67,22 @@ public class FindingsUnionNodeTest extends DBSpec {
 
         // add additional test code here
         assertNotNull(result);
-        assertEquals(null, result.getXMLTag());
+        assertNull(result.getXMLTag());
         assertEquals(0.0, result.getLowerResult(), 0.001);
         assertEquals(1.0, result.getUpperResult(), 0.001);
-        assertEquals(0.0, result.getValue(), 0.001);
+        assertEquals(1.0, result.getValue(), 0.001);
         assertEquals("owner", result.getOwnedBy());
         assertEquals("", result.getDescription());
-        assertEquals(null, result.getProcessor());
+        assertNull(result.getProcessor());
         assertEquals("Node(name=name)", result.toString());
         assertEquals("name", result.getName());
     }
 
     /**
      * Run the Set<Finding> getFindings() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetFindings_1() throws Exception
-    {
+    public void testGetFindings_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -111,7 +100,7 @@ public class FindingsUnionNodeTest extends DBSpec {
         fixture.graph.addNode(fn);
         fixture.graph.addEdge(fn, fixture, new FindingToMeasureEdge("name", fn, fixture));
 
-        final Set<Finding> result = fixture.getFindings();
+        final List<Finding> result = fixture.getFindings();
 
         assertNotNull(result);
         assertEquals(3, result.size());
@@ -119,13 +108,9 @@ public class FindingsUnionNodeTest extends DBSpec {
 
     /**
      * Run the Set<Finding> getFindings() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetFindings_2() throws Exception
-    {
+    public void testGetFindings_2() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -135,20 +120,16 @@ public class FindingsUnionNodeTest extends DBSpec {
         final FindingsUnionNode fixture = new FindingsUnionNode(graph, "union", "owner");
 
         fixture.graph.addNode(fixture);
-        final Set<Finding> result = fixture.getFindings();
+        final List<Finding> result = fixture.getFindings();
 
         assertTrue(result.isEmpty());
     }
 
     /**
      * Run the BigDecimal getLowerResult() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetLowerResult_1() throws Exception
-    {
+    public void testGetLowerResult_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -165,13 +146,9 @@ public class FindingsUnionNodeTest extends DBSpec {
 
     /**
      * Run the BigDecimal getUpperResult() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetUpperResult_1() throws Exception
-    {
+    public void testGetUpperResult_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -188,13 +165,9 @@ public class FindingsUnionNodeTest extends DBSpec {
 
     /**
      * Run the BigDecimal getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_1() throws Exception
-    {
+    public void testGetValue_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -206,32 +179,6 @@ public class FindingsUnionNodeTest extends DBSpec {
         final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(0.0, result, 0.001);
-    }
-
-    /**
-     * Perform pre-test initialization.
-     *
-     * @throws Exception
-     *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    @Before
-    public void setUp() throws Exception
-    {
-        // add additional set up code here
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // Add additional tear down code here
+        assertEquals(1.0, result, 0.001);
     }
 }

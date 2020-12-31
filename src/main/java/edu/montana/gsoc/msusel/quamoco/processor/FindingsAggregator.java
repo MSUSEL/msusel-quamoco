@@ -67,7 +67,7 @@ public abstract class FindingsAggregator extends Aggregator {
      * 
      * @return The aggregated set of findings.
      */
-    protected abstract Set<Finding> aggregate();
+    protected abstract List<Finding> aggregate();
 
     /**
      * Process all findings sets incoming from input nodes, by calling the
@@ -75,7 +75,7 @@ public abstract class FindingsAggregator extends Aggregator {
      * 
      * @return The processed set of findings.
      */
-    public Set<Finding> processFindings()
+    public List<Finding> processFindings()
     {
         return aggregate();
     }

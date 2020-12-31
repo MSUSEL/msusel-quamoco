@@ -32,7 +32,6 @@ import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,9 +42,8 @@ import java.util.List;
  * The class <code>NumberMaxAggregatorTest</code> contains tests for the class
  * <code>{@link NumberMaxAggregator}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:35 PM
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class NumberMaxAggregatorTest {
 
@@ -53,12 +51,9 @@ public class NumberMaxAggregatorTest {
 
     /**
      * Run the NumberMaxAggregator(Node) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testNumberMaxAggregator_1() throws Exception {
+    public void testNumberMaxAggregator_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -75,12 +70,9 @@ public class NumberMaxAggregatorTest {
 
     /**
      * Run the BigDecimal aggregate(Map<Node,BigDecimal>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testAggregate_1() throws Exception {
+    public void testAggregate_1() {
         final List<Double> values = Lists.newArrayList();
         values.add(10.0);
         values.add(20.0);
@@ -94,34 +86,28 @@ public class NumberMaxAggregatorTest {
 
     /**
      * Run the BigDecimal aggregate(Map<Node,BigDecimal>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testAggregate_2() throws Exception {
+    public void testAggregate_2() {
         final List<Double> values = Lists.newArrayList();
 
         final double result = fixture.aggregate(values);
 
         // add additional test code here
-        Assert.assertEquals(1.0, result, 0.001);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
      * Run the BigDecimal aggregate(Map<Node,BigDecimal>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testAggregate_3() throws Exception {
+    public void testAggregate_3() {
         final List<Double> values = null;
 
         final double result = fixture.aggregate(values);
 
         // add additional test code here
-        Assert.assertEquals(1.0, result, 0.001);
+        Assert.assertEquals(0.0, result, 0.001);
     }
 
     /**
@@ -129,7 +115,6 @@ public class NumberMaxAggregatorTest {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
     public void setUp() throws Exception {
@@ -141,17 +126,5 @@ public class NumberMaxAggregatorTest {
                 .build();
         final MeasureNode node = new MeasureNode(graph, "measure", "owner");
         fixture = new NumberMaxAggregator(node);
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    @After
-    public void tearDown() throws Exception {
-        // Add additional tear down code here
     }
 }

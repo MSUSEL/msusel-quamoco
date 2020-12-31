@@ -28,7 +28,7 @@ package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * Typing Interface indicating that a realizing edge is meant to convey and
@@ -42,5 +42,5 @@ public interface FindingsEdge {
     /**
      * @return Findings set passed from source to destination
      */
-    Set<Finding> getFindings();
+    List<Finding> getFindings();
 }

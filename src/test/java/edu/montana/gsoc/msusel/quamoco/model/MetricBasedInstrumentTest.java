@@ -33,6 +33,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class MetricBasedInstrumentTest {
 
     MetricBasedInstrument element;
@@ -53,7 +57,7 @@ public class MetricBasedInstrumentTest {
     }
 
 //    @Test
-//    public void toScript() throws Exception {
+//    public void toScript() {
 //        fail();
 //    }
 

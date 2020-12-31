@@ -31,41 +31,45 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class ResultSetTest {
+
     @Before
     public void setUp() throws Exception {
     }
 
     @Test
-    public void addEvaluation() throws Exception {
+    public void addEvaluation() {
     }
 
     @Test
-    public void removeEvaluation() throws Exception {
+    public void removeEvaluation() {
     }
 
     @Test
-    public void getEvaluations() throws Exception {
+    public void getEvaluations() {
     }
 
     @Test
-    public void addMeasurement() throws Exception {
+    public void addMeasurement() {
     }
 
     @Test
-    public void removeMeasurement() throws Exception {
+    public void removeMeasurement() {
     }
 
     @Test
-    public void getMeasurements() throws Exception {
+    public void getMeasurements() {
     }
 
     @Test
-    public void getSystem() throws Exception {
+    public void getSystem() {
     }
 
     @Test
-    public void getIdentifier() throws Exception {
+    public void getIdentifier() {
     }
-
 }

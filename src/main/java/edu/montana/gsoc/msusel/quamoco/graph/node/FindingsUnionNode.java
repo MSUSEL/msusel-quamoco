@@ -26,11 +26,13 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingsEdge;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -45,7 +47,7 @@ public class FindingsUnionNode extends Node {
     /**
      * The union-ed set of findings.
      */
-    private final Set<Finding> findings;
+    private final List<Finding> findings;
 
     /**
      * Constructs a new Node which is contained in the given graph,
@@ -66,7 +68,7 @@ public class FindingsUnionNode extends Node {
     public FindingsUnionNode(MutableNetwork<Node, Edge> graph, final String name, final String owner)
     {
         super(graph, name, owner);
-        findings = Sets.newHashSet();
+        findings = Lists.newArrayList();
     }
 
     /**
@@ -94,7 +96,7 @@ public class FindingsUnionNode extends Node {
     public double getValue()
     {
 //        calculated = true;
-        return 0.0;
+        return 1.0;
     }
 
     /**
@@ -111,7 +113,7 @@ public class FindingsUnionNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public Set<Finding> getFindings()
+    public List<Finding> getFindings()
     {
         if (findings.isEmpty())
         {

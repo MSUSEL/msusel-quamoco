@@ -38,7 +38,6 @@ import edu.montana.gsoc.msusel.quamoco.processor.evaluators.MeanEvaluator;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.PositiveLinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
 import org.javalite.activejdbc.test.DBSpec;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,7 +49,7 @@ import static org.junit.Assert.assertNotNull;
  * class <code>{@link MeasureToFactorFindingsEdge}</code>.
  *
  * @author Isaac Griffith
- * @version $Revision: 1.0 $
+ * @version 1.3.0
  */
 public class MeasureToFactorFindingsEdgeTest extends DBSpec {
 
@@ -226,7 +225,7 @@ public class MeasureToFactorFindingsEdgeTest extends DBSpec {
         fixture.norm = new NullNormalizer(fixture, "norm", NormalizationRange.CLASS);
         dest.setProcessor(new MeanEvaluator(dest));
 
-        Assert.assertEquals(0.0, dest.getValue(), 0.001);
+        Assert.assertEquals(1.0, dest.getValue(), 0.001);
     }
 
     /**

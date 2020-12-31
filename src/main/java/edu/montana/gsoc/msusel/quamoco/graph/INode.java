@@ -30,7 +30,6 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.processor.Processor;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Defines the basic interface of nodes for a Distilled Quality Model processing
@@ -104,6 +103,6 @@ public interface INode {
     /**
      * @return The set of findings incoming into this node
      */
-    Set<Finding> getFindings();
+    List<Finding> getFindings();
 
 }

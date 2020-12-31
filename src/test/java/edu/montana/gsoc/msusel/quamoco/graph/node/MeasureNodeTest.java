@@ -42,8 +42,8 @@ import static org.junit.Assert.*;
  * The class <code>MeasureNodeTest</code> contains tests for the class
  * <code>{@link MeasureNode}</code>.
  *
- * @author isaac
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class MeasureNodeTest {
 
@@ -175,7 +175,7 @@ public class MeasureNodeTest {
 
         final double result = fixture.getValue();
 
-        assertEquals(0.0, result, 0.001);
+        assertEquals(1.0, result, 0.001);
         fixture.setValue(1.0);
         assertEquals(1.0, fixture.value, 0.001);
     }

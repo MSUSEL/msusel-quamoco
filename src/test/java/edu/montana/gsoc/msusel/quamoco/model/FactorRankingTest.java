@@ -38,6 +38,10 @@ import org.mockito.junit.MockitoRule;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class FactorRankingTest {
 
     private FactorRanking element;
@@ -59,13 +63,13 @@ public class FactorRankingTest {
     }
 
     @Test
-    public void getFactor() throws Exception {
+    public void getFactor() {
         assertNotNull(element.getFactor());
         assertEquals(fac, element.getFactor());
     }
 
     @Test
-    public void setFactor() throws Exception {
+    public void setFactor() {
         Factor fac2 = mock(Factor.class);
         element.setFactor(null);
         assertNull(element.getFactor());
@@ -74,40 +78,40 @@ public class FactorRankingTest {
     }
 
     @Test
-    public void getRank() throws Exception {
+    public void getRank() {
         assertEquals(5, element.getRank());
     }
 
     @Test
-    public void setRank() throws Exception {
+    public void setRank() {
         element.setRank(1);
         assertEquals(1, element.getRank());
     }
 
     @Test
-    public void getWeight() throws Exception {
+    public void getWeight() {
         assertEquals(1.0, element.getWeight(), 0.001);
     }
 
     @Test
-    public void setWeight() throws Exception {
+    public void setWeight() {
         element.setWeight(0.5);
         assertEquals(0.5, element.getWeight(), 0.001);
     }
 
     @Test
-    public void getContributionPoints() throws Exception {
+    public void getContributionPoints() {
         assertEquals(0, element.getContributionPoints(), 0.001);
     }
 
     @Test
-    public void setContributionPoints() throws Exception {
+    public void setContributionPoints() {
         element.setContributionPoints(10.0);
         assertEquals(10, element.getContributionPoints(), 0.001);
     }
 
 //    @Test
-//    public void toScript() throws Exception {
+//    public void toScript() {
 //        fail();
 //    }
 

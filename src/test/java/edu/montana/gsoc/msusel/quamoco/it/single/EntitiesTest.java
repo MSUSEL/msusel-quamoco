@@ -34,6 +34,10 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class EntitiesTest extends BaseTestClass {
 
     @After

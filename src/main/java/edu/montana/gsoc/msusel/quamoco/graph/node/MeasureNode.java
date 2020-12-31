@@ -27,7 +27,6 @@
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
@@ -67,7 +66,7 @@ public class MeasureNode extends Node {
     /**
      * The set of findings collected in this node
      */
-    private Set<Finding> findings;
+    private List<Finding> findings;
 
     /**
      * Constructs a new MeasureNode which is contained in the given graph,
@@ -85,7 +84,7 @@ public class MeasureNode extends Node {
     public MeasureNode(MutableNetwork<Node, Edge> graph, final String name, final String owner) {
         super(graph, name, owner);
         type = MeasureType.FINDINGS;
-        findings = Sets.newHashSet();
+        findings = Lists.newArrayList();
     }
 
     /**
@@ -126,7 +125,7 @@ public class MeasureNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public Set<Finding> getFindings() {
+    public List<Finding> getFindings() {
         if (type.equals(MeasureType.FINDINGS)) {
             findings = ((FindingsAggregator) processor).processFindings();
         }

@@ -26,6 +26,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.normalizers;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import edu.isu.isuese.datamodel.File;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureNumberEdge;
@@ -33,19 +34,19 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.FileFinding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import org.javalite.activejdbc.test.DBSpec;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Set;
 
 /**
  * The class <code>NullNormalizerTest</code> contains tests for the class
  * <code>{@link NullNormalizer}</code>.
  *
- * @author fate
- * @version $Revision: BigDecimal.ONE $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class NullNormalizerTest extends DBSpec {
 
@@ -55,7 +56,7 @@ public class NullNormalizerTest extends DBSpec {
      * Run the NullNormalizer(Edge,String,NormalizationRange) constructor test.
      */
     @Test
-    public void testNullNormalizer_1() throws Exception {
+    public void testNullNormalizer_1() {
         final NormalizationRange range = NormalizationRange.CLASS;
 
         final NullNormalizer result = new NullNormalizer(
@@ -70,8 +71,8 @@ public class NullNormalizerTest extends DBSpec {
      * Run the BigDecimal normalize(List<Finding>) method test.
      */
     @Test
-    public void testNormalize_2() throws Exception {
-        final Set<Finding> findings = Sets.newHashSet();
+    public void testNormalize_2() {
+        final List<Finding> findings = Lists.newArrayList();
         findings.add(new FileFinding(File.builder().fileKey("path").create(), "issue", "issue"));
         final double result = fixture.normalize(findings);
 
@@ -83,8 +84,8 @@ public class NullNormalizerTest extends DBSpec {
      * Run the BigDecimal normalize(List<Finding>) method test.
      */
     @Test
-    public void testNormalize_3() throws Exception {
-        final Set<Finding> findings = null;
+    public void testNormalize_3() {
+        final List<Finding> findings = null;
         final double result = fixture.normalize(findings);
 
         // add additional test code here
@@ -101,16 +102,5 @@ public class NullNormalizerTest extends DBSpec {
     public void setUp() throws Exception {
         fixture = new NullNormalizer(
                 new MeasureToMeasureNumberEdge("edge", null, null), "LOC", NormalizationRange.CLASS);
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     */
-    @After
-    public void tearDown() throws Exception {
-        // Add additional tear down code here
     }
 }

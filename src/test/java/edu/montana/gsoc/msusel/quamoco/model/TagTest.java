@@ -32,6 +32,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class TagTest {
 
     Tag element;
@@ -47,53 +51,53 @@ public class TagTest {
     }
 
     @Test
-    public void getDescription() throws Exception {
+    public void getDescription() {
         assertEquals("description", element.getDescription());
     }
 
     @Test
-    public void setDescription() throws Exception {
+    public void setDescription() {
         element.setDescription("newDescription");
         assertEquals("newDescription", element.getDescription());
     }
 
     @Test
-    public void getName() throws Exception {
+    public void getName() {
         assertEquals("tag", element.getName());
     }
 
     @Test
-    public void setName() throws Exception {
+    public void setName() {
         element.setName("NewName");
         assertEquals("NewName", element.getName());
     }
 
     @Test
-    public void getTitle() throws Exception {
+    public void getTitle() {
         assertEquals("title", element.getTitle());
     }
 
     @Test
-    public void setTitle() throws Exception {
+    public void setTitle() {
         element.setTitle("new_title");
         assertEquals("new_title", element.getTitle());
     }
 
     @Test
-    public void getTaggedBy() throws Exception {
+    public void getTaggedBy() {
         assertNotNull(element.getTaggedBy());
         assertTrue(element.getTaggedBy().isEmpty());
     }
 
     @Test
-    public void addTaggedBy() throws Exception {
+    public void addTaggedBy() {
         assertTrue(element.getTaggedBy().isEmpty());
         element.addTaggedBy(mock(Tag.class));
         assertTrue(element.getTaggedBy().isEmpty());
     }
 
     @Test
-    public void removeTaggedBy() throws Exception {
+    public void removeTaggedBy() {
     }
 
     @Test
@@ -103,8 +107,7 @@ public class TagTest {
     }
 
 //    @Test
-//    public void toScript() throws Exception {
+//    public void toScript() {
 //        fail();
 //    }
-
 }

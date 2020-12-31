@@ -32,6 +32,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class MinFactorAggregationTest {
 
     MinFactorAggregation element;
@@ -42,7 +46,7 @@ public class MinFactorAggregationTest {
     }
 
 //    @Test
-//    public void evaluate() throws Exception {
+//    public void evaluate() {
 //        fail();
 //    }
 
@@ -53,7 +57,7 @@ public class MinFactorAggregationTest {
     }
 
 //    @Test
-//    public void toScript() throws Exception {
+//    public void toScript() {
 //        fail();
 //    }
 }

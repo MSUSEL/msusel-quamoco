@@ -38,6 +38,10 @@ import org.mockito.junit.MockitoRule;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class FindingsIntersectionMeasureAggregationTest {
 
     FindingsIntersectionMeasureAggregation element;

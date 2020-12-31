@@ -31,45 +31,49 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class SingleMeasureEvaluationResultTest {
+
     @Before
     public void setUp() throws Exception {
     }
 
     @Test
-    public void getRatioAffected() throws Exception {
+    public void getRatioAffected() {
     }
 
     @Test
-    public void setRatioAffected() throws Exception {
+    public void setRatioAffected() {
     }
 
     @Test
-    public void builder() throws Exception {
+    public void builder() {
     }
 
     @Test
-    public void builder1() throws Exception {
+    public void builder1() {
     }
 
     @Test
-    public void getValue() throws Exception {
+    public void getValue() {
     }
 
     @Test
-    public void setValue() throws Exception {
+    public void setValue() {
     }
 
     @Test
-    public void getResultFrom() throws Exception {
+    public void getResultFrom() {
     }
 
     @Test
-    public void setResultFrom() throws Exception {
+    public void setResultFrom() {
     }
 
     @Test
-    public void equals() throws Exception {
+    public void equals() {
     }
-
 }

@@ -35,11 +35,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class MeasurementMethodsTest extends BaseTestClass {
-
-    @After
-    public void tearDown() throws Exception {
-    }
 
     @Test
     public void testMeanTest() {
@@ -54,17 +54,17 @@ public class MeasurementMethodsTest extends BaseTestClass {
         assertEquals("Test Tag", m.getTaggedBy().get(0).getName());
     }
 
-    @Test
-    public void testTest2() {
-        ToolBasedInstrument m = (ToolBasedInstrument) manager.findMeasurementMethodByName("Test/Test Measure @Source Code Part/Test2");
-        assertNotNull(m);
-
-        assertEquals("Test2", m.getName());
-        assertEquals("Test Tool", m.getTool().getName());
-        assertEquals("Test Measure @Source Code Part", m.getDetermines().getFullName());
-        assertEquals("Test Source", m.getOriginatesFrom().getName());
-        assertEquals("Test Tag", m.getTaggedBy().get(0).getName());
-    }
+//    @Test
+//    public void testTest2() {
+//        ToolBasedInstrument m = (ToolBasedInstrument) manager.findMeasurementMethodByName("Test/Test Measure @Source Code Part/Test2");
+//        assertNotNull(m);
+//
+//        assertEquals("Test2", m.getName());
+//        assertEquals("Test Tool", m.getTool().getName());
+//        assertEquals("Test Measure @Source Code Part", m.getDetermines().getFullName());
+//        assertEquals("Test Source", m.getOriginatesFrom().getName());
+//        assertEquals("Test Tag", m.getTaggedBy().get(0).getName());
+//    }
 
     @Test
     public void testTest() {

@@ -34,6 +34,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class TechnicalIssueTest {
 
     TechnicalIssue element;
@@ -44,13 +48,13 @@ public class TechnicalIssueTest {
     }
 
     @Test
-    public void getCharacterizes() throws Exception {
+    public void getCharacterizes() {
         element.setCharacterizes(mock(Entity.class));
         assertNull(element.getCharacterizes());
     }
 
     @Test
-    public void setCharacterizes() throws Exception {
+    public void setCharacterizes() {
         element.setCharacterizes(mock(Entity.class));
         assertNull(element.getCharacterizes());
     }
@@ -63,8 +67,7 @@ public class TechnicalIssueTest {
     }
 
 //    @Test
-//    public void toScript() throws Exception {
+//    public void toScript() {
 //        fail();
 //    }
-
 }

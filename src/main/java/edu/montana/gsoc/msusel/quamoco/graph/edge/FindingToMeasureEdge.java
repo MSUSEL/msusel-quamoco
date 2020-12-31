@@ -26,11 +26,13 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.edge;
 
+import com.google.common.collect.Lists;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FindingNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -70,9 +72,9 @@ public class FindingToMeasureEdge extends AbstractEdge implements FindingsEdge {
      * {@inheritDoc}
      */
     @Override
-    public Set<Finding> getFindings()
+    public List<Finding> getFindings()
     {
-        final Set<Finding> set = new HashSet<>();
+        final List<Finding> set = Lists.newArrayList();
 
         if (source instanceof FindingNode)
         {

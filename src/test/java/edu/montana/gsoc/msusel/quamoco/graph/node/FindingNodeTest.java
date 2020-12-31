@@ -32,20 +32,19 @@ import edu.isu.isuese.datamodel.File;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.processor.NullProcessor;
 import org.javalite.activejdbc.test.DBSpec;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Set;
 
 /**
  * The class <code>FindingNodeTest</code> contains tests for the class
  * <code>{@link FindingNode}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:38 PM
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class FindingNodeTest extends DBSpec {
 
@@ -54,13 +53,9 @@ public class FindingNodeTest extends DBSpec {
     /**
      * Run the FindingNode(MutableNetwork
      * <Node,Edge>,String,String,String,String) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testFindingNode_1() throws Exception
-    {
+    public void testFindingNode_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -88,13 +83,9 @@ public class FindingNodeTest extends DBSpec {
 
     /**
      * Run the void addFinding(Finding) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testAddFinding_1() throws Exception
-    {
+    public void testAddFinding_1() {
         Assert.assertTrue(fixture.getFindings().isEmpty());
         final Finding finding = new FileFinding(File.builder().fileKey("path").create(), "issueKey", "issueName");
 
@@ -107,15 +98,11 @@ public class FindingNodeTest extends DBSpec {
 
     /**
      * Run the Set<Finding> getFindings() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetFindings_1() throws Exception
-    {
+    public void testGetFindings_1() {
         fixture.addFinding(new FileFinding(File.builder().fileKey("path").create(), "issueKey", "issueName"));
-        final Set<Finding> result = fixture.getFindings();
+        final List<Finding> result = fixture.getFindings();
 
         // add additional test code here
         Assert.assertNotNull(result);
@@ -124,13 +111,9 @@ public class FindingNodeTest extends DBSpec {
 
     /**
      * Run the BigDecimal getLowerResult() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetLowerResult_1() throws Exception
-    {
+    public void testGetLowerResult_1() {
         final double result = fixture.getLowerResult();
 
         Assert.assertEquals(0.0, result, 0.001);
@@ -138,13 +121,9 @@ public class FindingNodeTest extends DBSpec {
 
     /**
      * Run the String getRuleName() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetRuleName_1() throws Exception
-    {
+    public void testGetRuleName_1() {
         final String result = fixture.getRuleName();
 
         // add additional test code here
@@ -153,13 +132,9 @@ public class FindingNodeTest extends DBSpec {
 
     /**
      * Run the String getToolName() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetToolName_1() throws Exception
-    {
+    public void testGetToolName_1() {
         final String result = fixture.getToolName();
 
         // add additional test code here
@@ -168,13 +143,9 @@ public class FindingNodeTest extends DBSpec {
 
     /**
      * Run the BigDecimal getUpperResult() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetUpperResult_1() throws Exception
-    {
+    public void testGetUpperResult_1() {
         final double result = fixture.getUpperResult();
 
         Assert.assertEquals(1.0, result, 0.001);
@@ -182,13 +153,9 @@ public class FindingNodeTest extends DBSpec {
 
     /**
      * Run the BigDecimal getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_1() throws Exception
-    {
+    public void testGetValue_1() {
         final double result = fixture.getValue();
 
         // add additional test code here
@@ -197,13 +164,9 @@ public class FindingNodeTest extends DBSpec {
 
     /**
      * Run the void setRuleName(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetRuleName_1() throws Exception
-    {
+    public void testSetRuleName_1() {
         final String ruleName = "other";
 
         fixture.setRuleName(ruleName);
@@ -217,7 +180,6 @@ public class FindingNodeTest extends DBSpec {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Before
     public void setUp() throws Exception
@@ -230,18 +192,5 @@ public class FindingNodeTest extends DBSpec {
                 .build();
         fixture = new FindingNode(graph, "node", "owner", "rule", "tool");
         fixture.processor = new NullProcessor(fixture);
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // Add additional tear down code here
     }
 }

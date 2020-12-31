@@ -37,46 +37,39 @@ import edu.montana.gsoc.msusel.quamoco.io.RootNotFoundException;
  * The class <code>RootNotFoundExceptionTest</code> contains tests for the class
  * <code>{@link RootNotFoundException}</code>.
  *
- * @generatedBy CodePro at 5/30/15 3:42 PM
- * @author isaac
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class RootNotFoundExceptionTest {
 
 	/**
 	 * Run the RootNotFoundException() constructor test.
-	 *
-	 * @throws Exception
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
 	 */
 	@Test
-	public void testRootNotFoundException_1() throws Exception {
+	public void testRootNotFoundException_1() {
 
 		final RootNotFoundException result = new RootNotFoundException();
 
 		// TODO: add additional test code here
 		Assert.assertNotNull(result);
-		Assert.assertEquals(null, result.getCause());
+		Assert.assertNull(result.getCause());
 		Assert.assertEquals("edu.montana.gsoc.msusel.quamoco.io.RootNotFoundException", result.toString());
-		Assert.assertEquals(null, result.getMessage());
-		Assert.assertEquals(null, result.getLocalizedMessage());
+		Assert.assertNull(result.getMessage());
+		Assert.assertNull(result.getLocalizedMessage());
 	}
 
 	/**
 	 * Run the RootNotFoundException(String) constructor test.
-	 *
-	 * @throws Exception
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
 	 */
 	@Test
-	public void testRootNotFoundException_2() throws Exception {
+	public void testRootNotFoundException_2() {
 		final String message = "";
 
 		final RootNotFoundException result = new RootNotFoundException(message);
 
 		// TODO: add additional test code here
 		Assert.assertNotNull(result);
-		Assert.assertEquals(null, result.getCause());
+		Assert.assertNull(result.getCause());
 		Assert.assertEquals("edu.montana.gsoc.msusel.quamoco.io.RootNotFoundException: ", result.toString());
 		Assert.assertEquals("", result.getMessage());
 		Assert.assertEquals("", result.getLocalizedMessage());
@@ -84,12 +77,9 @@ public class RootNotFoundExceptionTest {
 
 	/**
 	 * Run the RootNotFoundException(Throwable) constructor test.
-	 *
-	 * @throws Exception
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
 	 */
 	@Test
-	public void testRootNotFoundException_3() throws Exception {
+	public void testRootNotFoundException_3() {
 		final Throwable cause = new Throwable();
 
 		final RootNotFoundException result = new RootNotFoundException(cause);
@@ -103,12 +93,9 @@ public class RootNotFoundExceptionTest {
 
 	/**
 	 * Run the RootNotFoundException(String,Throwable) constructor test.
-	 *
-	 * @throws Exception
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
 	 */
 	@Test
-	public void testRootNotFoundException_4() throws Exception {
+	public void testRootNotFoundException_4() {
 		final String message = "";
 		final Throwable cause = new Throwable();
 
@@ -124,12 +111,9 @@ public class RootNotFoundExceptionTest {
 	/**
 	 * Run the RootNotFoundException(String,Throwable,boolean,boolean)
 	 * constructor test.
-	 *
-	 * @throws Exception
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
 	 */
 	@Test
-	public void testRootNotFoundException_5() throws Exception {
+	public void testRootNotFoundException_5() {
 		final String message = "";
 		final Throwable cause = new Throwable();
 		final boolean enableSuppression = true;
@@ -143,40 +127,5 @@ public class RootNotFoundExceptionTest {
 		Assert.assertEquals("edu.montana.gsoc.msusel.quamoco.io.RootNotFoundException: ", result.toString());
 		Assert.assertEquals("", result.getMessage());
 		Assert.assertEquals("", result.getLocalizedMessage());
-	}
-
-	/**
-	 * Perform pre-test initialization.
-	 *
-	 * @throws Exception
-	 *             if the initialization fails for some reason
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
-	 */
-	@Before
-	public void setUp() throws Exception {
-		// TODO: add additional set up code here
-	}
-
-	/**
-	 * Perform post-test clean-up.
-	 *
-	 * @throws Exception
-	 *             if the clean-up fails for some reason
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
-	 */
-	@After
-	public void tearDown() throws Exception {
-		// TODO: add additional tear down code here
-	}
-
-	/**
-	 * Launch the test.
-	 *
-	 * @param args
-	 *            the command line arguments
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
-	 */
-	public static void main(final String[] args) {
-		new org.junit.runner.JUnitCore().run(RootNotFoundExceptionTest.class);
 	}
 }

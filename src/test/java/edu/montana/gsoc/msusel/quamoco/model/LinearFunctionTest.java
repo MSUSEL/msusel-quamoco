@@ -34,6 +34,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class LinearFunctionTest {
 
     LinearFunction element;
@@ -48,29 +52,29 @@ public class LinearFunctionTest {
     }
 
     @Test
-    public void getLowerBound() throws Exception {
+    public void getLowerBound() {
         assertEquals(0.0, element.getLowerBound(), 0.001);
     }
 
     @Test
-    public void setLowerBound() throws Exception {
+    public void setLowerBound() {
         element.setLowerBound(1.0);
         assertEquals(1.0, element.getLowerBound(), 0.001);
     }
 
     @Test
-    public void getUpperBound() throws Exception {
+    public void getUpperBound() {
         assertEquals(1.0, element.getUpperBound(), 0.001);
     }
 
     @Test
-    public void setUpperBound() throws Exception {
+    public void setUpperBound() {
         element.setUpperBound(0.0);
         assertEquals(0.0, element.getUpperBound(), 0.001);
     }
 
     @Test
-    public void generateXMLTag() throws Exception {
+    public void generateXMLTag() {
         String tag = element.generateXMLTag(FunctionType.LINEAR_INCREASING.type());
         String value = "<function xmi:id=\"ID\" xsi:type=\"qm:LinearIncreasingFunction\" lowerBound=\"0.000000\" upperBound=\"1.000000\" />\n";
         assertEquals(value, tag);
@@ -79,5 +83,4 @@ public class LinearFunctionTest {
         value = "<function xmi:id=\"ID\" xsi:type=\"qm:LinearDecreasingFunction\" lowerBound=\"0.000000\" upperBound=\"1.000000\" />\n";
         assertEquals(value, tag);
     }
-
 }

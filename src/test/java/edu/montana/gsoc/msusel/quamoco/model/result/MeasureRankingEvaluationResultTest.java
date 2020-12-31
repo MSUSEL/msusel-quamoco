@@ -31,6 +31,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class MeasureRankingEvaluationResultTest {
 
     MeasureRankingEvaluationResult element;
@@ -43,39 +47,38 @@ public class MeasureRankingEvaluationResultTest {
     }
 
     @Test
-    public void getRatioAffected() throws Exception {
+    public void getRatioAffected() {
     }
 
     @Test
-    public void setRatioAffected() throws Exception {
+    public void setRatioAffected() {
     }
 
     @Test
-    public void getResultFrom() throws Exception {
+    public void getResultFrom() {
     }
 
     @Test
-    public void setResultFrom() throws Exception {
+    public void setResultFrom() {
     }
 
     @Test
-    public void getValue() throws Exception {
+    public void getValue() {
     }
 
     @Test
-    public void setValue() throws Exception {
+    public void setValue() {
     }
 
     @Test
-    public void getIdentifier() throws Exception {
+    public void getIdentifier() {
     }
 
     @Test
-    public void build() throws Exception {
+    public void build() {
     }
 
     @Test
-    public void build1() throws Exception {
+    public void build1() {
     }
-
 }

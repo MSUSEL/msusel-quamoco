@@ -28,15 +28,15 @@ package edu.montana.gsoc.msusel.quamoco.processor;
 
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.isu.isuese.datamodel.*;
 import edu.isu.isuese.datamodel.Class;
 import edu.isu.isuese.datamodel.System;
+import edu.isu.isuese.datamodel.*;
 import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureFindingsEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
+import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggregator;
@@ -51,8 +51,8 @@ import static org.junit.Assert.*;
  * The class <code>ExtentTest</code> contains tests for the class
  * <code>{@link Extent}</code>.
  *
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class ExtentTest extends DBSpec {
 
@@ -71,7 +71,7 @@ public class ExtentTest extends DBSpec {
      * Run the double findExtent(String,NormalizationRange) method test.
      */
     @Test
-    public void testFindExtent_1() throws Exception {
+    public void testFindExtent_1() {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.FILE;
 
@@ -85,7 +85,7 @@ public class ExtentTest extends DBSpec {
      * Run the double findExtent(String,NormalizationRange) method test.
      */
     @Test
-    public void testFindExtent_2() throws Exception {
+    public void testFindExtent_2() {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.CLASS;
 
@@ -99,7 +99,7 @@ public class ExtentTest extends DBSpec {
      * Run the double findExtent(String,NormalizationRange) method test.
      */
     @Test
-    public void testFindExtent_3() throws Exception {
+    public void testFindExtent_3() {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.METHOD;
 
@@ -113,7 +113,7 @@ public class ExtentTest extends DBSpec {
      * Run the double findExtent(String,NormalizationRange) method test.
      */
     @Test
-    public void testFindExtent_4() throws Exception {
+    public void testFindExtent_4() {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.NA;
 
@@ -127,7 +127,7 @@ public class ExtentTest extends DBSpec {
      * Run the double findExtent(String,NormalizationRange) method test.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testFindExtent_7() throws Exception {
+    public void testFindExtent_7() {
         final String metric = "";
         final NormalizationRange range = NormalizationRange.CLASS;
 
@@ -138,7 +138,7 @@ public class ExtentTest extends DBSpec {
      * Run the double findExtent(String,NormalizationRange) method test.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testFindExtent_8() throws Exception {
+    public void testFindExtent_8() {
         final String metric = null;
         final NormalizationRange range = NormalizationRange.CLASS;
 
@@ -149,7 +149,7 @@ public class ExtentTest extends DBSpec {
      * Run the double findExtent(String,NormalizationRange) method test.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testFindExtent_9() throws Exception {
+    public void testFindExtent_9() {
         final String metric = "LOC";
         final NormalizationRange range = null;
 
@@ -161,7 +161,7 @@ public class ExtentTest extends DBSpec {
      * method test.
      */
     @Test
-    public void testFindMeasureExtent_1() throws Exception {
+    public void testFindMeasureExtent_1() {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.FILE;
 
@@ -177,7 +177,7 @@ public class ExtentTest extends DBSpec {
      * method test.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testFindMeasureExtent_2() throws Exception {
+    public void testFindMeasureExtent_2() {
         final String metric = "";
         final NormalizationRange range = NormalizationRange.FILE;
 
@@ -191,7 +191,7 @@ public class ExtentTest extends DBSpec {
      * method test.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testFindMeasureExtent_3() throws Exception {
+    public void testFindMeasureExtent_3() {
         final String metric = null;
         final NormalizationRange range = NormalizationRange.FILE;
 
@@ -204,7 +204,7 @@ public class ExtentTest extends DBSpec {
      * method test.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testFindMeasureExtent_4() throws Exception {
+    public void testFindMeasureExtent_4() {
         final String metric = "LOC";
         final NormalizationRange range = null;
 
@@ -217,7 +217,7 @@ public class ExtentTest extends DBSpec {
      * method test.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testFindMeasureExtent_5() throws Exception {
+    public void testFindMeasureExtent_5() {
         final String metric = "LOC";
         final NormalizationRange range = NormalizationRange.FILE;
 
@@ -229,7 +229,7 @@ public class ExtentTest extends DBSpec {
      * Run the Extent getInstance() method test.
      */
     @Test
-    public void testGetInstance_1() throws Exception {
+    public void testGetInstance_1() {
         final Extent result = Extent.getInstance();
         final Extent result2 = Extent.getInstance();
 

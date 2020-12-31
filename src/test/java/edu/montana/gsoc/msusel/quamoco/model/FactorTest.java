@@ -36,6 +36,10 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class FactorTest {
 
     Factor element;
@@ -143,10 +147,9 @@ public class FactorTest {
         assertEquals("new_title", element.getTitle());
     }
 
-    @Test
-    public void generateXMLTag() {
-        System.out.println(element.xmlTag());
-    }
+//    @Test
+//    public void generateXMLTag() {
+//    }
 
 //    @Test
 //    public void hasAggregationAnnotation() {

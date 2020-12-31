@@ -32,7 +32,6 @@ import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,9 +42,8 @@ import java.util.List;
  * The class <code>NumberMedianAggregatorTest</code> contains tests for the
  * class <code>{@link NumberMedianAggregator}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:36 PM
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class NumberMedianAggregatorTest {
 
@@ -53,12 +51,9 @@ public class NumberMedianAggregatorTest {
 
     /**
      * Run the NumberMedianAggregator(Node) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:36 PM
      */
     @Test
-    public void testNumberMedianAggregator_1() throws Exception {
+    public void testNumberMedianAggregator_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -75,12 +70,9 @@ public class NumberMedianAggregatorTest {
 
     /**
      * Run the BigDecimal aggregate(Map<Node,BigDecimal>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:36 PM
      */
     @Test
-    public void testAggregate_1() throws Exception {
+    public void testAggregate_1() {
         final List<Double> values = Lists.newArrayList();
         values.add(10.0);
         values.add(20.0);
@@ -96,12 +88,9 @@ public class NumberMedianAggregatorTest {
 
     /**
      * Run the BigDecimal aggregate(Map<Node,BigDecimal>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:36 PM
      */
     @Test
-    public void testAggregate_2() throws Exception {
+    public void testAggregate_2() {
         final List<Double> values = Lists.newArrayList();
         values.add(10.0);
         values.add(20.0);
@@ -116,12 +105,9 @@ public class NumberMedianAggregatorTest {
 
     /**
      * Run the BigDecimal aggregate(Map<Node,BigDecimal>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:36 PM
      */
     @Test
-    public void testAggregate_3() throws Exception {
+    public void testAggregate_3() {
         final List<Double> values = Lists.newArrayList();
 
         final double result = fixture.aggregate(values);
@@ -132,12 +118,9 @@ public class NumberMedianAggregatorTest {
 
     /**
      * Run the BigDecimal aggregate(Map<Node,BigDecimal>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:36 PM
      */
     @Test
-    public void testAggregate_4() throws Exception {
+    public void testAggregate_4() {
         final List<Double> values = null;
 
         final double result = fixture.aggregate(values);
@@ -151,7 +134,6 @@ public class NumberMedianAggregatorTest {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:36 PM
      */
     @Before
     public void setUp() throws Exception {
@@ -163,17 +145,5 @@ public class NumberMedianAggregatorTest {
                 .build();
         final MeasureNode node = new MeasureNode(graph, "measure", "owner");
         fixture = new NumberMedianAggregator(node);
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:36 PM
-     */
-    @After
-    public void tearDown() throws Exception {
-        // Add additional tear down code here
     }
 }

@@ -34,20 +34,18 @@ import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureFindingsEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import org.javalite.activejdbc.test.DBSpec;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * The class <code>FindingsIntersectAggregatorTest</code> contains tests for the
  * class <code>{@link FindingsIntersectAggregator}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:35 PM
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class FindingsIntersectAggregatorTest extends DBSpec {
 
@@ -66,12 +64,11 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
                 .expectedNodeCount(10000)
                 .expectedEdgeCount(10000)
                 .build();
-//        final Node owner = new MeasureNode(graph, "measure", "owner");
+        final Node owner = new MeasureNode(graph, "measure", "owner");
 
-//        final FindingsIntersectAggregator result = new FindingsIntersectAggregator(owner);
+        final FindingsIntersectAggregator result = new FindingsIntersectAggregator(owner);
 
-        // add additional test code here
-//        Assert.assertNotNull(result);
+        Assert.assertNotNull(result);
     }
 
     /**
@@ -85,7 +82,7 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
         fn2.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue2"));
         fn2.addFinding(new FileFinding(File.builder().fileKey("file2").create(), "issue2", "issue2"));
 
-        final Set<Finding> result = fixture.aggregate();
+        final List<Finding> result = fixture.aggregate();
 
         // add additional test code here
         Assert.assertNotNull(result);
@@ -103,11 +100,11 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
         fn2.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue"));
         fn2.addFinding(new FileFinding(File.builder().fileKey("file2").create(), "issue2", "issue2"));
 
-        final Set<Finding> result = fixture.aggregate();
+        final List<Finding> result = fixture.aggregate();
 
         // add additional test code here
         Assert.assertNotNull(result);
-        Assert.assertEquals(1, result.size());
+        Assert.assertEquals(2, result.size());
     }
 
     /**
@@ -118,7 +115,7 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
         fn1.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue"));
         fn1.addFinding(new FileFinding(File.builder().fileKey("file2").create(), "issue2", "issue"));
 
-        final Set<Finding> result = fixture.aggregate();
+        final List<Finding> result = fixture.aggregate();
 
         // add additional test code here
         Assert.assertNotNull(result);
@@ -133,11 +130,11 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
         fn1.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue"));
         fn2.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue"));
 
-        final Set<Finding> result = fixture.aggregate();
+        final List<Finding> result = fixture.aggregate();
 
         // add additional test code here
         Assert.assertNotNull(result);
-        Assert.assertEquals(1, result.size());
+        Assert.assertEquals(2, result.size());
     }
 
     /**
@@ -168,17 +165,5 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
         graph.addEdge(fn1, src, new FindingToMeasureEdge("edge1", fn1, src));
         graph.addEdge(fn2, dest, new FindingToMeasureEdge("edge2", fn2, dest));
         graph.addEdge(src, dest, new MeasureToMeasureFindingsEdge("edge3", src, dest));
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(FindingsIntersectAggregatorTest.class);
     }
 }

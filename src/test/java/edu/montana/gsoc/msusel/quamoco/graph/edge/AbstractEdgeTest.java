@@ -35,8 +35,8 @@ import org.junit.Test;
  * The class <code>AbstractEdgeTest</code> contains tests for the class
  * <code>{@link AbstractEdge}</code>.
  *
- * @author isaac
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class AbstractEdgeTest {
 
@@ -44,7 +44,7 @@ public class AbstractEdgeTest {
 	 * Run the boolean equals(Object) method test.
 	 */
 	@Test
-	public void testEquals_2() throws Exception {
+	public void testEquals_2() {
 		final AbstractEdge fixture = AbstractEdgeFactory.createAbstractEdge3();
 		final Object obj = null;
 
@@ -58,7 +58,7 @@ public class AbstractEdgeTest {
 	 * Run the boolean equals(Object) method test.
 	 */
 	@Test
-	public void testEquals_3() throws Exception {
+	public void testEquals_3() {
 		final AbstractEdge fixture = AbstractEdgeFactory.createAbstractEdge4();
 		final Object obj = new Object();
 
@@ -72,7 +72,7 @@ public class AbstractEdgeTest {
 	 * Run the long getId() method test.
 	 */
 	@Test
-	public void testGetId_1() throws Exception {
+	public void testGetId_1() {
 		final AbstractEdge fixture = AbstractEdgeFactory.createAbstractEdge();
 		final long id = 1;
 		fixture.setId(id);
@@ -86,44 +86,12 @@ public class AbstractEdgeTest {
 	 * Run the String getName() method test.
 	 */
 	@Test
-	public void testGetName_1() throws Exception {
+	public void testGetName_1() {
 		final AbstractEdge fixture = AbstractEdgeFactory.createAbstractEdge2();
 
 		final String result = fixture.getName();
 
 		// TODO: add additional test code here
 		Assert.assertEquals("", result);
-	}
-
-	/**
-	 * Perform pre-test initialization.
-	 *
-	 * @throws Exception
-	 *             if the initialization fails for some reason
-	 */
-	@Before
-	public void setUp() throws Exception {
-		// TODO: add additional set up code here
-	}
-
-	/**
-	 * Perform post-test clean-up.
-	 *
-	 * @throws Exception
-	 *             if the clean-up fails for some reason
-	 */
-	@After
-	public void tearDown() throws Exception {
-		// TODO: add additional tear down code here
-	}
-
-	/**
-	 * Launch the test.
-	 *
-	 * @param args
-	 *            the command line arguments
-	 */
-	public static void main(final String[] args) {
-		new org.junit.runner.JUnitCore().run(AbstractEdgeTest.class);
 	}
 }

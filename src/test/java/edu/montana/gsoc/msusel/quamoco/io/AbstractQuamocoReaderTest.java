@@ -27,12 +27,8 @@
 package edu.montana.gsoc.msusel.quamoco.io;
 
 import edu.montana.gsoc.msusel.quamoco.distiller.ModelManager;
-import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
 import edu.montana.gsoc.msusel.quamoco.io.qmr.QMRXMLReader;
-import org.easymock.EasyMock;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import javax.xml.namespace.QName;
@@ -46,8 +42,8 @@ import static org.mockito.Mockito.when;
  * The class <code>AbstractQuamocoReaderTest</code> contains tests for the class
  * <code>{@link AbstractQuamocoReader}</code>.
  *
- * @author isaac
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class AbstractQuamocoReaderTest {
 
@@ -90,15 +86,5 @@ public class AbstractQuamocoReaderTest {
 
 		Assert.assertNotNull(result);
 		Assert.assertEquals(0, result.size());
-	}
-
-	/**
-	 * Launch the test.
-	 *
-	 * @param args
-	 *            the command line arguments
-	 */
-	public static void main(final String[] args) {
-		new org.junit.runner.JUnitCore().run(AbstractQuamocoReaderTest.class);
 	}
 }

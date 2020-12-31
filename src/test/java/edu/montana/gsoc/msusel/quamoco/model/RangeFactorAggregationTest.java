@@ -32,6 +32,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class RangeFactorAggregationTest {
 
     RangeFactorAggregation element;

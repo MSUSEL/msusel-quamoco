@@ -26,8 +26,10 @@
  */
 package edu.montana.gsoc.msusel.quamoco.model;
 
-import static org.junit.Assert.*;
-
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class FunctionTest {
 
 }

@@ -32,6 +32,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class ProductPartTest {
 
     ProductPart element;
@@ -49,7 +53,7 @@ public class ProductPartTest {
     }
 
 //    @Test
-//    public void toScript() throws Exception {
+//    public void toScript() {
 //        fail();
 //    }
 

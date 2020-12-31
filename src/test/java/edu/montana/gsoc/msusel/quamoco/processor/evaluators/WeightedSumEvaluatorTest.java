@@ -32,7 +32,6 @@ import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,9 +42,8 @@ import java.util.List;
  * The class <code>WeightedSumEvaluatorTest</code> contains tests for the class
  * <code>{@link WeightedSumEvaluator}</code>.
  *
- * @author fate
- * @version $Revision: 1.0 $
- * @generatedBy CodePro at 1/26/16 6:35 PM
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class WeightedSumEvaluatorTest {
 
@@ -53,12 +51,9 @@ public class WeightedSumEvaluatorTest {
 
     /**
      * Run the WeightedSumEvaluator(Node) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testWeightedSumEvaluator_1() throws Exception {
+    public void testWeightedSumEvaluator_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -75,12 +70,9 @@ public class WeightedSumEvaluatorTest {
 
     /**
      * Run the BigDecimal evaluate(List<Double>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testEvaluate_1() throws Exception {
+    public void testEvaluate_1() {
         final List<Double> values = Lists.newArrayList();
         values.add(10.0);
         values.add(15.0);
@@ -94,12 +86,9 @@ public class WeightedSumEvaluatorTest {
 
     /**
      * Run the BigDecimal evaluate(List<Double>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testEvaluate_2() throws Exception {
+    public void testEvaluate_2() {
         final List<Double> values = Lists.newArrayList();
 
         final double result = fixture.evaluate(values);
@@ -110,12 +99,9 @@ public class WeightedSumEvaluatorTest {
 
     /**
      * Run the BigDecimal evaluate(List<Double>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testEvaluate_3() throws Exception {
+    public void testEvaluate_3() {
         final List<Double> values = null;
 
         final double result = fixture.evaluate(values);
@@ -126,9 +112,6 @@ public class WeightedSumEvaluatorTest {
 
     /**
      * Perform pre-test initialization.
-     *
-     * @throws Exception if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
     public void setUp() throws Exception {
@@ -140,16 +123,5 @@ public class WeightedSumEvaluatorTest {
                 .build();
         final Node owner = new FactorNode(graph, "factor", "owner");
         fixture = new WeightedSumEvaluator(owner);
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    @After
-    public void tearDown() throws Exception {
-        // Add additional tear down code here
     }
 }

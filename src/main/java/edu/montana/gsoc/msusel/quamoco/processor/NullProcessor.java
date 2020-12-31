@@ -55,7 +55,7 @@ public class NullProcessor extends Processor {
     public double process()
     {
         // TODO Auto-generated method stub
-        return 0.0;
+        return 1.0;
     }
 
 }

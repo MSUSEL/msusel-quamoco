@@ -55,7 +55,7 @@ public class FactorNode extends Node {
     /**
      * The set of all findings connected to this factor (via the graph)
      */
-    private Set<Finding> findings;
+    private List<Finding> findings;
 
     /**
      * Constructs a new Factor node in the given graph, with the given name, and
@@ -71,7 +71,7 @@ public class FactorNode extends Node {
     public FactorNode(MutableNetwork<Node, Edge> graph, final String name, final String owner) {
         super(graph, name, owner);
         method = FactorMethod.MEAN;
-        findings = Sets.newHashSet();
+        findings = Lists.newArrayList();
     }
 
     /**
@@ -156,7 +156,7 @@ public class FactorNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public Set<Finding> getFindings() {
+    public List<Finding> getFindings() {
         if (findings == null || findings.isEmpty()) {
             for (Edge edge : graph.inEdges(this)) {
                 Node n = getOpposite(edge);

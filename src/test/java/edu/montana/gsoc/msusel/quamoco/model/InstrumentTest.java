@@ -34,6 +34,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class InstrumentTest {
 
     Instrument element;
@@ -49,12 +53,12 @@ public class InstrumentTest {
     }
 
     @Test
-    public void getDescription() throws Exception {
+    public void getDescription() {
         assertEquals("description", element.getDescription());
     }
 
     @Test
-    public void setDescription() throws Exception {
+    public void setDescription() {
         element.setDescription(null);
         assertNull(element.getDescription());
         element.setDescription("NewDescription");

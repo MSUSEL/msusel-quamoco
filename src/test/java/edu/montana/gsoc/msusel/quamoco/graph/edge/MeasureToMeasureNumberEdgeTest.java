@@ -45,8 +45,8 @@ import static org.junit.Assert.*;
  * The class <code>MeasureToMeasureNumberEdgeTest</code> contains tests for the
  * class <code>{@link MeasureToMeasureNumberEdge}</code>.
  *
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class MeasureToMeasureNumberEdgeTest {
 

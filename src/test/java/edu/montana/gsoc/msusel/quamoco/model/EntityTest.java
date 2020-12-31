@@ -35,6 +35,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class EntityTest {
 
     Entity element;
@@ -51,12 +55,12 @@ public class EntityTest {
     }
 
     @Test
-    public void getPartOf() throws Exception {
+    public void getPartOf() {
         assertNotNull(element.getPartOf());
     }
 
     @Test
-    public void setPartOf() throws Exception {
+    public void setPartOf() {
         element.setPartOf(null);
         assertNull(element.getPartOf());
         Entity ent = mock(Entity.class);
@@ -65,17 +69,17 @@ public class EntityTest {
     }
 
     @Test
-    public void isAs() throws Exception {
+    public void isAs() {
         assertEquals(2, element.isAs().size());
     }
 
     @Test
-    public void hasIsAs() throws Exception {
+    public void hasIsAs() {
         assertTrue(element.hasIsAs());
     }
 
     @Test
-    public void addIsA() throws Exception {
+    public void addIsA() {
         Entity ent = mock(Entity.class);
         int size = 2;
         assertEquals(size, element.isAs().size());
@@ -89,7 +93,7 @@ public class EntityTest {
     }
 
     @Test
-    public void removeIsA() throws Exception {
+    public void removeIsA() {
         Entity ent = mock(Entity.class);
         int size = 2;
         assertEquals(size, element.isAs().size());
@@ -100,40 +104,40 @@ public class EntityTest {
     }
 
     @Test
-    public void getDescription() throws Exception {
+    public void getDescription() {
         assertEquals("description", element.getDescription());
     }
 
     @Test
-    public void setDescription() throws Exception {
+    public void setDescription() {
         element.setDescription("newDescription");
         assertEquals("newDescription", element.getDescription());
     }
 
     @Test
-    public void getName() throws Exception {
+    public void getName() {
         assertEquals("entity", element.getName());
     }
 
     @Test
-    public void setName() throws Exception {
+    public void setName() {
         element.setName("NewName");
         assertEquals("NewName", element.getName());
     }
 
     @Test
-    public void getTitle() throws Exception {
+    public void getTitle() {
         assertEquals("title", element.getTitle());
     }
 
     @Test
-    public void setTitle() throws Exception {
+    public void setTitle() {
         element.setTitle("new_title");
         assertEquals("new_title", element.getTitle());
     }
 
     @Test
-    public void generateXMLTag() throws Exception {
+    public void generateXMLTag() {
         String tag = element.generateXMLTag(EntityType.PRODUCT_PART.type());
         String value = "<entities xmi:id=\"ID\" xsi:type=\"qm:ProductPart\" name=\"entity\" description=\"description\" title=\"title\">\n" +
                 "<isA parent=\"null\" />\n" +
@@ -155,5 +159,4 @@ public class EntityTest {
                 "</entities>\n";
         assertEquals(value, tag);
     }
-
 }

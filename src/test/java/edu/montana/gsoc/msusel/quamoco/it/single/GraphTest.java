@@ -26,15 +26,15 @@
  */
 package edu.montana.gsoc.msusel.quamoco.it.single;
 
-import edu.isu.isuese.datamodel.*;
 import edu.isu.isuese.datamodel.System;
+import edu.isu.isuese.datamodel.*;
 import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.FindingToMeasureEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToFactorFindingsEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToFactorNumberEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
+import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import org.junit.After;
@@ -42,11 +42,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class GraphTest extends BaseTestClass {
-
-    @After
-    public void tearDown() throws Exception {
-    }
 
     @Test
     public void testGraph() {
@@ -214,6 +214,7 @@ public class GraphTest extends BaseTestClass {
         Project proj = Project.builder().projKey("project").create();
         File fn = File.builder().fileKey("file1").create();
         File fn2 = File.builder().fileKey("file2").create();
+        Namespace ns = Namespace.builder().nsKey("ns").name("ns").create();
         sys.addProject(proj);
         proj.addFile(fn);
         proj.addFile(fn2);
@@ -417,12 +418,13 @@ public class GraphTest extends BaseTestClass {
         Node unionMeas = findNodeByName("UnionMeas");
         assertNotNull(unionMeas);
         assertTrue(unionMeas instanceof MeasureNode);
+        assertEquals(MeasureType.FINDINGS, ((MeasureNode) unionMeas).getType());
 
         Node union = findNodeByName("TestHier Union Aggr");
         assertNotNull(union);
         assertTrue(union instanceof FindingsUnionNode);
 
-        assertEquals(1.0, unionMeas.getValue(), 0.001);
+        assertEquals(0.0, unionMeas.getValue(), 0.001);
         assertEquals(1.0, fixture.getValue(), 0.001);
 
         for (Edge e : graph.inEdges(fixture)) {

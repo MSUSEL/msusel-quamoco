@@ -45,8 +45,8 @@ import static org.mockito.Mockito.when;
  * The class <code>InfluenceEdgeTest</code> contains tests for the class
  * <code>{@link FactorToFactorEdge}</code>.
  *
- * @author isaac
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class FactorToFactorEdgeTest {
 
@@ -237,7 +237,7 @@ public class FactorToFactorEdgeTest {
         fixture.setDist(null);
         fixture.setInf(null);
         fixture.setNormalizer(null);
-//
+
         graph.addEdge(src, dest, fixture);
         fixture.source = src;
         fixture.dest = dest;

@@ -70,24 +70,17 @@ public class FactorToFactorEdge extends WeightedRankedEdge implements InfluenceE
         double value = source.getValue();
 
         if (usesLinearDist) {
-            value = dist.calculate(getMaxPoints(), value) / getMaxPoints();
+            value = dist.calculate(getMaxPoints(), value / getMaxPoints());
         }
 
         if (inf != null) {
             if (inf.equals(InfluenceType.NEG)) {
                 value = getMaxPoints() - (value * getMaxPoints());
-                value /= getMaxPoints();
             }
-
-//            if (inf.equals(InfluenceType.POS)) {
-//                //System.out.println("Value: " + value);
-//                if (Double.compare(0.0, value) <= 0)
-//                    value = 1.0;
-//            }
+//            value /= getMaxPoints();
         }
 
-//        value = thresholdValue(value, lowerBound, upperBound);
-//        System.out.println(value);
+        value = thresholdValue(value, lowerBound, upperBound);
         value = value * weight;
 
         return value;

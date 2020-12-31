@@ -32,6 +32,7 @@ import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -92,5 +93,5 @@ public abstract class Normalizer {
      * @return normalized value for the findings set, representing the
      * proportion of the system affected by the given findings set.
      */
-    public abstract double normalize(Set<Finding> findings);
+    public abstract double normalize(List<Finding> findings);
 }

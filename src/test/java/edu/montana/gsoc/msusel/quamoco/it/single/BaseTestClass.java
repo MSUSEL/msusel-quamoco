@@ -40,6 +40,10 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class BaseTestClass extends DBSpec {
 
     ModelManager manager;

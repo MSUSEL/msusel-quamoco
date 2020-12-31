@@ -32,13 +32,17 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class LinearIncreasingFunctionTest {
 
     LinearIncreasingFunction element;
 
     @Before
     public void setUp() throws Exception {
-        element = (LinearIncreasingFunction) LinearIncreasingFunction.builder()
+        element = LinearIncreasingFunction.builder()
                 .identifier("ID")
                 .upperBound(1.0)
                 .lowerBound(0.0)
@@ -52,7 +56,7 @@ public class LinearIncreasingFunctionTest {
     }
 
 //    @Test
-//    public void toScript() throws Exception {
+//    public void toScript() {
 //        fail();
 //    }
 

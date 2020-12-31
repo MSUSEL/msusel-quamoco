@@ -32,6 +32,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class TextEvaluationTest {
 
     TextEvaluation element;
@@ -44,17 +48,17 @@ public class TextEvaluationTest {
     }
 
 //    @Test
-//    public void evaluate() throws Exception {
+//    public void evaluate() {
 //        fail();
 //    }
 
     @Test
-    public void getSpecification() throws Exception {
+    public void getSpecification() {
         assertEquals("spec", element.getSpecification());
     }
 
     @Test
-    public void setSpecification() throws Exception {
+    public void setSpecification() {
         element.setSpecification(null);
         assertNull(element.getSpecification());
         element.setSpecification("newSpec");
@@ -68,7 +72,7 @@ public class TextEvaluationTest {
     }
 
 //    @Test
-//    public void toScript() throws Exception {
+//    public void toScript() {
 //        fail();
 //    }
 

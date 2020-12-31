@@ -50,8 +50,8 @@ import org.junit.Test;
  * The class <code>EvaluatorTest</code> contains tests for the class
  * <code>{@link Evaluator}</code>.
  *
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class EvaluatorTest {
 
@@ -89,7 +89,7 @@ public class EvaluatorTest {
         final double result = fixture.process();
 
         // add additional test code here
-        Assert.assertEquals(10.0, result, 0.001);
+        Assert.assertEquals(0.10, result, 0.001);
     }
 
     /**

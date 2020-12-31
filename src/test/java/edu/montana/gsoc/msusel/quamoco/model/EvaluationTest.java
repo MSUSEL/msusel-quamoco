@@ -35,6 +35,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class EvaluationTest {
 
     Evaluation element;
@@ -52,34 +56,34 @@ public class EvaluationTest {
     }
 
     @Test
-    public void getCompleteness() throws Exception {
+    public void getCompleteness() {
         assertEquals(100, element.getCompleteness(), 0.001);
     }
 
     @Test
-    public void setCompleteness() throws Exception {
+    public void setCompleteness() {
         element.setCompleteness(0.0);
         assertEquals(0.0, element.getCompleteness(), 0.001);
     }
 
     @Test
-    public void getMaximumPoints() throws Exception {
+    public void getMaximumPoints() {
         assertEquals(100, element.getMaximumPoints(), 0.001);
     }
 
     @Test
-    public void setMaximumPoints() throws Exception {
+    public void setMaximumPoints() {
         element.setMaximumPoints(0.0);
         assertEquals(0.0, element.getMaximumPoints(), 0.001);
     }
 
     @Test
-    public void getEvaluates() throws Exception {
+    public void getEvaluates() {
         assertNotNull(element.getEvaluates());
     }
 
     @Test
-    public void setEvaluates() throws Exception {
+    public void setEvaluates() {
         element.setEvaluates(null);
         assertNull(element.getEvaluates());
         Factor fac = mock(Factor.class);
@@ -88,30 +92,29 @@ public class EvaluationTest {
     }
 
 //    @Test
-//    public void evaluate() throws Exception {
+//    public void evaluate() {
 //        fail();
 //    }
 
     @Test
-    public void getDescription() throws Exception {
+    public void getDescription() {
         assertEquals("description", element.getDescription());
     }
 
     @Test
-    public void setDescription() throws Exception {
+    public void setDescription() {
         element.setDescription("newDescription");
         assertEquals("newDescription", element.getDescription());
     }
 
     @Test
-    public void getTitle() throws Exception {
+    public void getTitle() {
         assertEquals("title", element.getTitle());
     }
 
     @Test
-    public void setTitle() throws Exception {
+    public void setTitle() {
         element.setTitle("new_title");
         assertEquals("new_title", element.getTitle());
     }
-
 }

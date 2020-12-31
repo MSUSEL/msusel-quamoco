@@ -45,8 +45,8 @@ import static org.mockito.Mockito.mock;
  * The class <code>NormalizerFactoryTest</code> contains tests for the class
  * <code>{@link NormalizerFactory}</code>.
  *
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class NormalizerFactoryTest {
 
@@ -85,7 +85,7 @@ public class NormalizerFactoryTest {
         EasyMock.verify(edge);
         Assert.assertNotNull(result);
         Assert.assertTrue(result instanceof NullNormalizer);
-        assertEquals(null, result.getMetric());
+        assertNull(result.getMetric());
     }
 
     /**

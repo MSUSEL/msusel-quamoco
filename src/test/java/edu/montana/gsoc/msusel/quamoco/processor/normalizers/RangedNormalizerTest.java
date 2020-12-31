@@ -26,6 +26,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.normalizers;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
@@ -47,19 +48,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Set;
 
 /**
  * The class <code>RangedNormalizerTest</code> contains tests for the class
  * <code>{@link RangedNormalizer}</code>.
  *
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class RangedNormalizerTest extends DBSpec {
 
     private RangedNormalizer fixture;
-    private Set<Finding> findings;
+    private List<Finding> findings;
     private File file;
     private File file2;
     private File file3;
@@ -87,7 +89,7 @@ public class RangedNormalizerTest extends DBSpec {
 
     @Test
     public void testNormalize_Set_Finding_1() {
-        findings = Sets.newHashSet();
+        findings = Lists.newArrayList();
         Finding f1 = new FileFinding(file, "issue", "issue");
         Finding f2 = new FileFinding(file2, "issue", "issue");
         findings.add(f1);
@@ -101,25 +103,27 @@ public class RangedNormalizerTest extends DBSpec {
 
     @Test
     public void testNormalize_Set_Finding_2() {
-        double result = fixture.normalize((Set<Finding>) null);
+        double result = fixture.normalize((List<Finding>) null);
 
-        Assert.assertEquals(0.0, result, 0.001);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     @Test
     public void testNormalize_Set_Finding_3() {
-        double result = fixture.normalize(Sets.newHashSet());
+        double result = fixture.normalize(Lists.newArrayList());
 
-        Assert.assertEquals(0.0, result, 0.001);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     @Test
     public void testNormalize_Set_Finding_4() {
-        findings = Sets.newHashSet();
+        findings = Lists.newArrayList();
         Finding f1 = new FileFinding(file, "issue", "issue");
         Finding f2 = new FileFinding(file2, "issue", "issue");
-        findings.add(f1);
-        findings.add(f2);
+        Finding f3 = new FileFinding(file3, "issue", "issue");
+//        findings.add(f1);
+//        findings.add(f2);
+//        findings.add(f3);
 
         double result = fixture.normalize(findings);
         Assert.assertEquals(1.0, result, 0.001);
@@ -167,6 +171,8 @@ public class RangedNormalizerTest extends DBSpec {
         file2 = null;
         Project proj = Project.builder().projKey("Test").create();
         sys.addProject(proj);
+        Namespace ns = Namespace.builder().nsKey("ns").name("ns").create();
+        proj.addNamespace(ns);
         QuamocoContext.instance().setMetricRepoKey("repo");
         QuamocoContext.instance().setProject(proj);
         proj.addMeasure(Measure.of("repo:LOC").on(proj).withValue(1000.0));
@@ -180,6 +186,7 @@ public class RangedNormalizerTest extends DBSpec {
 
         Class type = Class.builder().compKey("namespace.Type").start(1).end(100).create();
         file.addType(type);
+        ns.addType(type);
         proj.addMeasure(Measure.of("repo:LOC").on(type).withValue(100.0));
 
         Method method1 = Method.builder().compKey("namespace.Type#method").start(20).end(100).create();
@@ -196,7 +203,7 @@ public class RangedNormalizerTest extends DBSpec {
 
         sys.addProject(proj);
 
-        findings = Sets.newHashSet();
+        findings = Lists.newArrayList();
         Finding f1 = new FileFinding(file, "issue", "issue");
         Finding f2 = new FileFinding(file2, "issue", "issue");
         findings.add(f1);

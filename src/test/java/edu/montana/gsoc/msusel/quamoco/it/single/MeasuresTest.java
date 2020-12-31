@@ -34,11 +34,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class MeasuresTest extends BaseTestClass {
-
-    @After
-    public void tearDown() throws Exception {
-    }
 
     @Test
     public void testProductMean() {
@@ -74,8 +74,6 @@ public class MeasuresTest extends BaseTestClass {
     public void testSourcCodePartTestMeasure() {
         Measure m = manager.findMeasureByName("Test Measure @Source Code Part");
         assertNotNull(m);
-
-        System.out.println(m.getQualifiedIdentifier());
 
         assertEquals("Test measure", m.getTitle());
         assertEquals("Test Measure", m.getDescription());

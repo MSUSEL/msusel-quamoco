@@ -34,11 +34,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class ModelTest extends BaseTestClass {
-
-    @After
-    public void tearDown() throws Exception {
-    }
 
     @Test
     public void testModelTest() {
@@ -57,8 +57,6 @@ public class ModelTest extends BaseTestClass {
     public void testModelTestHier() {
         QualityModel model = manager.getModelByName("TestHier");
         assertNotNull(model);
-
-        System.out.println("Tag: " + manager.findTag("Test.qm#_HDZAEBUEEei0lMAbFVod2Q"));
 
         assertEquals("TestHier", model.getName());
         assertEquals("Test Source", model.getOriginatesFrom().getName());

@@ -70,20 +70,21 @@ public class MeasureToFactorNumberEdge extends WeightedRankedEdge implements Inf
 
         if (inf != null) {
             if (inf.equals(InfluenceType.NEG)) {
-                value = (getMaxPoints() - (getMaxPoints() * value)) / getMaxPoints();
+                value = (getMaxPoints() - (getMaxPoints() * value));
             }
-//            else {
-//                value = value / getMaxPoints();
-//            }
+            value = value / getMaxPoints();
         }
 
         if (usesLinearDist) {
-            value = dist.calculate(getMaxPoints(), value) / getMaxPoints();
+            value = dist.calculate(getMaxPoints(), value / getMaxPoints());
         }
+
+        if (inf == null && !usesLinearDist)
+            value /= getMaxPoints();
 
         value = value * weight;
 
-//        value = thresholdValue(value, lowerBound, upperBound);
+        value = thresholdValue(value, lowerBound, upperBound);
 
         return value;
     }

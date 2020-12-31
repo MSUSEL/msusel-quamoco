@@ -26,29 +26,23 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.lineardist;
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
  * The class <code>PositiveLinearDistributionTest</code> contains tests for the
  * class <code>{@link PositiveLinearDistribution}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:35 PM
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class PositiveLinearDistributionTest {
+
     /**
      * Run the PositiveLinearDistribution(String) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testPositiveLinearDistribution_1() throws Exception
-    {
+    public void testPositiveLinearDistribution_1() {
         final PositiveLinearDistribution result = new PositiveLinearDistribution();
 
         // add additional test code here
@@ -57,13 +51,9 @@ public class PositiveLinearDistributionTest {
 
     /**
      * Run the double calculate(double,double) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testCalculate_1() throws Exception
-    {
+    public void testCalculate_1() {
         final PositiveLinearDistribution fixture = new PositiveLinearDistribution();
         final double maxPoints = 100.0;
         final double proportion = 0.5;
@@ -90,43 +80,5 @@ public class PositiveLinearDistributionTest {
 
         result = fixture.calculate(maxPoints, -1.5);
         Assert.assertEquals(0.0, result, 0.001);
-    }
-
-    /**
-     * Perform pre-test initialization.
-     *
-     * @throws Exception
-     *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    @Before
-    public void setUp() throws Exception
-    {
-        // add additional set up code here
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    public static void main(final String[] args)
-    {
-        new org.junit.runner.JUnitCore().run(PositiveLinearDistributionTest.class);
     }
 }

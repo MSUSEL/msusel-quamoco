@@ -47,8 +47,8 @@ import static org.junit.Assert.*;
  * The class <code>MeasureToFactorNumberEdgeTest</code> contains tests for the
  * class <code>{@link MeasureToFactorNumberEdge}</code>.
  *
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class MeasureToFactorNumberEdgeTest {
 
@@ -191,7 +191,7 @@ public class MeasureToFactorNumberEdgeTest {
         final double result = fixture.getValue();
 
         // add additional test code here
-        assertEquals(0.5, result, 0.001);
+        assertEquals(0.55, result, 0.001);
     }
 
     /**

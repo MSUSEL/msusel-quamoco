@@ -29,7 +29,6 @@ package edu.montana.gsoc.msusel.quamoco.graph.node;
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,9 +37,8 @@ import org.junit.Test;
  * The class <code>NodeTest</code> contains tests for the class
  * <code>{@link Node}</code>.
  *
- * @generatedBy CodePro at 5/30/15 3:38 PM
- * @author isaac
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class NodeTest {
 
@@ -48,13 +46,9 @@ public class NodeTest {
 
     /**
      * Run the boolean equals(Object) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testEquals_1() throws Exception
-    {
+    public void testEquals_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -65,52 +59,40 @@ public class NodeTest {
         final boolean result = fixture.equals(obj);
 
         // TODO: add additional test code here
-        Assert.assertEquals(true, result);
+        Assert.assertTrue(result);
     }
 
     /**
      * Run the boolean equals(Object) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testEquals_2() throws Exception
-    {
+    public void testEquals_2() {
         final Object obj = null;
 
         final boolean result = fixture.equals(obj);
 
         // TODO: add additional test code here
-        Assert.assertEquals(false, result);
+        Assert.assertFalse(result);
     }
 
     /**
      * Run the boolean equals(Object) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testEquals_3() throws Exception
-    {
+    public void testEquals_3() {
         final Object obj = new Object();
 
         final boolean result = fixture.equals(obj);
 
         // TODO: add additional test code here
-        Assert.assertEquals(false, result);
+        Assert.assertFalse(result);
     }
 
     /**
      * Run the boolean equals(Object) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testEquals_4() throws Exception
-    {
+    public void testEquals_4() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -127,13 +109,9 @@ public class NodeTest {
 
     /**
      * Run the String getDescription() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetDescription_1() throws Exception
-    {
+    public void testGetDescription_1() {
         fixture.description = "description";
 
         final String result = fixture.getDescription();
@@ -144,13 +122,9 @@ public class NodeTest {
 
     /**
      * Run the DirectedSparseGraph<Node, Edge> getGraph() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetGraph_1() throws Exception
-    {
+    public void testGetGraph_1() {
         final MutableNetwork<Node, Edge> result = fixture.getGraph();
 
         // TODO: add additional test code here
@@ -162,13 +136,9 @@ public class NodeTest {
 
     /**
      * Run the String getName() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetName_1() throws Exception
-    {
+    public void testGetName_1() {
         final String result = fixture.getName();
 
         // TODO: add additional test code here
@@ -177,13 +147,9 @@ public class NodeTest {
 
     /**
      * Run the String getOwnedBy() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testGetOwnedBy_1() throws Exception
-    {
+    public void testGetOwnedBy_1() {
         final String result = fixture.getOwnedBy();
 
         // TODO: add additional test code here
@@ -192,13 +158,9 @@ public class NodeTest {
 
     /**
      * Run the void setDescription(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetDescription_1() throws Exception
-    {
+    public void testSetDescription_1() {
         Assert.assertEquals("", fixture.getDescription());
         final String description = "description";
         fixture.setDescription(description);
@@ -209,13 +171,9 @@ public class NodeTest {
 
     /**
      * Run the void setDescription(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testSetDescription_2() throws Exception
-    {
+    public void testSetDescription_2() {
         final String description = null;
 
         fixture.setDescription(description);
@@ -226,36 +184,25 @@ public class NodeTest {
 
     /**
      * Run the void setName(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
-    @Test
-    public void testSetName_1() throws Exception
-    {
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetName_1() {
         String name = "";
-        try
-        {
-            fixture.setName(name);
-            Assert.fail();
-        }
-        catch (final IllegalArgumentException e)
-        {
 
-        }
+        fixture.setName(name);
 
-        name = null;
-        try
-        {
-            fixture.setName(name);
-            Assert.fail();
-        }
-        catch (final IllegalArgumentException e)
-        {
+    }
 
-        }
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetName_2() {
+        String name = null;
 
-        name = "newName";
+        fixture.setName(name);
+    }
+
+    @Test
+    public void testSetName_3() {
+        String name = "newName";
         fixture.setName(name);
 
         // TODO: add additional test code here
@@ -264,36 +211,24 @@ public class NodeTest {
 
     /**
      * Run the void setOwnedBy(String) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
-    @Test
-    public void testSetOwnedBy_1() throws Exception
-    {
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetOwnedBy_1() {
         String ownedBy = "";
-        try
-        {
-            fixture.setOwnedBy(ownedBy);
-            Assert.fail();
-        }
-        catch (final IllegalArgumentException e)
-        {
 
-        }
+        fixture.setOwnedBy(ownedBy);
+    }
 
-        ownedBy = null;
-        try
-        {
-            fixture.setOwnedBy(ownedBy);
-            Assert.fail();
-        }
-        catch (final IllegalArgumentException e)
-        {
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetOwnedBy_2() {
+        String ownedBy = null;
 
-        }
+        fixture.setOwnedBy(ownedBy);
+    }
 
-        ownedBy = "newOwner";
+    @Test
+    public void testSetOwnedBy_3() {
+        String ownedBy = "newOwner";
         fixture.setOwnedBy(ownedBy);
 
         // TODO: add additional test code here
@@ -302,13 +237,9 @@ public class NodeTest {
 
     /**
      * Run the String toString() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Test
-    public void testToString_1() throws Exception
-    {
+    public void testToString_1() {
         final String result = fixture.toString();
 
         // TODO: add additional test code here
@@ -320,7 +251,6 @@ public class NodeTest {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 5/30/15 3:38 PM
      */
     @Before
     public void setUp() throws Exception
@@ -332,18 +262,5 @@ public class NodeTest {
                 .expectedEdgeCount(10000)
                 .build();
         fixture = new FactorNode(graph, "node", "owner");
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 5/30/15 3:38 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // TODO: add additional tear down code here
     }
 }

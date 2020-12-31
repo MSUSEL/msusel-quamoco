@@ -36,6 +36,10 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class QMElementTest {
 
     QMElement element;

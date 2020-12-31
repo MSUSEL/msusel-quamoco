@@ -30,8 +30,12 @@ import edu.montana.gsoc.msusel.quamoco.model.eval.factor.MedianFactorAggregation
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class MedianFactorAggregationTest {
 
     MedianFactorAggregation element;
@@ -42,7 +46,7 @@ public class MedianFactorAggregationTest {
     }
 
 //    @Test
-//    public void evaluate() throws Exception {
+//    public void evaluate() {
 //        fail();
 //    }
 
@@ -53,7 +57,7 @@ public class MedianFactorAggregationTest {
     }
 
 //    @Test
-//    public void toScript() throws Exception {
+//    public void toScript() {
 //        fail();
 //    }
 }

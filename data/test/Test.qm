@@ -26,7 +26,7 @@
   <factors xmi:id="_8efzEBUFEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Source Code Part Quality" name="Quality" characterizes="_A3o0ABT6Eei0lMAbFVod2Q">
     <refines xmi:id="_AvoREBUGEei0lMAbFVod2Q" parent="_S-rHUBT5Eei0lMAbFVod2Q"/>
   </factors>
-  <evaluations xsi:type="qm:SingleMeasureEvaluation" xmi:id="_ZHJrABUFEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Security test measue evaluation" name="SingleMeasureEvaluation" title="Test Measure for Security" evaluates="_X-NG8BT6Eei0lMAbFVod2Q" measure="_CpKQcBUEEei0lMAbFVod2Q" normlizationMeasure="_Dd6uMBUEEei0lMAbFVod2Q" range="FILE">
+  <evaluations xsi:type="qm:SingleMeasureEvaluation" xmi:id="_ZHJrABUFEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Security test measure evaluation" name="SingleMeasureEvaluation" title="Test Measure for Security" evaluates="_X-NG8BT6Eei0lMAbFVod2Q" measure="_CpKQcBUEEei0lMAbFVod2Q" normlizationMeasure="_Dd6uMBUEEei0lMAbFVod2Q" range="FILE">
     <function xsi:type="qm:LinearDecreasingFunction" xmi:id="_UPP2ABUHEei0lMAbFVod2Q" upperBound="1.0"/>
   </evaluations>
   <evaluations xsi:type="qm:SingleMeasureEvaluation" xmi:id="_dAcQwBUFEei0lMAbFVod2Q" originatesFrom="_HttvcBUEEei0lMAbFVod2Q" taggedBy="_HDZAEBUEEei0lMAbFVod2Q" description="Test evaluation for maintainability" name="SingleMeasureEvaluation" evaluates="_OFLMUBT6Eei0lMAbFVod2Q" measure="_CpKQcBUEEei0lMAbFVod2Q" normlizationMeasure="_Dd6uMBUEEei0lMAbFVod2Q" range="FILE">

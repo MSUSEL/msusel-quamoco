@@ -26,12 +26,14 @@
  */
 package edu.montana.gsoc.msusel.quamoco.graph.node;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -59,7 +61,7 @@ public class FindingNode extends Node {
      * The set of findings accumulated in this node.
      */
     @Getter
-    private Set<Finding> findings;
+    private List<Finding> findings;
 
     /**
      * Constructs a new FindingNode which is contained in the given graph,
@@ -82,7 +84,7 @@ public class FindingNode extends Node {
         super(graph, key, owner);
         this.ruleName = ruleName;
         this.toolName = toolName;
-        findings = Sets.newHashSet();
+        findings = Lists.newArrayList();
     }
 
     /**

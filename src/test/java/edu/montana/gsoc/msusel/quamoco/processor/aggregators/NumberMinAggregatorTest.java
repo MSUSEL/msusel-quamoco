@@ -32,7 +32,6 @@ import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,9 +42,8 @@ import java.util.List;
  * The class <code>NumberMinAggregatorTest</code> contains tests for the class
  * <code>{@link NumberMinAggregator}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:34 PM
- * @author fate
- * @version $Revision: BigDecimal.ONE $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class NumberMinAggregatorTest {
 
@@ -53,13 +51,9 @@ public class NumberMinAggregatorTest {
 
     /**
      * Run the NumberMinAggregator(Node) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:34 PM
      */
     @Test
-    public void testNumberMinAggregator_1() throws Exception
-    {
+    public void testNumberMinAggregator_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -76,13 +70,9 @@ public class NumberMinAggregatorTest {
 
     /**
      * Run the BigDecimal aggregate(Map<Node,BigDecimal>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:34 PM
      */
     @Test
-    public void testAggregate_1() throws Exception
-    {
+    public void testAggregate_1() {
         final List<Double> values = Lists.newArrayList();
         values.add(10.0);
         values.add(20.0);
@@ -96,13 +86,9 @@ public class NumberMinAggregatorTest {
 
     /**
      * Run the BigDecimal aggregate(Map<Node,BigDecimal>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:34 PM
      */
     @Test
-    public void testAggregate_2() throws Exception
-    {
+    public void testAggregate_2() {
         final List<Double> values = Lists.newArrayList();
 
         final double result = fixture.aggregate(values);
@@ -113,13 +99,9 @@ public class NumberMinAggregatorTest {
 
     /**
      * Run the BigDecimal aggregate(Map<Node,BigDecimal>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:34 PM
      */
     @Test
-    public void testAggregate_3() throws Exception
-    {
+    public void testAggregate_3() {
         final List<Double> values = null;
 
         final double result = fixture.aggregate(values);
@@ -133,7 +115,6 @@ public class NumberMinAggregatorTest {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:34 PM
      */
     @Before
     public void setUp() throws Exception
@@ -146,18 +127,5 @@ public class NumberMinAggregatorTest {
                 .build();
         final MeasureNode node = new MeasureNode(graph, "measure", "owner");
         fixture = new NumberMinAggregator(node);
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:34 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // Add additional tear down code here
     }
 }

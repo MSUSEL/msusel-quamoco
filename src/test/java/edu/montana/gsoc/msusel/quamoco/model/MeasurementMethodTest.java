@@ -35,6 +35,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class MeasurementMethodTest {
 
     MeasurementMethod element;
@@ -48,12 +52,12 @@ public class MeasurementMethodTest {
     }
 
     @Test
-    public void getDetermines() throws Exception {
+    public void getDetermines() {
         assertNotNull(element.getDetermines());
     }
 
     @Test
-    public void setDetermines() throws Exception {
+    public void setDetermines() {
         element.setDetermines(null);
         assertNull(element.getDetermines());
         element.setDetermines(mock(Measure.class));
@@ -61,16 +65,15 @@ public class MeasurementMethodTest {
     }
 
     @Test
-    public void getMetric() throws Exception {
+    public void getMetric() {
         assertEquals("name", element.getName());
     }
 
     @Test
-    public void setMetric() throws Exception {
+    public void setMetric() {
         element.setName(null);
         assertNull(element.getName());
         element.setName("newMetric");
         assertEquals("newMetric", element.getName());
     }
-
 }

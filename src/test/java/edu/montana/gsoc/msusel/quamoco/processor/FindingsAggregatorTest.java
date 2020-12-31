@@ -37,21 +37,18 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.model.MeasureType;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.FindingsUnionAggregator;
 import org.javalite.activejdbc.test.DBSpec;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * The class <code>FindingsAggregatorTest</code> contains tests for the class
  * <code>{@link FindingsAggregator}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:35 PM
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class FindingsAggregatorTest extends DBSpec {
 
@@ -59,13 +56,9 @@ public class FindingsAggregatorTest extends DBSpec {
 
     /**
      * Run the double aggregate(Map<Node,Double>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testAggregate_1() throws Exception
-    {
+    public void testAggregate_1() {
         final List<Double> values = Lists.newArrayList();
         values.add(10.0);
         values.add(20.0);
@@ -77,14 +70,10 @@ public class FindingsAggregatorTest extends DBSpec {
 
     /**
      * Run the Set<Finding> processFindings() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testProcessFindings_1() throws Exception
-    {
-        final Set<Finding> result = fixture.processFindings();
+    public void testProcessFindings_1() {
+        final List<Finding> result = fixture.processFindings();
 
         // add additional test code here
         Assert.assertNotNull(result);
@@ -96,7 +85,6 @@ public class FindingsAggregatorTest extends DBSpec {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
     public void setUp() throws Exception
@@ -124,18 +112,5 @@ public class FindingsAggregatorTest extends DBSpec {
         fixture = new FindingsUnionAggregator(mn);
         mn.setProcessor(fixture);
         mn2.setProcessor(new FindingsUnionAggregator(mn2));
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // Add additional tear down code here
     }
 }

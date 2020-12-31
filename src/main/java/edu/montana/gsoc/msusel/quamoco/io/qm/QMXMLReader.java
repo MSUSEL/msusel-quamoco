@@ -568,17 +568,16 @@ public class QMXMLReader extends AbstractQuamocoReader {
      */
     @VisibleForTesting
     private InputStream getInputStream(final String qm) {
-        System.out.println("QM File: " + qm);
         final Path file = Paths.get(qm);
         if (Files.exists(file)) {
             try {
                 return Files.newInputStream(file, StandardOpenOption.READ);
             } catch (final IOException e) {
                 QMXMLReader.LOG.warn(e.getMessage(), e);
-                return QMXMLReader.class.getResourceAsStream("/com/sparqline/quamoco/models/" + qm + ".qm");
+                return QMXMLReader.class.getResourceAsStream("/edu/montana/gsoc/msusel/quamoco/models/" + qm + ".qm");
             }
         } else {
-            return QMXMLReader.class.getResourceAsStream("/com/sparqline/quamoco/models/" + qm + ".qm");
+            return QMXMLReader.class.getResourceAsStream("/edu/montana/gsoc/msusel/quamoco/models/" + qm + ".qm");
         }
     }
 
@@ -606,11 +605,12 @@ public class QMXMLReader extends AbstractQuamocoReader {
     }
 
     public void read(String arg) {
+        if (arg == null || arg.isEmpty())
+            throw new IllegalArgumentException("qm model to read cannot be null or empty");
         try {
             firstPass(arg);
             secondPass(arg);
         } catch (Exception e) {
-
         }
     }
 }

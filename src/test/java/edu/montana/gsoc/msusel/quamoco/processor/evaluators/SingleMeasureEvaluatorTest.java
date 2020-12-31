@@ -42,8 +42,8 @@ import java.util.List;
  * The class <code>SingleMeasureEvaluatorTest</code> contains tests for the
  * class <code>{@link SingleMeasureEvaluator}</code>.
  *
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class SingleMeasureEvaluatorTest {
 

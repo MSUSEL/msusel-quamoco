@@ -26,6 +26,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.aggregators;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
@@ -33,6 +34,9 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.processor.FindingsAggregator;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 
 /**
@@ -60,10 +64,10 @@ public class FindingsIntersectAggregator extends FindingsAggregator {
      * {@inheritDoc}
      */
     @Override
-    protected Set<Finding> aggregate()
+    protected List<Finding> aggregate()
     {
         final MutableNetwork<Node, Edge> graph = owner.getGraph();
-        Set<Finding> retVal = Sets.newHashSet();
+        List<Finding> retVal = Lists.newArrayList();
         boolean first = true;
 
         for (final Edge edge : graph.inEdges(owner))
@@ -76,11 +80,21 @@ public class FindingsIntersectAggregator extends FindingsAggregator {
             }
             else
             {
-                Set<Finding> temp = Sets.newHashSet(n.getFindings());
-                Set<Finding> temp1 = Sets.newHashSet(temp);
-                temp1.removeAll(retVal);
-                temp.removeAll(temp1);
-                retVal = temp;
+                List<Finding> temp = Lists.newArrayList(n.getFindings());
+                Iterator<Finding> iter = temp.iterator();
+                while (iter.hasNext()) {
+                    Finding f = iter.next();
+                    if (retVal.contains(f)) {
+                        retVal.add(f);
+                    }
+                }
+                iter = retVal.iterator();
+                while (iter.hasNext()) {
+                    Finding f = iter.next();
+                    if (!temp.contains(f)) {
+                        iter.remove();
+                    }
+                }
             }
         }
 

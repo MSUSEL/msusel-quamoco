@@ -31,6 +31,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class AnnotationTest {
 
     private Annotation annotation;
@@ -68,22 +72,22 @@ public class AnnotationTest {
     }
 
 //    @Test
-//    public void toYaml() throws Exception {
+//    public void toYaml() {
 //        fail();
 //    }
 //
 //    @Test
-//    public void toJson() throws Exception {
+//    public void toJson() {
 //        fail();
 //    }
 //
 //    @Test
-//    public void toScript() throws Exception {
+//    public void toScript() {
 //        fail();
 //    }
 //
 //    @Test
-//    public void xmlTag() throws Exception {
+//    public void xmlTag() {
 //        fail();
 //    }
 

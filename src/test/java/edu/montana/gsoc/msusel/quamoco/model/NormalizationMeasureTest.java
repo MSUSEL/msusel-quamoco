@@ -32,12 +32,16 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class NormalizationMeasureTest {
 
     NormalizationMeasure element;
 
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         element = (NormalizationMeasure) NormalizationMeasure.normBuilder()
                 .name("Name")
                 .identifier("ID")
@@ -45,7 +49,7 @@ public class NormalizationMeasureTest {
     }
 
     @Test
-    public void isNormalizer() throws Exception {
+    public void isNormalizer() {
         assertTrue(element.isNormalizer());
     }
 

@@ -32,7 +32,6 @@ import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,9 +42,8 @@ import java.util.List;
  * The class <code>ManualEvaluatorTest</code> contains tests for the class
  * <code>{@link ManualEvaluator}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:35 PM
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class ManualEvaluatorTest {
 
@@ -53,12 +51,9 @@ public class ManualEvaluatorTest {
 
     /**
      * Run the ManualEvaluator(Node) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testManualEvaluator_1() throws Exception {
+    public void testManualEvaluator_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -75,12 +70,9 @@ public class ManualEvaluatorTest {
 
     /**
      * Run the double evaluate(List<Double>) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testEvaluate_1() throws Exception {
+    public void testEvaluate_1() {
         final List<Double> values = Lists.newArrayList();
         final double result = fixture.evaluate(values);
         // add mock object expectations here
@@ -93,7 +85,6 @@ public class ManualEvaluatorTest {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
     public void setUp() throws Exception {
@@ -104,17 +95,5 @@ public class ManualEvaluatorTest {
                 .expectedEdgeCount(10000)
                 .build();
         fixture = new ManualEvaluator(new FactorNode(graph, "factor", "owner"));
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    @After
-    public void tearDown() throws Exception {
-        // Add additional tear down code here
     }
 }

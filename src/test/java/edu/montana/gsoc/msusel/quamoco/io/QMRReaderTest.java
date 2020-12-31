@@ -33,20 +33,16 @@ import org.junit.Test;
 /**
  * The class <code>QMRReaderTest</code> contains tests for the class
  *
- * @generatedBy CodePro at 5/30/15 3:42 PM
- * @author isaac
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class QMRReaderTest {
 
 	/**
 	 * Run the QMRReader() constructor test.
-	 *
-	 * @throws Exception
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
 	 */
 	@Test
-	public void testQMRReader_1() throws Exception {
+	public void testQMRReader_1() {
 
 //		final QMRReader result = new QMRReader();
 //
@@ -57,12 +53,9 @@ public class QMRReaderTest {
 
 	/**
 	 * Run the QualityModelResult getResult() method test.
-	 *
-	 * @throws Exception
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
 	 */
 	@Test
-	public void testGetResult_1() throws Exception {
+	public void testGetResult_1() {
 //		final QMRReader fixture = new QMRReader();
 //
 //		final QualityModelResult result = fixture.getResult();
@@ -73,12 +66,9 @@ public class QMRReaderTest {
 
 	/**
 	 * Run the void read(String) method test.
-	 *
-	 * @throws Exception
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
 	 */
 	@Test
-	public void testRead_1() throws Exception {
+	public void testRead_1() {
 //		final QMRReader fixture = new QMRReader();
 //		fixture.read("testdata/test.qmr");
 //
@@ -174,40 +164,5 @@ public class QMRReaderTest {
 //		Assert.assertEquals(1.0, v4.getUpper(), 0.01);
 //		Assert.assertEquals(1.0, v4.getLower(), 0.01);
 //		Assert.assertEquals("_tcGWNsguEeKB3pQmwdg3FA", v4.getId());
-	}
-
-	/**
-	 * Perform pre-test initialization.
-	 *
-	 * @throws Exception
-	 *             if the initialization fails for some reason
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
-	 */
-	@Before
-	public void setUp() throws Exception {
-		// TODO: add additional set up code here
-	}
-
-	/**
-	 * Perform post-test clean-up.
-	 *
-	 * @throws Exception
-	 *             if the clean-up fails for some reason
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
-	 */
-	@After
-	public void tearDown() throws Exception {
-		// TODO: add additional tear down code here
-	}
-
-	/**
-	 * Launch the test.
-	 *
-	 * @param args
-	 *            the command line arguments
-	 * @generatedBy CodePro at 5/30/15 3:42 PM
-	 */
-	public static void main(final String[] args) {
-		new org.junit.runner.JUnitCore().run(QMRReaderTest.class);
 	}
 }

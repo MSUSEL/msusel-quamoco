@@ -168,7 +168,7 @@ public class ValueNode extends Node {
      * {@inheritDoc}
      */
     @Override
-    public Set<Finding> getFindings() {
-        return Sets.newHashSet();
+    public List<Finding> getFindings() {
+        return Lists.newArrayList();
     }
 }

@@ -31,6 +31,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class DoubleIntervalTest {
 
     DoubleInterval element;
@@ -44,14 +48,14 @@ public class DoubleIntervalTest {
     }
 
     @Test
-    public void contains() throws Exception {
+    public void contains() {
         assertTrue(element.contains(0.5));
         assertFalse(element.contains(-1.0));
         assertFalse(element.contains(1.1));
     }
 
     @Test
-    public void compareTo() throws Exception {
+    public void compareTo() {
         DoubleInterval element2 = DoubleInterval.builder()
                 .upper(1.0)
                 .lower(0.0)
@@ -61,14 +65,14 @@ public class DoubleIntervalTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void compareTo2() throws Exception {
+    public void compareTo2() {
         DoubleInterval element2 = null;
 
         assertEquals(0, element.compareTo(element2));
     }
 
     @Test
-    public void compareTo3() throws Exception {
+    public void compareTo3() {
         DoubleInterval element2 = DoubleInterval.builder()
                 .upper(1.0)
                 .lower(0.5)
@@ -78,7 +82,7 @@ public class DoubleIntervalTest {
     }
 
     @Test
-    public void compareTo4() throws Exception {
+    public void compareTo4() {
         DoubleInterval element2 = DoubleInterval.builder()
                 .upper(2.0)
                 .lower(0.0)
@@ -88,7 +92,7 @@ public class DoubleIntervalTest {
     }
 
     @Test
-    public void compareTo5() throws Exception {
+    public void compareTo5() {
         DoubleInterval element2 = DoubleInterval.builder()
                 .upper(2.0)
                 .lower(1.0)

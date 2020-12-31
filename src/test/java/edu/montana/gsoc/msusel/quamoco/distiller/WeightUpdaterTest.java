@@ -33,7 +33,6 @@ import edu.montana.gsoc.msusel.quamoco.graph.edge.FactorToFactorEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.node.FactorNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -61,11 +60,5 @@ public class WeightUpdaterTest {
         graph.addEdge(f1, root, new FactorToFactorEdge("ffe1", f1, root, InfluenceEffect.POSITIVE).setRank(1));
         graph.addEdge(f2, root, new FactorToFactorEdge("ffe2", f2, root, InfluenceEffect.POSITIVE).setRank(2));
         graph.addEdge(f3, root, new FactorToFactorEdge("ffe3", f3, root, InfluenceEffect.POSITIVE).setRank(3));
-    }
-
-    @After
-    public void tearDown() throws Exception
-    {
-        // TODO: add additional tear down code here
     }
 }

@@ -37,16 +37,15 @@ import edu.montana.gsoc.msusel.quamoco.model.eval.measure.WeightedSumMultiMeasur
 import edu.montana.gsoc.msusel.quamoco.model.func.LinearDecreasingFunction;
 import edu.montana.gsoc.msusel.quamoco.model.func.LinearFunction;
 import edu.montana.gsoc.msusel.quamoco.model.func.LinearIncreasingFunction;
-import org.junit.After;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class EvaluationsTest extends BaseTestClass {
-
-    @After
-    public void tearDown() throws Exception {
-    }
 
     @Test
     public void testMaintainabilitySingleMeasureEval() {
@@ -144,7 +143,7 @@ public class EvaluationsTest extends BaseTestClass {
         assertNotNull(m);
 
         assertEquals("Test Measure for Security", m.getTitle());
-        assertEquals("Security test measue evaluation", m.getDescription());
+        assertEquals("Security test measure evaluation", m.getDescription());
         assertEquals("Test Source", m.getOriginatesFrom().getName());
         assertEquals(100.0, m.getCompleteness(), 0.001);
         assertEquals(100.0, m.getMaximumPoints(), 0.001);

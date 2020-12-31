@@ -41,7 +41,7 @@ import lombok.ToString;
  * @author Isaac Griffith
  * @version 1.3.0
  */
-@EqualsAndHashCode
+@EqualsAndHashCode(of = {"issueKey", "issueName"})
 @ToString
 public abstract class Finding {
 

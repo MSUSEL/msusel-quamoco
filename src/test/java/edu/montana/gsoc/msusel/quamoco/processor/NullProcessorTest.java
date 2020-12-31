@@ -39,7 +39,6 @@ import edu.montana.gsoc.msusel.quamoco.model.InfluenceEffect;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMeanAggregator;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,9 +47,8 @@ import org.junit.Test;
  * The class <code>NullProcessorTest</code> contains tests for the class
  * <code>{@link NullProcessor}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:35 PM
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class NullProcessorTest {
 
@@ -58,13 +56,9 @@ public class NullProcessorTest {
 
     /**
      * Run the NullProcessor(Node) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testNullProcessor_1() throws Exception
-    {
+    public void testNullProcessor_1() {
         final MutableNetwork<Node, Edge> graph = NetworkBuilder.directed()
                 .allowsParallelEdges(true)
                 .allowsSelfLoops(false)
@@ -77,22 +71,18 @@ public class NullProcessorTest {
 
         // add additional test code here
         Assert.assertNotNull(result);
-        Assert.assertEquals(0.0, result.process(), 0.001);
+        Assert.assertEquals(1.0, result.process(), 0.001);
     }
 
     /**
      * Run the double process() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
-    public void testProcess_1() throws Exception
-    {
+    public void testProcess_1() {
         final double result = fixture.process();
 
         // add additional test code here
-        Assert.assertEquals(0.0, result, 0.001);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     /**
@@ -100,7 +90,6 @@ public class NullProcessorTest {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
     public void setUp() throws Exception
@@ -125,18 +114,5 @@ public class NullProcessorTest {
 
         fixture = new NullProcessor(owner);
         owner.setProcessor(fixture);
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // Add additional tear down code here
     }
 }

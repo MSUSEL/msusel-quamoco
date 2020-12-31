@@ -27,29 +27,23 @@
 package edu.montana.gsoc.msusel.quamoco.io;
 
 import edu.montana.gsoc.msusel.quamoco.distiller.Grade;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
  * The class <code>GradeSchemePropertiesReaderTest</code> contains tests for the
  * class <code>{@link GradeSchemePropertiesReader}</code>.
  *
- * @generatedBy CodePro at 5/30/15 3:42 PM
- * @author isaac
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class GradeSchemePropertiesReaderTest {
 
     /**
      * Run the GradeSchemePropertiesReader() constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:42 PM
      */
     @Test
-    public void testGradeSchemePropertiesReader_1() throws Exception {
+    public void testGradeSchemePropertiesReader_1() {
         final GradeSchemePropertiesReader fixture = new GradeSchemePropertiesReader();
 
         Assert.assertNotNull(fixture);
@@ -57,12 +51,9 @@ public class GradeSchemePropertiesReaderTest {
 
     /**
      * Run the void read() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:42 PM
      */
     @Test
-    public void testRead_1() throws Exception {
+    public void testRead_1() {
         final GradeSchemePropertiesReader fixture = new GradeSchemePropertiesReader();
         fixture.read();
 
@@ -86,40 +77,5 @@ public class GradeSchemePropertiesReaderTest {
 
         Assert.assertEquals(0.0, Grade.U.getUpperThreshold(), 0.001);
         Assert.assertEquals(-1.0, Grade.U.getLowerThreshold(), 0.001);
-    }
-
-    /**
-     * Perform pre-test initialization.
-     *
-     * @throws Exception
-     *             if the initialization fails for some reason
-     * @generatedBy CodePro at 5/30/15 3:42 PM
-     */
-    @Before
-    public void setUp() throws Exception {
-        // TODO: add additional set up code here
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 5/30/15 3:42 PM
-     */
-    @After
-    public void tearDown() throws Exception {
-        // TODO: add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 5/30/15 3:42 PM
-     */
-    public static void main(final String[] args) {
-        new org.junit.runner.JUnitCore().run(GradeSchemePropertiesReaderTest.class);
     }
 }

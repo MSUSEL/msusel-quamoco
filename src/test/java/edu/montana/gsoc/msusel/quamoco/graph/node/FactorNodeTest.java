@@ -31,7 +31,6 @@ import com.google.common.graph.NetworkBuilder;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.ValueToMeasureEdge;
 import edu.montana.gsoc.msusel.quamoco.processor.NullProcessor;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,8 +39,8 @@ import org.junit.Test;
  * The class <code>FactorNodeTest</code> contains tests for the class
  * <code>{@link FactorNode}</code>.
  *
- * @author isaac
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class FactorNodeTest {
 
@@ -119,7 +118,7 @@ public class FactorNodeTest {
 
         final double result = fixture.getValue();
 
-        Assert.assertEquals(0.0, result, 0.001);
+        Assert.assertEquals(1.0, result, 0.001);
     }
 
     /**

@@ -26,34 +26,13 @@
  */
 package edu.montana.gsoc.msusel.quamoco.io;
 
-import static org.junit.Assert.*;
-
 import edu.montana.gsoc.msusel.quamoco.io.qmr.QMRYamlReader;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 /**
  * @author Isaac Griffith
- *
+ * @version 1.3.0
  */
 public class QMRYamlReaderTest {
-
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception
-    {
-    }
-
-    /**
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-    }
 
     /**
      * Test method for {@link QMRYamlReader#QMRYamlReader()}.

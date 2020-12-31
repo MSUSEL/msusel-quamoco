@@ -33,6 +33,7 @@ import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
 import edu.montana.gsoc.msusel.quamoco.processor.extents.Extent;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -61,7 +62,7 @@ public class UnrangedNormalizer extends Normalizer {
      * {@inheritDoc}
      */
     @Override
-    public double normalize(final Set<Finding> findings)
+    public double normalize(final List<Finding> findings)
     {
         if (findings == null || findings.isEmpty())
             return 0.0;

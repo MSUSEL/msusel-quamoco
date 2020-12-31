@@ -33,20 +33,19 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
 import org.javalite.activejdbc.test.DBSpec;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Set;
 
 /**
  * The class <code>FindingToMeasureEdgeTest</code> contains tests for the class
  * <code>{@link FindingToMeasureEdge}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:38 PM
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class FindingToMeasureEdgeTest extends DBSpec {
 
@@ -54,12 +53,9 @@ public class FindingToMeasureEdgeTest extends DBSpec {
 
     /**
      * Run the FindingToMeasureEdge(String) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testFindingToMeasureEdge_1() throws Exception {
+    public void testFindingToMeasureEdge_1() {
         final String name = "edge";
 
         final FindingToMeasureEdge result = new FindingToMeasureEdge(name, null, null);
@@ -72,13 +68,10 @@ public class FindingToMeasureEdgeTest extends DBSpec {
 
     /**
      * Run the Set<Finding> getFindings() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetFindings_1() throws Exception {
-        final Set<Finding> result = fixture.getFindings();
+    public void testGetFindings_1() {
+        final List<Finding> result = fixture.getFindings();
 
         // add additional test code here
         Assert.assertNotNull(result);
@@ -87,13 +80,10 @@ public class FindingToMeasureEdgeTest extends DBSpec {
 
     /**
      * Run the Set<Finding> getFindings() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetFindings_2() throws Exception {
-        final Set<Finding> result = fixture.getFindings();
+    public void testGetFindings_2() {
+        final List<Finding> result = fixture.getFindings();
 
         // add additional test code here
         Assert.assertNotNull(result);
@@ -102,12 +92,9 @@ public class FindingToMeasureEdgeTest extends DBSpec {
 
     /**
      * Run the double getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_1() throws Exception {
+    public void testGetValue_1() {
         final double result = fixture.getValue();
 
         // add additional test code here
@@ -119,7 +106,6 @@ public class FindingToMeasureEdgeTest extends DBSpec {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Before
     public void setUp() throws Exception {
@@ -135,28 +121,5 @@ public class FindingToMeasureEdgeTest extends DBSpec {
         fixture.norm = new NullNormalizer(fixture, "LOC", NormalizationRange.CLASS);
 
         src.addFinding(new FileFinding(File.builder().fileKey("path1").create(), "rule", "rule"));
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    @After
-    public void tearDown() throws Exception {
-        // Add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    public static void main(final String[] args) {
-        new org.junit.runner.JUnitCore().run(FindingToMeasureEdgeTest.class);
     }
 }

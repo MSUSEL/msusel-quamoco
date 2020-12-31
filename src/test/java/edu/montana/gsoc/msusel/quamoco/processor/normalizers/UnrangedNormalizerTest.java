@@ -26,40 +26,39 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.normalizers;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.isu.isuese.datamodel.*;
 import edu.isu.isuese.datamodel.Class;
 import edu.isu.isuese.datamodel.System;
+import edu.isu.isuese.datamodel.*;
 import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.Edge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.MeasureToMeasureNumberEdge;
 import edu.montana.gsoc.msusel.quamoco.graph.edge.ValueToMeasureEdge;
-import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Finding;
+import edu.montana.gsoc.msusel.quamoco.graph.node.*;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMeanAggregator;
 import org.easymock.EasyMock;
 import org.javalite.activejdbc.test.DBSpec;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * The class <code>UnrangedNormalizerTest</code> contains tests for the class
  * <code>{@link UnrangedNormalizer}</code>.
  *
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class UnrangedNormalizerTest extends DBSpec {
 
     private UnrangedNormalizer fixture;
-    private Set<Finding> findings;
+    private List<Finding> findings;
     private File file;
     private File file2;
 
@@ -86,7 +85,7 @@ public class UnrangedNormalizerTest extends DBSpec {
 
     @Test
     public void testNormalize_Set_Finding_1() {
-        findings = Sets.newHashSet();
+        findings = Lists.newArrayList();
         Finding f1 = new FileFinding(file, "issue", "issue");
         Finding f2 = new FileFinding(file2, "issue", "issue");
         findings.add(f1);
@@ -99,21 +98,21 @@ public class UnrangedNormalizerTest extends DBSpec {
 
     @Test
     public void testNormalize_Set_Finding_2() {
-        double result = fixture.normalize((Set<Finding>) null);
+        double result = fixture.normalize((List<Finding>) null);
 
         Assert.assertEquals(0.0, result, 0.001);
     }
 
     @Test
     public void testNormalize_Set_Finding_3() {
-        double result = fixture.normalize(Sets.newHashSet());
+        double result = fixture.normalize(Lists.newArrayList());
 
         Assert.assertEquals(0.0, result, 0.001);
     }
 
     @Test
     public void testNormalize_Set_Finding_4() {
-        findings = Sets.newHashSet();
+        findings = Lists.newArrayList();
         Finding f1 = new FileFinding(file, "issue", "issue");
         Finding f2 = new FileFinding(file2, "issue", "issue");
         findings.add(f1);

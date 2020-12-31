@@ -34,7 +34,6 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.MeasureNode;
 import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
 import edu.montana.gsoc.msusel.quamoco.processor.aggregators.NumberMeanAggregator;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,9 +42,8 @@ import org.junit.Test;
  * The class <code>AggregatorTest</code> contains tests for the class
  * <code>{@link Aggregator}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:35 PM
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class AggregatorTest {
 
@@ -53,9 +51,6 @@ public class AggregatorTest {
 
     /**
      * Run the double process() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Test
     public void testProcess_1() throws Exception
@@ -73,7 +68,6 @@ public class AggregatorTest {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
      */
     @Before
     public void setUp() throws Exception
@@ -91,18 +85,5 @@ public class AggregatorTest {
         vn.addValue(10.0);
         vn.addValue(20.0);
         graph.addEdge(vn, mn, new ValueToMeasureEdge("v2m", vn, mn));
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:35 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // Add additional tear down code here
     }
 }

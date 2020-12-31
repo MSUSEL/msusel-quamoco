@@ -55,7 +55,6 @@ public class TypeExtentDecorator extends AbstractExtentDecorator {
 
     @Override
     public double findFileExtent(String metric) {
-        System.out.println("TypeExtentDecorator.findFileExtent Metric: " + metric);
         Measurable file = decorated.getParent();
         Measure meas = Measure.retrieve(file, metric);
         if (meas == null)
@@ -65,14 +64,12 @@ public class TypeExtentDecorator extends AbstractExtentDecorator {
 
     @Override
     public double findMethodExtent(String metric) {
-        System.out.println("TpyeExtentDecorator.findMethodExtent Metric: " + metric);
         Type t = (Type) decorated;
         return sumMetrics(metric, t.getAllMethods());
     }
 
     @Override
     public double findClassExtent(String metric) {
-        System.out.println("TypeExtentDecorator.findClassExtent Metric: " + metric);
         Measure meas = Measure.retrieve(decorated, metric);
         if (meas == null)
             meas = Measure.retrieve(decorated, QuamocoContext.instance().getMetricRepoKey() + ":" + metric);

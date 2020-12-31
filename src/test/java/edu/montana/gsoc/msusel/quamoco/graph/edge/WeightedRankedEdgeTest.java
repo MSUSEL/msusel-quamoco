@@ -36,7 +36,6 @@ import edu.montana.gsoc.msusel.quamoco.processor.Normalizer;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.NegativeLinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.lineardist.PositiveLinearDistribution;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,9 +44,8 @@ import org.junit.Test;
  * The class <code>WeightedRankedEdgeTest</code> contains tests for the class
  * <code>{@link WeightedRankedEdge}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:38 PM
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class WeightedRankedEdgeTest {
 
@@ -55,13 +53,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the LinearDistribution getDist() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetDist_1() throws Exception
-    {
+    public void testGetDist_1() {
         final LinearDistribution result = fixture.getDist();
 
         // add additional test code here
@@ -71,13 +65,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the BigDecimal getLowerBound() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetLowerBound_1() throws Exception
-    {
+    public void testGetLowerBound_1() {
         final double result = fixture.getLowerBound();
 
         // add additional test code here
@@ -86,13 +76,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the BigDecimal getMaxPoints() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetMaxPoints_1() throws Exception
-    {
+    public void testGetMaxPoints_1() {
         final double result = fixture.getMaxPoints();
 
         // add additional test code here
@@ -101,13 +87,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the Normalizer getNormalizer() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetNormalizer_1() throws Exception
-    {
+    public void testGetNormalizer_1() {
         final Normalizer result = fixture.getNormalizer();
 
         // add additional test code here
@@ -117,13 +99,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the BigDecimal getUpperBound() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetUpperBound_1() throws Exception
-    {
+    public void testGetUpperBound_1() {
         final double result = fixture.getUpperBound();
 
         // add additional test code here
@@ -132,13 +110,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the BigDecimal getWeight() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetWeight_1() throws Exception
-    {
+    public void testGetWeight_1() {
         final double result = fixture.getWeight();
 
         // add additional test code here
@@ -147,44 +121,32 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the boolean isUsesLinearDist() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testIsUsesLinearDist_1() throws Exception
-    {
+    public void testIsUsesLinearDist_1() {
         final boolean result = fixture.isUsesLinearDist();
 
         // add additional test code here
-        Assert.assertEquals(true, result);
+        Assert.assertTrue(result);
     }
 
     /**
      * Run the boolean isUsesLinearDist() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testIsUsesLinearDist_2() throws Exception
-    {
+    public void testIsUsesLinearDist_2() {
         fixture.setUsesLinearDist(false);
         final boolean result = fixture.isUsesLinearDist();
 
         // add additional test code here
-        Assert.assertEquals(false, result);
+        Assert.assertFalse(result);
     }
 
     /**
      * Run the void setDist(LinearDistribution) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetDist_1() throws Exception
-    {
+    public void testSetDist_1() {
         final LinearDistribution lindist = new NegativeLinearDistribution();
 
         fixture.setDist(lindist);
@@ -194,13 +156,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the void setLowerBound(BigDecimal) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetLowerBound_1() throws Exception
-    {
+    public void testSetLowerBound_1() {
         final double lowerBound = 0.5;
 
         try
@@ -212,18 +170,13 @@ public class WeightedRankedEdgeTest {
         {
             Assert.fail();
         }
-
     }
 
     /**
      * Run the void setLowerBound(BigDecimal) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetLowerBound_2() throws Exception
-    {
+    public void testSetLowerBound_2() {
         fixture.setUpperBound(0.0);
         final double lowerBound = 0.5;
 
@@ -232,13 +185,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the void setMaxPoints(BigDecimal) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetMaxPoints_1() throws Exception
-    {
+    public void testSetMaxPoints_1() {
         final double maxPoints = 100.0;
 
         fixture.setMaxPoints(maxPoints);
@@ -247,13 +196,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the void setMaxPoints(BigDecimal) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetMaxPoints_2() throws Exception
-    {
+    public void testSetMaxPoints_2() {
         final double maxPoints = 0.0;
 
         fixture.setMaxPoints(maxPoints);
@@ -262,13 +207,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the void setMaxPoints(BigDecimal) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetMaxPoints_3() throws Exception
-    {
+    public void testSetMaxPoints_3() {
         final double maxPoints = -1.0;
 
         fixture.setMaxPoints(maxPoints);
@@ -276,13 +217,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the void setNormalizer(Normalizer) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetNormalizer_1() throws Exception
-    {
+    public void testSetNormalizer_1() {
         final Normalizer normalizer = new NullNormalizer(fixture, "NOC", NormalizationRange.CLASS);
 
         fixture.setNormalizer(normalizer);
@@ -295,13 +232,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the void setUpperBound(BigDecimal) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetUpperBound_1() throws Exception
-    {
+    public void testSetUpperBound_1() {
         final double upperBound = 0.5;
 
         try
@@ -317,13 +250,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the void setUpperBound(BigDecimal) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetUpperBound_2() throws Exception
-    {
+    public void testSetUpperBound_2() {
         fixture.setLowerBound(1.0);
         final double upperBound = 0.5;
 
@@ -340,13 +269,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the void setUsesLinearDist(boolean) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetUsesLinearDist_1() throws Exception
-    {
+    public void testSetUsesLinearDist_1() {
         final boolean usesLinearDist = true;
 
         fixture.setUsesLinearDist(usesLinearDist);
@@ -356,13 +281,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the void setWeight(BigDecimal) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetWeight_1() throws Exception
-    {
+    public void testSetWeight_1() {
         final double weight = 1.0;
 
         try
@@ -378,13 +299,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the void setWeight(BigDecimal) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetWeight_2() throws Exception
-    {
+    public void testSetWeight_2() {
         final double weight = -1.0;
 
         fixture.setWeight(weight);
@@ -392,13 +309,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the void setWeight(BigDecimal) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testSetWeight_3() throws Exception
-    {
+    public void testSetWeight_3() {
         final double weight = 0.0;
 
         fixture.setWeight(weight);
@@ -407,13 +320,9 @@ public class WeightedRankedEdgeTest {
 
     /**
      * Run the void setWeight(BigDecimal) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetWeight_4() throws Exception
-    {
+    public void testSetWeight_4() {
         final double weight = 2.0;
 
         fixture.setWeight(weight);
@@ -424,7 +333,6 @@ public class WeightedRankedEdgeTest {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Before
     public void setUp() throws Exception
@@ -447,18 +355,5 @@ public class WeightedRankedEdgeTest {
         fixture.weight = 1.0;
         fixture.maxPoints = 1.0;
         fixture.lowerBound = 0.0;
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // Add additional tear down code here
     }
 }

@@ -31,6 +31,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class ToolTest {
 
     Tool element;
@@ -46,34 +50,34 @@ public class ToolTest {
     }
 
     @Test
-    public void getTitle() throws Exception {
+    public void getTitle() {
         assertEquals("title", element.getTitle());
     }
 
     @Test
-    public void setTitle() throws Exception {
+    public void setTitle() {
         element.setTitle("NewTitle");
         assertEquals("NewTitle", element.getTitle());
     }
 
     @Test
-    public void getName() throws Exception {
+    public void getName() {
         assertEquals("tool", element.getName());
     }
 
     @Test
-    public void setName() throws Exception {
+    public void setName() {
         element.setName("NewName");
         assertEquals("NewName", element.getName());
     }
 
     @Test
-    public void getDescription() throws Exception {
+    public void getDescription() {
         assertEquals("description", element.getDescription());
     }
 
     @Test
-    public void setDescription() throws Exception {
+    public void setDescription() {
         element.setDescription("NewDescription");
         assertEquals("NewDescription", element.getDescription());
     }
@@ -85,8 +89,7 @@ public class ToolTest {
     }
 
 //    @Test
-//    public void toScript() throws Exception {
+//    public void toScript() {
 //        fail();
 //    }
-
 }

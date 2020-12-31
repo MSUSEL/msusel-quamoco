@@ -33,7 +33,6 @@ import edu.montana.gsoc.msusel.quamoco.graph.node.Node;
 import edu.montana.gsoc.msusel.quamoco.graph.node.ValueNode;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 import edu.montana.gsoc.msusel.quamoco.processor.normalizers.NullNormalizer;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,9 +41,8 @@ import org.junit.Test;
  * The class <code>ValueToMeasureEdgeTest</code> contains tests for the class
  * <code>{@link ValueToMeasureEdge}</code>.
  *
- * @generatedBy CodePro at 1/26/16 6:38 PM
- * @author fate
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class ValueToMeasureEdgeTest {
 
@@ -52,13 +50,9 @@ public class ValueToMeasureEdgeTest {
 
     /**
      * Run the ValueToMeasureEdge(String) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testValueToMeasureEdge_1() throws Exception
-    {
+    public void testValueToMeasureEdge_1() {
         final String name = "";
 
         final ValueToMeasureEdge result = new ValueToMeasureEdge(name, null, null);
@@ -70,13 +64,9 @@ public class ValueToMeasureEdgeTest {
 
     /**
      * Run the BigDecimal getValue() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Test
-    public void testGetValue_1() throws Exception
-    {
+    public void testGetValue_1() {
         final double result = fixture.getValue();
 
         // add additional test code here
@@ -88,7 +78,6 @@ public class ValueToMeasureEdgeTest {
      *
      * @throws Exception
      *             if the initialization fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
      */
     @Before
     public void setUp() throws Exception
@@ -106,18 +95,5 @@ public class ValueToMeasureEdgeTest {
 
         fixture = new ValueToMeasureEdge("edge", src, dest);
         fixture.norm = new NullNormalizer(fixture, "LOC", NormalizationRange.CLASS);
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 1/26/16 6:38 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // Add additional tear down code here
     }
 }

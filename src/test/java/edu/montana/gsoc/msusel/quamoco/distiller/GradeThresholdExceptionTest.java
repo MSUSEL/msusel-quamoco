@@ -29,55 +29,46 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
  * The class <code>GradeThresholdExceptionTest</code> contains tests for the
  * class <code>{@link GradeThresholdException}</code>.
  *
- * @generatedBy CodePro at 5/30/15 3:42 PM
- * @author isaac
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class GradeThresholdExceptionTest {
 
     /**
      * Run the GradeThresholdException() constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:42 PM
      */
     @Test
-    public void testGradeThresholdException_1() throws Exception {
+    public void testGradeThresholdException_1() {
 
         final GradeThresholdException result = new GradeThresholdException();
 
         // TODO: add additional test code here
         Assert.assertNotNull(result);
-        Assert.assertEquals(null, result.getCause());
+        Assert.assertNull(result.getCause());
         Assert.assertEquals("edu.montana.gsoc.msusel.quamoco.distiller.GradeThresholdException", result.toString());
-        Assert.assertEquals(null, result.getMessage());
-        Assert.assertEquals(null, result.getLocalizedMessage());
+        Assert.assertNull(result.getMessage());
+        Assert.assertNull(result.getLocalizedMessage());
     }
 
     /**
      * Run the GradeThresholdException(String) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:42 PM
      */
     @Test
-    public void testGradeThresholdException_2() throws Exception {
+    public void testGradeThresholdException_2() {
         final String message = "";
 
         final GradeThresholdException result = new GradeThresholdException(message);
 
         // TODO: add additional test code here
         Assert.assertNotNull(result);
-        Assert.assertEquals(null, result.getCause());
+        Assert.assertNull(result.getCause());
         Assert.assertEquals("edu.montana.gsoc.msusel.quamoco.distiller.GradeThresholdException: ", result.toString());
         Assert.assertEquals("", result.getMessage());
         Assert.assertEquals("", result.getLocalizedMessage());
@@ -85,12 +76,9 @@ public class GradeThresholdExceptionTest {
 
     /**
      * Run the GradeThresholdException(Throwable) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:42 PM
      */
     @Test
-    public void testGradeThresholdException_3() throws Exception {
+    public void testGradeThresholdException_3() {
         final Throwable cause = new Throwable();
 
         final GradeThresholdException result = new GradeThresholdException(cause);
@@ -105,12 +93,9 @@ public class GradeThresholdExceptionTest {
 
     /**
      * Run the GradeThresholdException(String,Throwable) constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:42 PM
      */
     @Test
-    public void testGradeThresholdException_4() throws Exception {
+    public void testGradeThresholdException_4() {
         final String message = "";
         final Throwable cause = new Throwable();
 
@@ -126,12 +111,9 @@ public class GradeThresholdExceptionTest {
     /**
      * Run the GradeThresholdException(String,Throwable,boolean,boolean)
      * constructor test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:42 PM
      */
     @Test
-    public void testGradeThresholdException_5() throws Exception {
+    public void testGradeThresholdException_5() {
         final String message = "";
         final Throwable cause = new Throwable();
         final boolean enableSuppression = true;
@@ -145,40 +127,5 @@ public class GradeThresholdExceptionTest {
         Assert.assertEquals("edu.montana.gsoc.msusel.quamoco.distiller.GradeThresholdException: ", result.toString());
         Assert.assertEquals("", result.getMessage());
         Assert.assertEquals("", result.getLocalizedMessage());
-    }
-
-    /**
-     * Perform pre-test initialization.
-     *
-     * @throws Exception
-     *             if the initialization fails for some reason
-     * @generatedBy CodePro at 5/30/15 3:42 PM
-     */
-    @Before
-    public void setUp() throws Exception {
-        // TODO: add additional set up code here
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 5/30/15 3:42 PM
-     */
-    @After
-    public void tearDown() throws Exception {
-        // TODO: add additional tear down code here
-    }
-
-    /**
-     * Launch the test.
-     *
-     * @param args
-     *            the command line arguments
-     * @generatedBy CodePro at 5/30/15 3:42 PM
-     */
-    public static void main(final String[] args) {
-        new org.junit.runner.JUnitCore().run(GradeThresholdExceptionTest.class);
     }
 }

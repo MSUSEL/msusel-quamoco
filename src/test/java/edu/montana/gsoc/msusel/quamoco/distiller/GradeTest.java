@@ -29,9 +29,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.distiller;
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -40,21 +38,16 @@ import java.util.List;
  * The class <code>GradeTest</code> contains tests for the class
  * <code>{@link Grade}</code>.
  *
- * @generatedBy CodePro at 5/30/15 3:41 PM
- * @author isaac
- * @version $Revision: 1.0 $
+ * @author Isaac Griffith
+ * @version 1.3.0
  */
 public class GradeTest {
 
     /**
      * Run the int evaluate(Double) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:41 PM
      */
     @Test
-    public void testEvaluate_1() throws Exception
-    {
+    public void testEvaluate_1() {
         final Grade fixture = Grade.A;
         final double val = 1.0;
 
@@ -66,13 +59,9 @@ public class GradeTest {
 
     /**
      * Run the int evaluate(Double) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:41 PM
      */
     @Test
-    public void testEvaluate_2() throws Exception
-    {
+    public void testEvaluate_2() {
         final Grade fixture = Grade.A;
         final double val = 1.0;
 
@@ -84,13 +73,9 @@ public class GradeTest {
 
     /**
      * Run the int evaluate(Double) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:41 PM
      */
     @Test
-    public void testEvaluate_3() throws Exception
-    {
+    public void testEvaluate_3() {
         final Grade fixture = Grade.A;
         final double val = 1.0;
 
@@ -102,13 +87,9 @@ public class GradeTest {
 
     /**
      * Run the List<Grade> getGrades() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:41 PM
      */
     @Test
-    public void testGetGrades_1() throws Exception
-    {
+    public void testGetGrades_1() {
 
         final List<Grade> result = Grade.getGrades();
 
@@ -119,13 +100,9 @@ public class GradeTest {
 
     /**
      * Run the String getName() method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:41 PM
      */
     @Test
-    public void testGetName_1() throws Exception
-    {
+    public void testGetName_1() {
         final Grade fixture = Grade.A;
 
         final String result = fixture.getName();
@@ -136,9 +113,6 @@ public class GradeTest {
 
     /**
      * Run the void setThresholds(double,double) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:41 PM
      */
     @Test
     public void testSetThresholds_1() throws Exception
@@ -161,9 +135,6 @@ public class GradeTest {
 
     /**
      * Run the void setThresholds(double,double) method test.
-     *
-     * @throws Exception
-     * @generatedBy CodePro at 5/30/15 3:41 PM
      */
     @Test(expected = GradeThresholdException.class)
     public void testSetThresholds_2() throws Exception
@@ -174,31 +145,5 @@ public class GradeTest {
         final double upper = 0.0;
 
         fixture.setThresholds(lower, upper);
-    }
-
-    /**
-     * Perform pre-test initialization.
-     *
-     * @throws Exception
-     *             if the initialization fails for some reason
-     * @generatedBy CodePro at 5/30/15 3:41 PM
-     */
-    @Before
-    public void setUp() throws Exception
-    {
-        // TODO: add additional set up code here
-    }
-
-    /**
-     * Perform post-test clean-up.
-     *
-     * @throws Exception
-     *             if the clean-up fails for some reason
-     * @generatedBy CodePro at 5/30/15 3:41 PM
-     */
-    @After
-    public void tearDown() throws Exception
-    {
-        // TODO: add additional tear down code here
     }
 }

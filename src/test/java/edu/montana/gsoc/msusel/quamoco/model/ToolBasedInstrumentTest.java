@@ -61,9 +61,9 @@ public class ToolBasedInstrumentTest {
         assertEquals(tool, element.getTool());
     }
 
-    @Test
-    public void generateXMLTag() throws Exception {
-        System.out.println(element.generateXMLTag(MeasurementMethodType.RULE_BASED_INSTRUMENT.type()));
-    }
+//    @Test
+//    public void generateXMLTag() throws Exception {
+//        System.out.println(element.generateXMLTag(MeasurementMethodType.RULE_BASED_INSTRUMENT.type()));
+//    }
 
 }

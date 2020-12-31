@@ -31,29 +31,34 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Isaac Griffith
+ * @version 1.3.0
+ */
 public class FindingsMeasurementResultTest {
+
     @Before
     public void setUp() throws Exception {
     }
 
     @Test
-    public void getCount() throws Exception {
+    public void getCount() {
     }
 
     @Test
-    public void builder() throws Exception {
+    public void builder() {
     }
 
     @Test
-    public void builder1() throws Exception {
+    public void builder1() {
     }
 
     @Test
-    public void getResultFrom() throws Exception {
+    public void getResultFrom() {
     }
 
     @Test
-    public void setResultFrom() throws Exception {
+    public void setResultFrom() {
     }
 
 }

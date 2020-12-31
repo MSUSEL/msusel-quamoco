@@ -59,7 +59,7 @@ public class MeasureToMeasureFindingsNumberEdge extends WeightedRankedEdge {
         double value = norm.normalize(source.getFindings());
 
         if (usesLinearDist) {
-            value = getDist().calculate(getMaxPoints(), value) / getMaxPoints();
+            value = getDist().calculate(getMaxPoints(), value / getMaxPoints());
         }
 
         value = value * weight;

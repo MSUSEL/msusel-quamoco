@@ -26,6 +26,7 @@
  */
 package edu.montana.gsoc.msusel.quamoco.processor.extents;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import edu.isu.isuese.datamodel.Measure;
 import edu.isu.isuese.datamodel.Project;
@@ -154,7 +155,7 @@ public class Extent {
             throw new IllegalArgumentException("Range cannot be null.");
         }
 
-        final Set<Finding> findingsSet = Sets.newHashSet();
+        final List<Finding> findingsSet = Lists.newArrayList();
         findingsSet.addAll(measure.getFindings());
 
         double total = findFindingsExtent(metric, findingsSet, range);
@@ -234,9 +235,6 @@ public class Extent {
                 values = Measure.getAllMethodValues(QuamocoContext.instance().getProject(), QuamocoContext.instance().getMetricRepoKey(), metric);
                 break;
             case NA:
-                System.out.println("Proj: " + QuamocoContext.instance().getProject());
-                System.out.println("Repo Key: " + QuamocoContext.instance().getMetricRepoKey());
-                System.out.println("Metric: " + metric);
                 return Measure.getProjectMetric(QuamocoContext.instance().getProject(), QuamocoContext.instance().getMetricRepoKey(), metric);
         }
 
@@ -269,7 +267,7 @@ public class Extent {
      *            The set of findings to search for the proper range over.
      * @return The new normalization range to be used.
      */
-    public NormalizationRange findRange(Project project, String metric, NormalizationRange prior, Set<Finding> findings) {
+    public NormalizationRange findRange(Project project, String metric, NormalizationRange prior, List<Finding> findings) {
         NormalizationRange newRange = prior;
         // First find the minimal range;
         for (final Finding f : findings) {
@@ -330,7 +328,7 @@ public class Extent {
      * @return The extent of affect this set of findings has within the entire
      *         system (un-normalized)
      */
-    private double findFindingsExtent(String metric, Set<Finding> findings, NormalizationRange range) {
+    private double findFindingsExtent(String metric, List<Finding> findings, NormalizationRange range) {
         double value = 0.0;
 
         for (Finding f : findings) {
