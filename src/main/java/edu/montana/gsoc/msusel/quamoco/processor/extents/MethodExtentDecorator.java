@@ -70,6 +70,10 @@ public class MethodExtentDecorator extends AbstractExtentDecorator {
         Measure meas = Measure.retrieve(file, metric);
         if (meas == null)
             meas = Measure.retrieve(file, QuamocoContext.instance().getMetricRepoKey() + ":" + metric);
+        if (meas == null) {
+            System.out.println("Metric: " + metric);
+            return 0.0;
+        }
         return Objects.requireNonNull(meas).getValue();
     }
 
@@ -81,6 +85,10 @@ public class MethodExtentDecorator extends AbstractExtentDecorator {
         Measure meas = Measure.retrieve(decorated, metric);
         if (meas == null)
             meas = Measure.retrieve(decorated, QuamocoContext.instance().getMetricRepoKey() + ":" + metric);
+        if (meas == null) {
+            System.out.println("Metric: " + metric);
+            return 0.0;
+        }
         return Objects.requireNonNull(meas).getValue();
     }
 
@@ -95,6 +103,10 @@ public class MethodExtentDecorator extends AbstractExtentDecorator {
             Measure meas = Measure.retrieve(p, metric);
             if (meas == null)
                 meas = Measure.retrieve(p, QuamocoContext.instance().getMetricRepoKey() + ":" + metric);
+            if (meas == null) {
+                System.out.println("Metric: " + metric);
+                return 0.0;
+            }
             return Objects.requireNonNull(meas).getValue();
         }
 

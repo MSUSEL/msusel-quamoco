@@ -3,6 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a738a267-9a20-4b8c-88fe-147b5320e1a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/FieldExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/FieldExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/FileExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/FileExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/InitializerExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/InitializerExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/LiteralExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/LiteralExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/MethodExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/MethodExtentDecorator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/TypeExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/TypeExtentDecorator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -173,7 +178,7 @@
       <workItem from="1609142535017" duration="462000" />
       <workItem from="1609143010122" duration="11120000" />
       <workItem from="1609196727278" duration="8415000" />
-      <workItem from="1609251108156" duration="46769000" />
+      <workItem from="1609251108156" duration="47538000" />
     </task>
     <servers />
   </component>
