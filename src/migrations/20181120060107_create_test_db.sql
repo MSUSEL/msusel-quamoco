@@ -466,7 +466,15 @@ create table imports
     name       VARCHAR UNIQUE,
     start      INTEGER,
     end        INTEGER,
+    created_at NUMERIC,
+    updated_at NUMERIC
+);
+
+create table files_imports
+(
+    id         INTEGER NOT NULL PRIMARY KEY Autoincrement,
     file_id    INTEGER REFERENCES files (id),
+    import_id  INTEGER REFERENCES imports (id),
     created_at NUMERIC,
     updated_at NUMERIC
 );
