@@ -242,6 +242,114 @@ create table projects_measures
     updated_at NUMERIC
 );
 
+create table namespaces_measures
+(
+    id           INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    namespace_id INTEGER REFERENCES namespaces (id),
+    measure_id   INTEGER REFERENCES measures (id),
+    created_at   NUMERIC,
+    updated_at   NUMERIC
+);
+
+create table systems_measures
+(
+    id         INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    system_id  INTEGER REFERENCES systems (id),
+    measure_id INTEGER REFERENCES measures (id),
+    created_at NUMERIC,
+    updated_at NUMERIC
+);
+
+create table patterns_measures
+(
+    id         INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    pattern_id INTEGER REFERENCES patterns (id),
+    measure_id INTEGER REFERENCES measures (id),
+    created_at NUMERIC,
+    updated_at NUMERIC
+);
+
+create table files_measures
+(
+    id         INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    file_id    INTEGER REFERENCES files (id),
+    measure_id INTEGER REFERENCES measures (id),
+    created_at NUMERIC,
+    updated_at NUMERIC
+);
+
+create table modules_measures
+(
+    id         INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    module_id  INTEGER REFERENCES projects (id),
+    measure_id INTEGER REFERENCES measures (id),
+    created_at NUMERIC,
+    updated_at NUMERIC
+);
+
+create table initializers_measures
+(
+    id             INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    initializer_id INTEGER REFERENCES initializers (id),
+    measure_id     INTEGER REFERENCES measures (id),
+    created_at     NUMERIC,
+    updated_at     NUMERIC
+);
+
+create table methods_measures
+(
+    id         INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    method_id  INTEGER REFERENCES methods (id),
+    measure_id INTEGER REFERENCES measures (id),
+    created_at NUMERIC,
+    updated_at NUMERIC
+);
+
+create table classes_measures
+(
+    id         INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    class_id   INTEGER REFERENCES classes (id),
+    measure_id INTEGER REFERENCES measures (id),
+    created_at NUMERIC,
+    updated_at NUMERIC
+);
+
+create table enums_measures
+(
+    id         INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    enum_id    INTEGER REFERENCES enums (id),
+    measure_id INTEGER REFERENCES measures (id),
+    created_at NUMERIC,
+    updated_at NUMERIC
+);
+
+create table interfaces_measures
+(
+    id           INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    interface_id INTEGER REFERENCES interfaces (id),
+    measure_id   INTEGER REFERENCES measures (id),
+    created_at   NUMERIC,
+    updated_at   NUMERIC
+);
+
+create table constructors_measures
+(
+    id             INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    constructor_id INTEGER REFERENCES constructors (id),
+    measure_id     INTEGER REFERENCES measures (id),
+    created_at     NUMERIC,
+    updated_at     NUMERIC
+);
+
+create table destructors_measures
+(
+    id            INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    destructor_id INTEGER REFERENCES destructors (id),
+    measure_id    INTEGER REFERENCES measures (id),
+    created_at    NUMERIC,
+    updated_at    NUMERIC
+);
+
 create table metrics
 (
     id                   INTEGER NOT NULL PRIMARY KEY Autoincrement,
@@ -856,26 +964,27 @@ insert into pattern_repositories (repoKey, name)
 values ('gof', 'gof');
 
 insert into patterns (patternKey, name, pattern_repository_id)
-values ('gof:abstract_factory', 'Abstract Factory', 1),
-       ('gof:builder', 'Builder', 1),
-       ('gof:factory_method', 'Factory Method', 1),
-       ('gof:prototype', 'Prototype', 1),
-       ('gof:singleton', 'Singleton', 1),
-       ('gof:adapter', 'Adapter', 1),
-       ('gof:bridge', 'Bridge', 1),
-       ('gof:composite', 'Composite', 1),
-       ('gof:decorator', 'Decorator', 1),
-       ('gof:facade', 'Facade', 1),
-       ('gof:flyweight', 'Flyweight', 1),
-       ('gof:proxy', 'Proxy', 1),
-       ('gof:chain_of_responsibility', 'Chain of Responsibility', 1),
-       ('gof:command', 'Command', 1),
-       ('gof:interpreter', 'Interpreter', 1),
-       ('gof:iterator', 'Iterator', 1),
-       ('gof:mediator', 'Mediator', 1),
-       ('gof:memento', 'Memento', 1),
-       ('gof:observer', 'Observer', 1),
-       ('gof:state', 'State', 1),
-       ('gof:strategy', 'Strategy', 1),
-       ('gof:template_method', 'Template Method', 1),
-       ('gof:visitor', 'Visitor', 1);
+values ('gof:Abstract Factory', 'Abstract Factory', 1),
+       ('gof:Builder', 'Builder', 1),
+       ('gof:Factory Method', 'Factory Method', 1),
+       ('gof:Prototype', 'Prototype', 1),
+       ('gof:Singleton', 'Singleton', 1),
+       ('gof:Adapter', 'Adapter', 1),
+       ('gof:Bridge', 'Bridge', 1),
+       ('gof:Composite', 'Composite', 1),
+       ('gof:Decorator', 'Decorator', 1),
+       ('gof:Facade', 'Facade', 1),
+       ('gof:Flyweight', 'Flyweight', 1),
+       ('gof:Proxy', 'Proxy', 1),
+       ('gof:Proxy2', 'Proxy2', 1),
+       ('gof:Chain of Responsibility', 'Chain of Responsibility', 1),
+       ('gof:Command', 'Command', 1),
+       ('gof:Interpreter', 'Interpreter', 1),
+       ('gof:Iterator', 'Iterator', 1),
+       ('gof:Mediator', 'Mediator', 1),
+       ('gof:Memento', 'Memento', 1),
+       ('gof:Observer', 'Observer', 1),
+       ('gof:State', 'State', 1),
+       ('gof:Strategy', 'Strategy', 1),
+       ('gof:Template Method', 'Template Method', 1),
+       ('gof:Visitor', 'Visitor', 1);
