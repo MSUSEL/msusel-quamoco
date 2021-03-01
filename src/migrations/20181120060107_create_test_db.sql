@@ -121,7 +121,7 @@ create table role_bindings
 create table refs
 (
     id          INTEGER NOT NULL PRIMARY KEY Autoincrement,
-    refKey      VARCHAR UNIQUE,
+    refKey      VARCHAR,
     type        INTEGER,
     parent_id   INTEGER,
     parent_type VARCHAR,
