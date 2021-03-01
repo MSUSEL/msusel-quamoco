@@ -34,6 +34,7 @@ import edu.isu.isuese.datamodel.Project;
 import edu.montana.gsoc.msusel.quamoco.model.NormalizationRange;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -107,5 +108,17 @@ public abstract class AbstractExtentDecorator implements Measurable {
         }
 
         return value;
+    }
+
+    public void addMeasure(Measure meas) {
+        decorated.addMeasure(meas);
+    }
+
+    public void removeMeasure(Measure meas) {
+        decorated.removeMeasure(meas);
+    }
+
+    public List<Measure> getMeasures() {
+        return decorated.getMeasures();
     }
 }
