@@ -172,8 +172,8 @@ create table finding_data_points
     finding_data_id INTEGER,
     handle          VARCHAR,
     value           DOUBLE,
-    create_at       NUMERIC,
-    update_at       NUMERIC
+    created_at      NUMERIC,
+    updated_at      NUMERIC
 );
 
 create table rules
