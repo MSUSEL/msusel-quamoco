@@ -51,10 +51,6 @@ public class DistillerTest {
         final ModelDistiller distiller = new ModelDistiller(manager);
         distiller.buildGraph(path);
 
-        for (QualityModel model : manager.getModels()) {
-            System.out.println(model.getName());
-        }
-
         return distiller.getGraph();
     }
 }

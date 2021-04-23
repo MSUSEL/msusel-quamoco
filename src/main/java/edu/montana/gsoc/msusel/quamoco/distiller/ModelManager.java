@@ -40,6 +40,7 @@ import edu.montana.gsoc.msusel.quamoco.model.factor.Factor;
 import edu.montana.gsoc.msusel.quamoco.model.measure.Measure;
 import edu.montana.gsoc.msusel.quamoco.model.measure.NormalizationMeasure;
 import edu.montana.gsoc.msusel.quamoco.model.measurement.MeasurementMethod;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
@@ -51,6 +52,7 @@ import java.util.function.Predicate;
  * @author Isaac Griffith
  * @version 1.3.0
  */
+@Log4j2
 public class ModelManager {
 
     Map<String, QualityModel> models;
@@ -243,7 +245,7 @@ public class ModelManager {
             }
         }
         if (graph.edges().size() > 0) {
-            System.out.println("Graph has Cycles");
+            log.warn("Graph has Cycles");
         }
 
         List<QualityModel> other = Lists.newArrayList();

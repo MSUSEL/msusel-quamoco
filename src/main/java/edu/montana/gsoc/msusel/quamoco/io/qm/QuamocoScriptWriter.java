@@ -32,6 +32,7 @@ import edu.montana.gsoc.msusel.quamoco.distiller.ModelDistiller;
 import edu.montana.gsoc.msusel.quamoco.distiller.ModelManager;
 import edu.montana.gsoc.msusel.quamoco.io.AbstractWriter;
 import edu.montana.gsoc.msusel.quamoco.model.QualityModel;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,7 @@ import java.util.List;
  * @author Isaac Griffith
  * @version 1.3.0
  */
+@Log4j2
 public class QuamocoScriptWriter extends AbstractWriter {
 
     /**
@@ -93,7 +95,7 @@ public class QuamocoScriptWriter extends AbstractWriter {
             final CommandLine line = parser.parse(QuamocoScriptWriter.options, args);
             QuamocoScriptWriter.execute(line);
         } catch (final ParseException exp) {
-            System.err.println("Parsing failed. Reason: " + exp.getMessage());
+            log.error("Parsing failed. Reason: " + exp.getMessage());
         }
     }
 

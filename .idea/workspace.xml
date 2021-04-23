@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="a738a267-9a20-4b8c-88fe-147b5320e1a2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/distiller/DistillerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/distiller/DistillerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/distiller/ModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/distiller/ModelManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/io/qm/QuamocoScriptWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/io/qm/QuamocoScriptWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/FieldExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/FieldExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/FileExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/FileExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/InitializerExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/InitializerExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/LiteralExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/LiteralExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/MethodExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/MethodExtentDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/TypeExtentDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/montana/gsoc/msusel/quamoco/processor/extents/TypeExtentDecorator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +86,6 @@
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
-        <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="ExtentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -89,7 +101,6 @@
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
-        <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="FactorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -105,7 +116,6 @@
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
-        <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="GraphTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -121,7 +131,6 @@
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
-        <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="RangedNormalizerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -137,14 +146,6 @@
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
-        <option name="BSP.BeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-        <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
@@ -157,6 +158,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -176,57 +178,11 @@
       <workItem from="1609771543494" duration="2377000" />
       <workItem from="1614628929140" duration="1774000" />
       <workItem from="1614694151810" duration="13000" />
+      <workItem from="1619168260382" duration="139000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="4283" y="117" width="1024" height="852" key="#Project_Structure" timestamp="1609142956840">
-      <screen x="3840" y="0" width="1920" height="1080" />
-    </state>
-    <state x="4283" y="117" width="1024" height="852" key="#Project_Structure/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609142956840" />
-    <state x="4445" y="98" width="699" height="890" key="#Unittests_in_test" timestamp="1609143099249">
-      <screen x="3840" y="0" width="1920" height="1080" />
-    </state>
-    <state x="4445" y="98" width="699" height="890" key="#Unittests_in_test/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609143099249" />
-    <state x="2073" y="101" width="1720" height="880" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1609160828018">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="2073" y="101" width="1720" height="880" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609160828018" />
-    <state x="4541" y="286" width="506" height="521" key="FileChooserDialogImpl" timestamp="1609425427430">
-      <screen x="3840" y="0" width="1920" height="1080" />
-    </state>
-    <state x="4541" y="286" width="506" height="521" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609425427430" />
-    <state width="1872" height="288" key="GridCell.Tab.0.bottom" timestamp="1609473792475">
-      <screen x="3840" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1872" height="288" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609473792475" />
-    <state width="1872" height="288" key="GridCell.Tab.0.center" timestamp="1609473792475">
-      <screen x="3840" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1872" height="288" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609473792475" />
-    <state width="1872" height="288" key="GridCell.Tab.0.left" timestamp="1609473792475">
-      <screen x="3840" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1872" height="288" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609473792475" />
-    <state width="1872" height="288" key="GridCell.Tab.0.right" timestamp="1609473792475">
-      <screen x="3840" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1872" height="288" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609473792475" />
-    <state x="4281" y="175" width="1037" height="737" key="SettingsEditor" timestamp="1609143060446">
-      <screen x="3840" y="0" width="1920" height="1080" />
-    </state>
-    <state x="4281" y="175" width="1037" height="737" key="SettingsEditor/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609143060446" />
-    <state x="2566" y="251" width="768" height="578" key="find.popup" timestamp="1614629414294">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="2566" y="251" width="768" height="578" key="find.popup/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@1920.0.1920.1080" timestamp="1614629414294" />
-    <state x="4486" y="251" width="768" height="578" key="find.popup/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609776964920" />
-    <state x="4463" y="239" key="search.everywhere.popup" timestamp="1609418706305">
-      <screen x="3840" y="0" width="1920" height="1080" />
-    </state>
-    <state x="4463" y="239" key="search.everywhere.popup/1920.0.1920.1080/0.27.1920.1053/3840.0.1920.1080@3840.0.1920.1080" timestamp="1609418706305" />
+    <option name="version" value="3" />
   </component>
 </project>
