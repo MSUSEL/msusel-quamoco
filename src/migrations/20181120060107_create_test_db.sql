@@ -61,8 +61,8 @@ create table roles
     roleKey    VARCHAR UNIQUE,
     name       VARCHAR,
     type       INTEGER,
-    mandatory  BOOLEAN,
     pattern_id INTEGER REFERENCES patterns (id),
+    mandatory  BOOLEAN,
     created_at NUMERIC,
     updated_at NUMERIC
 );
