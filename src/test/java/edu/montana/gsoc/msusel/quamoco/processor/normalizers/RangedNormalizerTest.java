@@ -27,10 +27,8 @@
 package edu.montana.gsoc.msusel.quamoco.processor.normalizers;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.common.graph.MutableNetwork;
 import com.google.common.graph.NetworkBuilder;
-import edu.isu.isuese.datamodel.Class;
 import edu.isu.isuese.datamodel.System;
 import edu.isu.isuese.datamodel.*;
 import edu.montana.gsoc.msusel.quamoco.distiller.QuamocoContext;
@@ -49,7 +47,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * The class <code>RangedNormalizerTest</code> contains tests for the class
@@ -184,7 +181,7 @@ public class RangedNormalizerTest extends DBSpec {
         proj.addFile(file);
         proj.addMeasure(Measure.of("repo:LOC").on(file).withValue(200.0));
 
-        Class type = Class.builder().compKey("namespace.Type").start(1).end(100).create();
+        Type type = Type.builder().type(Type.CLASS).compKey("namespace.Type").start(1).end(100).create();
         file.addType(type);
         ns.addType(type);
         proj.addMeasure(Measure.of("repo:LOC").on(type).withValue(100.0));
