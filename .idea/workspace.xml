@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a738a267-9a20-4b8c-88fe-147b5320e1a2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/data/test.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/activejdbc_models.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/activejdbc_models.bak.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/node/FindingsUnionNodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/graph/node/FindingsUnionNodeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/it/single/GraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/it/single/GraphTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/aggregators/FindingsIntersectAggregatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/aggregators/FindingsIntersectAggregatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/aggregators/FindingsUnionAggregatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/montana/gsoc/msusel/quamoco/processor/aggregators/FindingsUnionAggregatorTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +77,19 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunManager" selected="JUnit.All in msusel-quamoco">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in msusel-quamoco" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="msusel-quamoco" />
       <option name="PACKAGE_NAME" value="" />
@@ -169,6 +189,8 @@
       <workItem from="1614628929140" duration="1774000" />
       <workItem from="1614694151810" duration="13000" />
       <workItem from="1619168260382" duration="1346000" />
+      <workItem from="1622750070482" duration="3554000" />
+      <workItem from="1622926194292" duration="1901000" />
     </task>
     <servers />
   </component>

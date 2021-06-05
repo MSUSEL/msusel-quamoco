@@ -34,6 +34,68 @@
         </developer>
     </developers>
 
+    <build>
+        <plugins>
+            <!--<plugin>-->
+            <!--<groupId>com.devexperts.bintray</groupId>-->
+            <!--<artifactId>bintray-maven-plugin</artifactId>-->
+            <!--<version>1.2</version>-->
+            <!--<configuration>-->
+            <!--<id>bintray-REPO-deploy</id>-->
+            <!--<url>https://api.bintray.com/maven/SUBJECT/maven/REPO</url>-->
+            <!--</configuration>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>bintray-deploy</id>-->
+            <!--<goals>-->
+            <!--<goal>deploy</goal>-->
+            <!--<goal>publish</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+            <plugin>
+                <groupId>org.javalite</groupId>
+                <artifactId>db-migrator-maven-plugin</artifactId>
+                <version>${activejdbc.version}</version>
+                <configuration>
+                    <configFile>${project.basedir}/src/main/resources/database.properties</configFile>
+                    <environments>${environments}</environments>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>dev_migrations</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>migrate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.xerial</groupId>
+                        <artifactId>sqlite-jdbc</artifactId>
+                        <version>3.25.2</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.javalite</groupId>
+                <artifactId>activejdbc-instrumentation</artifactId>
+                <version>${activejdbc.version}</version>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>instrument</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>edu.montana.gsoc.msusel</groupId>

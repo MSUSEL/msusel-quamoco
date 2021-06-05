@@ -103,8 +103,8 @@ public class FindingsUnionAggregatorTest extends DBSpec {
 
         fn1.addFinding(new FileFinding(File.builder().fileKey("path1").create(), "issue1", "issue"));
         fn1.addFinding(new FileFinding(File.builder().fileKey("path2").create(), "issue1", "issue"));
-        fn2.addFinding(new FileFinding(File.builder().fileKey("path1").create(), "issue2", "issue"));
-        fn2.addFinding(new FileFinding(File.builder().fileKey("path2").create(), "issue2", "issue"));
+        fn2.addFinding(new FileFinding(File.findFirst("fileKey = ?", "path1"), "issue2", "issue"));
+        fn2.addFinding(new FileFinding(File.findFirst("fileKey = ?", "path2"), "issue2", "issue"));
 
         final MeasureNode owner = new MeasureNode(graph, "measure", "owner");
         owner.setType(MeasureType.FINDINGS);

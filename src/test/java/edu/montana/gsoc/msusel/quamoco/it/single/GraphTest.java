@@ -263,7 +263,7 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(measure.getProcessor());
 
         Finding f1 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name");
-        Finding f2 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name2");
+        Finding f2 = new FileFinding(File.findFirst("fileKey = ?", "file1"), "key", "name2");
 
         finding.addFinding(f1);
         finding.addFinding(f2);
@@ -459,7 +459,7 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(measure.getProcessor());
 
         Finding f1 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name");
-        Finding f2 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name2");
+        Finding f2 = new FileFinding(File.findFirst("fileKey = ?", "file1"), "key", "name2");
 
         finding.addFinding(f1);
         finding.addFinding(f2);
@@ -498,7 +498,7 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(measure.getProcessor());
 
         Finding f1 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name");
-        Finding f2 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name2");
+        Finding f2 = new FileFinding(File.findFirst("fileKey = ?", "file1"), "key", "name2");
 
         finding.addFinding(f1);
         finding.addFinding(f2);
@@ -537,7 +537,7 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(measure.getProcessor());
 
         Finding f1 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name");
-        Finding f2 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name2");
+        Finding f2 = new FileFinding(File.findFirst("fileKey = ?", "file1"), "key", "name2");
 
         finding.addFinding(f1);
         finding.addFinding(f2);
@@ -576,7 +576,7 @@ public class GraphTest extends BaseTestClass {
         assertNotNull(measure.getProcessor());
 
         Finding f1 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name");
-        Finding f2 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name2");
+        Finding f2 = new FileFinding(File.findFirst("fileKey = ?", "file1"), "key", "name2");
 
         finding.addFinding(f1);
         finding.addFinding(f2);
@@ -626,7 +626,7 @@ public class GraphTest extends BaseTestClass {
         //assertNotNull(fn.getProcessor());
 
         Finding f1 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name");
-        Finding f2 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name2");
+        Finding f2 = new FileFinding(File.findFirst("fileKey = ?", "file1"), "key", "name2");
 
         fn.addFinding(f1);
         fn.addFinding(f2);
@@ -651,7 +651,7 @@ public class GraphTest extends BaseTestClass {
         //assertNotNull(fn.getProcessor());
 
         Finding f1 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name");
-        Finding f2 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name2");
+        Finding f2 = new FileFinding(File.findFirst("fileKey = ?", "file1"), "key", "name2");
 
         fn.addFinding(f1);
         fn.addFinding(f2);
@@ -676,7 +676,7 @@ public class GraphTest extends BaseTestClass {
         //assertNotNull(fn.getProcessor());
 
         Finding f1 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name");
-        Finding f2 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name2");
+        Finding f2 = new FileFinding(File.findFirst("fileKey = ?", "file1"), "key", "name2");
 
         fn.addFinding(f1);
         fn.addFinding(f2);
@@ -701,7 +701,7 @@ public class GraphTest extends BaseTestClass {
         //assertNotNull(fn.getProcessor());
 
         Finding f1 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name");
-        Finding f2 = new FileFinding(File.builder().fileKey("file1").create(), "key", "name2");
+        Finding f2 = new FileFinding(File.findFirst("fileKey = ?", "file1"), "key", "name2");
 
         fn.addFinding(f1);
         fn.addFinding(f2);

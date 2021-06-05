@@ -79,8 +79,8 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
         fn1.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue"));
         fn1.addFinding(new FileFinding(File.builder().fileKey("file2").create(), "issue2", "issue"));
 
-        fn2.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue2"));
-        fn2.addFinding(new FileFinding(File.builder().fileKey("file2").create(), "issue2", "issue2"));
+        fn2.addFinding(new FileFinding(File.findFirst("fileKey = ?", "file"), "issue1", "issue2"));
+        fn2.addFinding(new FileFinding(File.findFirst("fileKey = ?", "file2"), "issue2", "issue2"));
 
         final List<Finding> result = fixture.aggregate();
 
@@ -97,8 +97,8 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
         fn1.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue"));
         fn1.addFinding(new FileFinding(File.builder().fileKey("file2").create(), "issue2", "issue"));
 
-        fn2.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue"));
-        fn2.addFinding(new FileFinding(File.builder().fileKey("file2").create(), "issue2", "issue2"));
+        fn2.addFinding(new FileFinding(File.findFirst("fileKey = ?", "file"), "issue1", "issue"));
+        fn2.addFinding(new FileFinding(File.findFirst("fileKey = ?", "file2"), "issue2", "issue2"));
 
         final List<Finding> result = fixture.aggregate();
 
@@ -128,7 +128,7 @@ public class FindingsIntersectAggregatorTest extends DBSpec {
     @Test
     public void testAggregate_4() {
         fn1.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue"));
-        fn2.addFinding(new FileFinding(File.builder().fileKey("file").create(), "issue1", "issue"));
+        fn2.addFinding(new FileFinding(File.findFirst("fileKey = ?", "file"), "issue1", "issue"));
 
         final List<Finding> result = fixture.aggregate();
 

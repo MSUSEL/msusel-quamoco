@@ -95,8 +95,8 @@ public class FindingsUnionNodeTest extends DBSpec {
         fixture.graph.addNode(fixture);
         final FindingNode fn = new FindingNode(fixture.graph, "finding", "finding", "rule", "tool");
         fn.addFinding(new FileFinding(File.builder().fileKey("path").create(), "finding1", "rule"));
-        fn.addFinding(new FileFinding(File.builder().fileKey("path").create(), "finding2", "rule"));
-        fn.addFinding(new FileFinding(File.builder().fileKey("path").create(), "finding3", "rule"));
+        fn.addFinding(new FileFinding(File.findFirst("fileKey = ?", "path"), "finding2", "rule"));
+        fn.addFinding(new FileFinding(File.findFirst("fileKey = ?", "path"), "finding3", "rule"));
         fixture.graph.addNode(fn);
         fixture.graph.addEdge(fn, fixture, new FindingToMeasureEdge("name", fn, fixture));
 
