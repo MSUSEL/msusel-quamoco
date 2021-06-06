@@ -686,6 +686,7 @@ create table parameters
 create table method_exceptions
 (
     id          INTEGER NOT NULL PRIMARY KEY Autoincrement,
+    name        VARCHAR,
     parent_id   INTEGER,
     parent_type VARCHAR,
     created_at  NUMERIC,
