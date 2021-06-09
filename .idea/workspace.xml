@@ -70,17 +70,6 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunManager" selected="JUnit.All in msusel-quamoco">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="All in msusel-quamoco" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="msusel-quamoco" />
       <option name="PACKAGE_NAME" value="" />
@@ -183,6 +172,8 @@
       <workItem from="1622750070482" duration="3554000" />
       <workItem from="1622926194292" duration="1901000" />
       <workItem from="1622934463539" duration="2416000" />
+      <workItem from="1623147450798" duration="598000" />
+      <workItem from="1623180833890" duration="599000" />
     </task>
     <servers />
   </component>
