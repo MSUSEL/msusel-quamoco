@@ -121,4 +121,8 @@ public abstract class AbstractExtentDecorator implements Measurable {
     public List<Measure> getMeasures() {
         return decorated.getMeasures();
     }
+
+    public double getValueFor(String metricKey) {
+        return decorated.getValueFor(metricKey);
+    }
 }
