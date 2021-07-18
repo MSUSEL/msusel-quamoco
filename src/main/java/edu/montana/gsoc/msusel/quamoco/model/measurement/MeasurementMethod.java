@@ -37,6 +37,7 @@ import lombok.Setter;
 import lombok.Singular;
 import org.apache.commons.lang3.StringEscapeUtils;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -87,11 +88,11 @@ public abstract class MeasurementMethod extends QMElement {
         StringBuilder builder = new StringBuilder();
         if (modelName != null) {
             builder.append(modelName);
-            builder.append("/");
+            builder.append(File.separator);
         }
         if (determines != null) {
             builder.append(determines.getFullName());
-            builder.append("/");
+            builder.append(File.separator);
         }
         builder.append(name);
 

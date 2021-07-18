@@ -37,6 +37,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringEscapeUtils;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -127,11 +128,11 @@ public abstract class Evaluation extends QMElement {
         StringBuilder builder = new StringBuilder();
         if (modelName != null) {
             builder.append(modelName);
-            builder.append("/");
+            builder.append(File.separator);
         }
         if (evaluates != null) {
             builder.append(evaluates.getFullName());
-            builder.append("/");
+            builder.append(File.separator);
         }
         builder.append(getName());
 
