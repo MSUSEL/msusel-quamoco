@@ -62,7 +62,7 @@
                     <configFile>${project.basedir}/src/main/resources/database.properties</configFile>
                     <environments>${environments}</environments>
                 </configuration>
-                <executions>
+                <!--<executions>
                     <execution>
                         <id>dev_migrations</id>
                         <phase>validate</phase>
@@ -70,7 +70,7 @@
                             <goal>migrate</goal>
                         </goals>
                     </execution>
-                </executions>
+                </executions>-->
                 <dependencies>
                     <dependency>
                         <groupId>org.xerial</groupId>
@@ -80,7 +80,7 @@
                     <dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
-                        <version>8.0.25</version>
+                        <version>8.0.26</version>
                     </dependency>
                 </dependencies>
             </plugin>
