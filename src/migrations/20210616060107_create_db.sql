@@ -46,13 +46,13 @@ create table pattern_repositories
 
 create table patterns
 (
-    id                    INTEGER NOT NULL PRIMARY KEY Auto_Increment,
-    patternKey            TEXT,
-    name                  TEXT,
-    family                TEXT,
-    pattern_repository_id INTEGER REFERENCES pattern_repositories (id),
-    created_at            DATETIME,
-    updated_at            DATETIME
+    id                     INTEGER NOT NULL PRIMARY KEY Auto_Increment,
+    patternKey             TEXT,
+    name                   TEXT,
+    family                 TEXT,
+    pattern_repository_id  INTEGER REFERENCES pattern_repositories (id),
+    created_at             DATETIME,
+    updated_at             DATETIME
 );
 
 create table roles
