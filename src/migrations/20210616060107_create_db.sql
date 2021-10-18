@@ -100,14 +100,14 @@ create table pattern_chains
 
 create table pattern_instances
 (
-    id               INTEGER NOT NULL PRIMARY KEY Auto_Increment,
-    instKey          TEXT,
-    pattern_size     INTEGER,
-    pattern_chain_id INTEGER REFERENCES pattern_chains (id),
-    project_id       INTEGER REFERENCES projects (id),
-    pattern_id       INTEGER REFERENCES patterns (id),
-    created_at       DATETIME,
-    updated_at       DATETIME
+    id                 INTEGER NOT NULL PRIMARY KEY Auto_Increment,
+    instKey            TEXT,
+    pattern_size       INTEGER,
+    parent_chain_id    INTEGER,
+    project_id         INTEGER REFERENCES projects (id),
+    parent_pattern_id  INTEGER,
+    created_at         DATETIME,
+    updated_at         DATETIME
 );
 
 create table role_bindings
