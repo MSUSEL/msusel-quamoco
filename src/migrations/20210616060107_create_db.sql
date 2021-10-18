@@ -107,6 +107,7 @@ create table pattern_instances
     project_id         INTEGER REFERENCES projects (id),
     parent_pattern_id  INTEGER,
     matched            BOOLEAN,
+    extract            BOOLEAN,
     created_at         DATETIME,
     updated_at         DATETIME
 );
