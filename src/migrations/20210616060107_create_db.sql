@@ -106,6 +106,7 @@ create table pattern_instances
     parent_chain_id    INTEGER,
     project_id         INTEGER REFERENCES projects (id),
     parent_pattern_id  INTEGER,
+    matched            BOOLEAN,
     created_at         DATETIME,
     updated_at         DATETIME
 );
